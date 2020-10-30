@@ -7,11 +7,12 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
       <WelcomeScreen style={styles.container}>
+        <Text>dsad</Text>
         <StatusBar style="auto" />
       </WelcomeScreen>
-    // {/* </Provider> */}
+    </Provider>
   );
 }
 
@@ -23,5 +24,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-//
