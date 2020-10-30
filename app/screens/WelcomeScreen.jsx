@@ -1,15 +1,12 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-const WelcomeScreen = () => {
+export default function WelcomeScreen() {
   return (
     <View>
       <Text></Text>
     </View>
-  );
-};
+  )
+}
 
-export default WelcomeScreen;
-
-const styles = StyleSheet.create({});
-// work???
+const styles = StyleSheet.create({})
