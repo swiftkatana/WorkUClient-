@@ -18,5 +18,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-// work ?????
-//dsadsad
+
