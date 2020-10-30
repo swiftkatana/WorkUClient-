@@ -8,6 +8,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <View style={styles.container}>
+        <Text>dsad</Text>
         <StatusBar style="auto" />
       </View>
     </Provider>
@@ -22,5 +23,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-//
