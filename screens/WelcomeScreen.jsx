@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 const WelcomeScreen = () => {
   return (
     <View>
-      <Text></Text>
+      {/* <Text></Text> */}
     </View>
   );
 };
