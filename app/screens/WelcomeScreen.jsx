@@ -1,12 +1,17 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import LoginForm from '../components/LoginForm';
+import Logo from '../components/Logo';
 
 export default function WelcomeScreen() {
   return (
     <View style ={styles.container}>
-      <TextInput style ={styles.inputBox} placeholder = 'כתובת דוא"ל'/>
-      <TextInput style ={styles.inputBox} placeholder = 'סיסמה'/>
-
+      <Logo/>
+      <LoginForm/>
+      <View style= {styles.signupTextCont}>
+        <Text style= {styles.signupText}>אין לך משתמש?</Text>
+        <Text style= {styles.signupButton}>הירשם</Text>
+      </View>
     </View>
   )
 }
@@ -17,12 +22,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  inputBox: {
-    width: 300,
-    height: 60,
-    backgroundColor: '#ededed',
-    borderRadius: 25,
-    paddingHorizontal:16,
-    marginVertical: 10,
-  }
+  signupTextCont: {
+    flexGrow: 1,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingVertical: 16,
+    flexDirection: 'row-reverse'
+  },
+  signupText: {
+    fontSize: 16,
+  },
+  signupButton: {
+    paddingRight: 5,
+    color: "tomato",
+    fontSize: 18,
+    fontWeight:"bold",
+  },
 });
