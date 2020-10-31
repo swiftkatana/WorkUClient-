@@ -3,18 +3,22 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 
 export default function LoginForm() {
   return (
-    <View style ={styles.container}>
-      <TextInput style ={styles.inputBox} placeholder = 'כתובת דוא"ל'/>
-      <TextInput style ={styles.inputBox} placeholder = 'סיסמה' secureTextEntry ={true}/>
-      <TouchableOpacity style ={styles.button}>
-        <Text style={styles.buttonText} >כניסה</Text>
+    <View style={styles.container}>
+      <TextInput style={styles.inputBox} placeholder='כתובת דוא"ל' />
+      <TextInput
+        style={styles.inputBox}
+        placeholder="סיסמה"
+        secureTextEntry={true}
+      />
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  container : {
+  container: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center'
@@ -24,9 +28,9 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: '#ededed',
     borderRadius: 25,
-    paddingHorizontal:16,
+    paddingHorizontal: 16,
     marginVertical: 10,
-    textAlign : "right"
+    textAlign: "right"
   },
   button: {
     width: 300,
@@ -41,5 +45,5 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'center',
   },
-  
+
 });
