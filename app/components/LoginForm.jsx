@@ -7,7 +7,7 @@ export default function LoginForm() {
       <TextInput style ={styles.inputBox} placeholder = 'כתובת דוא"ל'/>
       <TextInput style ={styles.inputBox} placeholder = 'סיסמה' secureTextEntry ={true}/>
       <TouchableOpacity style ={styles.button}>
-        <Text style={styles.buttonText}>כניסה</Text>
+        <Text style={styles.buttonText} >כניסה</Text>
       </TouchableOpacity>
     </View>
   )

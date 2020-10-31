@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 import store from "./app/src/store";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
+
 export default function App() {
   return (
     <Provider store={store}>
