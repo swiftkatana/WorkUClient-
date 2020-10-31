@@ -3,21 +3,23 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import LoginForm from '../components/LoginForm';
 import Logo from '../components/Logo';
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen(props) {
   return (
-    <View style ={styles.container}>
-      <Logo/>
-      <LoginForm/>
-      <View style= {styles.signupTextCont}>
-        <Text style= {styles.signupText}>אין לך משתמש?</Text>
-        <Text style= {styles.signupButton}>הירשם</Text>
+    <View style={styles.container}>
+      <Logo />
+      <LoginForm />
+      <View style={styles.signupTextCont}>
+        <Text style={styles.signupText}>אין לך משתמש?</Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Register')}>
+          <Text style={styles.signupButton}>הירשם</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container : {
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
@@ -36,6 +38,6 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     color: "tomato",
     fontSize: 18,
-    fontWeight:"bold",
+    fontWeight: "bold",
   },
 });
