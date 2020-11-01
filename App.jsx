@@ -1,40 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View,Button,Alert } from "react-native";
-import {store,globalData} from "./app/src/store";
-import ProfileScreen from "./app/screens/ProfileScreen";
+import { ClippingRectangle, StyleSheet, Text, View } from "react-native";
+import {  NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack'
+// just a icon libary 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import store from "./app/src/store";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
 export default function App() {
-  return <ProfileScreen info={
-    {
-      "permission": {
-          "ceo": "ceo"
-      },
-      "role": "מנהל",
-      "email": "danial1029@hotmail.com",
-      "firstName": "דניאל",
-      "lastName": "לוי",
-      "imageProfile": "http://84.108.77.60:1029/images/defaultProfile.png",
-      "company": {
-          "name": "דניאל בעמ",
-          "status": "אושר"
-      },
-      "fullName": "דניאל לוי",
-      "DOYBC": "2020-10-30T12:05:28.517Z"
-  }
-  } />
+ 
+  
+
   return (
-    
     <Provider store={store}>
+      <NavigationContainer>
 
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        <View style={styles.LeftTop} >
-        <Button  title="Press me" onPress={() => Alert.alert('Simple Button pressed')}/>
-        </View>
-      </View>
-      
+        <Tab.Navigator >
+          <Tab.Screen options={{ tabBarVisible: false, }} name='Login' component={WelcomeScreen} />
 
+        </Tab.Navigator>
+      </NavigationContainer>
+      <StatusBar style="auto" />
     </Provider>
   );
 }
@@ -46,14 +38,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  LeftTop: {
-    position:"absolute",
-    left:25,
-    top:50,
-  },
 });
-
-
-
-
-//
