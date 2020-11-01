@@ -9,7 +9,7 @@ switch (action.type) {
         return action.payload
     case'eng':
 
-    return action.payload ;
+    return action.payload;
     default:
         return state
 }

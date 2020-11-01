@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-
 import userReducer from './userReducer'
-import leguageReducer from './leguageReducer'
+import lenguageReducer from './lenguageReducer'
+
 export default combineReducers({
     user: userReducer,
     len: lenguageReducer
-});//
+});
