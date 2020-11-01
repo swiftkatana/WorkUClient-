@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { connect } from 'react-redux'
 import LoginForm from '../components/LoginForm';
 import Logo from '../components/Logo';
 
-export default function WelcomeScreen(props) {
+ function WelcomeScreen(props) {
   return (
     <View style={styles.container}>
       <Logo />
@@ -41,3 +42,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+const mapStateToProps = (state) => ({
+  user:state.user
+})
+
+
+
+export default connect(mapStateToProps,null)(WelcomeScreen);

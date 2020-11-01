@@ -1,16 +1,34 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { connect } from 'react-redux'
 
-export default function LoginForm() {
+import {LoginUrl} from '../src/api/apiKeys';
+import serverApi from '../src/api/serverApi';
+import {loginUser} from '../src/action'
+
+ function LoginForm(props) {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handlerLogin=async ()=>{
+      // TODO: check input password and email 
+
+      // valid info send to the server
+      props.loginUser({email,password})
+  }
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.inputBox} placeholder='כתובת דוא"ל' />
+      <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' />
       <TextInput
+        value={password}
+        onChangeText={setPassword}
         style={styles.inputBox}
         placeholder="סיסמה"
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity onPress={handlerLogin} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
     </View>
@@ -47,3 +65,12 @@ const styles = StyleSheet.create({
   },
 
 });
+
+
+const mapStateToProps = (state) => ({
+ len:state.len 
+})
+
+
+
+export default connect(mapStateToProps,{loginUser})(LoginForm);
