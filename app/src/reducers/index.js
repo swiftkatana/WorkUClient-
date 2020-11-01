@@ -6,4 +6,4 @@ import lenguageReducer from './lenguageReducer'
 export default combineReducers({
     user: userReducer,
     len: lenguageReducer
-});
+});//
