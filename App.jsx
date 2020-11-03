@@ -1,30 +1,73 @@
-import React, { useEffect } from "react";
-import { Provider } from "react-redux";
-import { StatusBar } from "expo-status-bar";
-import { ClippingRectangle, StyleSheet, Text, View } from "react-native";
-import {  NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack'
+import React, { useEffect,useState } from "react";
+import { AppState,ClippingRectangle, StyleSheet, Text, View,Button,TextInput } from "react-native";
 // just a icon libary 
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import store from "./app/src/store";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+import ProfileScreen from './app/screens/ProfileScreen';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
+import * as Notifications from 'expo-notifications'
+import * as Permissions from 'expo-permissions';
+import Constants from 'expo-constants';
+import {gobalObject} from "./app/src/gobalObject";
+import LoginForm from "./app/components/LoginForm";
+
+const screens = {
+  WelcomeScreen:{
+    screen :WelcomeScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  ProfileScreen:{
+    screen:ProfileScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+
+  loginScreen:{
+    screen:LoginForm,
+    navigationOptions:{
+      headerShown: false
+    }
+  }
+}
+
+const AppContainer = createAppContainer(createStackNavigator(screens));
+
+
+
+listen = (r) =>{
+  console.log(r.notification.request.content.data);
+}
+Notifications.addNotificationResponseReceivedListener(listen);
+
+async function registerForPushNotificationsAsync() {
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = await Notifications.getExpoPushTokenAsync();
+    gobalObject.id = token.data;
+  }
+};
+
+registerForPushNotificationsAsync();
 
 export default function App() {
- 
+
+  
   return (
-    <Provider store={store}>
-      <NavigationContainer>
+        <AppContainer/>
 
-        <Tab.Navigator >
-          <Tab.Screen options={{ tabBarVisible: false, }} name='Login' component={WelcomeScreen} />
-
-      </NavigationContainer>
-      <StatusBar style="auto" />
-    </Provider>
   );
 }
 
@@ -36,3 +79,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+
+
+const s = StyleSheet.create({
+  continer:
+  {
+      paddingTop :50,
+  },
+  info:
+  {
+      fontSize:15,
+      textAlign:"right",
+      
+  },
+  Img:
+  {
+      marginTop:40,
+      position : "absolute",
+      height :50,
+      width:50
+  }
+  })
+  

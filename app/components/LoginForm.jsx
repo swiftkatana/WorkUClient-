@@ -1,34 +1,27 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { connect } from 'react-redux'
+import {gobalObject} from "../src/gobalObject";
 
-import {LoginUrl} from '../src/api/apiKeys';
-import serverApi from '../src/api/serverApi';
-import {loginUser} from '../src/action'
-
- function LoginForm(props) {
+export default function LoginForm() {
+  
+  //refernce
+  const pressHandler = ()=>
+  {
+    gobalObject.Navigation.navigate('ProfileScreen');
+  }
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
   const handlerLogin=async ()=>{
+      
       // TODO: check input password and email 
-
-      // valid info send to the server
-      props.loginUser({email,password})
   }
-
   return (
+    
     <View style={styles.container}>
       <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' />
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        style={styles.inputBox}
-        placeholder="סיסמה"
-        secureTextEntry={true}
-      />
-      <TouchableOpacity onPress={handlerLogin} style={styles.button}>
+      <TextInput value={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
+      <TouchableOpacity onPress={pressHandler} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
     </View>
@@ -66,11 +59,3 @@ const styles = StyleSheet.create({
 
 });
 
-
-const mapStateToProps = (state) => ({
- len:state.len 
-})
-
-
-
-export default connect(mapStateToProps,{loginUser})(LoginForm);

@@ -5,7 +5,7 @@ export default function Logo() {
     return (
         <View style= {styles.container}>
             <Image style= {styles.logo} source= {require('../assets/workU_icon.png')}/>
-            <Text style= {styles.logoText}>תתחילו לעבוד</Text>
+            <Text style= {styles.logoText}>התחילו לעבוד</Text>
         </View>
     )
 }
