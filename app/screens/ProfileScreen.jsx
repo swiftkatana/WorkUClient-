@@ -1,15 +1,36 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { connect } from 'react-redux'
+import React from "react"
+import {Image, StyleSheet, Text, View } from 'react-native'
+import {gobalObject} from "../src/gobalObject";
 
-const ProfileScreen = () => {
-    return (
-        <View>
-            <Text></Text>
-        </View>
-    )
+
+export default function ProfileScreen() {
+
+        return (
+
+            <View style={styles.continer}>
+            <Text style={styles.info}> </Text>
+            </View>
+            
+        )
 }
 
-export default ProfileScreen
+const styles = StyleSheet.create({
+continer:
+{
+    paddingTop :50,
+},
+info:
+{
+    fontSize:15,
+    textAlign:"right",
+    
+},
+Img:
+{
+    marginTop:40,
+    position : "absolute",
+    height :50,
+    width:50
+}
+})
 
-const styles = StyleSheet.create({})

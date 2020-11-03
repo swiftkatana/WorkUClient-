@@ -15,8 +15,6 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
  
-  
-
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -24,7 +22,6 @@ export default function App() {
         <Tab.Navigator >
           <Tab.Screen options={{ tabBarVisible: false, }} name='Login' component={WelcomeScreen} />
 
-        </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
     </Provider>
