@@ -11,6 +11,11 @@ import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import {gobalObject} from "./app/src/gobalObject";
 import LoginForm from "./app/components/LoginForm";
+import Logo from "./app/components/Logo";
+import UserRegisterScreen from "./app/screens/UserRegisterScreen";
+import UserRegisterScreen2 from "./app/screens/UserRegisterScreen2";
+import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
+
 
 const screens = {
   WelcomeScreen:{
@@ -25,9 +30,26 @@ const screens = {
       headerShown: false
     }
   },
-
   loginScreen:{
     screen:LoginForm,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  UserRegisterScreen:{
+    screen:UserRegisterScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  UserRegisterScreen2:{
+    screen:UserRegisterScreen2,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  RegisterSelectScreen:{
+    screen:RegisterSelectScreen,
     navigationOptions:{
       headerShown: false
     }
