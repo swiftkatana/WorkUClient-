@@ -11,7 +11,7 @@ import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import {gobalObject} from "./app/src/gobalObject";
 import LoginForm from "./app/components/LoginForm";
-
+import MainScreen from "./app/screens/MainScreen";
 const screens = {
   WelcomeScreen:{
     screen :WelcomeScreen,
@@ -31,7 +31,15 @@ const screens = {
     navigationOptions:{
       headerShown: false
     }
+  },
+  MainScreen:{
+    screen:MainScreen,
+    navigationOptions:{
+      headerShown: false
+    }
   }
+
+
 }
 
 const AppContainer = createAppContainer(createStackNavigator(screens));
@@ -63,12 +71,7 @@ async function registerForPushNotificationsAsync() {
 registerForPushNotificationsAsync();
 
 export default function App() {
-
-  
-  return (
-        <AppContainer/>
-
-  );
+  return (<AppContainer/>);
 }
 
 const styles = StyleSheet.create({

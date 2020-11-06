@@ -1,13 +1,13 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {gobalObject} from "../src/gobalObject";
+import {gobalObject} from "../src/globalObject";
 
 export default function LoginForm() {
   
   //refernce
   const pressHandler = ()=>
   {
-    gobalObject.Navigation.navigate('ProfileScreen');
+    gobalObject.Navigation.navigate('MainScreen');
   }
 
   const [email, setEmail] = useState('')

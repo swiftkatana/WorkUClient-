@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import LoginForm from '../components/LoginForm';
 import Logo from '../components/Logo';
-import {gobalObject} from "../src/gobalObject";
+import {gobalObject} from "../src/globalObject";
 
 
 export default function WelcomeScreen({navigation}) {
