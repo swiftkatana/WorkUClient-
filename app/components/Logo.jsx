@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         height: 120,
     },
     logoText: {
+        paddingBottom: 5,
         marginVertical: 15,
         fontSize: 18,
         color: '#000000',

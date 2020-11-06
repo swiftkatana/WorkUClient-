@@ -14,7 +14,7 @@ export default function WelcomeScreen({navigation}) {
       <LoginForm/>
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}> אין לך משתמש?</Text>
-        <TouchableOpacity onPress={() => gobalObject.Navigation.navigate('Register')}>
+        <TouchableOpacity onPress={() => gobalObject.Navigation.navigate('UserRegisterScreen')}>
           <Text style={styles.signupButton}>הירשם</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton}  />
