@@ -7,7 +7,7 @@ export default function UserRegisterScreen2() {
     return (
 
         <View style={styles.container}>
-            <Text style= {styles.logoText}>הרשמה</Text>
+            <Text style= {styles.logoText}>סיום הרשמה</Text>
             <TextInput style={styles.inputBox} placeholder='שם פרטי' />
             <TextInput style={styles.inputBox} placeholder="שם משפחה" secureTextEntry={true}/>
             <TouchableOpacity style={styles.button} onPress={() => gobalObject.Navigation.navigate('RegisterSelectScreen')}>

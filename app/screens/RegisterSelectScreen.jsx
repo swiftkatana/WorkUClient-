@@ -7,16 +7,22 @@ export default function RegisterSelectScreen() {
   return (
     
     <View style={styles.container}>
-      <Text style= {styles.logoText}>שלום, יעקוב</Text>
-      <View style={styles.signupTextCont}>
-        <Text style= {styles.signupText}>התחבר לבית עסק קיים:</Text>
+      <View style={styles.container, {flex: 1}}>
+        <Text style= {styles.GreetingText}>שלום, יעקוב</Text>
       </View>
-      <TextInput  style={styles.inputBox} placeholder='שם בית העסק' />
-      <TouchableOpacity  style={styles.button}>
-        <Text style={styles.buttonText}>התחל לעבוד</Text>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <View style={styles.signupTextCont}>
+          <Text style= {styles.signupText, {fontWeight: 'bold',fontSize: 16,}}>חבר/י את חשבונך לבית עסק רשום:</Text>
+        </View>
+        <TextInput  style={styles.inputBox} placeholder='קוד חשבון העסק' />
+        <TouchableOpacity  style={styles.button}>
+          <Text style={styles.buttonText}>התחל לעבוד</Text>
+        </TouchableOpacity>
+        <Text style= {styles.signupText}>* אין לך קוד? בקש/י מהמנהל שלך</Text>
+      </View>
       <View style={styles.signupTextCont}>
-        <Text style={styles.signupText}> בית העסק שלך עדיין לא רשום?</Text>
+        <Text style={styles.signupText, {fontWeight: 'bold',fontSize: 16,}}> מנהל/ת עסק?</Text>
+        <Text style={styles.signupText}> להרשמת בית עסק חדש במערכת</Text>
         <TouchableOpacity onPress={() => gobalObject.Navigation.navigate('UserRegisterScreen')}>
           <Text style={styles.signupButton}>לחץ כאן</Text>
         </TouchableOpacity>
@@ -30,7 +36,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingVertical: 60,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   inputBox: {
@@ -59,7 +65,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
     paddingVertical: 16,
-    flexDirection: 'row-reverse'
   },
   signupText: {
     fontSize: 16,
@@ -70,8 +75,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  logoText: {
-    marginVertical: 20,
+  GreetingText: {
+    marginVertical: 80,
     fontSize: 22,
     color: '#000000',
     fontWeight: "bold"

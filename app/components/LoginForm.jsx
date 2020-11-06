@@ -1,21 +1,27 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { userLoginUrl } from '../src/api/apiKeys';
+import serverApi from '../src/api/serverApi';
 import {gobalObject} from "../src/gobalObject";
 
 export default function LoginForm() {
   
   //refernce
-  const pressHandler = ()=>
+  const pressHandler = async ()=>
   {
-    gobalObject.Navigation.navigate('ProfileScreen');
+    const  res = await  serverApi.post(userLoginUrl, {email, password});
+    if(res.data.err){
+      
+      console.log(res.data.err);
+    }else{ // login content ok
+      gobalObject.User = res.data;
+      console.log(res.data)
+      gobalObject.Navigation.navigate('ProfileScreen');
+    }
   }
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const handlerLogin=async ()=>{
-      
-      // TODO: check input password and email 
-  }
   return (
     
     <View style={styles.container}>
@@ -33,6 +39,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center'
+
   },
   inputBox: {
     width: 300,
