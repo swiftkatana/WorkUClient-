@@ -1,4 +1,4 @@
-import {gobalObject} from "../src/globalObject"
+import {globalObject} from "../src/globalObject"
 import React, { Component,useEffect,useState } from 'react'
 import { Text, View ,StyleSheet,Dimensions} from 'react-native'
 import Greeting from "../components/Greeting"

@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {gobalObject} from "../src/gobalObject";
+import {globalObject} from "../src/globalObject";
 
 export default function RegisterSelectScreen() {
 
@@ -23,7 +23,7 @@ export default function RegisterSelectScreen() {
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText, {fontWeight: 'bold',fontSize: 16,}}> מנהל/ת עסק?</Text>
         <Text style={styles.signupText}> להרשמת בית עסק חדש במערכת</Text>
-        <TouchableOpacity onPress={() => gobalObject.Navigation.navigate('UserRegisterScreen')}>
+        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('UserRegisterScreen')}>
           <Text style={styles.signupButton}>לחץ כאן</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton}  />

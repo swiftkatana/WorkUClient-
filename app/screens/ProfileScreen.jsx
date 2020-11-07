@@ -1,6 +1,6 @@
 import React from "react"
 import {Image, StyleSheet, Text, View } from 'react-native'
-import {gobalObject} from "../src/globalObject";
+import {globalObject} from "../src/globalObject";
 
 
 export default function ProfileScreen() {

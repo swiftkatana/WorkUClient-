@@ -35,7 +35,7 @@ exports.userSendPersonalRequest = "/api/user/personalreuqest";
 //boss api
 
 
-// send {mangar{email,unqiePassword} ,email}
+// send {mangar{email,joinCode} ,email}
 // recive none
 exports.userLeaveUrl = "/api/company/leave";
 

@@ -2,7 +2,7 @@ import sever from "./api/serverApi"
 import { responedList } from "./respondList";
 
 
-class gobal
+class global
 {
     constructor() {
         this.User = {name:"דניאל"};   //when log in used to store the user object
@@ -30,8 +30,8 @@ class gobal
       }
 
 }
-const gobalObject = new gobal();
-export  {gobalObject};
+const globalObject = new global();
+export  {globalObject};
 
 
 
