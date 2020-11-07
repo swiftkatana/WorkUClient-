@@ -1,9 +1,7 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { userLoginUrl } from '../src/api/apiKeys';
-import serverApi from '../src/api/serverApi';
-import {gobalObject} from "../src/gobalObject";
-
+import {gobalObject} from "../src/globalObject";
+//add import
 export default function LoginForm() {
   
   //refernce

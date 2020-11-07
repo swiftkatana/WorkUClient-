@@ -1,10 +1,11 @@
 import React from "react"
 import {Image, StyleSheet, Text, View } from 'react-native'
-import {gobalObject} from "../src/gobalObject";
+import {gobalObject} from "../src/globalObject";
 
 
 export default function ProfileScreen() {
 
+    
         return (
 
             <View style={styles.continer}>
