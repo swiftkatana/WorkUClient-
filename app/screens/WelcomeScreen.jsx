@@ -2,19 +2,19 @@ import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import LoginForm from '../components/LoginForm';
 import Logo from '../components/Logo';
-import {gobalObject} from "../src/globalObject";
+import {globalObject} from "../src/globalObject";
 
 
 export default function WelcomeScreen({navigation}) {
 
-  gobalObject.Navigation = navigation;
+  globalObject.Navigation = navigation;
   return (
     <View style={styles.container}>
       <Logo />
       <LoginForm/>
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}> אין לך משתמש?</Text>
-        <TouchableOpacity onPress={() => gobalObject.Navigation.navigate('UserRegisterScreen')}>
+        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('UserRegisterScreen')}>
           <Text style={styles.signupButton}>הירשם</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton}  />

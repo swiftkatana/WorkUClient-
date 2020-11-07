@@ -9,7 +9,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
-import {gobalObject} from "./app/src/gobalObject";
+import {globalObject} from "./app/src/globalObject";
 import LoginForm from "./app/components/LoginForm";
 import MainScreen from "./app/screens/MainScreen";
 import Logo from "./app/components/Logo";
@@ -88,7 +88,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = await Notifications.getExpoPushTokenAsync();
-    gobalObject.id = token.data;
+    globalObject.id = token.data;
   }
 };
 

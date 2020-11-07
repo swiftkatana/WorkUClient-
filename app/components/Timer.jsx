@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { View, Text,StyleSheet,Dimensions } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import {gobalObject} from "../src/globalObject"
+import {globalObject} from "../src/globalObject"
 
 class timer
 {
@@ -25,7 +25,7 @@ class timer
       }
       GetPrint()
       {
-        var dif =  new Date().getTime() - gobalObject.timer.now;
+        var dif =  new Date().getTime() - globalObject.timer.now;
 
         var hours = Math.floor((dif % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((dif % (1000 * 60 * 60)) / (1000 * 60));
@@ -43,18 +43,18 @@ export default function Timer() {
 
     const [timePass,SetTime] = useState( "00:00:00" );
     useEffect(() => {
-        if(gobalObject.timer == 0)
+        if(globalObject.timer == 0)
         {
-            gobalObject.timer = new timer();
+            globalObject.timer = new timer();
         }
         else
         {
-            SetTime(gobalObject.timer.GetPrint());
+            SetTime(globalObject.timer.GetPrint());
         }
         const id = setInterval(() => {
 
-            if(gobalObject.timer.isEnd)
-                SetTime(gobalObject.timer.GetPrint());
+            if(globalObject.timer.isEnd)
+                SetTime(globalObject.timer.GetPrint());
             else
                 SetTime("00:00:00");  
         }, 1000);
@@ -65,12 +65,12 @@ export default function Timer() {
 
     
     var msg = "תחילת עבודה";
-    if(gobalObject.timer.isEnd){
+    if(globalObject.timer.isEnd){
         msg = "סיום עבודה";
     }
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.TimerStyle} onPress={()=>{gobalObject.timer.ButtonHandler()}}>
+            <TouchableOpacity style={styles.TimerStyle} onPress={()=>{globalObject.timer.ButtonHandler()}}>
              <Text style={{textAlign:"center"}}>
                 {msg}             
              </Text>

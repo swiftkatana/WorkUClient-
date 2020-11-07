@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {gobalObject} from "../src/gobalObject";
+import {globalObject} from "../src/globalObject";
 
 export default function UserRegisterScreen() {
 
@@ -11,7 +11,7 @@ export default function UserRegisterScreen() {
             <TextInput style={styles.inputBox} placeholder='כתובת דוא"ל' />
             <TextInput style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
             <TextInput style={styles.inputBox} placeholder="אימות סיסמה" secureTextEntry={true}/>
-            <TouchableOpacity style={styles.button} onPress={() => gobalObject.Navigation.navigate('UserRegisterScreen2')}>
+            <TouchableOpacity style={styles.button} onPress={() => globalObject.Navigation.navigate('UserRegisterScreen2')}>
                 <Text style={styles.buttonText}>אישור</Text>
             </TouchableOpacity>
         </View>

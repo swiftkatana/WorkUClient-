@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, View,Dimensions,Button } from 'react-native'
 import React, { Component,useEffect,useState } from 'react'
-import {gobalObject} from "../src/globalObject"
+import {globalObject} from "../src/globalObject"
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function GetGreetingMsg()
@@ -32,7 +32,7 @@ export default function Greeting()
     return (
 
         <View style={styles.view}>
-        <Text style={{fontSize:25}}> {GreetingMsg},{gobalObject.User.name}</Text>
+        <Text style={{fontSize:25}}> {GreetingMsg},{globalObject.User.name}</Text>
         <TouchableOpacity style={styles.settings}>
         <Text style={styles.settingsFont}>הגדרות</Text> 
         </TouchableOpacity>

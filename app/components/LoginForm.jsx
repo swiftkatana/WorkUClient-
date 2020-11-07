@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {gobalObject} from "../src/globalObject";
+import {globalObject} from "../src/globalObject";
 //add import
 export default function LoginForm() {
   
@@ -12,9 +12,9 @@ export default function LoginForm() {
       
       console.log(res.data.err);
     }else{ // login content ok
-      gobalObject.User = res.data;
+      globalObject.User = res.data;
       console.log(res.data)
-      gobalObject.Navigation.navigate('ProfileScreen');
+      globalObject.Navigation.navigate('ProfileScreen');
     }
   }
 
