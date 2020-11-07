@@ -8,10 +8,12 @@ export default function UserRegisterScreen() {
 
         <View style={styles.container}>
             <Text style= {styles.logoText}>הרשמה</Text>
+            <TextInput style={styles.inputBox} placeholder='שם פרטי' />
+            <TextInput style={styles.inputBox} placeholder="שם משפחה" secureTextEntry={true}/>
             <TextInput style={styles.inputBox} placeholder='כתובת דוא"ל' />
             <TextInput style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
             <TextInput style={styles.inputBox} placeholder="אימות סיסמה" secureTextEntry={true}/>
-            <TouchableOpacity style={styles.button} onPress={() => globalObject.Navigation.navigate('UserRegisterScreen2')}>
+            <TouchableOpacity style={styles.button} onPress={() => globalObject.Navigation.navigate('RegisterSelectScreen')}>
                 <Text style={styles.buttonText}>אישור</Text>
             </TouchableOpacity>
         </View>

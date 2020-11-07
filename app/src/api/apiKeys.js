@@ -26,7 +26,7 @@ exports.userGetTask = "/api/user/gettask";
 
 
 // send {type,body,fullName,email}
-// recive {_id}
+// recive {_id,}
 exports.userSendPersonalRequest = "/api/user/personalreuqest";
 
 
@@ -46,6 +46,6 @@ exports.createCompanyUrl = "/api/comapny/createcompany";
 
 
 // send {employees[email0,email1,email2,...],task{title,description,priority}}
-// recive none
+// recive {task}
 exports.createTaskUrl = "/api/company/addtasks";
 
