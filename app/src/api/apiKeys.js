@@ -9,7 +9,7 @@ exports.userLoginUrl = "/api/user/login";
 //recive {userData}
 exports.userRegisterUrl = "/api/user/register";
 
-//send {code}
+//send {email,code}
 //revice {userData}
 exports.userJoinCompany = "/api/user/joincompany";
 
