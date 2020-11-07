@@ -14,7 +14,6 @@ import LoginForm from "./app/components/LoginForm";
 import MainScreen from "./app/screens/MainScreen";
 import Logo from "./app/components/Logo";
 import UserRegisterScreen from "./app/screens/UserRegisterScreen";
-import UserRegisterScreen2 from "./app/screens/UserRegisterScreen2";
 import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
 
 
@@ -45,12 +44,6 @@ const screens = {
   },
   UserRegisterScreen:{
     screen:UserRegisterScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  UserRegisterScreen2:{
-    screen:UserRegisterScreen2,
     navigationOptions:{
       headerShown: false
     }

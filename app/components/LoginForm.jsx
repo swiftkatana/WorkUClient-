@@ -1,23 +1,27 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {globalObject} from "../src/globalObject";
+import { userLoginUrl } from "../src/api/apiKeys";
+import serverApi from '../src/api/serverApi';
 //add import
-export default function LoginForm() {
-  
-  //refernce
-  const pressHandler = async ()=>
-  {
-    const  res = await  serverApi.post(userLoginUrl, {email, password});
-    if(res.data.err){
-      
-      console.log(res.data.err);
-    }else{ // login content ok
-      globalObject.User = res.data;
-      console.log(res.data)
-      globalObject.Navigation.navigate('ProfileScreen');
-    }
-  }
 
+const pressHandler = async (email,password)=>
+{
+  const  res = await globalObject.SendRequest(userLoginUrl,{email,password});
+  console.log(res.err);
+  if(res.error){
+    console.log("3333333333333333333333333333333333");
+    globalObject.ErrorHandler(res.error);
+    //console.log(res.error);
+  }else{ // login content ok
+    console.log("222222222222222222222222222222222222");
+    globalObject.User = res.data;
+    //console.log(res.data)
+    globalObject.Navigation.navigate('ProfileScreen');
+  }
+}
+
+export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   return (
@@ -25,7 +29,7 @@ export default function LoginForm() {
     <View style={styles.container}>
       <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' />
       <TextInput value={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
-      <TouchableOpacity onPress={pressHandler} style={styles.button}>
+      <TouchableOpacity onPress={()=>pressHandler(email,password)} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
     </View>
