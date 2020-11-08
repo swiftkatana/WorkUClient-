@@ -7,18 +7,20 @@ import serverApi from '../src/api/serverApi';
 
 const pressHandler = async (email,password)=>
 {
-  const  res = await globalObject.SendRequest(userLoginUrl,{email,password});
-  console.log(res.err);
-  if(res.error){
-    console.log("3333333333333333333333333333333333");
-    globalObject.ErrorHandler(res.error);
-    //console.log(res.error);
-  }else{ // login content ok
-    console.log("222222222222222222222222222222222222");
-    globalObject.User = res.data;
-    //console.log(res.data)
-    globalObject.Navigation.navigate('ProfileScreen');
-  }
+  if(!firstName || !lastName || !email || !password || !verifyPassword){
+    title = "הכניסה נכשלה";
+    msg = "אחד או יותר מהשדות ריקים, נסו שנית"
+    alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
+    Alert.alert(title,msg,alertButton,{cancelable: false});
+  }else{
+    const  res = await globalObject.SendRequest(userLoginUrl,{email,password});
+    if(res.error){
+      globalObject.ErrorHandler(res.error);
+    }else{ // login content ok
+      globalObject.User = res.data;
+      globalObject.Navigation.navigate('ProfileScreen');
+    }
+}
 }
 
 export default function LoginForm() {

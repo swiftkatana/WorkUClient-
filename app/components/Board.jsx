@@ -3,7 +3,7 @@ import { StyleSheet, Text, View ,Dimensions, FlatList, Button} from 'react-nativ
 import { ScrollView,TouchableOpacity,TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 var arr = []
-for(let i = 0;i<4;i++)
+for(let i = 0;i<6;i++)
 { 
     if(i == 0)
     arr.push({title:"222222222kkkkkkkkkkkkkkkkkkלנקות את וחנות ועדכן את שמואל",value:(9999).toString()});
@@ -20,11 +20,11 @@ const render = ({item})=>
 
         <View style={styles.koral}>
         <TouchableOpacity style={styles.but}>
-          <Text>פירוט</Text>
+          <Text style ={styles.butText}>פירוט</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.but}>
-          <Text>עדכן</Text>
+          <Text style ={styles.butText}>עדכן</Text>
         </TouchableOpacity>
         </View>
 
@@ -37,7 +37,7 @@ export default function Board() {
 
     return (
         <View style={styles.view}>
-            <Text style={styles.taskBorad}>
+            <Text style={styles.boardTitle}>
                 לוח משימות
             </Text>
             <FlatList
@@ -52,37 +52,74 @@ export default function Board() {
 const styles = StyleSheet.create({
     view:
     {
-        borderWidth:1,
-        height: Dimensions.get('window').height *0.7,
+        //borderWidth:1,
+        height: Dimensions.get('window').height *0.65,
+        alignItems: 'center',
+        backgroundColor: "tomato",
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 90,
+        marginLeft:5,
+        marginRight:5,
+        
+
         
     },
     listText:
-    {   flex:5,
+    {   flex:3,
         textAlign:"right",
-        marginRight:2,
+        marginRight:15,
+        fontSize: 16,
+
     },
     list:
     {
-        borderWidth: 1,
+        //borderWidth: 1,
         height:100,
-        width:Dimensions.get('window').width,
-        backgroundColor:"#00ffff",
+        width:Dimensions.get('window').width-50,
+        //backgroundColor:"seashell",
+        backgroundColor:"white",
         flexDirection:"row-reverse",
+        alignItems: 'center',
+        marginLeft:20,
+        marginRight:20,
+        borderRadius:25,
+        marginBottom:8,
+        borderWidth:1,
+        borderColor: "lightgray",
+
+
     },  
-    taskBorad:
+    boardTitle:
     {
-        textAlign:"center",
-        fontSize:40,
-        
+        width:Dimensions.get('window').width -10,
+        textAlign:"right",
+        marginRight: 85,
+        marginTop: 10,
+        fontSize:24,
+        //backgroundColor: "tomato",
+        paddingVertical: 10,
+        borderRadius:20,
+        marginBottom: 10,
+        color: "seashell",
+        fontWeight: "bold",
+
     },
     but:
     {
-       
     width: 50,
-    height: 40,
-    backgroundColor: 'tomato', 
-
-    marginBottom:5,
+    height: 30,
+    marginHorizontal: 15,
+    backgroundColor: 'firebrick',
+    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:10,
+    marginVertical:8,
+    },
+    butText:
+    {
+        color:"seashell",
+        fontWeight: "bold",
     },
     koral:
     {

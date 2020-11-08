@@ -17,7 +17,6 @@ export default function MainScreen()
     )
 }
 
-
 const styles = StyleSheet.create(
     {
         container: {

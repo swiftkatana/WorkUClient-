@@ -71,11 +71,11 @@ export default function Timer() {
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.TimerStyle} onPress={()=>{globalObject.timer.ButtonHandler()}}>
-             <Text style={{textAlign:"center"}}>
+             <Text style={styles.TimerText}>
                 {msg}             
              </Text>
             </TouchableOpacity>
-            <Text style={{textAlign:"center",marginTop:20,}}>
+            <Text style={styles.Clock}>
                 שעון {timePass}       
              </Text>
         </View>
@@ -90,16 +90,45 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         flexDirection:"row-reverse",
         justifyContent:"space-between",
+        paddingHorizontal: 10,
+        alignItems: 'center',
+        textAlign: "right",
+        marginVertical: 10,
+        
+
     },
     TimerStyle:
     {
-        marginRight:1,
-        marginTop:5,
-        borderRadius:60,
-        backgroundColor:"#00ff00",
-        width:60,
+        
+        marginLeft:5,
+        borderRadius:25,
+        backgroundColor: "lightgray",
+        width:80,
         height:60,
+        justifyContent:'center',
+        textAlign:"center",
+        marginRight: 75,
+
+
+
     },
+    TimerText:
+    {
+        fontSize: 16,
+        textAlign:"center",
+        fontWeight: "bold",
+        color: "grey",
+
+    },
+    Clock:
+    {
+        flexGrow: 1,
+        marginLeft: 60,
+        justifyContent:'center',
+        textAlign:"center",
+        fontSize: 18,
+
+    }
 
 
 

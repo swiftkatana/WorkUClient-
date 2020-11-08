@@ -38,6 +38,11 @@ const styles = StyleSheet.create({
         height:75,
         flexDirection:"row-reverse",
         justifyContent:"space-between",
+        padding: 10,
+        alignItems: "center",
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10,
+        backgroundColor: "firebrick",
       
     },
     settings:
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
     
       marginLeft:5,
       borderRadius:10,
-      backgroundColor:"#00ff00",
+      backgroundColor:"seashell",
       width:60,
       height:60,
        
