@@ -1,6 +1,6 @@
-import React from 'react'
-import { StyleSheet, Text, View ,Dimensions, FlatList} from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View ,Dimensions, FlatList, Button} from 'react-native'
+import { ScrollView,TouchableOpacity,TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 var arr = []
 for(let i = 0;i<6;i++)
@@ -33,12 +33,12 @@ const render = ({item})=>
     )    
 }  
 
-export default function TaskBoard() {
+export default function Board() {
 
     return (
         <View style={styles.view}>
             <Text style={styles.boardTitle}>
-                לוח משימות
+                לוח4 משימות
             </Text>
             <FlatList
             data={arr}
@@ -52,12 +52,11 @@ export default function TaskBoard() {
 const styles = StyleSheet.create({
     view:
     {
-        //#bf3b49
         flex:9,
         //borderWidth:1,
         height: Dimensions.get('window').height,
         alignItems: 'center',
-        backgroundColor: "#ededed",
+        backgroundColor: "#bf3b49",
         borderTopRightRadius: 20,
         borderTopLeftRadius: 90,
         marginHorizontal: 5,
@@ -99,10 +98,11 @@ const styles = StyleSheet.create({
         marginRight: 90,
         marginTop: 10,
         fontSize:18,
+        //backgroundColor: "tomato",
         paddingVertical: 10,
         borderRadius:20,
         marginBottom: 10,
-        color: "grey",
+        color: "seashell",
         fontWeight: "bold",
 
     },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 30,
     marginHorizontal: 15,
-    backgroundColor: '#bf3b49',
+    backgroundColor: "'#a22434'",
     textAlign: "center",
     justifyContent: 'center',
     alignItems: 'center',
