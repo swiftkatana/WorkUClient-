@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     paddingRight: 5,
-    color: "tomato",
+    color: "#bf3b49",
     fontSize: 18,
     fontWeight: "bold",
   },

@@ -34,25 +34,26 @@ const styles = StyleSheet.create({
     view:
     {
         marginTop:5,
-        flex:1.5,
+        flex:2,
         flexDirection:"row-reverse",
-        justifyContent:"space-between",
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 3,
-        borderTopRightRadius: 3,
-        backgroundColor: "lightgrey",
+        justifyContent:"space-evenly",
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        backgroundColor: "#bf3b49",
         marginHorizontal: 5,
+        marginBottom: 5,
         textAlign: "center",
         alignItems: 'center',
 
     },
     settings:
     {
-      marginHorizontal:5,
+      marginHorizontal:4,
       borderRadius:20,
       backgroundColor:"seashell",
-      width:70,
+      width:75,
       height:60,
       justifyContent: 'center',
       alignItems: 'center',
@@ -60,8 +61,8 @@ const styles = StyleSheet.create({
     },
     settingsFont:
     {
-        marginHorizontal: 5,
+        marginHorizontal: 2,
         textAlign: "center",
-        fontWeight: "bold",
+        fontSize: 16,
      },
 })

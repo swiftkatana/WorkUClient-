@@ -25,7 +25,6 @@ const screens = {
       headerShown: false
     }
   },
-
   WelcomeScreen:{
     screen :WelcomeScreen,
     navigationOptions:{

@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     },
     button: {
       width: 300,
-      backgroundColor: "tomato",
+      backgroundColor: "#bf3b49",
       borderRadius: 25,
       marginVertical: 10,
       paddingVertical: 16,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     buttonText: {
       fontSize: 16,
       fontWeight: '500',
-      color: '#000000',
+      color: 'seashell',
       textAlign: 'center',
     },
     logoText: {
