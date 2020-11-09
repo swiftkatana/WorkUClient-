@@ -26,7 +26,7 @@ exports.userGetTask = "/api/user/gettask";
 
 
 // send {type,body,fullName,email}
-// recive {_id,}
+// recive {reuqest}
 exports.userSendPersonalRequest = "/api/user/personalreuqest";
 
 
