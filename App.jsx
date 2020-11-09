@@ -4,7 +4,7 @@ import { NativeModules,Platform,I18nManager } from "react-native";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ProfileScreen from './app/screens/ProfileScreen';
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import {createStackNavigator,TransitionPresets } from 'react-navigation-stack';
 
 import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions';
@@ -16,6 +16,7 @@ import UserRegisterScreen from "./app/screens/UserRegisterScreen";
 import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
 import MainRequestScreen from "./app/screens/MainRequestScreen"
 import NewRequestScreen from "./app/screens/NewRequestScreen";
+import AllRequestScreen from "./app/screens/AllRequestScreen";
 
 const screens = {
 
@@ -41,8 +42,15 @@ const screens = {
   {
   screen:NewRequestScreen,
   navigationOptions:{
-    headerShown: false
+    headerShown: false,
   }
+  },
+  AllRequestScreen:
+  {
+    screen:AllRequestScreen,
+    navigationOptions:{
+      headerShown: false
+    }
   },
 
   ProfileScreen:{

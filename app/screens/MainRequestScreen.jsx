@@ -10,7 +10,7 @@ export default function MainRequestScreen() {
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("AllRequestScreen")}>
                 <Text>כל הבקשות</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
