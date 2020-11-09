@@ -52,14 +52,16 @@ export default function Board() {
 const styles = StyleSheet.create({
     view:
     {
+        flex:8,
         //borderWidth:1,
         height: Dimensions.get('window').height *0.65,
         alignItems: 'center',
         backgroundColor: "tomato",
         borderTopRightRadius: 20,
         borderTopLeftRadius: 90,
-        marginLeft:5,
-        marginRight:5,
+        marginHorizontal: 5,
+        borderBottomLeftRadius: 3,
+        borderBottomRightRadius: 3,
         
 
         
@@ -80,8 +82,8 @@ const styles = StyleSheet.create({
         backgroundColor:"white",
         flexDirection:"row-reverse",
         alignItems: 'center',
-        marginLeft:20,
-        marginRight:20,
+        marginHorizontal: 20,
+
         borderRadius:25,
         marginBottom:8,
         borderWidth:1,

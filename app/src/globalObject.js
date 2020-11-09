@@ -11,7 +11,7 @@ class global
         this.id;
         this.timer = 0;
         this.tasks = [];
-
+        this.language;
         this.ErrorHandler = (error)=>{
           title = "5";
           msg = "5";

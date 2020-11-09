@@ -47,15 +47,16 @@ const styles = StyleSheet.create(
     {
         view:
         {
+            flex:1,
             alignItems: 'center',
             paddingHorizontal: 16,
-            paddingVertical: 20,
+            paddingVertical: 30,
             width: Dimensions.get('window').width,
-            flexDirection:"row-reverse",
+            flexDirection: "row-reverse",
             justifyContent:"space-between",
             textAlign: "right",
             borderRadius:2,
-            backgroundColor: "tomato",
+            backgroundColor: "#bf3b49",
             borderBottomRightRadius: 90,
             borderBottomLeftRadius: 5,
 
@@ -65,16 +66,19 @@ const styles = StyleSheet.create(
             fontSize:24,
             color: "seashell",
             fontWeight: "bold",
-            paddingRight:20,
+            paddingRight:30,
+            marginTop: 20,
         },
         settings:
         {
           marginLeft:5,
           borderRadius:25,
-          backgroundColor: "firebrick",
+          backgroundColor: "#941428",
           width:80,
-          height:60,
+          height:50,
           justifyContent:'center',
+          marginTop: 20,
+
 
         },
         settingsFont:

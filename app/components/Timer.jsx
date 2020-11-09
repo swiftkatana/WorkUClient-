@@ -42,6 +42,8 @@ class timer
 export default function Timer() {
 
     const [timePass,SetTime] = useState( "00:00:00" );
+    const [buttonName,setButtonName] = useState("תחילת עבודה")
+    const [textBottonStyle,setTextButtonStyle] = useState(styles.TimerText)
     useEffect(() => {
         if(globalObject.timer == 0)
         {
@@ -54,25 +56,28 @@ export default function Timer() {
         const id = setInterval(() => {
 
             if(globalObject.timer.isEnd)
+            {
                 SetTime(globalObject.timer.GetPrint());
+                setButtonName("סיום עבודה") 
+                setTextButtonStyle(styles.TimerTextEnd)
+            }
             else
-                SetTime("00:00:00");  
-        }, 1000);
+            {
+                SetTime("00:00:00"); 
+                setButtonName("תחילת עבודה") 
+                setTextButtonStyle(styles.TimerText)
+            }
+        }, 100);
         return () => {
             clearInterval(id);
         }
     }, [])
 
-    
-    var msg = "תחילת עבודה";
-    if(globalObject.timer.isEnd){
-        msg = "סיום עבודה";
-    }
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.TimerStyle} onPress={()=>{globalObject.timer.ButtonHandler()}}>
-             <Text style={styles.TimerText}>
-                {msg}             
+             <Text style={textBottonStyle}>
+                {buttonName}             
              </Text>
             </TouchableOpacity>
             <Text style={styles.Clock}>
@@ -86,6 +91,7 @@ export default function Timer() {
 const styles = StyleSheet.create({
     view:
     {
+        flex:1,
         height: 70,
         width: Dimensions.get('window').width,
         flexDirection:"row-reverse",
@@ -118,6 +124,14 @@ const styles = StyleSheet.create({
         textAlign:"center",
         fontWeight: "bold",
         color: "grey",
+
+    },
+    TimerTextEnd:
+    {
+        fontSize: 16,
+        textAlign:"center",
+        fontWeight: "bold",
+        color: "black",
 
     },
     Clock:
