@@ -2,30 +2,27 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default function MainScreenAction() {
+
+
+
     return (
         <View style={styles.view}>
 
-        <TouchableOpacity style={styles.settings}>
-        <Text style={styles.settingsFont}>פרופיל אישי</Text> 
-        </TouchableOpacity>
 
         <TouchableOpacity style={styles.settings}>
         <Text style={styles.settingsFont}>בקשה חדשה</Text> 
         </TouchableOpacity>
 
-
-        <TouchableOpacity style={styles.settings}>
-        <Text style={styles.settingsFont}>צ'אט</Text> 
-        </TouchableOpacity>
-
-
         <TouchableOpacity style={styles.settings}>
         <Text style={styles.settingsFont}>פורפיל שכר</Text> 
         </TouchableOpacity>
 
-        
         <TouchableOpacity style={styles.settings}>
-        <Text style={styles.settingsFont}>בקשות שהוגשו</Text> 
+        <Text style={styles.settingsFont}>משמרות</Text> 
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.settings}>
+        <Text style={styles.settingsFont}>צ'אט</Text> 
         </TouchableOpacity>
 
         </View>
@@ -35,24 +32,35 @@ export default function MainScreenAction() {
 const styles = StyleSheet.create({
     view:
     {
-        height:75,
+        marginTop:5,
+        flex:1.5,
         flexDirection:"row-reverse",
         justifyContent:"space-between",
-      
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 3,
+        borderTopRightRadius: 3,
+        backgroundColor: "lightgrey",
+        marginHorizontal: 5,
+        textAlign: "center",
+        alignItems: 'center',
+
     },
     settings:
     {
-    
-      marginLeft:5,
-      borderRadius:10,
-      backgroundColor:"#00ff00",
-      width:60,
+      marginHorizontal:5,
+      borderRadius:20,
+      backgroundColor:"seashell",
+      width:70,
       height:60,
-       
+      justifyContent: 'center',
+      alignItems: 'center',
+
     },
     settingsFont:
     {
-        marginTop:15,
-        textAlign:"center",
-    },
+        marginHorizontal: 5,
+        textAlign: "center",
+        fontWeight: "bold",
+     },
 })

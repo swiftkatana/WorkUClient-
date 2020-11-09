@@ -1,5 +1,5 @@
-import React, { useEffect,useState } from "react";
-import { AppState,ClippingRectangle, StyleSheet, Text, View,Button,TextInput } from "react-native";
+import React from "react";
+import { NativeModules,Platform,I18nManager } from "react-native";
 // just a icon libary 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ProfileScreen from './app/screens/ProfileScreen';
@@ -12,12 +12,19 @@ import Constants from 'expo-constants';
 import {globalObject} from "./app/src/globalObject";
 import LoginForm from "./app/components/LoginForm";
 import MainScreen from "./app/screens/MainScreen";
-import Logo from "./app/components/Logo";
 import UserRegisterScreen from "./app/screens/UserRegisterScreen";
 import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
 
 
 const screens = {
+
+  MainScreen:{
+    screen:MainScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+
   WelcomeScreen:{
     screen :WelcomeScreen,
     navigationOptions:{
@@ -36,12 +43,7 @@ const screens = {
       headerShown: false
     }
   },
-  MainScreen:{
-    screen:MainScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
+
   UserRegisterScreen:{
     screen:UserRegisterScreen,
     navigationOptions:{
@@ -59,66 +61,44 @@ const screens = {
 }
 
 
-const AppContainer = createAppContainer(createStackNavigator(screens));
 
 
 
-listen = (r) =>{
-  console.log(r.notification.request.content.data);
-}
-Notifications.addNotificationResponseReceivedListener(listen);
 
-async function registerForPushNotificationsAsync() {
-  if (Constants.isDevice) {
-    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
-      return;
-    }
-    token = await Notifications.getExpoPushTokenAsync();
-    globalObject.id = token.data;
-  }
-};
 
-registerForPushNotificationsAsync();
 
 export default function App() {
+
+
+  async function registerForPushNotificationsAsync() {
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+      token = await Notifications.getExpoPushTokenAsync();
+      globalObject.id = token.data;
+    }
+  };
+  registerForPushNotificationsAsync();
+
+  const AppContainer = createAppContainer(createStackNavigator(screens));
+
+  listen = (r) =>{
+    console.log(r);
+  }
+  Notifications.addNotificationResponseReceivedListener(listen);
+
+  globalObject.language =
+          Platform.OS === 'ios' ? NativeModules.SettingsManager.settings.AppleLocale || NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+            : NativeModules.I18nManager.localeIdentifier;
+
   return (<AppContainer/>);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-
-
-const s = StyleSheet.create({
-  continer:
-  {
-      paddingTop :50,
-  },
-  info:
-  {
-      fontSize:15,
-      textAlign:"right",
-      
-  },
-  Img:
-  {
-      marginTop:40,
-      position : "absolute",
-      height :50,
-      width:50
-  }
-  })
-  

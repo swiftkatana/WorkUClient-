@@ -32,7 +32,7 @@ export default function Greeting()
     return (
 
         <View style={styles.view}>
-        <Text style={{fontSize:25}}> {GreetingMsg},{globalObject.User.name}</Text>
+        <Text style={styles.GreetingText}> {GreetingMsg},{globalObject.User.name}</Text>
         <TouchableOpacity style={styles.settings}>
         <Text style={styles.settingsFont}>הגדרות</Text> 
         </TouchableOpacity>
@@ -47,25 +47,46 @@ const styles = StyleSheet.create(
     {
         view:
         {
-            height: 70,
+            flex:1,
+            alignItems: 'center',
+            paddingHorizontal: 16,
+            paddingVertical: 30,
             width: Dimensions.get('window').width,
-            flexDirection:"row-reverse",
+            flexDirection: "row-reverse",
             justifyContent:"space-between",
+            textAlign: "right",
+            borderRadius:2,
+            backgroundColor: "#bf3b49",
+            borderBottomRightRadius: 90,
+            borderBottomLeftRadius: 5,
+
+        },
+        GreetingText:
+        {
+            fontSize:24,
+            color: "seashell",
+            fontWeight: "bold",
+            paddingRight:30,
+            marginTop: 20,
         },
         settings:
         {
-        
           marginLeft:5,
-          borderRadius:30,
-          backgroundColor:"#00ff00",
-          width:60,
-          height:60,
-           
+          borderRadius:25,
+          backgroundColor: "#941428",
+          width:80,
+          height:50,
+          justifyContent:'center',
+          marginTop: 20,
+
+
         },
         settingsFont:
         {
-            marginTop:15,
-            textAlign:"center",
+            fontSize: 16,
+            fontWeight: "bold",
+            color:"seashell",
+            textAlign: 'center',
         },
     }
 )

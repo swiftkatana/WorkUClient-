@@ -1,25 +1,24 @@
 const responedList = {
-    DBError: { err: 'DBError' },
-    InfoUnvalid: { err: 'InfoUnvalid' },
-    route: { err: 'koral | Michael you send me bad request! ' },
-    FaildSave: { err: 'FaildSave' },
-    loginFaildAlreadyConnect: { err: 'loginFaildAlreadyConnect' },
+    DBError:'DBError',
+    InfoUnvalid:'InfoUnvalid',
+    route:'koral | Michael you send me bad request! ',
+    FaildSave:'FaildSave',
+    loginFaildAlreadyConnect:'loginFaildAlreadyConnect',
     //error when someone try to register but using a exists email please try diffrent email
-    UserIsAlreadyCreated: { err: "UserIsAlreadyCreated" },
+    UserIsAlreadyCreated:"UserIsAlreadyCreated",
     // error when try to login to user but could not found email is wrong
-    UserNotCreated: { err: "UserNotCreated" },
+    UserNotCreated:"UserNotCreated",
     // when try to create a company and there is already a company with this name
-    companyNameExists: { err: "companyNameExists" },
+    companyNameExists:"companyNameExists",
     // error when password is unvalid   
-    UnvalidPassword: { err: 'UnvalidPassword' },
+    UnvalidPassword:'UnvalidPassword',
     // error when someone try to login but user not exists or wrong info
-    usersNotFound: { err: 'usersNotFound' },
-    good: { valid: 'good' },
+    usersNotFound:'usersNotFound',
     // error when someone try to use a fake or not exists email 
-    emailNotExistsL: { err: 'emailIsFake' },
+    emailNotExistsL:'emailIsFake',
     // error when the DB cant find something
-    NotExists: { err: 'NotExists' },
-    isInUse: { err: 'isInUse' },
+    NotExists:'NotExists',
+    isInUse:'isInUse',
 }
 
 exports.responedList = responedList

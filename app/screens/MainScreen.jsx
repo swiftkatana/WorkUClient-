@@ -17,12 +17,12 @@ export default function MainScreen()
     )
 }
 
-
 const styles = StyleSheet.create(
     {
         container: {
-            marginTop:50,
-            height: Dimensions.get('window').height -10,
+            flex:1,
+            //marginTop:50,
+            //height: Dimensions.get('window').height ,
             
             
             

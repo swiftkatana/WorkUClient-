@@ -42,6 +42,8 @@ class timer
 export default function Timer() {
 
     const [timePass,SetTime] = useState( "00:00:00" );
+    const [buttonName,setButtonName] = useState("תחילת עבודה")
+    const [textBottonStyle,setTextButtonStyle] = useState(styles.TimerText)
     useEffect(() => {
         if(globalObject.timer == 0)
         {
@@ -54,28 +56,31 @@ export default function Timer() {
         const id = setInterval(() => {
 
             if(globalObject.timer.isEnd)
+            {
                 SetTime(globalObject.timer.GetPrint());
+                setButtonName("סיום עבודה") 
+                setTextButtonStyle(styles.TimerTextEnd)
+            }
             else
-                SetTime("00:00:00");  
-        }, 1000);
+            {
+                SetTime("00:00:00"); 
+                setButtonName("תחילת עבודה") 
+                setTextButtonStyle(styles.TimerText)
+            }
+        }, 100);
         return () => {
             clearInterval(id);
         }
     }, [])
 
-    
-    var msg = "תחילת עבודה";
-    if(globalObject.timer.isEnd){
-        msg = "סיום עבודה";
-    }
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.TimerStyle} onPress={()=>{globalObject.timer.ButtonHandler()}}>
-             <Text style={{textAlign:"center"}}>
-                {msg}             
+             <Text style={textBottonStyle}>
+                {buttonName}             
              </Text>
             </TouchableOpacity>
-            <Text style={{textAlign:"center",marginTop:20,}}>
+            <Text style={styles.Clock}>
                 שעון {timePass}       
              </Text>
         </View>
@@ -86,20 +91,58 @@ export default function Timer() {
 const styles = StyleSheet.create({
     view:
     {
+        flex:1,
         height: 70,
         width: Dimensions.get('window').width,
         flexDirection:"row-reverse",
         justifyContent:"space-between",
+        paddingHorizontal: 10,
+        alignItems: 'center',
+        textAlign: "right",
+        marginVertical: 10,
+        
+
     },
     TimerStyle:
     {
-        marginRight:1,
-        marginTop:5,
-        borderRadius:60,
-        backgroundColor:"#00ff00",
-        width:60,
+        
+        marginLeft:5,
+        borderRadius:25,
+        backgroundColor: "lightgray",
+        width:80,
         height:60,
+        justifyContent:'center',
+        textAlign:"center",
+        marginRight: 75,
+
+
+
     },
+    TimerText:
+    {
+        fontSize: 16,
+        textAlign:"center",
+        fontWeight: "bold",
+        color: "grey",
+
+    },
+    TimerTextEnd:
+    {
+        fontSize: 16,
+        textAlign:"center",
+        fontWeight: "bold",
+        color: "black",
+
+    },
+    Clock:
+    {
+        flexGrow: 1,
+        marginLeft: 60,
+        justifyContent:'center',
+        textAlign:"center",
+        fontSize: 18,
+
+    }
 
 
 
