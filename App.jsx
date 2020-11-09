@@ -11,15 +11,16 @@ import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import {globalObject} from "./app/src/globalObject";
 import LoginForm from "./app/components/LoginForm";
-import MainScreen from "./app/screens/MainScreen";
+import TaskScreen from "./app/screens/TaskScreen";
 import UserRegisterScreen from "./app/screens/UserRegisterScreen";
 import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
-
+import MainRequestScreen from "./app/screens/MainRequestScreen"
+import NewRequestScreen from "./app/screens/NewRequestScreen";
 
 const screens = {
 
-  MainScreen:{
-    screen:MainScreen,
+  TaskScreen:{
+    screen:TaskScreen,
     navigationOptions:{
       headerShown: false
     }
@@ -31,6 +32,20 @@ const screens = {
       headerShown: false
     }
   },
+  MainRequestScreen:{
+    screen:MainRequestScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  NewRequestScreen:
+  {
+  screen:NewRequestScreen,
+  navigationOptions:{
+    headerShown: false
+  }
+  },
+
   ProfileScreen:{
     screen:ProfileScreen,
     navigationOptions:{
@@ -89,7 +104,6 @@ export default function App() {
   registerForPushNotificationsAsync();
 
   const AppContainer = createAppContainer(createStackNavigator(screens));
-
   listen = (r) =>{
     console.log(r);
   }

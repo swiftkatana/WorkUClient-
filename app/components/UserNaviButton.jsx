@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-export default function MainScreenAction() {
+import { globalObject } from '../src/globalObject';
+export default function UserNaviButton() {
 
 
 
@@ -9,7 +10,7 @@ export default function MainScreenAction() {
         <View style={styles.view}>
 
 
-        <TouchableOpacity style={styles.settings}>
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('MainRequestScreen')}>
         <Text style={styles.settingsFont}>בקשה חדשה</Text> 
         </TouchableOpacity>
 

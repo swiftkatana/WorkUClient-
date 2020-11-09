@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View ,Dimensions, FlatList, Button} from 'react-native'
-import { ScrollView,TouchableOpacity,TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import React from 'react'
+import { StyleSheet, Text, View ,Dimensions, FlatList} from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 var arr = []
 for(let i = 0;i<6;i++)
@@ -33,7 +33,7 @@ const render = ({item})=>
     )    
 }  
 
-export default function Board() {
+export default function TaskBoard() {
 
     return (
         <View style={styles.view}>
