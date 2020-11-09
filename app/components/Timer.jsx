@@ -91,7 +91,7 @@ export default function Timer() {
 const styles = StyleSheet.create({
     view:
     {
-        flex:1,
+        flex:1.5,
         height: 70,
         width: Dimensions.get('window').width,
         flexDirection:"row-reverse",

@@ -63,7 +63,7 @@ const styles = StyleSheet.create(
         },
         GreetingText:
         {
-            fontSize:24,
+            fontSize:18,
             color: "seashell",
             fontWeight: "bold",
             paddingRight:30,
@@ -84,7 +84,6 @@ const styles = StyleSheet.create(
         settingsFont:
         {
             fontSize: 16,
-            fontWeight: "bold",
             color:"seashell",
             textAlign: 'center',
         },

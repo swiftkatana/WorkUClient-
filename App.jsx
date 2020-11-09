@@ -18,13 +18,13 @@ import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
 
 const screens = {
 
+
   MainScreen:{
     screen:MainScreen,
     navigationOptions:{
       headerShown: false
     }
   },
-
   WelcomeScreen:{
     screen :WelcomeScreen,
     navigationOptions:{

@@ -52,16 +52,16 @@ export default function Board() {
 const styles = StyleSheet.create({
     view:
     {
-        flex:8,
+        flex:9,
         //borderWidth:1,
-        height: Dimensions.get('window').height *0.65,
+        height: Dimensions.get('window').height,
         alignItems: 'center',
-        backgroundColor: "tomato",
+        backgroundColor: "#bf3b49",
         borderTopRightRadius: 20,
         borderTopLeftRadius: 90,
         marginHorizontal: 5,
-        borderBottomLeftRadius: 3,
-        borderBottomRightRadius: 3,
+        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 5,
         
 
         
@@ -70,13 +70,13 @@ const styles = StyleSheet.create({
     {   flex:3,
         textAlign:"right",
         marginRight:15,
-        fontSize: 16,
+        fontSize: 14,
 
     },
     list:
     {
         //borderWidth: 1,
-        height:100,
+        height:80,
         width:Dimensions.get('window').width-50,
         //backgroundColor:"seashell",
         backgroundColor:"white",
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
 
         borderRadius:25,
-        marginBottom:8,
+        marginBottom:10,
         borderWidth:1,
         borderColor: "lightgray",
 
@@ -95,9 +95,9 @@ const styles = StyleSheet.create({
     {
         width:Dimensions.get('window').width -10,
         textAlign:"right",
-        marginRight: 85,
+        marginRight: 90,
         marginTop: 10,
-        fontSize:24,
+        fontSize:18,
         //backgroundColor: "tomato",
         paddingVertical: 10,
         borderRadius:20,
@@ -111,17 +111,16 @@ const styles = StyleSheet.create({
     width: 50,
     height: 30,
     marginHorizontal: 15,
-    backgroundColor: 'firebrick',
+    backgroundColor: '#a22434',
     textAlign: "center",
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius:10,
-    marginVertical:8,
+    marginVertical:3,
     },
     butText:
     {
         color:"seashell",
-        fontWeight: "bold",
     },
     koral:
     {
