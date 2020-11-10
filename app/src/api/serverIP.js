@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const outip = ""
+const outip = "https://worku.herokuapp.com"
 const inMyServer = 'http://84.108.77.60:1029'
-const ip = inMyServer;
+const ip = outip;
 export default ip;

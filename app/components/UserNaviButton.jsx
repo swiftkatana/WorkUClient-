@@ -39,22 +39,22 @@ const styles = StyleSheet.create({
         justifyContent:"space-evenly",
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        backgroundColor: "#bf3b49",
-        marginHorizontal: 5,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        backgroundColor: "#ededed",
+        marginHorizontal: 10,
         marginBottom: 5,
         textAlign: "center",
         alignItems: 'center',
-
+//#bf3b49
     },
     settings:
     {
-      marginHorizontal:4,
-      borderRadius:20,
-      backgroundColor:"seashell",
+      //marginHorizontal:1,
+      borderRadius:30,
+      backgroundColor:"#bf3b49",
       width:75,
-      height:60,
+      height:70,
       justifyContent: 'center',
       alignItems: 'center',
 
@@ -64,5 +64,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 2,
         textAlign: "center",
         fontSize: 16,
+        color: "seashell",
+        fontWeight: "bold",
      },
 })
