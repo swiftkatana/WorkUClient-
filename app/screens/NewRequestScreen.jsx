@@ -32,19 +32,9 @@ export default function NewRequestScreen() {
             </TouchableOpacity>
             <View style={styles.container}>
 
-<<<<<<< HEAD
-            <View>
-                <Text >סוג הבקשה</Text>
-                <Picker selectedValue={type} style={styles.itemList}  onValueChange={(itemValue) => SetType(itemValue)}>
-                    <Picker.Item label="חולי" value="חולי" />
-                    <Picker.Item label="חופש" value="חופש" />
-                </Picker>
-            </View>
-=======
                 <View> 
                     <Text style={styles.header}>בקשה חדשה</Text>
                 </View>
->>>>>>> 440bf9394658d96668d4457bfba7d832e4dd2ef4
 
                 <View style={styles.picker}>
                     <Text style={styles.subTitle}>סוג הבקשה</Text>
