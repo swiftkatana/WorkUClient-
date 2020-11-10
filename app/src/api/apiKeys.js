@@ -12,9 +12,9 @@ exports.userRegisterUrl = "/api/user/register";
 //revice {userData}
 exports.userJoinCompany = "/api/user/joincompany";
 
-//send {_id,text}
+//send {_id,comment,email(email of the user who update)}
 //recive none
-exports.usercompleteTask = "/api/user/completetask";
+exports.usercompleteTask = "/api/user/updatetask";
 
 // send {_id,email}
 // recive {task}
