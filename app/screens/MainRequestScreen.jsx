@@ -5,12 +5,12 @@ import { globalObject } from '../src/globalObject'
 export default function MainRequestScreen() {
     return (
         <View style={styles.view}>
-            <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
                     <Text style={styles.exitText}>X</Text>
-                </TouchableOpacity>
+            </TouchableOpacity>
+            <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>הבקשות שלי</Text>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("AllRequestScreen")}>
                     <Text style={styles.buttonText}>כל הבקשות</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
@@ -27,10 +27,12 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor: "#bf3b49",
         
+        
     },
     buttonsContainer:
     {
-        paddingTop: 70,
+        //paddingTop: 10,
+        alignItems: 'flex-end',
     },
     button:
     {
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     },
     exitButton:
     {
-        //paddingTop: 60,
+        paddingTop: 60,
         //position:'absolute',
         marginLeft:30,
         

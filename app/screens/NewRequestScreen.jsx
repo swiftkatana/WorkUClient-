@@ -20,10 +20,11 @@ export default function NewRequestScreen() {
     const [text, SetText] = useState("");
     return (
         <View style={styles.view}>
+            <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
+                <Text style={styles.exitText}>X</Text>
+            </TouchableOpacity>
             <View style={styles.container}>
-                <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
-                    <Text style={styles.exitText}>X</Text>
-                </TouchableOpacity>
+
                 <View> 
                     <Text style={styles.header}>בקשה חדשה</Text>
                 </View>
@@ -58,12 +59,11 @@ const styles = StyleSheet.create({
     {
         flex:1,
         backgroundColor: "#bf3b49",
-        alignItems: "flex-end",
 
     },
     container:
     {  
-        paddingTop: 70,
+        alignItems: 'flex-end',
     },
     header:
     {
@@ -112,6 +112,8 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
+        marginHorizontal: 30,
+
         
     },
 
@@ -123,7 +125,9 @@ const styles = StyleSheet.create({
     },
     exitButton:
     {
-        marginRight:30,
+        marginLeft: 30,
+        paddingTop: 60,
+
     },
     exitText:
     {
