@@ -24,6 +24,10 @@ exports.userGetTask = "/api/user/gettask";
 // recive {reuqest}
 exports.userSendPersonalRequest = "/api/user/personalreuqest";
 
+// send {_id,status,respond}
+// recive {reuqest}
+exports.updatePersonalRequest = '/api/company/updatepersonalreuqest';
+
 //boss api
 
 // send {mangar{email,joinCode} ,email}
