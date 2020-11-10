@@ -1,26 +1,35 @@
 import React,{useState} from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {globalObject} from "../src/globalObject";
-import { userLoginUrl } from "../src/api/apiKeys";
-import serverApi from '../src/api/serverApi';
-//add import
+import { getCompanyUrl, userLoginUrl } from "../src/api/apiKeys";
 
 const pressHandler = async (email,password)=>
 {
-  if(!firstName || !lastName || !email || !password || !verifyPassword){
+  if(!email || !password ){
     title = "הכניסה נכשלה";
     msg = "אחד או יותר מהשדות ריקים, נסו שנית"
     alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
     Alert.alert(title,msg,alertButton,{cancelable: false});
-  }else{
-    const  res = await globalObject.SendRequest(userLoginUrl,{email,password});
-    if(res.error){
-      globalObject.ErrorHandler(res.error);
-    }else{ // login content ok
-      globalObject.User = res.data;
-      globalObject.Navigation.navigate('ProfileScreen');
+  }else
+  {
+    const  user = await globalObject.SendRequest(userLoginUrl,{email,password});
+    if(user)
+    { 
+      
+      globalObject.User = user;
+      if(globalObject.User.permission.managar)
+      {
+        const  company = await globalObject.SendRequest(getCompanyUrl,{email:user.email,joinCode:user.joinCode});
+        if(company)
+        {
+          globalObject.User.tasks = company.tasks;
+          globalObject.User.personalRequests = company.personalRequests;
+          globalObject.campany = company;
+        }
+      }
+      globalObject.Navigation.navigate('TaskScreen');
     }
-}
+  }
 }
 
 export default function LoginForm() {

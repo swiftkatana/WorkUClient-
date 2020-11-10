@@ -8,9 +8,16 @@ import { globalObject } from '../src/globalObject'
 // send {type,body,fullName,email}
 // recive {_id,}
 const SendTask = async (type,body)=>
-{
-    return;
+{   
     res = await globalObject.SendRequest(userSendPersonalRequest,{type:type,body:body,fullName:globalObject.User.fullName,email:globalObject.User.email})
+    if(res.error)
+    {
+
+    }
+    else
+    {
+
+    }
 
 }
 
@@ -29,8 +36,8 @@ export default function NewRequestScreen() {
             <View>
                 <Text >סוג הבקשה</Text>
                 <Picker selectedValue={type} style={styles.itemList}  onValueChange={(itemValue) => SetType(itemValue)}>
-                    <Picker.Item label="חולי" value="java" />
-                    <Picker.Item label="חופש" value="js" />
+                    <Picker.Item label="חולי" value="חולי" />
+                    <Picker.Item label="חופש" value="חופש" />
                 </Picker>
             </View>
 

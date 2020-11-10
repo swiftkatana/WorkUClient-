@@ -1,7 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-import ip from './serverIP'
+import ip from "./serverIP";
 var config = {
-    headers: { 'Access-Control-Allow-Origin': '*' }
+  baseURL: ip,
+  timeout: 1000,
+  headers: { "Access-Control-Allow-Origin": "*" },
 };
-export default axios.create({ baseURL: ip }, config);
+export default axios.create(config);
