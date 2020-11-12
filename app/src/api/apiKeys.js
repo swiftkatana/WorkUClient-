@@ -12,9 +12,9 @@ exports.userRegisterUrl = "/api/user/register";
 //revice {userData}
 exports.userJoinCompany = "/api/user/joincompany";
 
-//send {_id,text}
+//send {_id,comment,email(email of the user who update),complete}
 //recive none
-exports.usercompleteTask = "/api/user/completetask";
+exports.usercompleteTask = "/api/user/updatetask";
 
 // send {_id,email}
 // recive {task}
@@ -23,6 +23,10 @@ exports.userGetTask = "/api/user/gettask";
 // send {type,body,fullName,email}
 // recive {reuqest}
 exports.userSendPersonalRequest = "/api/user/personalreuqest";
+
+// send {_id,status,respond}
+// recive {reuqest}
+exports.updatePersonalRequest = '/api/company/updatepersonalreuqest';
 
 //boss api
 
