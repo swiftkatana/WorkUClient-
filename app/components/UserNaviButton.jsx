@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
 export default function UserNaviButton() {
@@ -11,18 +11,22 @@ export default function UserNaviButton() {
 
 
         <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('MainRequestScreen')}>
-        <Text style={styles.settingsFont}>בקשה חדשה</Text> 
+        <Image style={styles.tinyLogo} source={require('../assets/notebook_icon.png')}/>
+        <Text style={styles.settingsFont}>בקשות</Text> 
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('EmployeePortfolioScreen')}>
+        <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')}/>
+        <Text style={styles.settingsFont}>פורטל עובד</Text> 
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.settings}>
-        <Text style={styles.settingsFont}>פורפיל שכר</Text> 
+        <Image style={styles.tinyLogo} source={require('../assets/statistics_icon.png')}/>
+        <Text style={styles.settingsFont}>סטטיסטיקה</Text> 
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.settings}>
-        <Text style={styles.settingsFont}>משמרות</Text> 
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.settings}>
+        <Image style={styles.tinyLogo} source={require('../assets/chat_icon_2.png')}/>
         <Text style={styles.settingsFont}>צ'אט</Text> 
         </TouchableOpacity>
 
@@ -41,7 +45,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        backgroundColor: "#ededed",
+        //backgroundColor: "#ededed",
+        backgroundColor: "#efeef4",
         marginHorizontal: 10,
         marginBottom: 5,
         textAlign: "center",
@@ -52,7 +57,7 @@ const styles = StyleSheet.create({
     {
       //marginHorizontal:1,
       borderRadius:30,
-      backgroundColor:"#bf3b49",
+      backgroundColor:"#7f71e3",
       width:75,
       height:70,
       justifyContent: 'center',
@@ -61,10 +66,19 @@ const styles = StyleSheet.create({
     },
     settingsFont:
     {
-        marginHorizontal: 2,
         textAlign: "center",
-        fontSize: 16,
+        fontSize: 11,
         color: "seashell",
         fontWeight: "bold",
      },
+     tinyLogo:{
+        width: 30,
+        height: 30,
+        //alignItems: 'flex-end',
+        //justifyContent: 'flex-end',
+        //marginBottom: 40,
+        //marginRight: 12,
+        //zIndex: 5,
+        
+    },
 })

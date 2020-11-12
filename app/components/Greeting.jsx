@@ -32,9 +32,10 @@ export default function Greeting()
     return (
 
         <View style={styles.view}>
-        <Text style={styles.GreetingText}> {GreetingMsg},{globalObject.User.name}</Text>
-        <TouchableOpacity style={styles.settings}>
-        <Text style={styles.settingsFont}>הגדרות</Text> 
+        <Text style={styles.GreetingText}> {GreetingMsg}, {globalObject.User.firstName}</Text>
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate("SettingsScreen")}>
+        <Image style={styles.tinyLogo} source={require('../assets/settings_icon.png')}/>
+        <Text style={styles.settingsFont}>הגדרות</Text>
         </TouchableOpacity>
         </View>
         
@@ -56,36 +57,49 @@ const styles = StyleSheet.create(
             justifyContent:"space-between",
             textAlign: "right",
             borderRadius:2,
-            backgroundColor: "#bf3b49",
-            borderBottomRightRadius: 90,
-            borderBottomLeftRadius: 5,
+            backgroundColor: "#7f71e3",
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 85,
+            borderBottomLeftRadius: 0,
 
         },
         GreetingText:
         {
-            fontSize:18,
+            fontSize:16,
             color: "seashell",
             fontWeight: "bold",
             paddingRight:30,
-            marginTop: 20,
+            marginTop: 45,
         },
         settings:
         {
           marginLeft:5,
           borderRadius:25,
-          backgroundColor: "#941428",
-          width:80,
-          height:50,
+          //backgroundColor: "#6f61ca",
+          width:60,
+          height:60,
           justifyContent:'center',
-          marginTop: 20,
+          alignItems: 'center',
+          marginTop: 35,
 
 
         },
         settingsFont:
         {
-            fontSize: 16,
+            fontSize: 11,
             color:"seashell",
             textAlign: 'center',
+            fontWeight: "bold",
+        },
+        tinyLogo:{
+            width: 30,
+            height: 30,
+            //alignItems: 'flex-end',
+            //justifyContent: 'flex-end',
+            //marginBottom: 40,
+            //marginRight: 12,
+            //zIndex: 5,
+            
         },
     }
 )

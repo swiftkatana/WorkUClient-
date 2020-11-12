@@ -25,7 +25,7 @@ export default function WelcomeScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.9,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     paddingRight: 5,
-    color: "#bf3b49",
+    color: "#7f71e3",
     fontSize: 18,
     fontWeight: "bold",
   },

@@ -1,5 +1,6 @@
 import React,{useState} from "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import Logo from "../components/Logo";
 import { userRegisterUrl } from "../src/api/apiKeys";
 import {globalObject} from "../src/globalObject";
 
@@ -24,27 +25,33 @@ export default function UserRegisterScreen() {
       alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
       Alert.alert(title,msg,alertButton,{cancelable: false});
     }else{
-      const  res = await globalObject.SendRequest(userRegisterUrl,{firstName,lastName,email,password});
-      if(res.error){
-        globalObject.ErrorHandler(res.error);
-      }else{// register content ok
-        globalObject.User = res.data;
-        globalObject.Navigation.navigate('MainScreen');
+      const  user = await globalObject.SendRequest(userRegisterUrl,{firstName,lastName,email,password});
+      if(user){// register content ok
+        globalObject.User = user;
+        globalObject.Navigation.navigate('TaskScreen');
       }
     }
   }
     return (
-
         <View style={styles.container}>
-            <Text style= {styles.logoText}>הרשמה</Text>
-            <TextInput value ={firstName} onChangeText={setFirstName} style={styles.inputBox} placeholder='שם פרטי' />
-            <TextInput value ={lastName} onChangeText={setLastName} style={styles.inputBox} placeholder="שם משפחה"/>
-            <TextInput value ={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' />
-            <TextInput value ={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
-            <TextInput value ={verifyPassword} onChangeText={setVerifyPassword} style={styles.inputBox} placeholder="אימות סיסמה" secureTextEntry={true}/>
-            <TouchableOpacity style={styles.button} onPress={() => pressHandler(firstName,lastName,email,password,verifyPassword)}>
-                <Text style={styles.buttonText}>אישור</Text>
-            </TouchableOpacity>
+          <View style={styles.container}>
+              <Text style= {styles.logoText}>הרשמה</Text>
+              <TextInput value ={firstName} onChangeText={setFirstName} style={styles.inputBox} placeholder='שם פרטי' />
+              <TextInput value ={lastName} onChangeText={setLastName} style={styles.inputBox} placeholder="שם משפחה"/>
+              <TextInput value ={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' />
+              <TextInput value ={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
+              <TextInput value ={verifyPassword} onChangeText={setVerifyPassword} style={styles.inputBox} placeholder="אימות סיסמה" secureTextEntry={true}/>
+              <TouchableOpacity style={styles.button} onPress={() => pressHandler(firstName,lastName,email,password,verifyPassword)}>
+                  <Text style={styles.buttonText}>אישור</Text>
+              </TouchableOpacity>
+          </View>
+          <View style={styles.signinTextCont}>
+                <Text style={styles.signinText}> כבר יש לך משתמש?</Text>
+                <TouchableOpacity onPress={() => globalObject.Navigation.navigate('WelcomeScreen')}>
+                  <Text style={styles.signinButton}>כניסה</Text>
+                </TouchableOpacity>
+                <Text style={styles.signinButton}  />
+          </View>
         </View>
   
         
@@ -53,7 +60,7 @@ export default function UserRegisterScreen() {
 
 const styles = StyleSheet.create({
     container: {
-      flexGrow: 1,
+      flexGrow: 0.8,
       justifyContent: 'center',
       alignItems: 'center'
     },
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
     },
     button: {
       width: 300,
-      backgroundColor: "#bf3b49",
+      backgroundColor: "#7f71e3",
       borderRadius: 25,
       marginVertical: 10,
       paddingVertical: 16,
@@ -84,6 +91,22 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: '#000000',
         fontWeight: "bold"
-    }
+    },
+    signinTextCont: {
+      //flexGrow: 0.1,
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      paddingVertical: 16,
+      flexDirection: 'row-reverse'
+    },
+    signinText: {
+      fontSize: 16,
+    },
+    signinButton: {
+      paddingRight: 5,
+      color: "#7f71e3",
+      fontSize: 18,
+      fontWeight: "bold",
+    },
   
   });

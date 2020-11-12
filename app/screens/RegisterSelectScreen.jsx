@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 300,
-    backgroundColor: "#bf3b49",
+    backgroundColor: "#7f71e3",
     borderRadius: 25,
     marginVertical: 10,
     paddingVertical: 16,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     paddingRight: 5,
-    color: "#bf3b49",
+    color: "#7f71e3",
     fontSize: 18,
     fontWeight: "bold",
   },

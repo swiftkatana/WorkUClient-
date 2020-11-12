@@ -11,18 +11,46 @@ import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
 import MainRequestScreen from "./app/screens/MainRequestScreen"
 import NewRequestScreen from "./app/screens/NewRequestScreen";
 import AllRequestScreen from "./app/screens/AllRequestScreen";
+import EmployeePortfolioScreen from "./app/screens/EmployeePortfolioScreen";
+import UserPayChecksScreen from "./app/screens/UserPayChecksScreen";
+import WorkingTimeReportScreen from "./app/screens/WorkingTimeReportScreen";
+import SettingsScreen from "./app/screens/SettingsScreen";
 import { globalObject } from "./app/src/globalObject";
 
 const screens = {
 
   WelcomeScreen:{
-    screen :WelcomeScreen,
+    screen:WelcomeScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  SettingsScreen:{
+    screen:SettingsScreen,
     navigationOptions:{
       headerShown: false
     }
   },
   TaskScreen:{
     screen:TaskScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  EmployeePortfolioScreen:{
+    screen:EmployeePortfolioScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  UserPayChecksScreen:{
+    screen:UserPayChecksScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  WorkingTimeReportScreen:{
+    screen:WorkingTimeReportScreen,
     navigationOptions:{
       headerShown: false
     }

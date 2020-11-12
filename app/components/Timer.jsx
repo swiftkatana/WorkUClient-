@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { View, Text,StyleSheet,Dimensions } from 'react-native'
+import { View, Text,StyleSheet,Dimensions, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {globalObject} from "../src/globalObject"
 
@@ -75,14 +75,16 @@ export default function Timer() {
 
     return (
         <View style={styles.view}>
+            <Image style={styles.tinyLogo} source={require('../assets/circle_icon_purple.png')}/>
             <TouchableOpacity style={styles.TimerStyle} onPress={()=>{globalObject.timer.ButtonHandler()}}>
              <Text style={textBottonStyle}>
                 {buttonName}             
              </Text>
-            </TouchableOpacity>
             <Text style={styles.Clock}>
-                שעון {timePass}       
+                {timePass}       
              </Text>
+             </TouchableOpacity>
+
         </View>
     )
 }
@@ -94,33 +96,34 @@ const styles = StyleSheet.create({
         flex:1.5,
         height: 70,
         width: Dimensions.get('window').width,
-        flexDirection:"row-reverse",
-        justifyContent:"space-between",
-        paddingHorizontal: 10,
+        //flexDirection:"row-reverse",
+        justifyContent:"center",
+        //paddingHorizontal: 10,
         alignItems: 'center',
-        textAlign: "right",
+        textAlign: "center",
         marginVertical: 10,
+        marginTop: 20,
         
 
     },
     TimerStyle:
     {
         
-        marginLeft:5,
-        borderRadius:25,
-        backgroundColor: "lightgray",
-        width:80,
-        height:60,
+        //marginLeft:5,
+        borderRadius:21,
+        //backgroundColor: "lightgray",
+        width:70,
+        height:50,
         justifyContent:'center',
         textAlign:"center",
-        marginRight: 75,
+        //margin: 10,
 
 
 
     },
     TimerText:
     {
-        fontSize: 16,
+        fontSize: 12,
         textAlign:"center",
         fontWeight: "bold",
         color: "grey",
@@ -128,21 +131,35 @@ const styles = StyleSheet.create({
     },
     TimerTextEnd:
     {
-        fontSize: 16,
+        fontSize: 12,
         textAlign:"center",
         fontWeight: "bold",
         color: "black",
+        marginHorizontal: 5,
 
     },
     Clock:
     {
         flexGrow: 1,
-        marginLeft: 60,
+        //marginLeft: 60,
         justifyContent:'center',
         textAlign:"center",
-        fontSize: 18,
+        fontSize: 11,
+        marginTop: 2,
 
-    }
+    },
+    tinyLogo:{
+        position: "absolute",
+        width: 85,
+        height: 85,
+        opacity: 0.6,
+        //alignItems: 'flex-end',
+        //justifyContent: 'flex-end',
+        //marginBottom: 40,
+        //marginRight: 12,
+        //zIndex: 5,
+        
+    },
 
 
 

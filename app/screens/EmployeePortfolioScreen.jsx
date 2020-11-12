@@ -2,20 +2,24 @@ import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import { globalObject } from '../src/globalObject'
 
-export default function MainRequestScreen() {
+export default function EmployeePortfolioScreen() {
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
                     <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>הבקשות שלי</Text>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("AllRequestScreen")}>
-                    <Text style={styles.buttonText}>כל הבקשות</Text>
+                <Text style={styles.title}>פורטל עובד</Text>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("UserPayChecksScreen")}>
+                    <Text style={styles.buttonText}>תלושי שכר</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
-                    <Text style={styles.buttonText}>בקשה חדשה</Text>
+                    <Text style={styles.buttonText}>משמרות</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
+                    <Text style={styles.buttonText}>דו"ח שעות חודשי</Text>
+                </TouchableOpacity>
+
             </View>
         </View>
     )

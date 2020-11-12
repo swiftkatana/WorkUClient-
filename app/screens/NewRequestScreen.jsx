@@ -4,6 +4,8 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { Picker } from 'react-native-picker-dropdown'
 import { userSendPersonalRequest } from '../src/api/apiKeys'
 import { globalObject } from '../src/globalObject'
+//import RNPickerSelect from 'react-native-picker-select';
+
 
 // send {type,body,fullName,email}
 // recive {_id,}
@@ -35,12 +37,18 @@ export default function NewRequestScreen() {
                 <View> 
                     <Text style={styles.header}>בקשה חדשה</Text>
                 </View>
-
                 <View style={styles.picker}>
                     <Text style={styles.subTitle}>סוג הבקשה</Text>
-                    <Picker selectedValue={type} style={styles.itemList} onValueChange={(itemValue) => SetType(itemValue)}>
-                        <Picker.Item  style={styles.pickerItem} label="חולי" value="java" />
-                        <Picker.Item  style={styles.pickerItem}  label="חופש" value="js" />
+                    
+                    <Picker prompt='test' mode='dropdown' selectedValue={type} style={styles.itemList} onValueChange={(itemValue) => SetType(itemValue)}>
+                        <Picker.Item  style={styles.pickerItem} label="חל''ת" value="חל''ת" />
+                        <Picker.Item  style={styles.pickerItem}  label="ימי חופש" value="ימי חופש" />
+                        <Picker.Item  style={styles.pickerItem}  label="העלאה בשכר" value="העלאה בשכר" />
+                        <Picker.Item  style={styles.pickerItem}  label="ימי מחלה" value="ימי מחלה" />
+                        <Picker.Item  style={styles.pickerItem}  label="פיטורים" value="פיטורים" />
+
+
+
                     </Picker>
                 </View>
 
@@ -65,7 +73,7 @@ const styles = StyleSheet.create({
     view:
     {
         flex:1,
-        backgroundColor: "#bf3b49",
+        backgroundColor: "#7f71e3",
 
     },
     container:
@@ -89,17 +97,26 @@ const styles = StyleSheet.create({
 
     },
     picker:{
-        
+        textAlign: 'right',
+        justifyContent: 'center',
+
     },
     itemList:
     {
         textAlign:"right",
+        width: 300,
+        textAlign: 'right',
+        justifyContent: 'center',
+
             
     },
     pickerItem:{
 
         fontSize: 16,
         color: "green",
+        textAlign: 'right',
+        justifyContent: 'center',
+
     },
     inputBoxContainer:{
         marginRight:30,
@@ -115,7 +132,7 @@ const styles = StyleSheet.create({
     },
     button:{
         width: 300,
-        backgroundColor: "#a22434",
+        backgroundColor: "#6f61ca",// #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,

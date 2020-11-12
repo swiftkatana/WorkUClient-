@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View ,Dimensions, FlatList} from 'react-native'
+import { StyleSheet, Text, View ,Dimensions, FlatList, Image} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 var arr = []
@@ -19,13 +19,9 @@ const render = ({item})=>
         <Text style={styles.listText}>תקציר: {item.title}</Text>
 
         <View style={styles.koral}>
-        <TouchableOpacity style={styles.but}>
-          <Text style ={styles.butText}>פירוט</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.but}>
-          <Text style ={styles.butText}>עדכן</Text>
-        </TouchableOpacity>
+        <TouchableOpacity style={styles.logo}>
+            <Image style={styles.tinyLogo} source={require('../assets/plus_icon.png')}/>
+        </TouchableOpacity>   
         </View>
 
 
@@ -57,7 +53,7 @@ const styles = StyleSheet.create({
         //borderWidth:1,
         height: Dimensions.get('window').height,
         alignItems: 'center',
-        backgroundColor: "#ededed",
+        //backgroundColor: "#ededed",
         borderTopRightRadius: 20,
         borderTopLeftRadius: 90,
         marginHorizontal: 5,
@@ -78,7 +74,7 @@ const styles = StyleSheet.create({
     {
         //borderWidth: 1,
         height:80,
-        width:Dimensions.get('window').width-50,
+        width:Dimensions.get('window').width-60,
         //backgroundColor:"seashell",
         backgroundColor:"white",
         flexDirection:"row-reverse",
@@ -106,12 +102,29 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
 
     },
+    logo:{
+        //flex: 1,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        //zIndex: 5,
+
+    },
+    tinyLogo:{
+        width: 40,
+        height: 40,
+        //alignItems: 'flex-end',
+        //justifyContent: 'flex-end',
+        marginBottom: 40,
+        //marginRight: 12,
+        //zIndex: 5,
+        
+    },
     but:
     {
     width: 50,
     height: 30,
     marginHorizontal: 15,
-    backgroundColor: '#bf3b49',
+    backgroundColor: '#7f71e3',
     textAlign: "center",
     justifyContent: 'center',
     alignItems: 'center',
