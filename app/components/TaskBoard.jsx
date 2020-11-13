@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View ,Dimensions, FlatList, Image} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { globalObject } from '../src/globalObject'
 
 var arr = []
 for(let i = 0;i<6;i++)
@@ -19,7 +20,7 @@ const render = ({item})=>
         <Text style={styles.listText}>תקציר: {item.title}</Text>
 
         <View style={styles.koral}>
-        <TouchableOpacity style={styles.logo}>
+        <TouchableOpacity style={styles.logo} onPress={()=>globalObject.Navigation.navigate('UpdateTaskScreen',{item:item})}>
             <Image style={styles.tinyLogo} source={require('../assets/plus_icon.png')}/>
         </TouchableOpacity>   
         </View>
@@ -40,6 +41,7 @@ export default function TaskBoard() {
             data={arr}
             renderItem={render}
             keyExtractor={item => item.value}
+            
             />
         </View>
     )

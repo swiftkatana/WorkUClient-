@@ -10,7 +10,7 @@ export default function EmployeePortfolioScreen() {
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>פורטל עובד</Text>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("UserPayChecksScreen")}>
+                <TouchableOpacity style={styles.button} oPress={()=>globalObject.Navigation.navigaten("UserPayChecksScreen")}>
                     <Text style={styles.buttonText}>תלושי שכר</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>

@@ -12,7 +12,7 @@ const pressHandler = async (email,password)=>
     Alert.alert(title,msg,alertButton,{cancelable: false});
   }else
   {
-    const  user = await globalObject.SendRequest(userLoginUrl,{email,password});
+    const  user = await globalObject.SendRequest(userLoginUrl,{email:email.trim().toLowerCase(),password});
     if(user)
     { 
       
@@ -27,6 +27,7 @@ const pressHandler = async (email,password)=>
           globalObject.campany = company;
         }
       }
+      console.log(globalObject.User);
       globalObject.Navigation.navigate('TaskScreen');
     }
   }
@@ -38,7 +39,7 @@ export default function LoginForm() {
   return (
     
     <View style={styles.container}>
-      <TextInput value={email} onChangeText={email=>{setEmail(email.trim().toLowerCase())}} style={styles.inputBox} placeholder='כתובת דוא"ל'  autoCapitalize="none"  secureTextEntry={true}  keyboardType={"visible-password"} />
+      <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל'  autoCapitalize="none"  secureTextEntry={true}  keyboardType={"visible-password"} />
       <TextInput value={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
       <TouchableOpacity onPress={()=>pressHandler(email,password)} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>

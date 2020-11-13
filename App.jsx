@@ -15,6 +15,7 @@ import EmployeePortfolioScreen from "./app/screens/EmployeePortfolioScreen";
 import UserPayChecksScreen from "./app/screens/UserPayChecksScreen";
 import WorkingTimeReportScreen from "./app/screens/WorkingTimeReportScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
+import UpdateTaskScreen from "./app/screens/UpdateTaskScreen";
 import { globalObject } from "./app/src/globalObject";
 
 const screens = {
@@ -33,6 +34,12 @@ const screens = {
   },
   TaskScreen:{
     screen:TaskScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  UpdateTaskScreen:{
+    screen:UpdateTaskScreen,
     navigationOptions:{
       headerShown: false
     }
