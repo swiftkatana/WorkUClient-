@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
-import { Picker } from 'react-native-picker-dropdown'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { userSendPersonalRequest } from '../src/api/apiKeys'
 import { globalObject } from '../src/globalObject'
 

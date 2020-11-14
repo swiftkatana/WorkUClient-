@@ -1,10 +1,9 @@
-import CheckBox from '@react-native-community/checkbox';
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
-import { Picker } from 'react-native-picker-dropdown'
+import {Picker} from '@react-native-community/picker';
 import { globalObject } from '../src/globalObject'
-//import { CheckBox } from 'react-native-elements'; // 0.16.0
+
 
 
 
