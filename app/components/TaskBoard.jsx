@@ -16,13 +16,13 @@ else
 const render = ({item})=>
 {
     return(   
-    <View style={styles.list}>
+    <View>
+        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate('UpdateTaskScreen',{item:item})}>
         <Text style={styles.listText}>תקציר: {item.title}</Text>
         <View style={styles.koral}>
-        <TouchableOpacity style={styles.logo} onPress={()=>globalObject.Navigation.navigate('UpdateTaskScreen',{item:item})}>
-            <Image style={styles.tinyLogo} source={require('../assets/plus_icon.png')}/>
-        </TouchableOpacity>
+            <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')}/>
         </View>
+        </TouchableOpacity>
     </View>
     )    
 }  
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         
     },
     listText:
-    {   flex:3,
+    {   flex:4,
         textAlign:"right",
         marginRight:15,
         fontSize: 14,
@@ -109,12 +109,13 @@ const styles = StyleSheet.create({
 
     },
     tinyLogo:{
-        width: 40,
-        height: 40,
+        width: 20,
+        height: 20,
         //alignItems: 'flex-end',
         //justifyContent: 'flex-end',
-        marginBottom: 40,
-        //marginRight: 12,
+        //marginBottom: 40,
+        marginLeft: 15,
+        opacity: 0.7,
         //zIndex: 5,
         
     },

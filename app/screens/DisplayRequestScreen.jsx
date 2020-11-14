@@ -21,7 +21,7 @@ export default function DisplayRequestScreen() {
             </TouchableOpacity>
             <View style={styles.container}>
 
-                <View> 
+                <View > 
                     <Text style={styles.header}>בקשה</Text>
                 </View>
                 <Text style={styles.subTitle}>תאריך: {date}</Text>
@@ -31,10 +31,6 @@ export default function DisplayRequestScreen() {
                 <Text style={styles.subTitle}>{text}</Text>
 
 
-
-
-
-                    
             </View>
         </View>
     )
@@ -63,15 +59,20 @@ const styles = StyleSheet.create({
     subTitle:
     {
         marginRight:30,
+        marginLeft:30,
         fontSize: 16,
         color: "seashell",
+        
 
     },
     bodyHeader:{
         marginRight:30,
+        marginLeft:30,
+
         fontSize: 16,
         color: "seashell",
         marginTop: 30,
+
     },
     itemList:
     {

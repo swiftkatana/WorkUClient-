@@ -2,45 +2,66 @@ import CheckBox from '@react-native-community/checkbox';
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import { Picker } from 'react-native-picker-dropdown'
 import { globalObject } from '../src/globalObject'
 //import { CheckBox } from 'react-native-elements'; // 0.16.0
 
-export default function UpdateTaskScreen() {
 
+
+const SendTask = async (type,body)=>
+{   
+    res = await globalObject.SendRequest(userSendPersonalRequest,{type:type,body:body,fullName:globalObject.User.fullName,email:globalObject.User.email})
+    if(res.error)
+    {
+
+    }
+    else
+    {
+
+    }
+
+}
+
+export default function UpdateTaskScreen() {
     const [type, SetType] = useState("חולי");
-    const [text, SetText] = useState("");
+
+    const [priority, SetPriority] = useState("דחוף");
+    const [title, SetTitle] = useState("חיכעיכעיכע עכ יכע כע כע כופש");
+    const [text, SetText] = useState("אני רוצה לצאת לחופש בימים בלה בלה ובלהיעכיכעיכעיכעיכעיכעיעכחעיחעיחעיחיעחעיחעיחיעחעוטאואטואטואטוטאואטואחעיחעיחעיחעיחעיחעיחעיחעיחעיחעיחעיחיעחיעחעיחעיחעיחעיחעיחחעיחעיחעיחעיחעיחעיחעיחעיחעיחעיחעיחעיחעייכע ואני סיימתי את כל המשימות שלי אז הכל טוב וזה ");
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>
-                <View> 
-                    <Text style={styles.header}>משימה</Text>
-                </View>
-                <View> 
-                    <Text style={styles.subHeader}>פרטים</Text>
-                </View>
-                <View> 
-                    <Text style={styles.subHeader}>שליחת עדכון</Text>
-                </View>
+            <View style={styles.infoContainer}>
+                    <View > 
+                        <Text style={styles.header}>משימה</Text>
+                    </View>
+                    <Text style={styles.subTitle}>דחיפות: {priority}</Text>
+                    <Text style={styles.subTitle}>תקציר: {title}</Text>
+                    <Text style={styles.bodyHeader}>פירוט:</Text>
+                    <Text style={styles.subTitle}>{text}</Text>
+            </View>
+
+
                 <View style={styles.inputBoxContainer}>
                     <TextInput
                     style={styles.inputBox}
-                    onChangeText={text => SetText(text)}
-                    value={text}
                     placeholder= 'גוף הבקשה (אופציונלי)'
                     />
                 </View>
-                <CheckBox
-                    //title ='המשימה בוצעה'
-                    //checked={this.state.checked}
-                    //onPress={() => this.setState({checked: !this.state.checked})}
-                />
-
-                <TouchableOpacity style={styles.button} onPress={()=>SendTask(type,text)}>
-                    <Text style={styles.buttonText} >שלח בקשה</Text> 
-                </TouchableOpacity>
+                <View style={styles.picker}>
+                    <Text style={styles.subTitle}>סטטוס משימה:</Text>
+                    
+                    <Picker prompt='test' mode='dropdown' selectedValue={type} style={styles.itemList} onValueChange={(itemValue) => SetType(itemValue)}>
+                        <Picker.Item  style={styles.pickerItem}  label="המשימה הושלמה" value="המשימה הושלמה" />
+                        <Picker.Item  style={styles.pickerItem}  label="המשימה לא הושלמה" value="המשימה לא הושלמה" />
+                    </Picker>
+                    <TouchableOpacity style={styles.button} onPress={()=>SendTask(type,text)}>
+                    <Text style={styles.buttonText} >שלח עדכון</Text> 
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
@@ -55,6 +76,8 @@ const styles = StyleSheet.create({
     },
     container:
     {  
+        flex: 1,
+
         alignItems: 'flex-end',
     },
     header:
@@ -66,13 +89,23 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline"
        
     },
-    subHeader:{
-        margin:20,
+    subTitle:
+    {
         marginRight:30,
+        marginLeft:30,
         fontSize: 16,
         color: "seashell",
-        //textDecorationLine: "underline"
-        fontWeight:"bold",
+
+        
+
+    },
+    bodyHeader:{
+        marginRight:30,
+        marginLeft:30,
+        fontSize: 16,
+        color: "seashell",
+        marginTop: 30,
+
     },
     itemList:
     {
@@ -83,25 +116,57 @@ const styles = StyleSheet.create({
 
             
     },
+    infoContainer:{
+        flex: 2,
+            //marginRight:30,
+            //marginLeft:30,
+    },
     inputBoxContainer:{
-        marginHorizontal:20,
-    },
-    inputBox:{
-        width: 300,
-        height: 100,
-        backgroundColor: '#ededed',
-        borderRadius: 25,
-        paddingHorizontal: 16,
-        marginVertical: 10,
-        textAlign: "right"
-    },
+        flex: 1,
+            //marginRight:30,
+            //marginLeft:30,
+        },
+        inputBox:{
+            width: 300,
+            height: 100,
+            backgroundColor: '#ededed',
+            borderRadius: 25,
+            //paddingHorizontal: 16,
+            marginVertical: 60,
+            marginHorizontal: 30,
+            textAlign: "right",
+
+        },
+        picker:{
+            flex:2,
+            textAlign: 'right',
+            justifyContent: 'center',
+    
+        },
+        itemList:
+        {
+            textAlign:"right",
+            width: 300,
+            textAlign: 'right',
+            justifyContent: 'center',
+    
+                
+        },
+        pickerItem:{
+    
+            fontSize: 16,
+            color: "green",
+            textAlign: 'right',
+            justifyContent: 'center',
+    
+        },
     button:{
         width: 300,
         backgroundColor: "#6f61ca",// #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
-        marginHorizontal: 20,
+        marginHorizontal: 30,
 
         
     },
@@ -124,5 +189,4 @@ const styles = StyleSheet.create({
         color: "seashell",
 
     }
-
 })
