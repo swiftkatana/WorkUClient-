@@ -21,6 +21,7 @@ const render = ({item})=>
 export default function TaskBoard() {
 
     const [tasks,UpdateTask] = useState([])
+    const [shouldShow, setShouldShow] = useState(false);
 
     useEffect(() => {
         
@@ -34,6 +35,9 @@ export default function TaskBoard() {
                 arr.push({title:task.title,id,priority:task.priority,description:task.description,status:task.status});
 
         }
+        if(arr.length == 0){
+            setShouldShow(true);
+        }
         UpdateTask(arr);
         return () => {
             UpdateTask([])
@@ -45,6 +49,13 @@ export default function TaskBoard() {
             <Text style={styles.boardTitle}>
                 לוח משימות
             </Text>
+            {shouldShow ? (
+            <View style={styles.emptyContainer}>
+                <Image style={styles.emptyIcon}  source={require('../assets/empty_icon.png')}/>
+                <Text style={styles.emptyText}>אין משימות</Text>
+            </View>
+            
+            ) : null}
             <FlatList
             data={tasks}
             renderItem={render}
@@ -118,9 +129,16 @@ const styles = StyleSheet.create({
         //zIndex: 5,
         
     },
-    tinyAlert:{
-        width: 20,
-        height: 20,
+    emptyText:{
+        textAlign: 'center',
+        color: "grey",
+        fontWeight: 'bold',
+    },
+    emptyIcon:{
+        marginTop: 90,
+        width: 80,
+        height: 80,
+        opacity: 0.4,
         //alignItems: 'flex-end',
         //justifyContent: 'flex-end',
         //marginRight: 12,

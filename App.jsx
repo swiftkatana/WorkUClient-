@@ -21,6 +21,9 @@ import manageRequestsScreen from "./app/screens/manageRequestsScreen";
 import managementToosScreen from "./app/screens/managementToosScreen";
 import DisplayRequestScreen from "./app/screens/DisplayRequestScreen";
 import HandleSingleRequestScreen from "./app/screens/HandleSingleRequestScreen";
+import ManualWorkingTime from "./app/screens/ManualWorkingTime";
+
+
 
 import { globalObject } from "./app/src/globalObject";
 
@@ -28,6 +31,12 @@ const screens = {
 
   WelcomeScreen:{
     screen:WelcomeScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  ManualWorkingTime:{
+    screen:ManualWorkingTime,
     navigationOptions:{
       headerShown: false
     }

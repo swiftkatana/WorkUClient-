@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { globalObject } from '../src/globalObject'
@@ -36,6 +36,7 @@ const render = ({item})=>
 }  
 
 export default function WorkingTimeReportScreen() {
+    const [sum, setSum] = useState(0)
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -56,9 +57,10 @@ export default function WorkingTimeReportScreen() {
                 renderItem={render}
                 keyExtractor={item => item.id}
                 />
-                <Text style={styles.mainSum}>סה"כ שעות עבודה במצטבר לחודש זה:</Text>
-                <TouchableOpacity style={styles.logo}>
+                <Text style={styles.mainSum}>סה"כ שעות עבודה במצטבר לחודש זה: {sum}</Text>
+                <TouchableOpacity style={styles.logo} onPress={()=>globalObject.Navigation.navigate("ManualWorkingTime")}>
                     <Image style={styles.tinyLogo} source={require('../assets/plus_icon.png')}/>
+
                 </TouchableOpacity>
             </View>
         </View>

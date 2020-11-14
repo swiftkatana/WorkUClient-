@@ -19,6 +19,12 @@ export default function managementToosScreen() {
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
                     <Text style={styles.buttonText}>ניהול משמרות</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
+                    <Text style={styles.buttonText}>שליחת תלוש משכורת</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
+                    <Text style={styles.buttonText}>דו"ח שעות חודשי של עובד</Text>
+                </TouchableOpacity>
 
             </View>
         </View>
