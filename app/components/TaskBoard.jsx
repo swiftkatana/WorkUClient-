@@ -7,16 +7,13 @@ import { globalObject } from '../src/globalObject'
 const render = ({item})=>
 {
     return(   
-    <View style={styles.list}>
+    <View>
+        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate('UpdateTaskScreen',{item:item})}>
         <Text style={styles.listText}>תקציר: {item.title}</Text>
-
         <View style={styles.koral}>
-        <TouchableOpacity style={styles.logo} onPress={()=>globalObject.Navigation.navigate('UpdateTaskScreen',{item:item})}>
-            <Image style={styles.tinyLogo} source={require('../assets/plus_icon.png')}/>
-        </TouchableOpacity>   
+            <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')}/>
         </View>
-
-
+        </TouchableOpacity>
     </View>
     )    
 }  
@@ -70,7 +67,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 5,
     },
     listText:
-    {   flex:3,
+    {   flex:4,
         textAlign:"right",
         marginRight:15,
         fontSize: 14,
@@ -88,7 +85,9 @@ const styles = StyleSheet.create({
         borderRadius:25,
         marginBottom:10,
         borderWidth:1,
-        borderColor: "lightgray",
+        borderColor: "lightgrey",
+
+
     },  
     boardTitle:
     {
@@ -109,9 +108,24 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     tinyLogo:{
-        width: 40,
-        height: 40,
-        marginBottom: 40,      
+        width: 20,
+        height: 20,
+        //alignItems: 'flex-end',
+        //justifyContent: 'flex-end',
+        //marginBottom: 40,
+        marginLeft: 15,
+        opacity: 0.7,
+        //zIndex: 5,
+        
+    },
+    tinyAlert:{
+        width: 20,
+        height: 20,
+        //alignItems: 'flex-end',
+        //justifyContent: 'flex-end',
+        //marginRight: 12,
+        zIndex: 5,
+        
     },
     but:
     {

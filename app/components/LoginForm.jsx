@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {globalObject} from "../src/globalObject";
 import { getCompanyUrl, userLoginUrl } from "../src/api/apiKeys";
 
-const pressHandler = async (email,password)=>
+const pressHandler = async (email,password,setShouldShow)=>
 {
   if(!email || !password ){
     title = "הכניסה נכשלה";
@@ -12,10 +12,10 @@ const pressHandler = async (email,password)=>
     Alert.alert(title,msg,alertButton,{cancelable: false});
   }else
   {
+    setShouldShow(true);
     const  user = await globalObject.SendRequest(userLoginUrl,{email:email.trim().toLowerCase(),password});
     if(user)
     { 
-      
       globalObject.User = user;
       if(globalObject.User.permission.managar)
       {
@@ -29,6 +29,10 @@ const pressHandler = async (email,password)=>
       }
       console.log(globalObject.User);
       globalObject.Navigation.navigate('TaskScreen');
+      setShouldShow(false);
+    }else{
+      setShouldShow(false);
+
     }
   }
 }
@@ -36,17 +40,25 @@ const pressHandler = async (email,password)=>
 export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [shouldShow, setShouldShow] = useState(false);
+  
   return (
-    
+
     <View style={styles.container}>
       <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל'  autoCapitalize="none"  secureTextEntry={true}  keyboardType={"visible-password"} />
       <TextInput value={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true}/>
-      <TouchableOpacity onPress={()=>pressHandler(email,password)} style={styles.button}>
+      <TouchableOpacity onPress={()=>pressHandler(email,password,setShouldShow)} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
+      {}
+      {shouldShow ? (
+        <Image style={styles.tinyLogo}  source={require('../assets/loading_animation.gif')}/>
+      ) : null}
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -77,6 +89,12 @@ const styles = StyleSheet.create({
     color: 'seashell',
     textAlign: 'center',
   },
+  tinyLogo:{
+    marginTop: 40,
+    width: 30,
+    height: 30,
+
+  }
 
 });
 

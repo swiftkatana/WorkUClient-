@@ -12,7 +12,7 @@ const render = ({item})=>
 {
     return(   
      <View>
-        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate("DisplayRequestScreen")}>
+        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate("HandleSingleRequestScreen")}>
             <Text style={styles.listText}>תאריך: {item.date}</Text>
             <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
             <Text style={styles.status}>סטטוס: {item.status}</Text>
@@ -22,7 +22,7 @@ const render = ({item})=>
     )    
 }  
 
-export default function AllRequestScreen() {
+export default function manageRequestsScreen() {
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -31,7 +31,7 @@ export default function AllRequestScreen() {
             <View style={styles.container}>
 
                 <Text style={styles.title}>
-                    כל הבקשות
+                    בקשות לטיפול
                 </Text>
                 <FlatList
                 data={arr}

@@ -2,7 +2,8 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
-export default function UserNaviButton() {
+
+export default function ManagerNaviButton() {
 
 
 
@@ -10,14 +11,14 @@ export default function UserNaviButton() {
         <View style={styles.view}>
 
 
-        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('MainRequestScreen')}>
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('manageRequestsScreen')}>
         <Image style={styles.tinyLogo} source={require('../assets/notebook_icon.png')}/>
-        <Text style={styles.settingsFont}>בקשות</Text> 
+        <Text style={styles.settingsFont}>ניהול בקשות</Text> 
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('EmployeePortfolioScreen')}>
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('managementToosScreen')}>
         <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')}/>
-        <Text style={styles.settingsFont}>פורטל עובד</Text> 
+        <Text style={styles.settingsFont}>כלי ניהול</Text> 
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.settings}>
