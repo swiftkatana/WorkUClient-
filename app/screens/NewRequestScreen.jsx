@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
-import { Picker } from 'react-native-picker-dropdown'
+import {Picker} from '@react-native-community/picker';
 import { userSendPersonalRequest } from '../src/api/apiKeys'
 import { globalObject } from '../src/globalObject'
-//import RNPickerSelect from 'react-native-picker-select';
-
-
 // send {type,body,fullName,email}
 // recive {_id,}
 const SendTask = async (type,body)=>
@@ -39,17 +36,21 @@ export default function NewRequestScreen() {
                 </View>
                 <View style={styles.picker}>
                     <Text style={styles.subTitle}>סוג הבקשה</Text>
-                    
-                    <Picker prompt='test' mode='dropdown' selectedValue={type} style={styles.itemList} onValueChange={(itemValue) => SetType(itemValue)}>
-                        <Picker.Item  style={styles.pickerItem} label="חל''ת" value="חל''ת" />
-                        <Picker.Item  style={styles.pickerItem}  label="ימי חופש" value="ימי חופש" />
-                        <Picker.Item  style={styles.pickerItem}  label="העלאה בשכר" value="העלאה בשכר" />
-                        <Picker.Item  style={styles.pickerItem}  label="ימי מחלה" value="ימי מחלה" />
-                        <Picker.Item  style={styles.pickerItem}  label="פיטורים" value="פיטורים" />
+                    <Picker 
+                        prompt='test' 
+                        mode='dropdown' 
+                        selectedValue={type} 
+                        style={styles.itemList} 
 
-
-
+                        onValueChange={(itemValue) => SetType(itemValue)}>
+                        
+                        <Picker.Item   label="חל''ת" value="חל''ת" />
+                        <Picker.Item   label="ימי חופש" value="ימי חופש" />
+                        <Picker.Item   label="העלאה בשכר" value="העלאה בשכר" />
+                        <Picker.Item   label="ימי מחלה" value="ימי מחלה" />
+                        <Picker.Item   label="פיטורים" value="פיטורים" />
                     </Picker>
+
                 </View>
 
                 <View style={styles.inputBoxContainer}>
@@ -94,29 +95,30 @@ const styles = StyleSheet.create({
         marginRight:30,
         fontSize: 16,
         color: "seashell",
+        
 
     },
     picker:{
         textAlign: 'right',
         justifyContent: 'center',
+       
 
     },
     itemList:
     {
-        textAlign:"right",
-        width: 300,
+        width: 200,
+        color:"#ffffff",
         textAlign: 'right',
         justifyContent: 'center',
-
             
     },
     pickerItem:{
+        color: "#00ffff",
 
-        fontSize: 16,
-        color: "green",
-        textAlign: 'right',
-        justifyContent: 'center',
-
+    },
+    test:
+    {
+        
     },
     inputBoxContainer:{
         marginRight:30,

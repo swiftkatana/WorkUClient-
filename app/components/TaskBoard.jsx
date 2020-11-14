@@ -1,17 +1,8 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import { StyleSheet, Text, View ,Dimensions, FlatList, Image} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject'
 
-var arr = []
-for(let i = 0;i<6;i++)
-{ 
-    if(i == 0)
-    arr.push({title:"222222222kkkkkkkkkkkkkkkkkkלנקות את וחנות ועדכן את שמואל",value:(9999).toString()});
-else
-    arr.push({title:i.toString(),value:(i+40).toString()});
-
-}
 
 const render = ({item})=>
 {
@@ -32,38 +23,51 @@ const render = ({item})=>
 
 export default function TaskBoard() {
 
+    const [tasks,UpdateTask] = useState([])
+
+    useEffect(() => {
+        
+        var arr = [];
+        for(var obj in globalObject.User.tasks.completed)
+        { 
+
+            let task = globalObject.User.tasks.completed[obj];
+            let id = obj;
+            if(task.status === "uncompleted")
+                arr.push({title:task.title,id,priority:task.priority,description:task.description,status:task.status});
+
+        }
+        UpdateTask(arr);
+        return () => {
+            UpdateTask([])
+        }
+    }, [])
+
     return (
         <View style={styles.view}>
             <Text style={styles.boardTitle}>
                 לוח משימות
             </Text>
             <FlatList
-            data={arr}
+            data={tasks}
             renderItem={render}
-            keyExtractor={item => item.value}
+            keyExtractor={item => item.id}
             
             />
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     view:
     {
-        //#bf3b49
         flex:9,
-        //borderWidth:1,
         height: Dimensions.get('window').height,
         alignItems: 'center',
-        //backgroundColor: "#ededed",
         borderTopRightRadius: 20,
         borderTopLeftRadius: 90,
         marginHorizontal: 5,
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
-        
-
-        
     },
     listText:
     {   flex:3,
@@ -74,10 +78,8 @@ const styles = StyleSheet.create({
     },
     list:
     {
-        //borderWidth: 1,
         height:80,
         width:Dimensions.get('window').width-60,
-        //backgroundColor:"seashell",
         backgroundColor:"white",
         flexDirection:"row-reverse",
         alignItems: 'center',
@@ -87,8 +89,6 @@ const styles = StyleSheet.create({
         marginBottom:10,
         borderWidth:1,
         borderColor: "lightgray",
-
-
     },  
     boardTitle:
     {
@@ -105,21 +105,13 @@ const styles = StyleSheet.create({
 
     },
     logo:{
-        //flex: 1,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        //zIndex: 5,
-
     },
     tinyLogo:{
         width: 40,
         height: 40,
-        //alignItems: 'flex-end',
-        //justifyContent: 'flex-end',
-        marginBottom: 40,
-        //marginRight: 12,
-        //zIndex: 5,
-        
+        marginBottom: 40,      
     },
     but:
     {
