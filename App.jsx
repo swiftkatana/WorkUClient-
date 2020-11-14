@@ -16,6 +16,12 @@ import UserPayChecksScreen from "./app/screens/UserPayChecksScreen";
 import WorkingTimeReportScreen from "./app/screens/WorkingTimeReportScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
 import UpdateTaskScreen from "./app/screens/UpdateTaskScreen";
+import ManagerMainScreen from "./app/screens/ManagerMainScreen";
+import manageRequestsScreen from "./app/screens/manageRequestsScreen";
+import managementToosScreen from "./app/screens/managementToosScreen";
+import DisplayRequestScreen from "./app/screens/DisplayRequestScreen";
+import HandleSingleRequestScreen from "./app/screens/HandleSingleRequestScreen";
+
 import { globalObject } from "./app/src/globalObject";
 
 const screens = {
@@ -26,12 +32,43 @@ const screens = {
       headerShown: false
     }
   },
+  ManagerMainScreen:{
+    screen:ManagerMainScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  managementToosScreen:{
+    screen:managementToosScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  manageRequestsScreen:{
+    screen:manageRequestsScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  HandleSingleRequestScreen:{
+    screen:HandleSingleRequestScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  DisplayRequestScreen:{
+    screen:DisplayRequestScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
   SettingsScreen:{
     screen:SettingsScreen,
     navigationOptions:{
       headerShown: false
     }
   },
+
   TaskScreen:{
     screen:TaskScreen,
     navigationOptions:{

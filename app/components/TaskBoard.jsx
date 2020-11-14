@@ -18,14 +18,11 @@ const render = ({item})=>
     return(   
     <View style={styles.list}>
         <Text style={styles.listText}>תקציר: {item.title}</Text>
-
         <View style={styles.koral}>
         <TouchableOpacity style={styles.logo} onPress={()=>globalObject.Navigation.navigate('UpdateTaskScreen',{item:item})}>
             <Image style={styles.tinyLogo} source={require('../assets/plus_icon.png')}/>
-        </TouchableOpacity>   
+        </TouchableOpacity>
         </View>
-
-
     </View>
     )    
 }  
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
         borderRadius:25,
         marginBottom:10,
         borderWidth:1,
-        borderColor: "lightgray",
+        borderColor: "lightgrey",
 
 
     },  
@@ -119,6 +116,15 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         //marginRight: 12,
         //zIndex: 5,
+        
+    },
+    tinyAlert:{
+        width: 20,
+        height: 20,
+        //alignItems: 'flex-end',
+        //justifyContent: 'flex-end',
+        //marginRight: 12,
+        zIndex: 5,
         
     },
     but:
