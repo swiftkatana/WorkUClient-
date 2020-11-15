@@ -25,7 +25,7 @@ const pressHandler = async (email,password,setShouldShow)=>
         {
           globalObject.User.tasks =  company.tasks ? company.tasks : [];
           globalObject.User.personalRequests = company.personalRequests ? company.personalRequests : [] ;
-          globalObject.campany = company;
+          globalObject.company = company;
           
           console.log(globalObject.User);
           globalObject.Navigation.navigate('ManagerMainScreen');
