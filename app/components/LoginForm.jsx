@@ -41,11 +41,12 @@ const pressHandler = async (email,password,setShouldShow)=>
       }
       else
       {
-        globalObject.Navigation.navigate('SelectScreen',{user:globalObject.User});
+        globalObject.Navigation.navigate('SelectionScreen',{user:globalObject.User});
         setShouldShow(false);
       }
 
-    }else{
+    }else
+    {
       setShouldShow(false);
 
     }

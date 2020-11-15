@@ -6,6 +6,7 @@ import { globalObject } from '../../src/globalObject'
 
 
 var arr = [
+    
     {sumOfTime:"8",endTime:"18:00",startTime:"10:00",date:"10.2.20",id:"123"},
     {sumOfTime:"10",endTime:"22:00",startTime:"12:00",date:"10.2.20",id:"124"},
     {sumOfTime:"10",endTime:"22:00",startTime:"12:00",date:"10.2.20",id:"1"}, 
@@ -47,12 +48,15 @@ export default function Main() {
                 <Text style={styles.title}>
                     דו"ח שעות חודשי
                 </Text>
-                <FlatList style={styles.header}
-                data={[{sumOfTime:"סך שעות",endTime:"שעת סיום",startTime:"שעת התחלה",date:"תאריך",id:"13"}]}
-                renderItem={render}
-                keyExtractor={item => item.id}
-                />
+                <View style={styles.header}>
+                    <FlatList 
+                    data={[{sumOfTime:"סך שעות",endTime:"שעת סיום",startTime:"שעת התחלה",date:"תאריך",id:"13"}]}
+                    renderItem={render}
+                    keyExtractor={item => item.id}
+                    />
+                </View>
                 <FlatList
+                
                 data={arr}
                 renderItem={render}
                 keyExtractor={item => item.id}
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
 
     view:
     {
-        flex:4,
+        flex:1,
         backgroundColor: "#7f71e3",
     },
     container:{
@@ -88,14 +92,13 @@ const styles = StyleSheet.create({
 
     },
     header:{
-        flexGrow:1,
-        height:78,
+        height:40,
+        marginBottom:5,
         borderColor: "lightgray",
 
     },
     list:
     {
-        flexGrow:1,
         height:42,
         width:Dimensions.get('window').width-50,
         backgroundColor:"seashell",
