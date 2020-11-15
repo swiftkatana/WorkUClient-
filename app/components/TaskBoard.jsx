@@ -26,12 +26,12 @@ export default function TaskBoard() {
     useEffect(() => {
         
         var arr = [];
-        for(var obj in globalObject.User.tasks.completed)
+        for(var obj in globalObject.User.tasks.processing)
         { 
 
-            let task = globalObject.User.tasks.completed[obj];
+            let task = globalObject.User.tasks.processing[obj];
             let id = obj;
-            if(task.status === "uncompleted")
+            if(task.status === "בטיפול")
                 arr.push({title:task.title,id,priority:task.priority,description:task.description,status:task.status});
 
         }
