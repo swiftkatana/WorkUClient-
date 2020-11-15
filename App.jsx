@@ -27,6 +27,8 @@ import ManagerManageRequestsScreen from "./app/screens/Manager/ManagerManageRequ
 import ManagerToolsScreen from "./app/screens/Manager/ManagerToolsScreen";
 import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequestScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
+import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
+
 const listScreen = 
 [
   {LoginScreen:LoginScreen},
@@ -48,6 +50,7 @@ const listScreen =
   {MainRequestScreen:MainRequestScreen},
   {EmpolyeeMainScreen:EmpolyeeMainScreen},
   {ManualWorkingTime:ManualWorkingTime},
+  {NewTaskScreen:NewTaskScreen},
   ];
 var screens = {}
 

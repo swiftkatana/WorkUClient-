@@ -14,7 +14,7 @@ export default function Main({navigation}) {
       <LoginForm/>
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}> אין לך משתמש?</Text>
-        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('UserRegisterScreen')}>
+        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('RegisterUserScreen')}>
           <Text style={styles.signupButton}>הירשם</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton}  />
