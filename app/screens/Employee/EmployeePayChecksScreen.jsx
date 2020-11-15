@@ -1,28 +1,24 @@
 import React from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
-import { globalObject } from '../src/globalObject'
+import { globalObject } from '../../src/globalObject'
 
-
-
-var arr = [{type:"חופשת מחלה",status:"נשלח",date:"10.2.20",id:"123"},{type:"מחלה",status:"מחכה",date:"10.2.20",id:"124"} ]
+var arr = [{type:"חופשת מחלה",date:"10.2.20",id:"123"},{type:"חופשתvv מחלה",date:"10.1.20",id:"124"} ]
 
 
 const render = ({item})=>
 {
     return(   
-     <View>
-        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate("HandleSingleRequestScreen")}>
-            <Text style={styles.listText}>תאריך: {item.date}</Text>
-            <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
-            <Text style={styles.status}>סטטוס: {item.status}</Text>
-            <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')}/>
+     <View style={styles.list}>
+        <Text style={styles.listText}>תאריך: {item.date}</Text>
+        <TouchableOpacity>
+            <Image style={styles.tinyLogo} source={require('../../assets/pdf_icon.png')}/>
         </TouchableOpacity>
      </View>
     )    
 }  
 
-export default function manageRequestsScreen() {
+export default function Main() {
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -31,14 +27,12 @@ export default function manageRequestsScreen() {
             <View style={styles.container}>
 
                 <Text style={styles.title}>
-                    בקשות לטיפול
-                </Text>
+                    תלושי שכר</Text>
                 <FlatList
                 data={arr}
                 renderItem={render}
                 keyExtractor={item => item.id}
                 />
-
             </View>
         </View>
     )
@@ -50,12 +44,9 @@ const styles = StyleSheet.create({
     {
         flex:1,
         backgroundColor: "#7f71e3",
-        //alignItems: 'center',
     },
     container:{
-        //paddingTop: 70,
-        alignItems: 'flex-end',
-        
+        alignItems: 'flex-end',    
     },
     title:
     {
@@ -66,49 +57,36 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline"
 
     },
+    tinyLogo: 
+    {
+        width: 45,
+        height: 45,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
     list:
     {
-        //borderWidth: 1,
-        height: 55,
-        width:Dimensions.get('window').width-40,
+        height:60,
+        width:Dimensions.get('window').width-50,
         backgroundColor:"seashell",
-        //backgroundColor:"white",
         flexDirection:"row-reverse",
         alignItems: 'center',
-        textAlign: "center",
+        textAlign: "right",
         marginHorizontal: 20,
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         borderRadius:25,
         marginBottom:10,
         borderWidth:1,
         borderColor: "lightgray",
-
-
     },
     listText:
-    {   flex:5,
-        textAlign:"center",
+    {  
+        textAlign:"right",
         fontSize: 14,
-        marginLeft: 5,
-        marginRight: 10,
-
-
+        justifyContent: 'center',
     },
-    status:    
-    {   flex:3,
-        textAlign:"center",
-        marginRight:10,
-        fontSize: 14,
-        fontWeight: "bold",
 
-    },
-    tinyLogo:{
-        
-        width: 20,
-        height: 20,
-        marginLeft: 15,
-        marginRight: 10,
-    },
     exitButton:
     {
         marginLeft: 30,

@@ -1,37 +1,39 @@
 import React,{useState} from "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { createCompanyUrl} from "../src/api/apiKeys";
-import {globalObject} from "../src/globalObject";
-
-export default function UserRegisterScreen() {
-
-const [companyName, setCompanyName] = useState('')
+import requestList from "../../src/api/apiKeys";
+import {globalObject} from "../../src/globalObject";
 
 
-  const pressHandler = async ()=>
+const pressHandler = async (companyName)=>
+{
+  if(!companyName)
   {
-    if(!companyName){
-        title = "ההרשמה נכשלה";
-      msg = "אחד או יותר מהשדות ריקים, נסו שנית"
-      alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
-      Alert.alert(title,msg,alertButton,{cancelable: false});
-    }else{
-        userEmail = globalObject.User.email;
-        const  res = await globalObject.SendRequest(createCompanyUrl,{companyName,userEmail});
-        if(res.error){
-            globalObject.ErrorHandler(res.error);
-          }else{// register content ok
-            
-            //Todo navi to admin page
-        }
-    }
+    title = "ההרשמה נכשלה";
+    msg = "אחד או יותר מהשדות ריקים, נסו שנית"
+    alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
+    Alert.alert(title,msg,alertButton,{cancelable: false});
+  }else{
+      const company = await globalObject.SendRequest(requestList.createCompanyUrl,{companyName,email:globalObject.User.email});
+      if(company)
+      {
+        globalObject.User.company = companyName;
+        globalObject.company = company;
+        globalObject.Navigation.navigate('EmpolyeeMainScreen');
+      }
+        
   }
+}
+
+export default function Main() 
+{
+  const [companyName, setCompanyName] = useState('')
+
     return (
 
         <View style={styles.container}>
             <Text style= {styles.logoText}>רישום בית עסק</Text>
             <TextInput value ={companyName} onChangeText={setCompanyName} style={styles.inputBox} placeholder="שם חברה" />
-            <TouchableOpacity style={styles.button} onPress={() => pressHandler()}>
+            <TouchableOpacity style={styles.button} onPress={() => pressHandler(companyName)}>
                 <Text style={styles.buttonText}>אישור</Text>
             </TouchableOpacity>
         </View>

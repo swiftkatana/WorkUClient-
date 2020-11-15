@@ -1,33 +1,40 @@
 import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import { globalObject } from '../src/globalObject'
+import { globalObject } from '../../src/globalObject'
 
-export default function MainRequestScreen() {
+export default function Main() {
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
                     <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>הבקשות שלי</Text>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("AllRequestScreen")}>
-                    <Text style={styles.buttonText}>כל הבקשות</Text>
+                <Text style={styles.title}>כלי ניהול</Text>
+                <TouchableOpacity style={styles.button} oPress={()=>globalObject.Navigation.navigaten("UserPayChecksScreen")}>
+                    <Text style={styles.buttonText}>שלח משימה לעובד</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
-                    <Text style={styles.buttonText}>בקשה חדשה</Text>
+                    <Text style={styles.buttonText}>היסטוריית משימות</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
+                    <Text style={styles.buttonText}>ניהול משמרות</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
+                    <Text style={styles.buttonText}>שליחת תלוש משכורת</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
+                    <Text style={styles.buttonText}>דו"ח שעות חודשי של עובד</Text>
+                </TouchableOpacity>
+
             </View>
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     view:{
         //marginTop:50,
         flex:1,
-        backgroundColor: "#7f71e3",
-        
-        
+        backgroundColor: "#7f71e3",        
     },
     buttonsContainer:
     {
@@ -44,7 +51,6 @@ const styles = StyleSheet.create({
     {
         fontSize: 16,
         color: "seashell",
-
     },
     title:
     {

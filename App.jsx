@@ -2,160 +2,62 @@ import React from "react";
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator } from 'react-navigation-stack';
 
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-import ProfileScreen from './app/screens/ProfileScreen';
-import LoginForm from "./app/components/LoginForm";
-import TaskScreen from "./app/screens/TaskScreen";
-import UserRegisterScreen from "./app/screens/UserRegisterScreen";
-import RegisterSelectScreen from "./app/screens/RegisterSelectScreen";
-import MainRequestScreen from "./app/screens/MainRequestScreen"
-import NewRequestScreen from "./app/screens/NewRequestScreen";
-import AllRequestScreen from "./app/screens/AllRequestScreen";
-import EmployeePortfolioScreen from "./app/screens/EmployeePortfolioScreen";
-import UserPayChecksScreen from "./app/screens/UserPayChecksScreen";
-import WorkingTimeReportScreen from "./app/screens/WorkingTimeReportScreen";
+
+// employee
+import EmpolyeeMainScreen from "./app/screens/Employee/EmpolyeeMainScreen"
+import MainRequestScreen from "./app/screens/Employee/MainRequestScreen"
+import NewRequestScreen from "./app/screens/Employee/NewRequestScreen";
+import EmployeePortalScreen from "./app/screens/Employee/EmployeePortalScreen";
+import EmployeePayChecksScreen from "./app/screens/Employee/EmployeePayChecksScreen";
+import WorkingTimeReportScreen from "./app/screens/Employee/WorkingTimeReportScreen";
+import EmployeeUpdateTaskScreen from "./app/screens/Employee/EmployeeUpdateTaskScreen";
+import DisplayRequestScreen from "./app/screens/Employee/DisplayRequestScreen";
+import AllRequestScreen from "./app/screens/Employee/AllRequestScreen";
+//reg and log
+import RegisterUserScreen from "./app/screens/RegistrationAndLogin/RegisterUserScreen";
+import SelectScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
+import RegisterCompanyScreen from  "./app/screens/RegistrationAndLogin/RegisterCompanyScreen";
+import LoginScreen from "./app/screens/RegistrationAndLogin/LoginScreen";
+
+
+// managar
+import ManagerMainScreen from "./app/screens/Manager/ManagerMainScreen";
+import ManagerManageRequestsScreen from "./app/screens/Manager/ManagerManageRequestsScreen";
+import ManagerToolsScreen from "./app/screens/Manager/ManagerToolsScreen";
+import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequestScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
-import UpdateTaskScreen from "./app/screens/UpdateTaskScreen";
-import ManagerMainScreen from "./app/screens/ManagerMainScreen";
-import manageRequestsScreen from "./app/screens/manageRequestsScreen";
-import managementToosScreen from "./app/screens/managementToosScreen";
-import DisplayRequestScreen from "./app/screens/DisplayRequestScreen";
-import HandleSingleRequestScreen from "./app/screens/HandleSingleRequestScreen";
+const listScreen = 
+[
+  {LoginScreen:LoginScreen},
+  {SettingsScreen:SettingsScreen},
+  {HandleSingleRequestScreen:HandleSingleRequestScreen},
+  {ManagerToolsScreen:ManagerToolsScreen},
+  {ManagerManageRequestsScreen:ManagerManageRequestsScreen},
+  {ManagerMainScreen:ManagerMainScreen},
+  {RegisterCompanyScreen:RegisterCompanyScreen},
+  {SelectScreen:SelectScreen},
+  {RegisterUserScreen:RegisterUserScreen},
+  {AllRequestScreen:AllRequestScreen},
+  {DisplayRequestScreen:DisplayRequestScreen},
+  {EmployeeUpdateTaskScreen:EmployeeUpdateTaskScreen},
+  {WorkingTimeReportScreen:WorkingTimeReportScreen},
+  {EmployeePortalScreen:EmployeePortalScreen},
+  {EmployeePayChecksScreen:EmployeePayChecksScreen},
+  {NewRequestScreen:NewRequestScreen},
+  {MainRequestScreen:MainRequestScreen},
+  {EmpolyeeMainScreen:EmpolyeeMainScreen},
+  ];
+var screens = {}
 
-import { globalObject } from "./app/src/globalObject";
-
-const screens = {
-
-  WelcomeScreen:{
-    screen:WelcomeScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  ManagerMainScreen:{
-    screen:ManagerMainScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  managementToosScreen:{
-    screen:managementToosScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  manageRequestsScreen:{
-    screen:manageRequestsScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  HandleSingleRequestScreen:{
-    screen:HandleSingleRequestScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  DisplayRequestScreen:{
-    screen:DisplayRequestScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  SettingsScreen:{
-    screen:SettingsScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-
-  TaskScreen:{
-    screen:TaskScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  UpdateTaskScreen:{
-    screen:UpdateTaskScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  EmployeePortfolioScreen:{
-    screen:EmployeePortfolioScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  UserPayChecksScreen:{
-    screen:UserPayChecksScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  WorkingTimeReportScreen:{
-    screen:WorkingTimeReportScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  MainRequestScreen:{
-    screen:MainRequestScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  NewRequestScreen:
+export default function App()
+ {
+  for(let i = 0;i<listScreen.length ;i++)
   {
-  screen:NewRequestScreen,
-  navigationOptions:{
-    headerShown: false,
+    var keyNames = Object.keys(listScreen[i]);
+    screens[keyNames[0]] = {screen:listScreen[i][keyNames[0]] ,navigationOptions:{ headerShown: false}}
   }
-  },
-  AllRequestScreen:
-  {
-    screen:AllRequestScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-
-  ProfileScreen:{
-    screen:ProfileScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  loginScreen:{
-    screen:LoginForm,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-
-  UserRegisterScreen:{
-    screen:UserRegisterScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-  RegisterSelectScreen:{
-    screen:RegisterSelectScreen,
-    navigationOptions:{
-      headerShown: false
-    }
-  },
-
-
-}
-
-export default function App() {
+  console.log("1",screens);
   const AppContainer = createAppContainer(createStackNavigator(screens));
-  listen = (r) =>{
-    console.log(r);
-  }
-  globalObject.AddNotificationListener(listen)
-
   return (<AppContainer/>);
 }
 

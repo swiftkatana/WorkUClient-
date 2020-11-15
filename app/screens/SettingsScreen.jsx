@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import { globalObject } from '../src/globalObject'
 
-export default function SettingsScreen() {
+export default function Main() {
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -10,16 +10,16 @@ export default function SettingsScreen() {
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>הגדרות</Text>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("UserPayChecksScreen")}>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("SelectionScreen")}>
                     <Text style={styles.buttonText}>שינוי סיסמה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("SelectionScreen")}>
                     <Text style={styles.buttonText}>ערכת נושא</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("SelectionScreen")}>
                     <Text style={styles.buttonText}>עזרה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("SelectionScreen")}>
                     <Text style={styles.buttonText}>יציאה</Text>
                 </TouchableOpacity>
 

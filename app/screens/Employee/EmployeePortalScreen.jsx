@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import { globalObject } from '../src/globalObject'
+import { globalObject } from '../../src/globalObject'
 
-export default function EmployeePortfolioScreen() {
+export default function Main() 
+{
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -10,7 +11,7 @@ export default function EmployeePortfolioScreen() {
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>פורטל עובד</Text>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("UserPayChecksScreen")}>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("EmployeePayChecksScreen")}>
                     <Text style={styles.buttonText}>תלושי שכר</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
@@ -19,7 +20,6 @@ export default function EmployeePortfolioScreen() {
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
                     <Text style={styles.buttonText}>דו"ח שעות חודשי</Text>
                 </TouchableOpacity>
-
             </View>
         </View>
     )
@@ -27,15 +27,11 @@ export default function EmployeePortfolioScreen() {
 
 const styles = StyleSheet.create({
     view:{
-        //marginTop:50,
         flex:1,
-        backgroundColor: "#7f71e3",
-        
-        
+        backgroundColor: "#7f71e3",     
     },
     buttonsContainer:
     {
-        //paddingTop: 10,
         alignItems: 'flex-end',
     },
     button:
@@ -48,7 +44,6 @@ const styles = StyleSheet.create({
     {
         fontSize: 16,
         color: "seashell",
-
     },
     title:
     {
@@ -62,9 +57,7 @@ const styles = StyleSheet.create({
     exitButton:
     {
         paddingTop: 60,
-        //position:'absolute',
-        marginLeft:30,
-        
+        marginLeft:30,      
     },
     exitText:
     {

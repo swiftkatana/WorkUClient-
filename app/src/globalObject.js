@@ -20,6 +20,8 @@ class global {
     };
 
     this.SendRequest = async (url, obj) => {
+      console.log(url);
+      console.log(obj);
       title = "";
       msg = "";
       alertButton = [
@@ -62,7 +64,7 @@ class global {
             Alert.alert(title, msg, alertButton, { cancelable: false });
             return null;
           }
-          return res.data;
+          return res.data == null ? "okay" : res.data;
         } catch (error) {
           title = "תקלה בתקשורת";
           msg = "קיימת בעיה עם השרת נסו מאוחר יותר";

@@ -11,12 +11,12 @@ export default function ManagerNaviButton() {
         <View style={styles.view}>
 
 
-        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('manageRequestsScreen')}>
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('ManagerManageRequestsScreen')}>
         <Image style={styles.tinyLogo} source={require('../assets/notebook_icon.png')}/>
         <Text style={styles.settingsFont}>ניהול בקשות</Text> 
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('managementToosScreen')}>
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('ManagerToolsScreen')}>
         <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')}/>
         <Text style={styles.settingsFont}>כלי ניהול</Text> 
         </TouchableOpacity>

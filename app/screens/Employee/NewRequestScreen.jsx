@@ -2,26 +2,12 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import {Picker} from '@react-native-community/picker';
-import { userSendPersonalRequest } from '../src/api/apiKeys'
-import { globalObject } from '../src/globalObject'
-// send {type,body,fullName,email}
-// recive {_id,}
-const SendTask = async (type,body)=>
-{   
-    res = await globalObject.SendRequest(userSendPersonalRequest,{type:type,body:body,fullName:globalObject.User.fullName,email:globalObject.User.email})
-    if(res.error)
-    {
+import requestList from '../../src/api/apiKeys'
+import { globalObject } from '../../src/globalObject'
 
-    }
-    else
-    {
 
-    }
-
-}
-
-export default function NewRequestScreen() {
-
+export default function Main()
+ {
     const [type, SetType] = useState("חולי");
     const [text, SetText] = useState("");
     return (
@@ -62,7 +48,7 @@ export default function NewRequestScreen() {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={()=>SendTask(type,text)}>
+                <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText} >שלח בקשה</Text> 
                 </TouchableOpacity>
             </View>

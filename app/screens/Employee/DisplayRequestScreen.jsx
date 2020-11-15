@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { userSendPersonalRequest } from '../src/api/apiKeys'
-import { globalObject } from '../src/globalObject'
+import  requestList  from '../../src/api/apiKeys'
+import { globalObject } from '../../src/globalObject'
 
 
-export default function HandleSingleRequestScreen() {
-
-
-
+export default function Main() 
+{
     const [date, SetDate] = useState("15.1.20");
     const [type, SetType] = useState("חופש");
     const [status, SetStatus] = useState("בטיפול");
@@ -20,25 +18,14 @@ export default function HandleSingleRequestScreen() {
             </TouchableOpacity>
             <View style={styles.container}>
 
-                <View> 
+                <View > 
                     <Text style={styles.header}>בקשה</Text>
                 </View>
-                
                 <Text style={styles.subTitle}>תאריך: {date}</Text>
                 <Text style={styles.subTitle}>סוג בקשה: {type}</Text>
                 <Text style={styles.subTitle}>סטטוס: {status}</Text>
                 <Text style={styles.bodyHeader}>פירוט:</Text>
                 <Text style={styles.subTitle}>{text}</Text>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonOk}>
-                        <Image style={styles.tinyLogo} source={require('../assets/v_icon.png')}/>     
-                        <Text style={styles.buttonText} >לאישור הבקשה</Text> 
-                    </TouchableOpacity>      
-                    <TouchableOpacity style={styles.buttonReject} >
-                        <Image style={styles.tinyLogo} source={require('../assets/x_icon.png')}/>
-                        <Text style={styles.buttonText} >לדחיית הבקשה</Text> 
-                    </TouchableOpacity>  
-                </View>    
             </View>
         </View>
     )
@@ -67,15 +54,20 @@ const styles = StyleSheet.create({
     subTitle:
     {
         marginRight:30,
+        marginLeft:30,
         fontSize: 16,
         color: "seashell",
+        
 
     },
     bodyHeader:{
         marginRight:30,
+        marginLeft:30,
+
         fontSize: 16,
         color: "seashell",
         marginTop: 30,
+
     },
     itemList:
     {
@@ -86,48 +78,22 @@ const styles = StyleSheet.create({
 
             
     },
-    buttonContainer:{
-    flexDirection:'row-reverse',
-    marginTop: 20,
-    marginLeft: 75,
-    },
-    buttonReject:{
-        
-        width: 100,
-        //backgroundColor: "#eb4034",// #6357b5
+    button:{
+        width: 300,
+        backgroundColor: "#6f61ca",// #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
-        marginHorizontal: 10,
-
-        
-    },
-    buttonOk:{
-        
-        width: 100,
-        //backgroundColor: "#20bd57",// #6357b5
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 16,
-        marginHorizontal: 10,
+        marginHorizontal: 30,
 
         
     },
 
     buttonText:{
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: '500',
         color: 'seashell',
         textAlign: 'center',
-        fontWeight: 'bold',
-
-    },
-    tinyLogo:{
-        width: 60,
-        height: 60,
-        marginHorizontal: 20,
-        marginBottom: 10,
-    
     },
     exitButton:
     {

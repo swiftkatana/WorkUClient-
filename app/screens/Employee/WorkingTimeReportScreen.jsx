@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
-import { globalObject } from '../src/globalObject'
+import { globalObject } from '../../src/globalObject'
 
 
 
@@ -35,7 +35,7 @@ const render = ({item})=>
     )    
 }  
 
-export default function WorkingTimeReportScreen() {
+export default function Main() {
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -58,7 +58,7 @@ export default function WorkingTimeReportScreen() {
                 />
                 <Text style={styles.mainSum}>סה"כ שעות עבודה במצטבר לחודש זה:</Text>
                 <TouchableOpacity style={styles.logo}>
-                    <Image style={styles.tinyLogo} source={require('../assets/plus_icon.png')}/>
+                    <Image style={styles.tinyLogo} source={require('../../assets/plus_icon.png')}/>
                 </TouchableOpacity>
             </View>
         </View>
@@ -71,13 +71,10 @@ const styles = StyleSheet.create({
     {
         flex:4,
         backgroundColor: "#7f71e3",
-        //alignItems: 'center',
     },
     container:{
         flex:1,
-        //paddingTop: 70,
         alignItems: 'flex-end',
-        
     },
     title:
     {
@@ -90,21 +87,16 @@ const styles = StyleSheet.create({
     },
     header:{
         flexGrow:1,
-        //borderWidth: 1,
         height:78,
-        //width:Dimensions.get('window').width-50,
-        //backgroundColor:"white",
         borderColor: "lightgray",
 
     },
     list:
     {
         flexGrow:1,
-        //borderWidth: 1,
         height:45,
         width:Dimensions.get('window').width-50,
         backgroundColor:"seashell",
-        //backgroundColor:"white",
         flexDirection:"row-reverse",
         alignItems: 'center',
         textAlign: "center",
@@ -114,14 +106,11 @@ const styles = StyleSheet.create({
         marginBottom:1,
         borderWidth:1,
         borderColor: "lightgray",
-
-
     },
     listText:
     {   flex:3,
         textAlign:"center",
         fontSize: 14,
-
     },
     mainSum:
     {
@@ -138,10 +127,8 @@ const styles = StyleSheet.create({
         marginRight:15,
         fontSize: 14,
         fontWeight: "bold",
-
     },
     logo:{
-        //flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
 

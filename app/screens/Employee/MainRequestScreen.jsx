@@ -1,41 +1,35 @@
 import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import { globalObject } from '../src/globalObject'
+import { globalObject } from '../../src/globalObject'
 
-export default function managementToosScreen() {
+export default function Main() 
+{
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
                     <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>כלי ניהול</Text>
-                <TouchableOpacity style={styles.button} oPress={()=>globalObject.Navigation.navigaten("UserPayChecksScreen")}>
-                    <Text style={styles.buttonText}>שלח משימה לעובד</Text>
+                <Text style={styles.title}>הבקשות שלי</Text>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("AllRequestScreen")}>
+                    <Text style={styles.buttonText}>כל הבקשות</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>
-                    <Text style={styles.buttonText}>היסטוריית משימות</Text>
+                    <Text style={styles.buttonText}>בקשה חדשה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
-                    <Text style={styles.buttonText}>ניהול משמרות</Text>
-                </TouchableOpacity>
-
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    view:{
-        //marginTop:50,
+    view:
+    {
         flex:1,
         backgroundColor: "#7f71e3",
-        
-        
     },
     buttonsContainer:
     {
-        //paddingTop: 10,
         alignItems: 'flex-end',
     },
     button:
@@ -48,7 +42,6 @@ const styles = StyleSheet.create({
     {
         fontSize: 16,
         color: "seashell",
-
     },
     title:
     {
@@ -57,14 +50,11 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: "seashell",
         textDecorationLine: "underline"
-
     },
     exitButton:
     {
         paddingTop: 60,
-        //position:'absolute',
-        marginLeft:30,
-        
+        marginLeft:30,     
     },
     exitText:
     {

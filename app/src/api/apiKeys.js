@@ -1,47 +1,50 @@
-//user api
+const requestList = {
+  //user api
+  //send {email, password}
+  //recive {userData}
+  userLoginUrl: "/api/user/login",
 
-//send {email, password}
-//recive {userData}
-exports.userLoginUrl = "/api/user/login";
+  // send {email,password,firstName,lastName}
+  //recive {userData}
+  userRegisterUrl: "/api/user/register",
 
-// send {email,password,firstName,lastName}
-//recive {userData}
-exports.userRegisterUrl = "/api/user/register";
+  //send {email,code}
+  //revice {userData}
+  userJoinCompany: "/api/user/joincompany",
 
-//send {email,code}
-//revice {userData}
-exports.userJoinCompany = "/api/user/joincompany";
+  //send {_id,comment,email(email of the user who update),complete}
+  //recive none
+  userUpdateTask: "/api/user/updatetask",
 
-//send {_id,comment,email(email of the user who update),complete}
-//recive none
-exports.usercompleteTask = "/api/user/updatetask";
+  // send {_id,email}
+  // recive {task}
+  userGetTask: "/api/user/gettask",
 
-// send {_id,email}
-// recive {task}
-exports.userGetTask = "/api/user/gettask";
+  // send {type,body,fullName,email}
+  // recive {reuqest}
+  userSendPersonalRequest: "/api/user/personalreuqest",
 
-// send {type,body,fullName,email}
-// recive {reuqest}
-exports.userSendPersonalRequest = "/api/user/personalreuqest";
+  // send {_id,status,respond}
+  // recive {reuqest}
+  updatePersonalRequest: "/api/company/updatepersonalreuqest",
 
-// send {_id,status,respond}
-// recive {reuqest}
-exports.updatePersonalRequest = '/api/company/updatepersonalreuqest';
+  //boss api
 
-//boss api
+  // send {mangar{email,joinCode} ,email}
+  // recive none
+  userLeaveUrl: "/api/company/leave",
 
-// send {mangar{email,joinCode} ,email}
-// recive none
-exports.userLeaveUrl = "/api/company/leave";
+  // send {companyName,email}
+  // recive  {company}
+  createCompanyUrl: "/api/company/createcompany",
 
-// send {companyName,email}
-// recive joinCode
-exports.createCompanyUrl = "/api/comapny/createcompany";
+  // send {employees[email0,email1,email2,...],task{title,description,priority}}
+  // recive {task}
+  createTaskUrl: "/api/company/addtasks",
 
-// send {employees[email0,email1,email2,...],task{title,description,priority}}
-// recive {task}
-exports.createTaskUrl = "/api/company/addtasks";
+  // send {joincode,email}
+  // recvice {company}
+  getCompanyUrl: "/api/company/getcompany",
+};
 
-// send {joincode,email}
-// recvice {company}
-exports.getCompanyUrl = "/api/company/getcompany";
+export default requestList;

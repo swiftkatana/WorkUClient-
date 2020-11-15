@@ -1,12 +1,12 @@
-import {globalObject} from "../src/globalObject"
+import {globalObject} from "../../src/globalObject"
 import React from 'react'
 import {View ,StyleSheet} from 'react-native'
-import Greeting from "../components/Greeting"
-import CompanyCode from "../components/CompanyCode"
-import TaskBoard from "../components/TaskBoard"
-import ManagerNaviButton from "../components/ManagerNaviButton"
+import Greeting from "../../components/Greeting"
+import CompanyCode from "../../components/CompanyCode"
+import TaskBoard from "../../components/TaskBoard"
+import ManagerNaviButton from "../../components/ManagerNaviButton"
 
-export default function ManagerMainScreen({navigation})
+export default function Main({navigation})
 {
     globalObject.Navigation = navigation;
     return (

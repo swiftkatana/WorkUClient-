@@ -1,10 +1,32 @@
 import React,{useState} from "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import Logo from "../components/Logo";
-import { userRegisterUrl } from "../src/api/apiKeys";
-import {globalObject} from "../src/globalObject";
+import requestList from "../../src/api/apiKeys";
+import {globalObject} from "../../src/globalObject";
 
-export default function UserRegisterScreen() {
+
+const pressHandler = async (firstName,lastName,email,password,verifyPassword)=>
+{
+  if(!firstName || !lastName || !email || !password || !verifyPassword){
+    title = "ההרשמה נכשלה";
+    msg = "אחד או יותר מהשדות ריקים, נסו שנית"
+    alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
+    Alert.alert(title,msg,alertButton,{cancelable: false});
+  }else if(password != verifyPassword){
+    title = "ההרשמה נכשלה";
+    msg = "הוזנו שני סיסמאות שונות, נסו שנית"
+    alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
+    Alert.alert(title,msg,alertButton,{cancelable: false});
+  }else{
+    const  user = await globalObject.SendRequest(requestList.userRegisterUrl,{firstName,lastName,email,password});
+    if(user){// register content ok
+      globalObject.User = user;
+      globalObject.Navigation.navigate('SelectionScreen',{user:globalObject.User});
+    }
+  }
+}
+
+export default function Main() 
+{
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -12,26 +34,7 @@ export default function UserRegisterScreen() {
   const [password, setPassword] = useState('')
   const [verifyPassword, setVerifyPassword] = useState('')
 
-  const pressHandler = async (firstName,lastName,email,password,verifyPassword)=>
-  {
-    if(!firstName || !lastName || !email || !password || !verifyPassword){
-      title = "ההרשמה נכשלה";
-      msg = "אחד או יותר מהשדות ריקים, נסו שנית"
-      alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
-      Alert.alert(title,msg,alertButton,{cancelable: false});
-    }else if(password != verifyPassword){
-      title = "ההרשמה נכשלה";
-      msg = "הוזנו שני סיסמאות שונות, נסו שנית"
-      alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
-      Alert.alert(title,msg,alertButton,{cancelable: false});
-    }else{
-      const  user = await globalObject.SendRequest(userRegisterUrl,{firstName,lastName,email,password});
-      if(user){// register content ok
-        globalObject.User = user;
-        globalObject.Navigation.navigate('TaskScreen');
-      }
-    }
-  }
+ 
     return (
         <View style={styles.container}>
           <View style={styles.container}>
@@ -47,7 +50,7 @@ export default function UserRegisterScreen() {
           </View>
           <View style={styles.signinTextCont}>
                 <Text style={styles.signinText}> כבר יש לך משתמש?</Text>
-                <TouchableOpacity onPress={() => globalObject.Navigation.navigate('WelcomeScreen')}>
+                <TouchableOpacity onPress={() => globalObject.Navigation.navigate('LoginScreen')}>
                   <Text style={styles.signinButton}>כניסה</Text>
                 </TouchableOpacity>
                 <Text style={styles.signinButton}  />
