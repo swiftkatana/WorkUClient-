@@ -13,6 +13,7 @@ import WorkingTimeReportScreen from "./app/screens/Employee/WorkingTimeReportScr
 import EmployeeUpdateTaskScreen from "./app/screens/Employee/EmployeeUpdateTaskScreen";
 import DisplayRequestScreen from "./app/screens/Employee/DisplayRequestScreen";
 import AllRequestScreen from "./app/screens/Employee/AllRequestScreen";
+import ManualWorkingTime from "./app/screens/Employee/ManualWorkingTime";
 //reg and log
 import RegisterUserScreen from "./app/screens/RegistrationAndLogin/RegisterUserScreen";
 import SelectScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
@@ -46,6 +47,7 @@ const listScreen =
   {NewRequestScreen:NewRequestScreen},
   {MainRequestScreen:MainRequestScreen},
   {EmpolyeeMainScreen:EmpolyeeMainScreen},
+  {ManualWorkingTime:ManualWorkingTime},
   ];
 var screens = {}
 

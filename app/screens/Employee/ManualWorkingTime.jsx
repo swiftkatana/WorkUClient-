@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity, Image } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
-import { globalObject } from '../src/globalObject'
+import { globalObject } from '../../src/globalObject'
 
-export default function ManualWorkingTime() {
+export default function Main() 
+{
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -12,9 +13,9 @@ export default function ManualWorkingTime() {
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>הוספת שעות</Text>
                 <View style={styles.infoConteiner}>
-                    <Image style={styles.tinyLogo} source={require('../assets/information_icon.png')}/>
+                    <Image style={styles.tinyLogo} source={require('../../assets/information_icon.png')}/>
 
-                    <View style={styles.infoTextConteiner} onPress={()=>globalObject.Navigation.navigate("AllRequestScreen")}>
+                    <View style={styles.infoTextConteiner}>
                         <Text style={styles.infoText}>שים לב, שעות העבודה נוספות באופן אוטומטי לדו"ח החודשי כאשר אתה מפעיל את שעון העבודה שבמסך הראשי.</Text>
                     </View>
                 </View>
@@ -24,8 +25,6 @@ export default function ManualWorkingTime() {
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>כניסה</Text>
                 </TouchableOpacity>
-
-
             </View>
         </View>
     )

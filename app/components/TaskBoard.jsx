@@ -8,7 +8,7 @@ const render = ({item})=>
 {
     return(   
     <View>
-        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate('UpdateTaskScreen',{item:item})}>
+        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate('EmployeeUpdateTaskScreen',{item:item})}>
         <Text style={styles.listText}>תקציר: {item.title}</Text>
         <View style={styles.koral}>
             <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')}/>
