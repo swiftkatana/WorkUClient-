@@ -12,13 +12,14 @@ const pressHandler = async (companyName)=>
     msg = "אחד או יותר מהשדות ריקים, נסו שנית"
     alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
     Alert.alert(title,msg,alertButton,{cancelable: false});
-  }else{
+  }else
+  {
       const company = await globalObject.SendRequest(requestList.createCompanyUrl,{companyName,email:globalObject.User.email});
       if(company)
       {
         globalObject.User.company = companyName;
         globalObject.company = company;
-        globalObject.Navigation.navigate('EmpolyeeMainScreen');
+        globalObject.Navigation.navigate('ManagerMainScreen');
       }
         
   }

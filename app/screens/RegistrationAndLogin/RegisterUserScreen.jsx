@@ -16,9 +16,12 @@ const pressHandler = async (firstName,lastName,email,password,verifyPassword)=>
     msg = "הוזנו שני סיסמאות שונות, נסו שנית"
     alertButton = [{text: "הבנתי",onPress: () => console.log("OK Pressed")}];
     Alert.alert(title,msg,alertButton,{cancelable: false});
-  }else{
+  }else
+  {
     const  user = await globalObject.SendRequest(requestList.userRegisterUrl,{firstName,lastName,email,password});
-    if(user){// register content ok
+    if(user)
+    {
+      // register content ok
       globalObject.User = user;
       globalObject.Navigation.navigate('SelectionScreen',{user:globalObject.User});
     }
