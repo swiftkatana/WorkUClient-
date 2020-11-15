@@ -16,7 +16,7 @@ import AllRequestScreen from "./app/screens/Employee/AllRequestScreen";
 import ManualWorkingTime from "./app/screens/Employee/ManualWorkingTime";
 //reg and log
 import RegisterUserScreen from "./app/screens/RegistrationAndLogin/RegisterUserScreen";
-import SelectScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
+import SelectionScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
 import RegisterCompanyScreen from  "./app/screens/RegistrationAndLogin/RegisterCompanyScreen";
 import LoginScreen from "./app/screens/RegistrationAndLogin/LoginScreen";
 
@@ -38,7 +38,7 @@ const listScreen =
   {ManagerManageRequestsScreen:ManagerManageRequestsScreen},
   {ManagerMainScreen:ManagerMainScreen},
   {RegisterCompanyScreen:RegisterCompanyScreen},
-  {SelectScreen:SelectScreen},
+  {SelectionScreen:SelectionScreen},
   {RegisterUserScreen:RegisterUserScreen},
   {AllRequestScreen:AllRequestScreen},
   {DisplayRequestScreen:DisplayRequestScreen},

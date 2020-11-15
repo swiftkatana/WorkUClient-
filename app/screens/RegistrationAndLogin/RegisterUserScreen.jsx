@@ -18,6 +18,7 @@ const pressHandler = async (firstName,lastName,email,password,verifyPassword)=>
     Alert.alert(title,msg,alertButton,{cancelable: false});
   }else{
     const  user = await globalObject.SendRequest(requestList.userRegisterUrl,{firstName,lastName,email,password});
+    console.log(user);
     if(user){// register content ok
       globalObject.User = user;
       globalObject.Navigation.navigate('SelectionScreen',{user:globalObject.User});
