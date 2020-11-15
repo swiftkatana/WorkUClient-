@@ -1,6 +1,6 @@
 const requestList = {
   //user api
-  //send {email, password}
+  //send {email, password,expoid}
   //recive {userData}
   userLoginUrl: "/api/user/login",
 
