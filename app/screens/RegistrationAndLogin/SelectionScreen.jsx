@@ -27,9 +27,9 @@ export default function Main({navigation}) {
       </View>
       <View style={styles.container}>
         <View style={styles.signupTextCont}>
-          <Text style= {styles.signupText, {fontWeight: 'bold',fontSize: 16,}}>חבר/י את חשבונך לבית עסק רשום:</Text>
+          <Text style= {styles.signupText, {fontWeight: 'bold',fontSize: 16,marginTop:120,}}>חבר/י את חשבונך לבית עסק רשום:</Text>
         </View>
-        <TextInput onChangeText={SetCodeText}  style={styles.inputBox} placeholder='קוד חשבון העסק' />
+        <TextInput onChangeText={SetCodeText}  style={styles.inputBox} placeholder='קוד גישה לבית העסק' />
         <TouchableOpacity onPress={()=>pressHandler(codeText)} style={styles.button}>
           <Text style={styles.buttonText}>התחל לעבוד</Text>
         </TouchableOpacity>
@@ -49,7 +49,7 @@ export default function Main({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    //flexGrow: 1,
     paddingVertical: 60,
     justifyContent: 'center',
     alignItems: 'center'
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   },
   signupText: {
     fontSize: 16,
+    marginTop:30,
   },
   signupButton: {
     paddingRight: 5,
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   GreetingText: {
-    marginVertical: 80,
+    marginTop:110,
     fontSize: 22,
     color: '#000000',
     fontWeight: "bold"

@@ -66,9 +66,11 @@ export default function Main()
 
 const styles = StyleSheet.create({
     container: {
-      flexGrow: 0.8,
+      //flexGrow: 0.8,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      marginTop:50,
+
     },
     inputBox: {
       width: 300,

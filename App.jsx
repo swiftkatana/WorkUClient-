@@ -16,7 +16,7 @@ import AllRequestScreen from "./app/screens/Employee/AllRequestScreen";
 import ManualWorkingTime from "./app/screens/Employee/ManualWorkingTime";
 //reg and log
 import RegisterUserScreen from "./app/screens/RegistrationAndLogin/RegisterUserScreen";
-import SelectScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
+import SelectionScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
 import RegisterCompanyScreen from  "./app/screens/RegistrationAndLogin/RegisterCompanyScreen";
 import LoginScreen from "./app/screens/RegistrationAndLogin/LoginScreen";
 
@@ -27,6 +27,8 @@ import ManagerManageRequestsScreen from "./app/screens/Manager/ManagerManageRequ
 import ManagerToolsScreen from "./app/screens/Manager/ManagerToolsScreen";
 import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequestScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
+import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
+
 const listScreen = 
 [
   {LoginScreen:LoginScreen},
@@ -36,7 +38,7 @@ const listScreen =
   {ManagerManageRequestsScreen:ManagerManageRequestsScreen},
   {ManagerMainScreen:ManagerMainScreen},
   {RegisterCompanyScreen:RegisterCompanyScreen},
-  {SelectScreen:SelectScreen},
+  {SelectionScreen:SelectionScreen},
   {RegisterUserScreen:RegisterUserScreen},
   {AllRequestScreen:AllRequestScreen},
   {DisplayRequestScreen:DisplayRequestScreen},
@@ -48,6 +50,7 @@ const listScreen =
   {MainRequestScreen:MainRequestScreen},
   {EmpolyeeMainScreen:EmpolyeeMainScreen},
   {ManualWorkingTime:ManualWorkingTime},
+  {NewTaskScreen:NewTaskScreen},
   ];
 var screens = {}
 

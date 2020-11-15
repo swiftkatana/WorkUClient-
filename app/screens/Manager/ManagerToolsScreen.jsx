@@ -10,7 +10,7 @@ export default function Main() {
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>כלי ניהול</Text>
-                <TouchableOpacity style={styles.button} oPress={()=>globalObject.Navigation.navigaten("UserPayChecksScreen")}>
+                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewTaskScreen")}>
                     <Text style={styles.buttonText}>שלח משימה לעובד</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("NewRequestScreen")}>

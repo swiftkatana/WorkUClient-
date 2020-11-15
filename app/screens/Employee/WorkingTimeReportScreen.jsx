@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     list:
     {
         flexGrow:1,
-        height:45,
+        height:42,
         width:Dimensions.get('window').width-50,
         backgroundColor:"seashell",
         flexDirection:"row-reverse",
