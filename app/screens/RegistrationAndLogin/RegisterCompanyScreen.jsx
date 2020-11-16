@@ -17,8 +17,10 @@ const pressHandler = async (companyName)=>
       const company = await globalObject.SendRequest(requestList.createCompanyUrl,{companyName,email:globalObject.User.email});
       if(company)
       {
+        globalObject.User.joinCode = company.joinCode;
         globalObject.User.company = companyName;
         globalObject.company = company;
+
         globalObject.Navigation.navigate('ManagerMainScreen');
       }
         

@@ -4,7 +4,7 @@ import {globalObject} from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 const pressHandler = async (joincode)=>
 {
-  const user = await globalObject.SendRequest(requestList.userJoinCompany,{email:globalObject.User.email,code:joincode});
+  const user = await globalObject.SendRequest(requestList.userJoinCompanyUrl,{email:globalObject.User.email,code:joincode});
   if(user)
   {
     globalObject.User = user;

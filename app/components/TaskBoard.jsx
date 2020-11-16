@@ -22,17 +22,14 @@ export default function TaskBoard() {
 
     const [tasks,UpdateTask] = useState([])
     const [shouldShow, setShouldShow] = useState(false);
-
-    useEffect(() => {
-        
+        useEffect(() => { 
         var arr = [];
+        console.log(globalObject.User);
         for(var obj in globalObject.User.tasks.processing)
         { 
 
             let task = globalObject.User.tasks.processing[obj];
-            let id = obj;
-            if(task.status === "בטיפול")
-                arr.push({title:task.title,id,priority:task.priority,description:task.description,status:task.status});
+            arr.push({title:task.title,id:obj,priority:task.priority,description:task.description,status:task.status});
 
         }
         if(arr.length == 0){
