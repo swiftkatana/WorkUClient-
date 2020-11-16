@@ -25,7 +25,7 @@ class global {
       title = "";
       msg = "";
       alertButton = [
-        { text: "הבנתי", onPress: () => console.log("OK Pressed") },
+        { text: "הבנתי"},
       ];
       isConnected = await NetInfo.fetch().then((state) => state.isConnected);
       if (!isConnected) {

@@ -17,6 +17,7 @@ export default function Main()
     const [text, SetText] = useState("");
     const [sendTo,SetSendTo] = useState({});
     const [employees,SetEmployyes] = useState([]);
+    const [shouldShow, setShouldShow] = useState(false);
 
     const PressHandler = async()=>
     {
@@ -55,6 +56,11 @@ export default function Main()
             let employee = employees[i];
             arr.push(employee);
         }
+        if(arr.length == 0){
+            setShouldShow(true);
+        }else{
+            setShouldShow(false);
+        }
         SetEmployyes(arr);
         return () => {
             arr = [];
@@ -75,6 +81,16 @@ export default function Main()
                     <Text style={styles.header}>משימה חדשה</Text>
                 </View>
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
+                {shouldShow ? (
+                    <View style={styles.infoConteiner}>
+                    <Image style={styles.tinyLogo} source={require('../../assets/information_icon.png')}/>
+
+                    <View style={styles.infoTextConteiner}>
+                        <Text style={styles.infoText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
+                    </View>
+                </View>
+                )
+                :null}
                 <FlatList style={styles.test}
                 data={employees}
                 renderItem={render}
@@ -237,6 +253,46 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: 'seashell',
         textAlign: 'center',
+    },
+    infoConteiner:{
+        flexDirection: 'row-reverse',
+        justifyContent: 'center',
+        alignItems:'center',
+        
+    },
+    infoTextConteiner:{
+        padding:10,
+        //marginHorizontal: 82,
+        marginRight:35,
+        marginLeft:55,
+        backgroundColor: "#6f61ca",
+        borderRadius: 20,
+        //borderEndWidth: 1,
+        //borderStartWidth: 1,
+        borderWidth: 1,
+        //right: 10,
+        justifyContent: 'center',
+        alignItems:'center',
+        borderColor: "seashell",
+
+    },
+    infoText:{
+        fontSize: 11,
+        color: "seashell",
+        fontWeight:'bold',
+    },
+    tinyLogo:{
+        width: 20,
+        height: 20,
+        //alignItems: 'center',
+        //justifyContent: 'center',
+        //marginBottom: 50,
+        //marginRight: 10,
+        //marginTop: 14,
+        left: 30,
+        bottom: 2,
+        zIndex: 5,
+        
     },
     exitButton:
     {

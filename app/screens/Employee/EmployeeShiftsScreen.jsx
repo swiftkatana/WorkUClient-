@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
+import Calander from '../../components/Calander'
 import { globalObject } from '../../src/globalObject'
-
 export default function Main() 
 {
     return (
@@ -10,16 +10,8 @@ export default function Main()
                     <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>פורטל עובד</Text>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("EmployeePayChecksScreen")}>
-                    <Text style={styles.buttonText}>תלושי שכר</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("EmployeeShiftsScreen")}>
-                    <Text style={styles.buttonText}>משמרות</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>globalObject.Navigation.navigate("WorkingTimeReportScreen")}>
-                    <Text style={styles.buttonText}>דו"ח שעות חודשי</Text>
-                </TouchableOpacity>
+                <Text style={styles.title}>משמרות</Text>
+                <Calander/>
             </View>
         </View>
     )

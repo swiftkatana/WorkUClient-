@@ -5,7 +5,7 @@ import { globalObject } from '../../src/globalObject'
 
 
 
-var arr = [{type:"חופשת מחלה",status:"נשלח",date:"10.2.20",id:"123"},{type:"מחלה",status:"מחכה",date:"10.2.20",id:"124"} ]
+var arr = [{type:"חופשת מחלה",employeeName:"קורל בר-און",date:"10.2.20",id:"123"},{type:"מחלה",employeeName:"קונסטנטין אברמוביצביץ",date:"10.2.20",id:"124"} ]
 
 
 const render = ({item})=>
@@ -15,7 +15,7 @@ const render = ({item})=>
         <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate("HandleSingleRequestScreen")}>
             <Text style={styles.listText}>תאריך: {item.date}</Text>
             <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
-            <Text style={styles.status}>סטטוס: {item.status}</Text>
+            <Text style={styles.employeeName}>שם עובד: {item.employeeName}</Text>
             <Image style={styles.tinyLogo} source={require('../../assets/arrow_icon_black.png')}/>
         </TouchableOpacity>
      </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     list:
     {
         //borderWidth: 1,
-        height: 55,
+        height: 70,
         width:Dimensions.get('window').width-40,
         backgroundColor:"seashell",
         //backgroundColor:"white",
@@ -79,14 +79,14 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         justifyContent: 'center',
         borderRadius:25,
-        marginBottom:10,
+        marginBottom:6,
         borderWidth:1,
         borderColor: "lightgray",
 
 
     },
     listText:
-    {   flex:5,
+    {   flex:3,
         textAlign:"center",
         fontSize: 14,
         marginLeft: 5,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
 
     },
-    status:    
+    employeeName:    
     {   flex:3,
         textAlign:"center",
         marginRight:10,

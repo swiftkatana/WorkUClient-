@@ -37,6 +37,8 @@ export default function TaskBoard() {
         }
         if(arr.length == 0){
             setShouldShow(true);
+        }else{
+            setShouldShow(false);
         }
         UpdateTask(arr);
         return () => {

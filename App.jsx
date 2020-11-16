@@ -14,6 +14,8 @@ import EmployeeUpdateTaskScreen from "./app/screens/Employee/EmployeeUpdateTaskS
 import DisplayRequestScreen from "./app/screens/Employee/DisplayRequestScreen";
 import AllRequestScreen from "./app/screens/Employee/AllRequestScreen";
 import ManualWorkingTime from "./app/screens/Employee/ManualWorkingTime";
+import EmployeeShiftsScreen from "./app/screens/Employee/EmployeeShiftsScreen";
+
 //reg and log
 import RegisterUserScreen from "./app/screens/RegistrationAndLogin/RegisterUserScreen";
 import SelectionScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
@@ -51,6 +53,7 @@ const listScreen =
   {EmpolyeeMainScreen:EmpolyeeMainScreen},
   {ManualWorkingTime:ManualWorkingTime},
   {NewTaskScreen:NewTaskScreen},
+  {EmployeeShiftsScreen:EmployeeShiftsScreen},
   ];
 var screens = {}
 
@@ -61,7 +64,6 @@ export default function App()
     var keyNames = Object.keys(listScreen[i]);
     screens[keyNames[0]] = {screen:listScreen[i][keyNames[0]] ,navigationOptions:{ headerShown: false}}
   }
-  console.log("1",screens);
   const AppContainer = createAppContainer(createStackNavigator(screens));
   return (<AppContainer/>);
 }
