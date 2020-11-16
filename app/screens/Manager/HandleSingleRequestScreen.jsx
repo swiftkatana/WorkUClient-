@@ -11,7 +11,7 @@ export default function Main({Navigation}) {
 
     const [date, SetDate] = useState("15.1.20");
     const [type, SetType] = useState("חופש");
-    const [status, SetStatus] = useState("בטיפול");
+    const [employeeName, SetEmployeeName] = useState("יעקוב עקיבה");
     const [text, SetText] = useState("אני רוצה לצאת לחופש בימים בלה בלה ובלה ואני סיימתי את כל המשימות שלי אז הכל טוב וזה ");
     return (
         <View style={styles.view}>
@@ -26,7 +26,7 @@ export default function Main({Navigation}) {
                 
                 <Text style={styles.subTitle}>תאריך: {date}</Text>
                 <Text style={styles.subTitle}>סוג בקשה: {type}</Text>
-                <Text style={styles.subTitle}>סטטוס: {status}</Text>
+                <Text style={styles.subTitle}>שם עובד: {employeeName}</Text>
                 <Text style={styles.bodyHeader}>פירוט:</Text>
                 <Text style={styles.subTitle}>{text}</Text>
                 <View style={styles.buttonContainer}>

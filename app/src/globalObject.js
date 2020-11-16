@@ -11,7 +11,7 @@ class global {
   constructor() {
     this.User; //when log in used to store the user object
     this.Navigation; //used for storing navigation oject
-    this.campany;
+    this.company;
     this.timer = 0;
     this.language;
 
@@ -25,7 +25,7 @@ class global {
       title = "";
       msg = "";
       alertButton = [
-        { text: "הבנתי", onPress: () => console.log("OK Pressed") },
+        { text: "הבנתי"},
       ];
       isConnected = await NetInfo.fetch().then((state) => state.isConnected);
       if (!isConnected) {

@@ -1,12 +1,31 @@
 import React,{useState,useEffect} from 'react'
-import { View, Text,StyleSheet,Dimensions, Image } from 'react-native'
+import { View, Text,StyleSheet,Dimensions, Image, Alert, Clipboard} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+//import Clipboard from '@react-native-community/clipboard';
 import {globalObject} from "../src/globalObject"
+
+const copyToClipboard = () => {
+    Clipboard.setString(globalObject.User.joinCode);
+  };
+
+const pressHandler = ()=>
+{
+    title = "קוד גישה";
+        msg ="שים לב יש להעביר קוד זה לעובדים על מנת שיוכלו להתחבר לבית העסק שלך."   
+      alertButton = [
+        { text: "העתק קוד גישה לשורת ההקלדה" , onPress: () => copyToClipboard()}
+      ];
+      Alert.alert(title, msg, alertButton, { cancelable: false });
+
+}
+
+
+
 export default function CompanyCode() {
 
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress = {pressHandler}>
                 <Text style={styles.buttonText}>קוד גישה להוספת עובדים</Text>
                 <Image style={styles.tinyLogo} source={require('../assets/employee_icon.png')}/>
             </TouchableOpacity>

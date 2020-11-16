@@ -25,7 +25,7 @@ const pressHandler = async (email,password,setShouldShow)=>
         {
           globalObject.User.tasks =  company.tasks ? company.tasks : [];
           globalObject.User.personalRequests = company.personalRequests ? company.personalRequests : [] ;
-          globalObject.campany = company;
+          globalObject.company = company;
           
           console.log(globalObject.User);
           globalObject.Navigation.navigate('ManagerMainScreen');
@@ -41,11 +41,12 @@ const pressHandler = async (email,password,setShouldShow)=>
       }
       else
       {
-        globalObject.Navigation.navigate('SelectScreen',{user:globalObject.User});
+        globalObject.Navigation.navigate('SelectionScreen',{user:globalObject.User});
         setShouldShow(false);
       }
 
-    }else{
+    }else
+    {
       setShouldShow(false);
 
     }

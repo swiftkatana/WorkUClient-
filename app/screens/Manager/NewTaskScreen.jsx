@@ -1,39 +1,73 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import {Picker} from '@react-native-community/picker';
 import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
-var arr = [{employeeName:"קורל בר-און",id:"1"},
-{employeeName:"קורל בר-און",id:"2"},
-{employeeName:"קורל בר-און",id:"3"},
-{employeeName:"קורל בר-און",id:"4"},
-{employeeName:"קורל בר-און",id:"5"},
-{employeeName:"קורל בר-און",id:"6"},
-{employeeName:"קורל בר-און",id:"7"},
-{employeeName:"קורל בר-און",id:"8"},
-
- ]
 
 
-const render = ({item})=>
-{
-    return(   
-     <View>
-        <TouchableOpacity style={styles.list}>
-            <Text style={styles.listText}>שם: {item.employeeName}</Text>
-            <Image style={styles.tinyLogo} source={require('../../assets/arrow_icon_black.png')}/>
-        </TouchableOpacity>
-     </View>
-    )    
-} 
+
 
 export default function Main()
  {
+
     const [priority, SetPriority] = useState("");
     const [header, SetHeader] = useState("");
     const [text, SetText] = useState("");
+    const [sendTo,SetSendTo] = useState({});
+    const [employees,SetEmployyes] = useState([]);
+    const [shouldShow, setShouldShow] = useState(false);
+
+    const PressHandler = async()=>
+    {
+          // send {employees[email0,email1,email2,...],task{title,description,priority}}
+        // recive {task}
+        const res = await globalObject.SendRequest(requestList.createTaskUrl,{ employees:[sendTo.email],task:{title:header,priority,description:text}});
+        if(res)
+        {
+            console.log(1);
+            globalObject.company.tasks.push(res);
+        }
+        else // error
+        {
+            console.log(2);
+        }
+    }
+
+
+    const render = ({item})=>
+    {
+        return(   
+         <View>
+            <TouchableOpacity style={styles.list} onPress={()=>SetSendTo(item)}>
+                <Text style={styles.listText}>שם: {item.firstName + " "+ item.lastName}</Text>
+                <Image style={styles.tinyLogo} source={require('../../assets/plus_icon.png')}/>
+            </TouchableOpacity>
+         </View>
+        )    
+    } 
+
+    useEffect(() => {
+        var arr = [];
+        var employees = globalObject.company.employees;
+        for (let i  in  employees)
+        {
+            let employee = employees[i];
+            arr.push(employee);
+        }
+        if(arr.length == 0){
+            setShouldShow(true);
+        }else{
+            setShouldShow(false);
+        }
+        SetEmployyes(arr);
+        return () => {
+            arr = [];
+        }
+    }, [])
+
+
     return (
         <KeyboardAvoidingView style={styles.view} behavior={Platform.OS == "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
@@ -46,11 +80,21 @@ export default function Main()
                 <View> 
                     <Text style={styles.header}>משימה חדשה</Text>
                 </View>
-                <Text style={styles.subTitle}>תייג עובד: </Text>
+                <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
+                {shouldShow ? (
+                    <View style={styles.infoConteiner}>
+                    <Image style={styles.tinyLogo} source={require('../../assets/information_icon.png')}/>
+
+                    <View style={styles.infoTextConteiner}>
+                        <Text style={styles.infoText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
+                    </View>
+                </View>
+                )
+                :null}
                 <FlatList style={styles.test}
-                data={arr}
+                data={employees}
                 renderItem={render}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.email}
                 />
                 <View style={styles.inputBoxContainer}>
                     <TextInput
@@ -76,16 +120,16 @@ export default function Main()
                         selectedValue={priority} 
                         style={styles.itemList} 
 
-                        onValueChange={(itemValue) => SetType(itemValue)}>
+                        onValueChange={(itemValue) => SetPriority(itemValue)}>
                         
-                        <Picker.Item   label="גבוהה" value="" />
-                        <Picker.Item   label="בינונית" value="" />
-                        <Picker.Item   label="נמוכה" value="העלאה בשכר" />
+                        <Picker.Item   label="גבוהה" value="high" />
+                        <Picker.Item   label="בינונית" value="mid" />
+                        <Picker.Item   label="נמוכה" value="low" />
                     </Picker>
                 </View>
 
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={()=>{PressHandler()}}>
                     <Text style={styles.buttonText} >שלח בקשה</Text> 
                 </TouchableOpacity>
             </View>
@@ -127,21 +171,20 @@ const styles = StyleSheet.create({
     {
         flex: 1,
         height: 35,
-        width:Dimensions.get('window').width-160,
+        width:Dimensions.get('window').width-100,
         backgroundColor:"seashell",
         flexDirection:"row-reverse",
         alignItems: 'center',
-        textAlign: "center",
         marginHorizontal: 35,
         justifyContent: 'center',
-        borderRadius:15,
+        borderRadius:5,
         marginBottom:2,
         borderWidth:1,
         borderColor: "lightgray",
     },
     listText:
     {   flex:5,
-        textAlign:"center",
+        textAlign:"right",
         fontSize: 14,
         marginLeft: 5,
         marginRight: 10,
@@ -210,6 +253,46 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: 'seashell',
         textAlign: 'center',
+    },
+    infoConteiner:{
+        flexDirection: 'row-reverse',
+        justifyContent: 'center',
+        alignItems:'center',
+        
+    },
+    infoTextConteiner:{
+        padding:10,
+        //marginHorizontal: 82,
+        marginRight:35,
+        marginLeft:55,
+        backgroundColor: "#6f61ca",
+        borderRadius: 20,
+        //borderEndWidth: 1,
+        //borderStartWidth: 1,
+        borderWidth: 1,
+        //right: 10,
+        justifyContent: 'center',
+        alignItems:'center',
+        borderColor: "seashell",
+
+    },
+    infoText:{
+        fontSize: 11,
+        color: "seashell",
+        fontWeight:'bold',
+    },
+    tinyLogo:{
+        width: 20,
+        height: 20,
+        //alignItems: 'center',
+        //justifyContent: 'center',
+        //marginBottom: 50,
+        //marginRight: 10,
+        //marginTop: 14,
+        left: 30,
+        bottom: 2,
+        zIndex: 5,
+        
     },
     exitButton:
     {
