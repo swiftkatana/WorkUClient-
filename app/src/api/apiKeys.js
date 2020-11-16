@@ -8,27 +8,39 @@ const requestList = {
   //recive {userData}
   userRegisterUrl: "/api/user/register",
 
+  // send{createDateOfUser,email,timeWorkObj}
+  // recive none
+  userAddNewWorkTime: "/api/user/addnewworktime",
+
+  //send{createDateOfUser,email}
+  // recive none
+  userRestWorkTimesUrl: '/api/user/restuserworktime',
+
   //send {email,code}
   //revice {userData}
-  userJoinCompany: "/api/user/joincompany",
+  userJoinCompanyUrl: "/api/user/joincompany",
 
   //send {_id,comment,email(email of the user who update),complete}
   //recive none
-  userUpdateTask: "/api/user/updatetask",
+  userUpdateTaskUrl: "/api/user/updatetask",
 
   // send {_id,email}
   // recive {task}
-  userGetTask: "/api/user/gettask",
+  userGetTaskUrl: "/api/user/gettask",
 
   // send {type,body,fullName,email}
   // recive {reuqest}
-  userSendPersonalRequest: "/api/user/personalreuqest",
+  userSendPersonalRequestUrl: "/api/user/personalreuqest",
 
   // send {_id,status,respond}
   // recive {reuqest}
-  updatePersonalRequest: "/api/company/updatepersonalreuqest",
+  updatePersonalRequestUrl: "/api/company/updatepersonalreuqest",
 
   //boss api
+
+  //send {email}
+  // recive expoId
+  getExpoIdUrl: '/api/company/getexpoid',
 
   // send {mangar{email,joinCode} ,email}
   // recive none
