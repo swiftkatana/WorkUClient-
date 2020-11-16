@@ -26,8 +26,8 @@ export default function Main()
         const res = await globalObject.SendRequest(requestList.createTaskUrl,{ employees:[sendTo.email],task:{title:header,priority,description:text}});
         if(res)
         {
-            console.log(1);
-            globalObject.company.tasks.push(res);
+            console.log(res);
+            globalObject.company.tasks[res.id] = res;
         }
         else // error
         {
