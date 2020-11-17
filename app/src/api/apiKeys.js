@@ -12,6 +12,19 @@ const requestList = {
   // recive none
   userAddNewWorkTime: "/api/user/addnewworktime",
 
+  // send{newPassword,oldPassword,email}
+  // recive none 
+
+  userChangePasswrordUrl: "/api/user/changepassword",
+
+  // send{email, restCode, newPassword}    
+  // recive none 
+  userChangePasswordWithRestCode: '/api/user/restpasswordrestcode',
+
+  // send{email}    
+  // recive none 
+  userRequestRestCode: '/api/user/createrestpasswordcode',
+
   //send{createDateOfUser,email}
   // recive none
   userRestWorkTimesUrl: "/api/user/restuserworktime",

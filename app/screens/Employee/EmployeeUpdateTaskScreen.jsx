@@ -85,9 +85,12 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "flex-end",
     },
-    scrollView: {
+    scrollView:
+    {
         height: 150,
         marginTop: 30,
+        justifyContent: 'flex-end',
+        textAlign: "right",
     },
     header: {
         margin: 20,
@@ -102,7 +105,15 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "seashell",
     },
+    descriptionStyle: {
+        textAlign: "right",
+        marginRight: 30,
+        marginLeft: 30,
+        fontSize: 16,
+        color: "seashell",
+    },
     bodyHeader: {
+
         marginRight: 30,
         marginLeft: 30,
         fontSize: 16,
