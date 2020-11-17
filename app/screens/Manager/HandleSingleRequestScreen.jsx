@@ -5,40 +5,47 @@ import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
 
-export default function Main({Navigation}) {
+const pressHandler = async (_id, status) => {
 
+    // send {_id,email,status}
+    // recive {reuqest}
+    const res = await globalObject.SendRequest(requestList.updatePersonalRequestUrl, { _id, status, email: globalObject.User.email });
+    if (res) {
+        console.log(res);
+        //  globalObject.User.personalRequests[res._id] = res;
+        //   globalObject.Navigation.pop();
+    }
+}
 
+export default function Main({ navigation }) {
 
-    const [date, SetDate] = useState("15.1.20");
-    const [type, SetType] = useState("חופש");
-    const [employeeName, SetEmployeeName] = useState("יעקוב עקיבה");
-    const [text, SetText] = useState("אני רוצה לצאת לחופש בימים בלה בלה ובלה ואני סיימתי את כל המשימות שלי אז הכל טוב וזה ");
+    const item = navigation.state.params.item;
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>
 
-                <View> 
+                <View>
                     <Text style={styles.header}>בקשה</Text>
                 </View>
-                
-                <Text style={styles.subTitle}>תאריך: {date}</Text>
-                <Text style={styles.subTitle}>סוג בקשה: {type}</Text>
-                <Text style={styles.subTitle}>שם עובד: {employeeName}</Text>
+
+                <Text style={styles.subTitle}>תאריך: {item.date}</Text>
+                <Text style={styles.subTitle}>סוג בקשה: {item.type}</Text>
+                <Text style={styles.subTitle}>שם עובד: {item.fullName}</Text>
                 <Text style={styles.bodyHeader}>פירוט:</Text>
-                <Text style={styles.subTitle}>{text}</Text>
+                <Text style={styles.subTitle}>{item.body}</Text>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonOk}>
-                        <Image style={styles.tinyLogo} source={require('../../assets/v_icon.png')}/>     
-                        <Text style={styles.buttonText} >לאישור הבקשה</Text> 
-                    </TouchableOpacity>      
-                    <TouchableOpacity style={styles.buttonReject} >
-                        <Image style={styles.tinyLogo} source={require('../../assets/x_icon.png')}/>
-                        <Text style={styles.buttonText} >לדחיית הבקשה</Text> 
-                    </TouchableOpacity>  
-                </View>    
+                    <TouchableOpacity style={styles.buttonOk} onPress={() => pressHandler(item.id, "אושרה")}>
+                        <Image style={styles.tinyLogo} source={require('../../assets/v_icon.png')} />
+                        <Text style={styles.buttonText} >לאישור הבקשה</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonReject} onPress={() => pressHandler(item.id, "נדחתה")}>
+                        <Image style={styles.tinyLogo} source={require('../../assets/x_icon.png')} />
+                        <Text style={styles.buttonText} >לדחיית הבקשה</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
@@ -47,52 +54,52 @@ export default function Main({Navigation}) {
 const styles = StyleSheet.create({
     view:
     {
-        flex:1,
+        flex: 1,
         backgroundColor: "#7f71e3",
 
     },
     container:
-    {  
+    {
         alignItems: 'flex-end',
     },
     header:
     {
-        margin:20,
-        marginRight:30,
+        margin: 20,
+        marginRight: 30,
         fontSize: 28,
         color: "seashell",
         textDecorationLine: "underline"
-       
+
     },
     subTitle:
     {
-        marginRight:30,
+        marginRight: 30,
         fontSize: 16,
         color: "seashell",
 
     },
-    bodyHeader:{
-        marginRight:30,
+    bodyHeader: {
+        marginRight: 30,
         fontSize: 16,
         color: "seashell",
         marginTop: 30,
     },
     itemList:
     {
-        textAlign:"right",
+        textAlign: "right",
         width: 300,
         textAlign: 'right',
         justifyContent: 'center',
 
-            
+
     },
-    buttonContainer:{
-    flexDirection:'row-reverse',
-    marginTop: 20,
-    marginLeft: 75,
+    buttonContainer: {
+        flexDirection: 'row-reverse',
+        marginTop: 20,
+        marginLeft: 75,
     },
-    buttonReject:{
-        
+    buttonReject: {
+
         width: 100,
         //backgroundColor: "#eb4034",// #6357b5
         borderRadius: 25,
@@ -100,10 +107,10 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         marginHorizontal: 10,
 
-        
+
     },
-    buttonOk:{
-        
+    buttonOk: {
+
         width: 100,
         //backgroundColor: "#20bd57",// #6357b5
         borderRadius: 25,
@@ -111,10 +118,10 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         marginHorizontal: 10,
 
-        
+
     },
 
-    buttonText:{
+    buttonText: {
         fontSize: 12,
         fontWeight: '500',
         color: 'seashell',
@@ -122,12 +129,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
 
     },
-    tinyLogo:{
+    tinyLogo: {
         width: 60,
         height: 60,
         marginHorizontal: 20,
         marginBottom: 10,
-    
+
     },
     exitButton:
     {
@@ -137,7 +144,7 @@ const styles = StyleSheet.create({
     },
     exitText:
     {
-        fontSize:30,
+        fontSize: 30,
         color: "seashell",
 
     }

@@ -27,7 +27,7 @@ const requestList = {
 
   //send{createDateOfUser,email}
   // recive none
-  userRestWorkTimesUrl: '/api/user/restuserworktime',
+  userRestWorkTimesUrl: "/api/user/restuserworktime",
 
   //send {email,code}
   //revice {userData}
@@ -45,15 +45,11 @@ const requestList = {
   // recive {reuqest}
   userSendPersonalRequestUrl: "/api/user/personalreuqest",
 
-  // send {_id,status,respond}
-  // recive {reuqest}
-  updatePersonalRequestUrl: "/api/company/updatepersonalreuqest",
-
   //boss api
 
   //send {email}
   // recive expoId
-  getExpoIdUrl: '/api/company/getexpoid',
+  getExpoIdUrl: "/api/company/getexpoid",
 
   // send {mangar{email,joinCode} ,email}
   // recive none
@@ -70,6 +66,10 @@ const requestList = {
   // send {joincode,email}
   // recvice {company}
   getCompanyUrl: "/api/company/getcompany",
+
+  // send {_id,email,status}
+  // recive {reuqest}
+  updatePersonalRequestUrl: "/api/company/updatepersonalreuqest",
 };
 
 export default requestList;

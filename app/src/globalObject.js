@@ -24,9 +24,7 @@ class global {
       console.log(obj);
       title = "";
       msg = "";
-      alertButton = [
-        { text: "הבנתי"},
-      ];
+      alertButton = [{ text: "הבנתי" }];
       isConnected = await NetInfo.fetch().then((state) => state.isConnected);
       if (!isConnected) {
         title = "תקלה בתקשורת";
@@ -50,6 +48,10 @@ class global {
               case responedList.companyNameExists:
                 title = "ההרשמה נכשלה";
                 msg = "";
+                break;
+              case responedList.NotExists:
+                title = "תקלה לא צפויה";
+                msg = "אנא פנה אלנו במייל\n danial1029@hotmail.com";
                 break;
               // error when someone try to use a fake or not exists email
               case responedList.emailIsFake:
