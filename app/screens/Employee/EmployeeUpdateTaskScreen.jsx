@@ -44,7 +44,7 @@ export default function Main({navigation})
                         <View  style={styles.scrollView}>
                             <ScrollView>  
                                 <Text style={styles.bodyHeader}>פירוט:</Text>  
-                                <Text style={styles.subTitle}>{item.description}</Text>
+                                <Text style={styles.descriptionStyle}>{item.description}</Text>
                             </ScrollView>  
                         </View>
                 </View>
@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
     {
         height:150,
         marginTop:30,
+        justifyContent:'flex-end',
+        textAlign:"right",
     },
     header:
     {
@@ -92,6 +94,13 @@ const styles = StyleSheet.create({
     },
     subTitle:
     {
+        marginRight:30,
+        marginLeft:30,
+        fontSize: 16,
+        color: "seashell",
+    },
+    descriptionStyle:{
+        textAlign: "right",
         marginRight:30,
         marginLeft:30,
         fontSize: 16,
