@@ -6,12 +6,12 @@ import InfoList from '../components/InfoList';
 
 
 
-export default function TaskBoard() {
+export default function TaskBoard({ navigation }) {
 
     const render = ({ item }) => {
         return (
             <View>
-                <TouchableOpacity style={styles.list} onPress={() => globalObject.Navigation.navigate('EmployeeUpdateTaskScreen', { item: item })}>
+                <TouchableOpacity style={styles.list} onPress={() => navigation.navigate('EmployeeUpdateTaskScreen', { item: item })}>
                     <Text style={styles.listText}>תקציר: {item.title}</Text>
                     <View style={styles.koral}>
                         <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
@@ -37,7 +37,7 @@ export default function TaskBoard() {
             <Text style={styles.boardTitle}>
                 לוח משימות
             </Text>
-            <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} src={require('../assets/information_icon.png')} />
+            <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} textColor={"grey"} opacity={0.4} src={require('../assets/empty_icon.png')} />
 
         </View>
     )

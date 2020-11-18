@@ -5,7 +5,7 @@ import { globalObject } from "../../src/globalObject";
 
 
 
-export default function Main() {
+export default function Main({ navigation }) {
 
     const [restCode, setRestCode] = useState('')
     const [email, setEmail] = useState('')
@@ -16,42 +16,34 @@ export default function Main() {
         if (!restCode || !email || !password || !verifyPassword) {
             title = "השינוי נכשל";
             msg = "אחד או יותר מהשדות ריקים, נסו שנית"
-            alertButton = [{ text: "הבנתי", onPress: () => console.log("OK Pressed") }];
+            alertButton = [{ text: "הבנתי" }];
             Alert.alert(title, msg, alertButton, { cancelable: false });
         } else if (password != verifyPassword) {
             title = "השינוי נכשל";
             msg = "הוזנו שני סיסמאות שונות, נסו שנית"
-            alertButton = [{ text: "הבנתי", onPress: () => console.log("OK Pressed") }];
+            alertButton = [{ text: "הבנתי" }];
             Alert.alert(title, msg, alertButton, { cancelable: false });
         } else {
+            var naviTo = "";
             const user = await globalObject.SendRequest(requestList.userChangePasswordWithRestCode, { restCode, email, newPassword: password });
             if (user) {
-                // register content ok
                 globalObject.User = user;
                 if (globalObject.User.permission.manager) {
                     const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
-                    console.log(company);
                     if (company) {
                         globalObject.User.tasks = company.tasks;
                         globalObject.User.personalRequests = company.personalRequests;
                         globalObject.company = company;
-
-                        console.log(globalObject.User);
-                        globalObject.Navigation.navigate('ManagerMainScreen');
-                        setShouldShow(false);
-                        return;
+                        naviTo = 'ManagerMainScreen';
                     }
                 }
-                if (globalObject.User.company) {
-                    console.log(globalObject.User);
-                    globalObject.Navigation.navigate('EmployeeMainScreen');
-                    setShouldShow(false);
-                }
-                else {
-                    globalObject.Navigation.navigate('SelectionScreen', { user: globalObject.User });
-                    setShouldShow(false);
-                }
+                else if (globalObject.User.company)
+                    naviTo = 'EmployeeMainScreen';
+                else
+                    naviTo = 'SelectionScreen';
             }
+            navigation.navigate(naviTo);
+            setShouldShow(false);
         }
     }
 
@@ -69,7 +61,7 @@ export default function Main() {
             </View>
             <View style={styles.signinTextCont}>
                 <Text style={styles.signinText}> לחזור אחרוה?</Text>
-                <TouchableOpacity onPress={() => globalObject.Navigation.navigate('GetCodeForRes')}>
+                <TouchableOpacity onPress={() => navigation.navigate('GetCodeForRes')}>
                     <Text style={styles.signinButton}>כניסה</Text>
                 </TouchableOpacity>
                 <Text style={styles.signinButton} />

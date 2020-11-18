@@ -5,7 +5,7 @@ import { globalObject } from '../../src/globalObject'
 import InfoList from '../../components/InfoList';
 
 
-export default function Main() {
+export default function Main({ navigation }) {
 
     const GetLen = () => {
         let len = 0;
@@ -29,7 +29,7 @@ export default function Main() {
     const render = ({ item }) => {
         return (
             <View>
-                <TouchableOpacity style={styles.list} onPress={() => globalObject.Navigation.navigate("HandleSingleRequestScreen", { item })}>
+                <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("HandleSingleRequestScreen", { item })}>
                     <Text style={styles.listText}>תאריך: {item.date}</Text>
                     <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
                     <Text style={styles.employeeName}>שם עובד: {item.fullName}</Text>
@@ -42,7 +42,7 @@ export default function Main() {
 
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>

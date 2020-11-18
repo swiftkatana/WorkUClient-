@@ -10,7 +10,7 @@ export default function Main({ navigation }) {
     const item = navigation.state.params.item;
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>

@@ -3,9 +3,9 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 
 export default function Logo() {
     return (
-        <View style= {styles.container}>
-            <Image style= {styles.logo} source= {require('../assets/workU_icon_p.png')}/>
-            <Text style= {styles.logoText}>התחילו לעבוד</Text>
+        <View style={styles.container}>
+            <Image style={styles.logo} source={require('../assets/workU_icon_p.png')} />
+            <Text style={styles.logoText}>התחילו לעבוד</Text>
         </View>
     )
 }

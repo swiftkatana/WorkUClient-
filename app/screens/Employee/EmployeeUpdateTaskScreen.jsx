@@ -7,32 +7,31 @@ import requestList from "../../src/api/apiKeys";
 import { Audio } from 'expo-av';
 import * as Permissions from "expo-permissions";
 import VoiceRecording from "../../components/VoiceRecording";
-const SendUpdateTask = async (id, status) => {
-    var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
-        _id: id,
-        email: globalObject.User.email,
-        complete: status,
-    });
-    if (res) {
-        if (status == "completed") {
-            globalObject.User.tasks.completed[id] = globalObject.User.tasks.processing[id];
-            delete globalObject.User.tasks.processing[id];
-            globalObject.Navigation.navigate("ManagerMainScreen");
-        }
-    }
-};
 
 export default function Main({ navigation }) {
 
-    
+
     const item = navigation.state.params.item;
-    console.log(item);
     const [status, SetStatus] = useState("completed");
+    const SendUpdateTask = async (id, status) => {
+        var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
+            _id: id,
+            email: globalObject.User.email,
+            complete: status,
+        });
+        if (res) {
+            if (status == "completed") {
+                globalObject.User.tasks.completed[id] = globalObject.User.tasks.processing[id];
+                delete globalObject.User.tasks.processing[id];
+                navigation.navigate("ManagerMainScreen");
+            }
+        }
+    };
     return (
         <View style={styles.view}>
             <TouchableOpacity
                 style={styles.exitButton}
-                onPress={() => globalObject.Navigation.pop()}
+                onPress={() => navigation.pop()}
             >
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -75,6 +74,7 @@ export default function Main({ navigation }) {
                     >
                         <Text style={styles.buttonText}>שלח עדכון</Text>
                     </TouchableOpacity>
+                    <VoiceRecording />
                 </View>
             </View>
             <VoiceRecording/>

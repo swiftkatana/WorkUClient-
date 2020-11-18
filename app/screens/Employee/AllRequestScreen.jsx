@@ -9,7 +9,7 @@ import InfoList from '../../components/InfoList';
 
 
 
-export default function Main() {
+export default function Main({ navigation }) {
     const GetLen = () => {
         let keys = Object.keys(globalObject.User.personalRequests);
         let len = 0;
@@ -31,7 +31,7 @@ export default function Main() {
     const render = ({ item }) => {
         return (
             <View>
-                <TouchableOpacity style={styles.list} onPress={() => globalObject.Navigation.navigate("DisplayRequestScreen", { item: item })}>
+                <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("DisplayRequestScreen", { item: item })}>
                     <Text style={styles.listText}>תאריך: {item.date}</Text>
                     <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
                     <Text style={styles.status}>סטטוס: {item.status}</Text>
@@ -45,7 +45,7 @@ export default function Main() {
 
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>
@@ -53,15 +53,8 @@ export default function Main() {
                 <Text style={styles.title}>
                     כל הבקשות
                 </Text>
-                <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'בדיקה'} src={require('../../assets/empty_icon.png')} />
+                <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין בקשות'} src={require('../../assets/empty_icon_white.png')} />
             </View>
-            {shouldShow ? (
-                <View style={styles.emptyContainer}>
-                    <Image style={styles.emptyIcon} source={require('../../assets/empty_icon_white.png')} />
-                    <Text style={styles.emptyText}>אין משימות</Text>
-                </View>
-
-            ) : null}
         </View>
     )
 }

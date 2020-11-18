@@ -32,9 +32,7 @@ class timer {
 
     }
     ButtonHandler = () => {
-        console.log('click')
         if (this.isEnd) {
-            console.log('time now', this.now)
             let timeWorkObj = {
                 sumOfTime: getFullTime(this.dif),
                 endTime: getFullTime(new Date().getTime()),
@@ -51,7 +49,6 @@ class timer {
             this.isEnd = false;
         }
         else {
-            console.log('end')
             this.now = new Date().getTime();
             this.isEnd = true;
         }
@@ -77,7 +74,7 @@ export default function Timer() {
     const [buttonName, setButtonName] = useState("תחילת עבודה")
     const [textBottonStyle, setTextButtonStyle] = useState(styles.TimerText)
     useEffect(() => {
-        if (globalObject.timer == 0) {
+        if (!globalObject.timer) {
             globalObject.timer = new timer();
         }
         else {

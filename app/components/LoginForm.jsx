@@ -23,55 +23,47 @@ const getData = async (key) => {
   }
 }
 
-const pressHandler = async (email, password, setShouldShow) => {
-  if (!email || !password) {
-    title = "הכניסה נכשלה";
-    msg = "אחד או יותר מהשדות ריקים, נסו שנית"
-    alertButton = [{ text: "הבנתי", onPress: () => console.log("OK Pressed") }];
-    Alert.alert(title, msg, alertButton, { cancelable: false });
-  } else {
-    setShouldShow(true);
-    storeData(password, 'password');
-    storeData(email, 'email')
-    const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password });
-    if (user) {
-      globalObject.User = user;
-      if (globalObject.User.permission.manager) {
-        const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
-        console.log(company);
-        if (company) {
-          globalObject.User.tasks = company.tasks;
-          globalObject.User.personalRequests = company.personalRequests;
-          globalObject.User.employees = company.employees;
-          globalObject.company = company;
+export default function LoginForm({ navigation }) {
 
-          console.log(globalObject.User);
-          globalObject.Navigation.navigate('ManagerMainScreen');
-          setShouldShow(false);
-          return;
-        }
-      }
-      if (globalObject.User.company) {
-        console.log(globalObject.User);
-        globalObject.Navigation.navigate('EmployeeMainScreen');
-        setShouldShow(false);
-      }
-      else {
-        globalObject.Navigation.navigate('SelectionScreen', { user: globalObject.User });
-        setShouldShow(false);
-      }
-
-    } else {
-      setShouldShow(false);
-
-    }
-  }
-}
-
-export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [shouldShow, setShouldShow] = useState(false);
+
+  const pressHandler = async (email, password, setShouldShow) => {
+    if (!email || !password) {
+      title = "הכניסה נכשלה";
+      msg = "אחד או יותר מהשדות ריקים, נסו שנית"
+      alertButton = [{ text: "הבנתי" }];
+      Alert.alert(title, msg, alertButton, { cancelable: false });
+    } else {
+      setShouldShow(true);
+      storeData(password, 'password');
+      storeData(email, 'email')
+      var naviTo = "";
+      const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password });
+      if (user) {
+        globalObject.User = user;
+        if (globalObject.User.permission.manager) {
+          const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
+          if (company) {
+            globalObject.User.tasks = company.tasks;
+            globalObject.User.personalRequests = company.personalRequests;
+            globalObject.User.employees = company.employees;
+            globalObject.company = company;
+            naviTo = "ManagerMainScreen";
+          }
+        }
+        else if (globalObject.User.company)
+          naviTo = 'EmployeeMainScreen';
+        else
+          naviTo = 'SelectionScreen';
+      }
+      navigation.navigate(naviTo);
+    }
+    setPassword("");
+    setEmail("");
+    setShouldShow(false);
+  }
 
   useEffect(() => {
     (async () => {
@@ -81,9 +73,7 @@ export default function LoginForm() {
       if (password && email) {
         setEmail(email);
         setPassword(password);
-        console.log('found email and password on login', email, password)
-      } else {
-        console.log('didnt find password and email');
+        pressHandler(email, password, setShouldShow);
       }
     })()
   }, [])
@@ -99,7 +89,7 @@ export default function LoginForm() {
 
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}> שכחת סיסמה?</Text>
-        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('GetCodeForRes')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GetCodeForRes')}>
           <Text style={styles.signupButton}>לחץ כאן</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton} />

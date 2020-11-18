@@ -5,21 +5,20 @@ import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
 
-const pressHandler = async (_id, status, email) => {
-    const res = await globalObject.SendRequest(requestList.updatePersonalRequestUrl, { _id, status, email });
-    if (res) {
-        console.log(res);
-        globalObject.User.personalRequests[res._id] = res;
-        globalObject.Navigation.pop();
-    }
-}
-
 export default function Main({ navigation }) {
+
+    const pressHandler = async (_id, status, email) => {
+        const res = await globalObject.SendRequest(requestList.updatePersonalRequestUrl, { _id, status, email });
+        if (res) {
+            globalObject.User.personalRequests[res._id] = res;
+            navigation.pop();
+        }
+    }
 
     const item = navigation.state.params.item;
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>
