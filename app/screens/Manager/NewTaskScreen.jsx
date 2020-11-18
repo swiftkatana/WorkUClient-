@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
-import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react';
+import { Alert, Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-community/picker';
-import requestList from '../../src/api/apiKeys'
-import { globalObject } from '../../src/globalObject'
-
-
+import requestList from '../../src/api/apiKeys';
+import { globalObject } from '../../src/globalObject';
+import InfoList from '../../components/InfoList';
 
 
 
@@ -15,15 +14,20 @@ export default function Main() {
     const [header, SetHeader] = useState("");
     const [text, SetText] = useState("");
     const [sendTo, SetSendTo] = useState({});
-    const [employees, SetEmployyes] = useState({});
-    const [shouldShow, setShouldShow] = useState(false);
     const PressHandler = async () => {
 
-        if (!employees) {
+        if (!sendTo.email) {
             Alert.alert("הפעולה נחשלה", "לא תויג עובד", [{ text: "הבנתי" }]);
             return;
         }
-
+        if (header.length < 1) {
+            Alert.alert("הפעולה נחשלה", "חסר תקציר", [{ text: "הבנתי" }]);
+            return;
+        }
+        if (text.length < 5) {
+            Alert.alert("הפעולה נחשלה", "חסר הסבר", [{ text: "הבנתי" }]);
+            return;
+        }
         const res = await globalObject.SendRequest(requestList.createTaskUrl, { employees: [sendTo.email], task: { title: header, priority: priority, description: text } });
         if (res) {
             globalObject.User.tasks.processing[res._id] = res;
@@ -45,22 +49,19 @@ export default function Main() {
         )
     }
 
-    useEffect(() => {
-        var arr = [];
-        var employees = globalObject.company.employees;
+    const GetList = () => {
+        let arr = [];
+        let employees = globalObject.company.employees;
         for (let i in employees) {
             let employee = employees[i];
+            employee[id] = employee.email;
             arr.push(employee);
         }
-        if (arr.length == 0) {
-            setShouldShow(true);
-        } else {
-            setShouldShow(false);
-        }
-        SetEmployyes(arr);
-        arr = [];
-    }, [])
-
+        return arr;
+    }
+    const GetLen = () => {
+        return Object.keys(globalObject.company.employees).length;
+    }
 
     return (
         <KeyboardAvoidingView style={styles.view} behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -75,21 +76,11 @@ export default function Main() {
                     <Text style={styles.header}>משימה חדשה</Text>
                 </View>
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
-                {shouldShow ? (
-                    <View style={styles.infoConteiner}>
-                        <Image style={styles.tinyLogo} source={require('../../assets/information_icon.png')} />
 
-                        <View style={styles.infoTextConteiner}>
-                            <Text style={styles.infoText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
-                        </View>
-                    </View>
-                )
-                    : null}
-                <FlatList style={styles.test}
-                    data={employees}
-                    renderItem={render}
-                    keyExtractor={item => item.email}
-                />
+                <View style={{ height: 150 }}>
+                    <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} src={require('../../assets/information_icon.png')} />
+                </View>
+
                 <View style={styles.inputBoxContainer}>
                     <TextInput
                         style={styles.shortInputBox}

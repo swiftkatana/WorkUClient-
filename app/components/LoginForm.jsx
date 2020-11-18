@@ -18,10 +18,8 @@ const pressHandler = async (email, password, setShouldShow) => {
         const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
         console.log(company);
         if (company) {
-          company.tasks.completed = company.tasks.completed || {};
-          company.tasks.processing = company.tasks.processing || {};
           globalObject.User.tasks = company.tasks;
-          globalObject.User.personalRequests = company.personalRequests ? company.personalRequests : {};
+          globalObject.User.personalRequests = company.personalRequests;
           globalObject.company = company;
 
           console.log(globalObject.User);

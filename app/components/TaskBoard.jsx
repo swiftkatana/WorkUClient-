@@ -1,85 +1,51 @@
-import React,{useEffect, useState} from 'react'
-import { StyleSheet, Text, View ,Dimensions, FlatList, Image} from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { globalObject } from '../src/globalObject'
+import { globalObject } from '../src/globalObject';
+import InfoList from '../components/InfoList';
 
 
-const render = ({item})=>
-{
-    return(   
-    <View>
-        <TouchableOpacity style={styles.list} onPress={()=>globalObject.Navigation.navigate('EmployeeUpdateTaskScreen',{item:item})}>
-        <Text style={styles.listText}>תקציר: {item.title}</Text>
-        <View style={styles.koral}>
-            <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')}/>
-        </View>
-        </TouchableOpacity>
-    </View>
-    )    
-}  
 
 export default function TaskBoard() {
 
-      
-    const [tasks,UpdateTask] = useState([])
-    const [shouldShow, setShouldShow] = useState(false);
-    const [currentLen,UpdateCurrentLen] = useState(0);
-
-        useEffect(() => { 
-        var arr = [];
-        const handle = setInterval(() =>
-         {
-             if(globalObject.User.tasks.processing)
-             {
-            let len = Object.keys(globalObject.User.tasks.processing).length;
-            if(currentLen != len)
-                UpdateCurrentLen(len);
-             }
-        }, 1000);
-
-        for(var obj in globalObject.User.tasks.processing)
-        { 
+    const render = ({ item }) => {
+        return (
+            <View>
+                <TouchableOpacity style={styles.list} onPress={() => globalObject.Navigation.navigate('EmployeeUpdateTaskScreen', { item: item })}>
+                    <Text style={styles.listText}>תקציר: {item.title}</Text>
+                    <View style={styles.koral}>
+                        <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    const GetLen = () => {
+        return Object.keys(globalObject.User.tasks.processing).length;
+    }
+    const GetList = () => {
+        let arr = [];
+        for (var obj in globalObject.User.tasks.processing) {
             let task = globalObject.User.tasks.processing[obj];
-            arr.push({title:task.title,id:obj,priority:task.priority,description:task.description,status:task.status});
+            arr.push({ title: task.title, id: obj, priority: task.priority, description: task.description, status: task.status });
         }
-        if(arr.length == 0){
-            setShouldShow(true);
-        }else{
-            setShouldShow(false);
-        }
-        UpdateTask(arr);
-        arr = [];
-
-        return () => {
-            clearInterval(handle);
-        }
-    }, [currentLen])
+        return arr;
+    }
 
     return (
         <View style={styles.view}>
             <Text style={styles.boardTitle}>
                 לוח משימות
             </Text>
-            {shouldShow ? (
-            <View style={styles.emptyContainer}>
-                <Image style={styles.emptyIcon}  source={require('../assets/empty_icon.png')}/>
-                <Text style={styles.emptyText}>אין משימות</Text>
-            </View>
-            
-            ) : null}
-            <FlatList
-            data={tasks}
-            renderItem={render}
-            keyExtractor={item => item.id}
-            
-            />
+            <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} src={require('../assets/information_icon.png')} />
+
         </View>
     )
 }
 const styles = StyleSheet.create({
     view:
     {
-        flex:9,
+        flex: 9,
         height: Dimensions.get('window').height,
         alignItems: 'center',
         borderTopRightRadius: 20,
@@ -89,92 +55,67 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 5,
     },
     listText:
-    {   flex:4,
-        textAlign:"right",
-        marginRight:15,
+    {
+        flex: 4,
+        textAlign: "right",
+        marginRight: 15,
         fontSize: 14,
-
     },
     list:
     {
-        height:80,
-        width:Dimensions.get('window').width-60,
-        backgroundColor:"white",
-        flexDirection:"row-reverse",
+        height: 80,
+        width: Dimensions.get('window').width - 60,
+        backgroundColor: "white",
+        flexDirection: "row-reverse",
         alignItems: 'center',
         marginHorizontal: 20,
-
-        borderRadius:25,
-        marginBottom:10,
-        borderWidth:1,
+        borderRadius: 25,
+        marginBottom: 10,
+        borderWidth: 1,
         borderColor: "lightgrey",
-
-
-    },  
+    },
     boardTitle:
     {
-        width:Dimensions.get('window').width -10,
-        textAlign:"right",
+        width: Dimensions.get('window').width - 10,
+        textAlign: "right",
         marginRight: 90,
         marginTop: 10,
-        fontSize:18,
+        fontSize: 18,
         paddingVertical: 10,
-        borderRadius:20,
+        borderRadius: 20,
         marginBottom: 10,
         color: "grey",
         fontWeight: "bold",
-
     },
-    logo:{
+    logo: {
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
     },
-    tinyLogo:{
+    tinyLogo: {
         width: 20,
         height: 20,
-        //alignItems: 'flex-end',
-        //justifyContent: 'flex-end',
-        //marginBottom: 40,
         marginLeft: 15,
         opacity: 0.7,
-        //zIndex: 5,
-        
-    },
-    emptyText:{
-        textAlign: 'center',
-        color: "grey",
-        fontWeight: 'bold',
-    },
-    emptyIcon:{
-        marginTop: 90,
-        width: 80,
-        height: 80,
-        opacity: 0.4,
-        //alignItems: 'flex-end',
-        //justifyContent: 'flex-end',
-        //marginRight: 12,
-        zIndex: 5,
-        
     },
     but:
     {
-    width: 50,
-    height: 30,
-    marginHorizontal: 15,
-    backgroundColor: '#7f71e3',
-    textAlign: "center",
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius:10,
-    marginVertical:3,
+        width: 50,
+        height: 30,
+        marginHorizontal: 15,
+        backgroundColor: '#7f71e3',
+        textAlign: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        marginVertical: 3,
     },
     butText:
     {
-        color:"seashell",
+        color: "seashell",
     },
     koral:
     {
-        flex:1,
-        flexDirection:"column",
+        flex: 1,
+        flexDirection: "column",
     },
 })

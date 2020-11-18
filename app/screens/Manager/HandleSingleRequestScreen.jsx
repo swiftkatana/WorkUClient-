@@ -5,15 +5,12 @@ import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
 
-const pressHandler = async (_id, status) => {
-
-    // send {_id,email,status}
-    // recive {reuqest}
-    const res = await globalObject.SendRequest(requestList.updatePersonalRequestUrl, { _id, status, email: globalObject.User.email });
+const pressHandler = async (_id, status, email) => {
+    const res = await globalObject.SendRequest(requestList.updatePersonalRequestUrl, { _id, status, email });
     if (res) {
         console.log(res);
-        //  globalObject.User.personalRequests[res._id] = res;
-        //   globalObject.Navigation.pop();
+        globalObject.User.personalRequests[res._id] = res;
+        globalObject.Navigation.pop();
     }
 }
 
@@ -37,11 +34,11 @@ export default function Main({ navigation }) {
                 <Text style={styles.bodyHeader}>פירוט:</Text>
                 <Text style={styles.subTitle}>{item.body}</Text>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonOk} onPress={() => pressHandler(item.id, "אושרה")}>
+                    <TouchableOpacity style={styles.buttonOk} onPress={() => pressHandler(item.id, "אושר", item.email)}>
                         <Image style={styles.tinyLogo} source={require('../../assets/v_icon.png')} />
                         <Text style={styles.buttonText} >לאישור הבקשה</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonReject} onPress={() => pressHandler(item.id, "נדחתה")}>
+                    <TouchableOpacity style={styles.buttonReject} onPress={() => pressHandler(item.id, "נדחה", item.email)}>
                         <Image style={styles.tinyLogo} source={require('../../assets/x_icon.png')} />
                         <Text style={styles.buttonText} >לדחיית הבקשה</Text>
                     </TouchableOpacity>

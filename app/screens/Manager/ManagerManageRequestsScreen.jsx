@@ -1,59 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { globalObject } from '../../src/globalObject'
+import InfoList from '../../components/InfoList';
 
-
-
-var arr = []
-
-const render = ({ item }) => {
-    return (
-        <View>
-            <TouchableOpacity style={styles.list} onPress={() => globalObject.Navigation.navigate("HandleSingleRequestScreen", { item })}>
-                <Text style={styles.listText}>תאריך: {item.date}</Text>
-                <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
-                <Text style={styles.employeeName}>שם עובד: {item.fullName}</Text>
-                <Image style={styles.tinyLogo} source={require('../../assets/arrow_icon_black.png')} />
-            </TouchableOpacity>
-        </View>
-    )
-}
 
 export default function Main() {
 
-
-    const [requests, UpdateRequests] = useState([])
-    const [shouldShow, setShouldShow] = useState(false);
-    const [currentLen, UpdateCurrentLen] = useState(0);
-
-    useEffect(() => {
+    const GetLen = () => {
+        let len = 0;
+        let keys = Object.keys(globalObject.User.personalRequests);
+        for (let i = 0; i < keys.length; i++) {
+            if (globalObject.User.personalRequests[keys[i]].status == "בטיפול")
+                len++;
+        }
+        return len;
+    }
+    const GetList = () => {
         var arr = [];
-        const handle = setInterval(() => {
-            if (globalObject.User.tasks.processing) {
-                let len = Object.keys(globalObject.User.personalRequests).length;
-                if (currentLen != len)
-                    UpdateCurrentLen(len);
-            }
-        }, 1000);
-
         for (var obj in globalObject.User.personalRequests) {
             let request = globalObject.User.personalRequests[obj];
-            arr.push({ id: request._id, email: request.email, type: request.type, body: request.body, fullName: request.fullName, status: request.status, date: request.date });
+            if (request.status === "בטיפול")
+                arr.push({ id: request._id, email: request.email, type: request.type, body: request.body, fullName: request.fullName, status: request.status, date: request.date });
         }
-        if (arr.length == 0) {
-            setShouldShow(true);
-        } else {
-            setShouldShow(false);
-        }
-        UpdateRequests(arr);
-        arr = [];
+        return arr;
+    }
 
-        return () => {
-            clearInterval(handle);
-        }
-    }, [currentLen])
-
+    const render = ({ item }) => {
+        return (
+            <View>
+                <TouchableOpacity style={styles.list} onPress={() => globalObject.Navigation.navigate("HandleSingleRequestScreen", { item })}>
+                    <Text style={styles.listText}>תאריך: {item.date}</Text>
+                    <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
+                    <Text style={styles.employeeName}>שם עובד: {item.fullName}</Text>
+                    <Image style={styles.tinyLogo} source={require('../../assets/arrow_icon_black.png')} />
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
 
     return (
@@ -66,12 +50,7 @@ export default function Main() {
                 <Text style={styles.title}>
                     בקשות לטיפול
                 </Text>
-                <FlatList
-                    data={requests}
-                    renderItem={render}
-                    keyExtractor={item => item.id}
-                />
-
+                <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין בקשות לטפל'} opacity={0.1} src={require('../../assets/empty_icon.png')} />
             </View>
         </View>
     )
@@ -83,12 +62,9 @@ const styles = StyleSheet.create({
     {
         flex: 1,
         backgroundColor: "#7f71e3",
-        //alignItems: 'center',
     },
     container: {
-        //paddingTop: 70,
         alignItems: 'flex-end',
-
     },
     title:
     {
@@ -97,15 +73,12 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: "seashell",
         textDecorationLine: "underline"
-
     },
     list:
     {
-        //borderWidth: 1,
         height: 70,
         width: Dimensions.get('window').width - 40,
         backgroundColor: "seashell",
-        //backgroundColor:"white",
         flexDirection: "row-reverse",
         alignItems: 'center',
         textAlign: "center",
@@ -115,8 +88,6 @@ const styles = StyleSheet.create({
         marginBottom: 6,
         borderWidth: 1,
         borderColor: "lightgray",
-
-
     },
     listText:
     {
@@ -125,8 +96,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginLeft: 5,
         marginRight: 10,
-
-
     },
     employeeName:
     {
@@ -135,7 +104,6 @@ const styles = StyleSheet.create({
         marginRight: 10,
         fontSize: 14,
         fontWeight: "bold",
-
     },
     tinyLogo: {
 
@@ -154,6 +122,5 @@ const styles = StyleSheet.create({
     {
         fontSize: 30,
         color: "seashell",
-
     }
 })
