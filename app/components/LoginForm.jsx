@@ -42,6 +42,7 @@ const pressHandler = async (email, password, setShouldShow) => {
         if (company) {
           globalObject.User.tasks = company.tasks;
           globalObject.User.personalRequests = company.personalRequests;
+          globalObject.User.employees = company.employees;
           globalObject.company = company;
 
           console.log(globalObject.User);
