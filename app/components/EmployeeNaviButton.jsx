@@ -14,8 +14,8 @@ export default function Main() {
         <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')}/>
         <Text style={styles.settingsFont}>פורטל עובד</Text> 
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.settings}>
+        
+        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate('employeeStatisticScreen')}>
         <Image style={styles.tinyLogo} source={require('../assets/statistics_icon.png')}/>
         <Text style={styles.settingsFont}>סטטיסטיקה</Text> 
         </TouchableOpacity>

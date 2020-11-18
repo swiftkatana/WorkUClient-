@@ -20,17 +20,27 @@ const render = ({item})=>
 
 export default function TaskBoard() {
 
+      
     const [tasks,UpdateTask] = useState([])
     const [shouldShow, setShouldShow] = useState(false);
+    const [currentLen,UpdateCurrentLen] = useState(0);
+
         useEffect(() => { 
         var arr = [];
-        console.log(globalObject.User);
+        const handle = setInterval(() =>
+         {
+             if(globalObject.User.tasks.processing)
+             {
+            let len = Object.keys(globalObject.User.tasks.processing).length;
+            if(currentLen != len)
+                UpdateCurrentLen(len);
+             }
+        }, 1000);
+
         for(var obj in globalObject.User.tasks.processing)
         { 
-
             let task = globalObject.User.tasks.processing[obj];
             arr.push({title:task.title,id:obj,priority:task.priority,description:task.description,status:task.status});
-
         }
         if(arr.length == 0){
             setShouldShow(true);
@@ -38,10 +48,12 @@ export default function TaskBoard() {
             setShouldShow(false);
         }
         UpdateTask(arr);
+        arr = [];
+
         return () => {
-            UpdateTask([])
+            clearInterval(handle);
         }
-    }, [])
+    }, [currentLen])
 
     return (
         <View style={styles.view}>

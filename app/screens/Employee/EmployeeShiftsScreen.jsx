@@ -1,9 +1,11 @@
-import React from 'react'
+import React ,{ useState } from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import Calander from '../../components/Calander'
+import Shifts from '../../components/Shifts'
 import { globalObject } from '../../src/globalObject'
+import CheckBox from '@react-native-community/checkbox';
 export default function Main() 
 {
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
     return (
         <View style={styles.view}>
             <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
@@ -11,7 +13,7 @@ export default function Main()
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>משמרות</Text>
-                <Calander/>
+                <Shifts/>
             </View>
         </View>
     )
@@ -26,17 +28,6 @@ const styles = StyleSheet.create({
     {
         alignItems: 'flex-end',
     },
-    button:
-    {
-        margin:20,
-        marginRight:30,
-
-    },
-    buttonText:
-    {
-        fontSize: 16,
-        color: "seashell",
-    },
     title:
     {
         margin:20,
@@ -44,6 +35,16 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: "seashell",
         textDecorationLine: "underline"
+
+    },
+    checkBoxContainer:{
+        flex:1,
+        backgroundColor: 'seashell',
+        margin: 20,
+        marginVertical: 150,
+        borderRadius: 30,
+    },
+    checkboxStyle:{
 
     },
     exitButton:
