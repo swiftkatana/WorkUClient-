@@ -5,7 +5,6 @@ const ShakeAll = (props) => {
   let shakeAnimation = new Animated.Value(0);
 
   const startShake = () => {
-    console.log("shake");
     Animated.sequence([
       Animated.timing(shakeAnimation, {
         toValue: 10,

@@ -2,21 +2,24 @@ import React, { useState } from "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
-const pressHandler = async (joincode) => {
-  const user = await globalObject.SendRequest(requestList.userJoinCompanyUrl, { email: globalObject.User.email, code: joincode });
-  if (user) {
 
-    globalObject.User = user;
-    globalObject.Navigation.navigate('EmployeeMainScreen');
-  }
-
-}
 
 export default function Main({ navigation }) {
 
 
   const [codeText, SetCodeText] = useState("");
-  const user = navigation.state.params.user;
+
+  const pressHandler = async () => {
+    const user = await globalObject.SendRequest(requestList.userJoinCompanyUrl, { email: globalObject.User.email, code: codeText });
+    if (user) {
+
+      globalObject.User = user;
+      navigation.navigate('EmployeeMainScreen');
+    }
+
+  }
+
+  const user = globalObject.User;
   return (
 
     <View style={styles.container}>
@@ -36,7 +39,7 @@ export default function Main({ navigation }) {
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText, { fontWeight: 'bold', fontSize: 16, }}> מנהל/ת עסק?</Text>
         <Text style={styles.signupText}> להרשמת בית עסק חדש במערכת</Text>
-        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('RegisterCompanyScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('RegisterCompanyScreen')}>
           <Text style={styles.signupButton}>לחץ כאן</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton} />

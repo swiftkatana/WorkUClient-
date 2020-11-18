@@ -5,23 +5,23 @@ import { Picker } from '@react-native-community/picker';
 import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
-const PressHandler = async (type, body) => {
-    // send {type,body,fullName,email}
-    // recive {reuqest}
-    const res = await globalObject.SendRequest(requestList.userSendPersonalRequestUrl, { type, body, fullName: globalObject.User.fullName, email: globalObject.User.email });
-    if (res) {
-        globalObject.User.personalRequests[res._id] = res;
-        globalObject.Navigation.navigate('EmployeeMainScreen');
 
-    }
-}
-
-export default function Main() {
+export default function Main({ navigation }) {
     const [type, SetType] = useState("חל''ת");
     const [text, SetText] = useState("");
+    const PressHandler = async (type, body) => {
+        // send {type,body,fullName,email}
+        // recive {reuqest}
+        const res = await globalObject.SendRequest(requestList.userSendPersonalRequestUrl, { type, body, fullName: globalObject.User.fullName, email: globalObject.User.email });
+        if (res) {
+            globalObject.User.personalRequests[res._id] = res;
+            navigation.navigate('EmployeeMainScreen');
+
+        }
+    }
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>

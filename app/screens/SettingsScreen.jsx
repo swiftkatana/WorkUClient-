@@ -1,25 +1,39 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { globalObject } from '../src/globalObject'
 
-export default function Main() {
+export default function Main({ navigation }) {
+    const logout = async () => {
+        await removeValue('password');
+        await removeValue('email');
+        globalObject.User = {};
+        navigation.navigate("LoginScreen");
+    }
+    const removeValue = async (key) => {
+        try {
+            await AsyncStorage.removeItem(key)
+        } catch (e) {
+            // remove error
+        }
+    }
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>הגדרות</Text>
-                <TouchableOpacity style={styles.button} onPress={() => globalObject.Navigation.navigate("ChangePasswordScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ChangePasswordScreen")}>
                     <Text style={styles.buttonText}>שינוי סיסמה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => globalObject.Navigation.navigate("SelectionScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SelectionScreen")}>
                     <Text style={styles.buttonText}>ערכת נושא</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => globalObject.Navigation.navigate("SelectionScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SelectionScreen")}>
                     <Text style={styles.buttonText}>עזרה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => globalObject.Navigation.navigate("SelectionScreen")}>
+                <TouchableOpacity style={styles.button} onPress={logout}>
                     <Text style={styles.buttonText}>יציאה</Text>
                 </TouchableOpacity>
 

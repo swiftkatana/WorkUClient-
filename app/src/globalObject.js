@@ -10,18 +10,11 @@ import NetInfo from "@react-native-community/netinfo";
 class global {
   constructor() {
     this.User; //when log in used to store the user object
-    this.Navigation; //used for storing navigation oject
     this.company;
-    this.timer = 0;
+    this.timer;
     this.language;
 
-    this.AddNotificationListener = (callback) => {
-      Notifications.addNotificationResponseReceivedListener(callback);
-    };
-
     this.SendRequest = async (url, obj) => {
-      console.log(url);
-      console.log(obj);
       title = "";
       msg = "";
       alertButton = [{ text: "הבנתי" }];

@@ -6,13 +6,13 @@ import { globalObject } from "../../src/globalObject";
 
 export default function Main({ navigation }) {
     const [email, setEmail] = useState('')
-    globalObject.Navigation = navigation;
+
 
     const handlerSenReq = async () => {
 
         let res = await globalObject.SendRequest(apiKeys.userRequestRestCode, { email });
         if (res) {
-            globalObject.Navigation.navigate('RestPasswordWithCode');
+            navigation.navigate('RestPasswordWithCode');
         }
 
     }
@@ -27,14 +27,14 @@ export default function Main({ navigation }) {
             </TouchableOpacity>
             <View style={styles.signupTextCont}>
                 <Text style={styles.signupText}> יש לך קוד?</Text>
-                <TouchableOpacity onPress={() => globalObject.Navigation.navigate('RestPasswordWithCode')}>
+                <TouchableOpacity onPress={() => navigation.navigate('RestPasswordWithCode')}>
                     <Text style={styles.signupButton}>לחץ כאן</Text>
                 </TouchableOpacity>
                 <Text style={styles.signupButton} />
             </View>
             <View style={styles.signupTextCont}>
                 <Text style={styles.signupText}> לחזור אחרוה ?</Text>
-                <TouchableOpacity onPress={() => globalObject.Navigation.navigate('LoginScreen')}>
+                <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
                     <Text style={styles.signupButton}>לחץ כאן</Text>
                 </TouchableOpacity>
                 <Text style={styles.signupButton} />

@@ -7,14 +7,13 @@ import { globalObject } from "../../src/globalObject";
 
 export default function Main({ navigation }) {
 
-  globalObject.Navigation = navigation;
   return (
     <View style={styles.container}>
       <Logo />
-      <LoginForm />
+      <LoginForm navigation={navigation} />
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}> אין לך משתמש?</Text>
-        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('RegisterUserScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('RegisterUserScreen')}>
           <Text style={styles.signupButton}>הירשם</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton} />

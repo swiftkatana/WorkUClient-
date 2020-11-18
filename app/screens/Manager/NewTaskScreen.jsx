@@ -8,7 +8,7 @@ import InfoList from '../../components/InfoList';
 
 
 
-export default function Main() {
+export default function Main({ navigation }) {
 
     const [priority, SetPriority] = useState("גבוהה");
     const [header, SetHeader] = useState("");
@@ -31,7 +31,7 @@ export default function Main() {
         const res = await globalObject.SendRequest(requestList.createTaskUrl, { employees: [sendTo.email], task: { title: header, priority: priority, description: text } });
         if (res) {
             globalObject.User.tasks.processing[res._id] = res;
-            globalObject.Navigation.navigate('ManagerMainScreen');
+            navigation.navigate('ManagerMainScreen');
 
         }
     }
@@ -67,7 +67,7 @@ export default function Main() {
         <KeyboardAvoidingView style={styles.view} behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
             enabled={Platform.OS === "ios" ? true : false}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>
