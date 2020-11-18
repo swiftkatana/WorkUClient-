@@ -100,7 +100,7 @@ export default function LoginForm() {
 
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}> שכחת סיסמה?</Text>
-        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('F')}>
+        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('GetCodeForRes')}>
           <Text style={styles.signupButton}>לחץ כאן</Text>
         </TouchableOpacity>
         <Text style={styles.signupButton} />
