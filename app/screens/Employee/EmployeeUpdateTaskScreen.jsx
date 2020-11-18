@@ -4,7 +4,7 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { Picker } from "@react-native-community/picker";
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
-
+import { Audio } from 'expo-av';
 const SendUpdateTask = async (id, status) => {
     var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
         _id: id,
@@ -20,7 +20,13 @@ const SendUpdateTask = async (id, status) => {
     }
 };
 
+
+
+
+
 export default function Main({ navigation }) {
+
+    
     const item = navigation.state.params.item;
     console.log(item);
     const [status, SetStatus] = useState("completed");
