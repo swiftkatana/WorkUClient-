@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, Text, View,TouchableOpacity,Dimensions } from 'react-native'
+import React,{useState} from 'react'
+import { StyleSheet, Text, View,TouchableOpacity,Dimensions, Image } from 'react-native'
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 import 'moment/locale/he';
@@ -12,11 +12,29 @@ const onSelected =(date)=>
 
 export default function Shifts(test) 
 {
+    const [onFocus, setOnFocus] = useState(false);
+
    // var heLocaleData = moment.localeData('he');
    // console.log(heLocaleData);
    //moment().tz('Asia/Jerusalem').format('MM/DD/YYYY')
    return (<View style={styles.mainView}>
             <Text style={styles.header}>הגשת משמרות לשבוע הבא: </Text>
+            <Text style={styles.header}>בחר תוית לסימון: </Text>
+            <View style={styles.lableContainer}>
+                {}
+                    <TouchableOpacity style={styles.lableButton}>
+                        <Image style={styles.tinyPluse} source={require('../assets/checked_icon_green.png')}/>
+                        <Text style={styles.lableText}>יכול</Text>
+                    </TouchableOpacity>
+                <TouchableOpacity style={styles.lableButton}>
+                    <Image style={styles.tinyPluse} source={require('../assets/unchecked_icon_red.png')}/>
+                    <Text style={styles.lableText}>לא יכול</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.lableButton}>
+                    <Image style={styles.tinyPluse} source={require('../assets/checked_icon_yellow.png')}/>
+                    <Text style={styles.lableText}>מעדיף שלא</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.view}>
                 <View >
                     <View style={styles.daysContainer}>
@@ -35,39 +53,39 @@ export default function Shifts(test)
                                 <Text style={styles.stateText}>ערב</Text>
                         </View>
                         <View style={styles.stateContainer}>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
                         </View>
                         <View style={styles.stateContainer}>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
                         </View>
                         <View style={styles.stateContainer}>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
                         </View>
                         <View style={styles.stateContainer}>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
                         </View>
                         <View style={styles.stateContainer}>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
                         </View>
                         <View style={styles.stateContainer}>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
                         </View>
                         <View style={styles.stateContainer}>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
-                                <Text style={styles.dayText}></Text>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}></View>
                         </View>
                     </View>
                 
@@ -78,101 +96,82 @@ export default function Shifts(test)
 
             </View>
             <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי: </Text>
-            <View >
-                <View style={styles.daysContainer}>
-                        <Text style={styles.dayText}>א</Text>
-                        <Text style={styles.dayText}>ב</Text>
-                        <Text style={styles.dayText}>ג</Text>
-                        <Text style={styles.dayText}>ד</Text>
-                        <Text style={styles.dayText}>ה</Text>
-                        <Text style={styles.dayText}>ו</Text>
-                        <Text style={styles.dayText}>ז</Text>
-                </View>
-                <View style={styles.fillContainer}>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.stateText}>בוקר</Text>
-                            <Text style={styles.stateText}>צהוריים</Text>
-                            <Text style={styles.stateText}>ערב</Text>
-                    </View>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                    </View>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                    </View>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                    </View>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                    </View>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                    </View>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                    </View>
-                    <View style={styles.stateContainer}>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                            <Text style={styles.dayText}></Text>
-                    </View>
-                </View>
-                
-            </View>
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     mainView:{
+        height:Dimensions.get('window').height,
+        width:Dimensions.get('window').width,
+
         alignItems:'flex-end',
     },
     view:{
-        //flex:1,
-        //justifyContent:'center',
         alignItems:'center',
 
         
+     },
+     lableContainer:{
+        width:Dimensions.get('window').width,
+         flexDirection:'row-reverse',
+         alignItems: 'center',
+         justifyContent: 'center',
+         //marginHorizontal:15
+     },
+     lableButton:{
+        textAlign:"center",
+        justifyContent: 'center',
+        alignItems: 'center',
+        width:109,
+        height:42,
+        margin: 5,
+        backgroundColor:"seashell",
+        borderRadius:10,
+        fontWeight:"bold",
+        borderWidth:2,
+        borderColor:"gray",
+     },
+     lableText:{
+        textAlign:"center",
+        borderRadius:10,
+        fontWeight:"bold",
+     },
+     tinyPluse:{
+        width: 15,
+        height: 15,
+
      },
      header:{
          fontSize:16,
          color:"seashell",
          marginHorizontal:22,
-         marginVertical:10,
+         marginVertical:2,
         },
      daysContainer:{
-         //flex:1,
+        width:Dimensions.get('window').width,
         justifyContent:'center',
         alignItems:'center',
         flexDirection:'row-reverse',
-        marginHorizontal:100,
+        marginHorizontal:Dimensions.get('window').width/50-10,
         
      },
      dayText:{
         textAlign:"center",
-        width:32,
+        width:Dimensions.get('window').width/12,
         height:35,
         margin: 5,
         backgroundColor:"seashell",
         borderRadius:10,
         fontWeight:"bold",
+        
+        
      },
      fillContainer:{
+        width:Dimensions.get('window').width,
         flexDirection:'row-reverse',
-        marginHorizontal:14,
+        marginHorizontal:10,
 
 
      },
@@ -180,7 +179,7 @@ const styles = StyleSheet.create({
         //flex:1,
         //justifyContent:'space-between',
         alignItems:'flex-end',
-        flexDirection:'column-reverse',
+        flexDirection:'column',
         //marginHorizontal:20,
      },
      stateText:{
@@ -200,7 +199,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
-        marginLeft:50,
+        //marginLeft:50,
 
     },
 
