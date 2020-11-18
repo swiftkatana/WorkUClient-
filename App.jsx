@@ -33,7 +33,9 @@ import ManagerToolsScreen from "./app/screens/Manager/ManagerToolsScreen";
 import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequestScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
 import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
-import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForRes'
+import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForResScreen';
+import RestPasswordWithCode from './app/screens/RegistrationAndLogin/RestPasswordWithCodeScreen';
+import ChangePasswordScreen from './app/screens/RegistrationAndLogin/ChangePasswordScreen';
 const listScreen =
   [
     { LoginScreen: LoginScreen },
@@ -59,6 +61,9 @@ const listScreen =
     { EmployeeShiftsScreen: EmployeeShiftsScreen },
     { employeeStatisticScreen: employeeStatisticScreen },
     { GetCodeForRes: GetCodeForRes },
+    { RestPasswordWithCode: RestPasswordWithCode },
+    { ChangePasswordScreen: ChangePasswordScreen }
+
   ];
 var screens = {}
 

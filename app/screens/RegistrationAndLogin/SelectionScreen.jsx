@@ -16,7 +16,6 @@ export default function Main({ navigation }) {
 
 
   const [codeText, SetCodeText] = useState("");
-  console.log(navigation);
   const user = navigation.state.params.user;
   return (
 
