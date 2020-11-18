@@ -74,7 +74,7 @@ export default function Timer() {
     const [buttonName, setButtonName] = useState("תחילת עבודה")
     const [textBottonStyle, setTextButtonStyle] = useState(styles.TimerText)
     useEffect(() => {
-        if (globalObject.timer == 0) {
+        if (!globalObject.timer) {
             globalObject.timer = new timer();
         }
         else {
