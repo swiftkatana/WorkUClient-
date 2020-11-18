@@ -1,6 +1,6 @@
 import React ,{ useState } from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import Calander from '../../components/Calander'
+import Shifts from '../../components/Shifts'
 import { globalObject } from '../../src/globalObject'
 import CheckBox from '@react-native-community/checkbox';
 export default function Main() 
@@ -13,29 +13,7 @@ export default function Main()
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>משמרות</Text>
-                <Calander/>
-            </View>
-            <View style={styles.checkBoxContainer} >
-                <Text>בוקר</Text>
-                <Text>צהוריים</Text>
-                <Text>ערב</Text>
-                <View value ={0}>
-                    <CheckBox style={styles.checkboxStyle}
-                        disabled={false}
-                        value={toggleCheckBox}
-                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    />
-                    <CheckBox style={styles.checkboxStyle}
-                        disabled={false}
-                        value={toggleCheckBox}
-                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    />
-                    <CheckBox style={styles.checkboxStyle}
-                        disabled={false}
-                        value={toggleCheckBox}
-                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    />
-                </View>
+                <Shifts/>
             </View>
         </View>
     )

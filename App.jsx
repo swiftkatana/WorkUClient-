@@ -57,6 +57,7 @@ const listScreen =
     { ManualWorkingTime: ManualWorkingTime },
     { NewTaskScreen: NewTaskScreen },
     { EmployeeShiftsScreen: EmployeeShiftsScreen },
+    {employeeStatisticScreen: employeeStatisticScreen},
   ];
 var screens = {}
 
