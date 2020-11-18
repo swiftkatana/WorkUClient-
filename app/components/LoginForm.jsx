@@ -33,26 +33,24 @@ const pressHandler = async (email, password, setShouldShow) => {
     setShouldShow(true);
     storeData(password, 'password');
     storeData(email, 'email')
-    const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password });
+    const expoId = await globalObject.registerForPushNotificationsAsync();
+    console.log(expoId);
+    const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password, expoId });
     if (user) {
       globalObject.User = user;
       if (globalObject.User.permission.manager) {
         const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
-        console.log(company);
         if (company) {
           globalObject.User.tasks = company.tasks;
           globalObject.User.personalRequests = company.personalRequests;
           globalObject.User.employees = company.employees;
           globalObject.company = company;
-
-          console.log(globalObject.User);
           globalObject.Navigation.navigate('ManagerMainScreen');
           setShouldShow(false);
           return;
         }
       }
       if (globalObject.User.company) {
-        console.log(globalObject.User);
         globalObject.Navigation.navigate('EmployeeMainScreen');
         setShouldShow(false);
       }
@@ -63,7 +61,6 @@ const pressHandler = async (email, password, setShouldShow) => {
 
     } else {
       setShouldShow(false);
-
     }
   }
 }
@@ -81,9 +78,7 @@ export default function LoginForm() {
       if (password && email) {
         setEmail(email);
         setPassword(password);
-        console.log('found email and password on login', email, password)
-      } else {
-        console.log('didnt find password and email');
+
       }
     })()
   }, [])

@@ -4,7 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 
 
-export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity }) {
+export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity, textColor }) {
     const [list, UpdateList] = useState([])
     const [currentLen, UpdateCurrentLen] = useState(0);
     const [shouldShow, setShouldShow] = useState(false);
@@ -36,7 +36,7 @@ export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity 
             {shouldShow ? (
                 <View style={styles.emptyContainer}>
                     <Image style={{ ...styles.emptyIcon, opacity: opacity ? opacity : 1 }} source={src} />
-                    <Text style={styles.emptyText}>{emptyInfo}</Text>
+                    <Text style={{ ...styles.emptyText, color: textColor ? textColor : "white" }}>{emptyInfo}</Text>
                 </View>
 
             ) : null}

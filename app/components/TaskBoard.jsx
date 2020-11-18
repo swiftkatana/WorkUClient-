@@ -37,7 +37,7 @@ export default function TaskBoard() {
             <Text style={styles.boardTitle}>
                 לוח משימות
             </Text>
-            <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} src={require('../assets/information_icon.png')} />
+            <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} textColor={"grey"} opacity={0.4} src={require('../assets/empty_icon.png')} />
 
         </View>
     )

@@ -15,13 +15,7 @@ class global {
     this.timer = 0;
     this.language;
 
-    this.AddNotificationListener = (callback) => {
-      Notifications.addNotificationResponseReceivedListener(callback);
-    };
-
     this.SendRequest = async (url, obj) => {
-      console.log(url);
-      console.log(obj);
       title = "";
       msg = "";
       alertButton = [{ text: "הבנתי" }];
@@ -96,7 +90,8 @@ class global {
         token = await Notifications.getExpoPushTokenAsync();
         return token.data;
       }
-      return 0;
+      alert(" push notification not work on emulator!");
+      return "";
     };
   }
 }

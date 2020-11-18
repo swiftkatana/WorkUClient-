@@ -1,6 +1,6 @@
 export default requestList = {
   //user api
-  //send {email, password,expoid}
+  //send {email, password,expoId}
   //recive {userData}
   userLoginUrl: "/api/user/login",
 
@@ -13,17 +13,17 @@ export default requestList = {
   userAddNewWorkTime: "/api/user/addnewworktime",
 
   // send{newPassword,oldPassword,email}
-  // recive none 
+  // recive none
 
   userChangePasswrordUrl: "/api/user/changepassword",
 
-  // send{email, restCode, newPassword}    
-  // recive none 
-  userChangePasswordWithRestCode: '/api/user/restpasswordrestcode',
+  // send{email, restCode, newPassword}
+  // recive none
+  userChangePasswordWithRestCode: "/api/user/restpasswordrestcode",
 
-  // send{email}    
-  // recive none 
-  userRequestRestCode: '/api/user/createrestpasswordcode',
+  // send{email}
+  // recive none
+  userRequestRestCode: "/api/user/createrestpasswordcode",
 
   //send{createDateOfUser,email}
   // recive none
@@ -71,4 +71,3 @@ export default requestList = {
   // recive {reuqest}
   updatePersonalRequestUrl: "/api/company/updatepersonalreuqest",
 };
-
