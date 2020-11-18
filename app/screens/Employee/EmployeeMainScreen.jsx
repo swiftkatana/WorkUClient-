@@ -1,6 +1,6 @@
 import { globalObject } from "../../src/globalObject"
 import React, { useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
 import Greeting from "../../components/Greeting"
 import Timer from "../../components/Timer"
 import TaskBoard from "../../components/TaskBoard"
@@ -12,7 +12,25 @@ export default function Main({ navigation }) {
 
     useEffect(() => {
         const subscription = Notifications.addNotificationReceivedListener(notification => {
-            console.log(notification);
+            let { data, body } = notification.request.content;
+            console.log(notification.request.content)
+            switch (body) {
+
+                case 'newTask':
+                    Alert.alert('you got notification', body);
+
+                    globalObject.User.tasks.processing[data._id] = data;
+                    break;
+
+                case 'updatePersonalReq':
+                    Alert.alert('you got notification', body);
+
+                    globalObject.User.personalRequests[data._id] = data
+                    break;
+                default:
+                    Alert.alert('you got not handler notification', body);
+                    break;
+            }
         });
         return () => subscription.remove();
     }, []);

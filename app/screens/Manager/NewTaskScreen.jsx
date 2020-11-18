@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+Notificationimport React, { useEffect, useState } from 'react';
 import { Alert, Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
 import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-community/picker';
@@ -32,7 +32,9 @@ export default function Main({ navigation }) {
         if (res) {
             globalObject.User.tasks.processing[res._id] = res;
             navigation.navigate('ManagerMainScreen');
-
+            let employeeExpoId = await globalObject.SendRequest(requestList.getExpoIdUrl, { email: sendTo.email });
+            if (employeeExpoId)
+                globalObject.sendNotification(employeeExpoId, res, 'newTask')
         }
     }
 
