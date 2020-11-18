@@ -1,4 +1,4 @@
-Notificationimport React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
 import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-community/picker';
