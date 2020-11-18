@@ -65,19 +65,19 @@ export default function Main() {
                 <Text style={styles.title}>
                     כל הבקשות
                 </Text>
-                {shouldShow ? (
-                    <View style={styles.emptyContainer}>
-                        <Image style={styles.emptyIcon} source={require('../../assets/empty_icon.png')} />
-                        <Text style={styles.emptyText}>אין משימות</Text>
-                    </View>
-
-                ) : null}
                 <FlatList
                     data={requests}
                     renderItem={render}
                     keyExtractor={item => item.id}
                 />
             </View>
+            {shouldShow ? (
+                    <View style={styles.emptyContainer}>
+                        <Image style={styles.emptyIcon} source={require('../../assets/empty_icon_white.png')} />
+                        <Text style={styles.emptyText}>אין משימות</Text>
+                    </View>
+
+                ) : null}
         </View>
     )
 }
@@ -157,15 +157,19 @@ const styles = StyleSheet.create({
         opacity: 0.7,
 
     },
+    emptyContainer:{
+        alignItems:'center',
+        justifyContent:'center',
+    },
     emptyText: {
         textAlign: 'center',
-        color: "grey",
+        color: "seashell",
         fontWeight: 'bold',
     },
     emptyIcon: {
         marginTop: 90,
         width: 80,
         height: 80,
-        opacity: 0.4,
+        //opacity: 0.4,
     },
 })
