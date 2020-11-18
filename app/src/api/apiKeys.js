@@ -1,4 +1,4 @@
-const requestList = {
+export default requestList = {
   //user api
   //send {email, password,expoid}
   //recive {userData}
@@ -72,4 +72,3 @@ const requestList = {
   getCompanyUrl: "/api/company/getcompany",
 };
 
-export default requestList;
