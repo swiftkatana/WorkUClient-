@@ -3,34 +3,43 @@ import { StyleSheet, Text, View,TouchableOpacity,Dimensions, Image } from 'react
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 import 'moment/locale/he';
+import { set } from 'react-native-reanimated';
 //import moment from 'moment-timezone';
 
-const onSelected =(date)=>
-{
-    console.log(date);
-}
 
 export default function Shifts(test) 
 {
-    const [onFocus, setOnFocus] = useState(false);
 
-   // var heLocaleData = moment.localeData('he');
-   // console.log(heLocaleData);
-   //moment().tz('Asia/Jerusalem').format('MM/DD/YYYY')
+    const [onFocus1, setOnFocus1] = useState(false);
+    const [onFocus2, setOnFocus2] = useState(false);
+    const [onFocus3, setOnFocus3] = useState(false);
+
+    const [lableButton1, setLableButton1] = useState(styles.lableButton);
+    const [lableButton2, setLableButton2] = useState(styles.lableButton);
+    const [lableButton3, setLableButton3] = useState(styles.lableButton);
+
+  const [lBtn, setLBtn] = useState(-1);
+
+    const pressHandler = (index)=>{
+        if(index == lBtn)
+            index = -1;
+            setLBtn(index);
+    }
    return (<View style={styles.mainView}>
             <Text style={styles.header}>הגשת משמרות לשבוע הבא: </Text>
             <Text style={styles.header}>בחר תוית לסימון: </Text>
             <View style={styles.lableContainer}>
-                {}
-                    <TouchableOpacity style={styles.lableButton}>
-                        <Image style={styles.tinyPluse} source={require('../assets/checked_icon_green.png')}/>
-                        <Text style={styles.lableText}>יכול</Text>
-                    </TouchableOpacity>
-                <TouchableOpacity style={styles.lableButton}>
+
+                <TouchableOpacity style={lBtn == 1 ? styles.lableButtonFocus : styles.lableButton} onPress={()=>pressHandler(1)}>
+                <Image style={styles.tinyPluse} source={require('../assets/checked_icon_green.png')}/>
+                <Text style={styles.lableText}>יכול</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={lBtn == 2 ? styles.lableButtonFocus : styles.lableButton} onPress={()=>pressHandler(2)}>
                     <Image style={styles.tinyPluse} source={require('../assets/unchecked_icon_red.png')}/>
                     <Text style={styles.lableText}>לא יכול</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.lableButton}>
+                <TouchableOpacity style={lBtn == 3 ? styles.lableButtonFocus : styles.lableButton}  onPress={()=>pressHandler(3)}>
                     <Image style={styles.tinyPluse} source={require('../assets/checked_icon_yellow.png')}/>
                     <Text style={styles.lableText}>מעדיף שלא</Text>
                 </TouchableOpacity>
@@ -132,6 +141,19 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         borderWidth:2,
         borderColor:"gray",
+     },
+     lableButtonFocus:{
+        textAlign:"center",
+        justifyContent: 'center',
+        alignItems: 'center',
+        width:109,
+        height:42,
+        margin: 5,
+        backgroundColor:"seashell",
+        borderRadius:10,
+        fontWeight:"bold",
+        borderWidth:2,
+        borderColor:"red",
      },
      lableText:{
         textAlign:"center",
