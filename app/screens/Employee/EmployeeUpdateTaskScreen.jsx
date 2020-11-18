@@ -75,9 +75,9 @@ export default function Main({ navigation }) {
                     >
                         <Text style={styles.buttonText}>שלח עדכון</Text>
                     </TouchableOpacity>
-                    <VoiceRecording/>
                 </View>
             </View>
+            <VoiceRecording/>
         </View>
     );
 }
