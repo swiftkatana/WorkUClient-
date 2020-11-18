@@ -5,21 +5,7 @@ import { globalObject } from '../../src/globalObject'
 
 
 
-var arr = [
 
-    { sumOfTime: "8", endTime: "18:00", startTime: "10:00", date: "10.2.20", id: "123" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "124" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "1" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "2" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "3" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "4" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "5" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "6" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "7" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "8" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "9" },
-    { sumOfTime: "10", endTime: "22:00", startTime: "12:00", date: "10.2.20", id: "10" },
-]
 
 
 const render = ({ item }) => {
@@ -55,7 +41,7 @@ export default function Main() {
                 </View>
                 <FlatList
 
-                    data={arr}
+                    data={globalObject.User.workTimes}
                     renderItem={render}
                     keyExtractor={item => item.id}
                 />

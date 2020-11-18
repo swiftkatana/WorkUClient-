@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import apiKeys from '../src/api/apiKeys';
 import { globalObject } from "../src/globalObject"
-var curday = function (sp) {
+var getFullDate = function (sp) {
     today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //As January is 0.
@@ -13,6 +13,17 @@ var curday = function (sp) {
     if (mm < 10) mm = '0' + mm;
     return (mm + sp + dd + sp + yyyy);
 };
+
+getFullTime = (time) => {
+    var hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((time % (1000 * 60)) / 1000);
+    var print = (hours > 9 ? hours.toString() : "0" + hours.toString()) + ":";
+    print += (minutes > 9 ? minutes.toString() : "0" + minutes.toString()) + ":";
+    print += seconds > 9 ? seconds.toString() : "0" + seconds.toString();
+    return print;
+}
+
 class timer {
     constructor() {
         this.dif = 0;
@@ -20,21 +31,27 @@ class timer {
         this.isEnd = false;
 
     }
-    ButtonHandler() {
+    ButtonHandler = () => {
+        console.log('click')
         if (this.isEnd) {
+            console.log('time now', this.now)
             let timeWorkObj = {
-                sumOfTime: this.dif,
-                endTime: new Date().getTime(),
-                startTime: now,
-                date: curday('/'),
+                sumOfTime: getFullTime(this.dif),
+                endTime: getFullTime(new Date().getTime()),
+                startTime: getFullTime(this.now),
+                date: getFullDate('/'),
                 id: Math.floor(Math.random() * (999999990000000 - 1000009999999) + 1000009999999).toString().replace('3', 'th3210ty').replace('6', 'ghew#!')
             }
+            let d = [];
+
+            globalObject.User.workTimes.unshift(timeWorkObj);
             globalObject.SendRequest(apiKeys.userAddNewWorkTime, { createDateOfUser: globalObject.User.createDateOfUser, email: globalObject.User.email, timeWorkObj })
 
             this.now = 0;
             this.isEnd = false;
         }
         else {
+            console.log('end')
             this.now = new Date().getTime();
             this.isEnd = true;
         }
