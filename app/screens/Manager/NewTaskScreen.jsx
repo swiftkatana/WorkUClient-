@@ -54,7 +54,7 @@ export default function Main() {
         let employees = globalObject.company.employees;
         for (let i in employees) {
             let employee = employees[i];
-            employee[id] = employee.email;
+            employee.id = employee.email;
             arr.push(employee);
         }
         return arr;
@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     {
         flex: 1,
         backgroundColor: "#7f71e3",
-
     },
     container:
     {
@@ -141,7 +140,6 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: "seashell",
         textDecorationLine: "underline"
-
     },
     subTitle:
     {
@@ -149,8 +147,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "seashell",
         marginBottom: 10,
-
-
     },
     list:
     {
