@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-gesture-handler'
 import apiKeys from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
-export default function ChangePasswordScreen() {
+export default function ChangePasswordScreen({ navigation }) {
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setnewPassword] = useState('')
     const [verifyPassword, setVerifyPassword] = useState('')
@@ -13,24 +13,24 @@ export default function ChangePasswordScreen() {
         if (!email || !password || !verifyPassword) {
             title = "השינוי נכשל";
             msg = "אחד או יותר מהשדות ריקים, נסו שנית"
-            alertButton = [{ text: "הבנתי", onPress: () => console.log("OK Pressed") }];
+            alertButton = [{ text: "הבנתי" }];
             Alert.alert(title, msg, alertButton, { cancelable: false });
         } else if (password != verifyPassword) {
             title = "השינוי נכשל";
             msg = "הוזנו שני סיסמאות שונות, נסו שנית"
-            alertButton = [{ text: "הבנתי", onPress: () => console.log("OK Pressed") }];
+            alertButton = [{ text: "הבנתי" }];
             Alert.alert(title, msg, alertButton, { cancelable: false });
         } else {
             const user = await globalObject.SendRequest(apiKeys.userChangePasswrordUrl, { newPassword, oldPassword, email: globalObject.User.email });
             if (user) {
-                globalObject.Navigation.pop()
+                navigation.pop()
             }
         }
     }
 
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <Text style={styles.title}>שינוי סיסמה</Text>

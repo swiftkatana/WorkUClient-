@@ -10,9 +10,8 @@ import NetInfo from "@react-native-community/netinfo";
 class global {
   constructor() {
     this.User; //when log in used to store the user object
-    this.Navigation; //used for storing navigation oject
     this.company;
-    this.timer = 0;
+    this.timer;
     this.language;
 
     this.SendRequest = async (url, obj) => {

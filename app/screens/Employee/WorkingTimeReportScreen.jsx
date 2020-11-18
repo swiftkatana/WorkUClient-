@@ -20,11 +20,11 @@ const render = ({ item }) => {
     )
 }
 
-export default function Main() {
+export default function Main({ navigation }) {
     const [sum, setSum] = useState(0)
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => globalObject.Navigation.pop()}>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.container}>
@@ -46,7 +46,7 @@ export default function Main() {
                     keyExtractor={item => item.id}
                 />
                 <Text style={styles.mainSum}>סה"כ שעות עבודה במצטבר לחודש זה: {sum}</Text>
-                <TouchableOpacity style={styles.logo} onPress={() => globalObject.Navigation.navigate("ManualWorkingTime")}>
+                <TouchableOpacity style={styles.logo} onPress={() => navigation.navigate("ManualWorkingTime")}>
                     <Image style={styles.tinyLogo} source={require('../../assets/plus_icon.png')} />
 
                 </TouchableOpacity>

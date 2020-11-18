@@ -9,6 +9,7 @@ import * as Notifications from "expo-notifications";
 
 export default function Main({ navigation }) {
 
+
     useEffect(() => {
         const subscription = Notifications.addNotificationReceivedListener(notification => {
             console.log(notification);
@@ -16,13 +17,12 @@ export default function Main({ navigation }) {
         return () => subscription.remove();
     }, []);
 
-    globalObject.Navigation = navigation;
     return (
         <View style={styles.container}>
-            <Greeting />
-            <Timer />
-            <TaskBoard />
-            <EmployeeNaviButton />
+            <Greeting navigation={navigation} />
+            <Timer navigation={navigation} />
+            <TaskBoard navigation={navigation} />
+            <EmployeeNaviButton navigation={navigation} />
         </View>
     )
 }

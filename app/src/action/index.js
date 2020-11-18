@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 import server from '../api/serverApi';
 import { SIGN_OUT, CREATE_USER, LOGIN, CHANGE_LEGUAGE } from './types';
-import {LoginUrl} from '../api/apiKeys';
+import { LoginUrl } from '../api/apiKeys';
 
 
 
@@ -15,7 +15,7 @@ const config = {
 
 
 
-export const createUser = (formValues,nav) => async dispatch => {
+export const createUser = (formValues, nav) => async dispatch => {
     const res = await server.post('/register', formValues);
     dispatch({ type: CREATE_USER, payload: res.data })
     if (res.data !== 'eror' && res.data !== 'dup') {
@@ -38,7 +38,7 @@ export const loginUser = (formValues) => async dispatch => {
 
 
 export const changeLeg = (leg) => {
-    
+
     return {
         type: CHANGE_LEGUAGE,
         payload: leg

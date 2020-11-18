@@ -1,44 +1,42 @@
-import {Image, StyleSheet, Text, View,Dimensions,Button } from 'react-native'
-import React, { Component,useEffect,useState } from 'react'
-import {globalObject} from "../src/globalObject"
+import { Image, StyleSheet, Text, View, Dimensions, Button } from 'react-native'
+import React, { Component, useEffect, useState } from 'react'
+import { globalObject } from "../src/globalObject"
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function GetGreetingMsg()
-{
+function GetGreetingMsg() {
     var msg;
     var hours = new Date().getHours();
-    if(hours >= 6 && hours < 12)
+    if (hours >= 6 && hours < 12)
         msg = "בוקר טוב";
-    else if(hours >= 12 && hours < 18)
+    else if (hours >= 12 && hours < 18)
         msg = "צהורים טובים";
-    else if(hours >= 18 && hours < 23)
-    msg = "ערב טוב";
+    else if (hours >= 18 && hours < 23)
+        msg = "ערב טוב";
     else
         msg = "לילה טוב";
     return msg;
-            
+
 }
 
-export default function Greeting()
-{
-    const [GreetingMsg ,SetGreeting] = useState("");
+export default function Greeting({ navigation }) {
+    const [GreetingMsg, SetGreeting] = useState("");
     useEffect(() => {
-        const id = setInterval(()=>{
-        SetGreeting(GetGreetingMsg());
+        const id = setInterval(() => {
+            SetGreeting(GetGreetingMsg());
         }, 3600);
         SetGreeting(GetGreetingMsg());
-        return () =>{clearInterval(id)};
+        return () => { clearInterval(id) };
     }, [])
     return (
 
         <View style={styles.view}>
-        <Text style={styles.GreetingText}> {GreetingMsg}, {globalObject.User.firstName}</Text>
-        <TouchableOpacity style={styles.settings} onPress={()=>globalObject.Navigation.navigate("SettingsScreen")}>
-        <Image style={styles.tinyLogo} source={require('../assets/settings_icon.png')}/>
-        <Text style={styles.settingsFont}>הגדרות</Text>
-        </TouchableOpacity>
+            <Text style={styles.GreetingText}> {GreetingMsg}, {globalObject.User.firstName}</Text>
+            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate("SettingsScreen")}>
+                <Image style={styles.tinyLogo} source={require('../assets/settings_icon.png')} />
+                <Text style={styles.settingsFont}>הגדרות</Text>
+            </TouchableOpacity>
         </View>
-        
+
     )
 
 }
@@ -48,15 +46,15 @@ const styles = StyleSheet.create(
     {
         view:
         {
-            flex:1,
+            flex: 1,
             alignItems: 'center',
             paddingHorizontal: 16,
             paddingVertical: 30,
             width: Dimensions.get('window').width,
             flexDirection: "row-reverse",
-            justifyContent:"space-between",
+            justifyContent: "space-between",
             textAlign: "right",
-            borderRadius:2,
+            borderRadius: 2,
             backgroundColor: "#7f71e3",
             borderTopRightRadius: 0,
             borderBottomRightRadius: 85,
@@ -65,33 +63,33 @@ const styles = StyleSheet.create(
         },
         GreetingText:
         {
-            fontSize:16,
+            fontSize: 16,
             color: "seashell",
             fontWeight: "bold",
-            paddingRight:30,
+            paddingRight: 30,
             marginTop: 45,
         },
         settings:
         {
-          marginLeft:5,
-          borderRadius:25,
-          //backgroundColor: "#6f61ca",
-          width:60,
-          height:60,
-          justifyContent:'center',
-          alignItems: 'center',
-          marginTop: 35,
+            marginLeft: 5,
+            borderRadius: 25,
+            //backgroundColor: "#6f61ca",
+            width: 60,
+            height: 60,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 35,
 
 
         },
         settingsFont:
         {
             fontSize: 11,
-            color:"seashell",
+            color: "seashell",
             textAlign: 'center',
             fontWeight: "bold",
         },
-        tinyLogo:{
+        tinyLogo: {
             width: 30,
             height: 30,
             //alignItems: 'flex-end',
@@ -99,7 +97,7 @@ const styles = StyleSheet.create(
             //marginBottom: 40,
             //marginRight: 12,
             //zIndex: 5,
-            
+
         },
     }
 )

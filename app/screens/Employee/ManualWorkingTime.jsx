@@ -1,19 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View,TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { globalObject } from '../../src/globalObject'
 
-export default function Main() 
-{
+export default function Main({ navigation }) {
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.exitButton} onPress={()=>globalObject.Navigation.pop()}>
-                    <Text style={styles.exitText}>X</Text>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>הוספת שעות</Text>
                 <View style={styles.infoConteiner}>
-                    <Image style={styles.tinyLogo} source={require('../../assets/information_icon.png')}/>
+                    <Image style={styles.tinyLogo} source={require('../../assets/information_icon.png')} />
 
                     <View style={styles.infoTextConteiner}>
                         <Text style={styles.infoText}>שים לב, שעות העבודה נוספות באופן אוטומטי לדו"ח החודשי כאשר אתה מפעיל את שעון העבודה שבמסך הראשי.</Text>
@@ -31,12 +30,12 @@ export default function Main()
 }
 
 const styles = StyleSheet.create({
-    view:{
+    view: {
         //marginTop:50,
-        flex:1,
+        flex: 1,
         backgroundColor: "#7f71e3",
-        
-        
+
+
     },
     buttonsContainer:
     {
@@ -52,24 +51,24 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginHorizontal: 45,
 
-      },
-      buttonText: {
+    },
+    buttonText: {
         fontSize: 16,
         fontWeight: '500',
         color: 'seashell',
         textAlign: 'center',
-      },
-    infoConteiner:{
+    },
+    infoConteiner: {
         flexDirection: 'row-reverse',
         justifyContent: 'center',
-        alignItems:'center',
-        
+        alignItems: 'center',
+
     },
-    infoTextConteiner:{
-        padding:10,
+    infoTextConteiner: {
+        padding: 10,
         //marginHorizontal: 82,
-        marginRight:35,
-        marginLeft:55,
+        marginRight: 35,
+        marginLeft: 55,
         backgroundColor: "#6f61ca",
         borderRadius: 20,
         //borderEndWidth: 1,
@@ -77,16 +76,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         //right: 10,
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         borderColor: "seashell",
 
     },
-    infoText:{
+    infoText: {
         fontSize: 11,
         color: "seashell",
-        fontWeight:'bold',
+        fontWeight: 'bold',
     },
-    tinyLogo:{
+    tinyLogo: {
         width: 20,
         height: 20,
         //alignItems: 'center',
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
         left: 30,
         bottom: 2,
         zIndex: 5,
-        
+
     },
     inputBox: {
         width: 300,
@@ -109,14 +108,14 @@ const styles = StyleSheet.create({
         marginHorizontal: 45,
         textAlign: "right",
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
 
-      },
+    },
     title:
     {
-        margin:20,
-        marginBottom:30,
-        marginRight:30,
+        margin: 20,
+        marginBottom: 30,
+        marginRight: 30,
         fontSize: 28,
         color: "seashell",
         textDecorationLine: "underline"
@@ -126,12 +125,12 @@ const styles = StyleSheet.create({
     {
         paddingTop: 60,
         //position:'absolute',
-        marginLeft:30,
-        
+        marginLeft: 30,
+
     },
     exitText:
     {
-        fontSize:30,
+        fontSize: 30,
         color: "seashell",
 
     }
