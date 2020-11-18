@@ -5,6 +5,8 @@ import { Picker } from "@react-native-community/picker";
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 import { Audio } from 'expo-av';
+import * as Permissions from "expo-permissions";
+import VoiceRecording from "../../components/VoiceRecording";
 const SendUpdateTask = async (id, status) => {
     var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
         _id: id,
@@ -19,10 +21,6 @@ const SendUpdateTask = async (id, status) => {
         }
     }
 };
-
-
-
-
 
 export default function Main({ navigation }) {
 
@@ -77,6 +75,7 @@ export default function Main({ navigation }) {
                     >
                         <Text style={styles.buttonText}>שלח עדכון</Text>
                     </TouchableOpacity>
+                    <VoiceRecording/>
                 </View>
             </View>
         </View>
