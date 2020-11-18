@@ -55,6 +55,13 @@ export default function Main() {
                 </Text>
                 <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'בדיקה'} src={require('../../assets/empty_icon.png')} />
             </View>
+            {shouldShow ? (
+                <View style={styles.emptyContainer}>
+                    <Image style={styles.emptyIcon} source={require('../../assets/empty_icon_white.png')} />
+                    <Text style={styles.emptyText}>אין משימות</Text>
+                </View>
+
+            ) : null}
         </View>
     )
 }

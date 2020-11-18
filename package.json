@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/checkbox": "^0.5.5",
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/hooks": "^2.6.0",
@@ -29,15 +30,18 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-calendar-strip": "^2.0.9",
+    "react-native-chart-kit": "^6.6.1",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-reanimated": "^1.13.1",
     "react-native-screens": "^2.10.1",
+    "react-native-svg": "^12.1.0",
     "react-native-toggle-calendar": "^1.0.3",
     "react-native-vector-icons": "^7.1.0",
     "react-native-week-selector": "0.0.6",
     "react-navigation": "^4.4.3",
     "react-navigation-stack": "^2.10.0",
-    "react-navigation-transitions": "^1.0.12"
+    "react-navigation-transitions": "^1.0.12",
+    "expo-av": "~8.6.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

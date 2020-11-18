@@ -15,6 +15,9 @@ import DisplayRequestScreen from "./app/screens/Employee/DisplayRequestScreen";
 import AllRequestScreen from "./app/screens/Employee/AllRequestScreen";
 import ManualWorkingTime from "./app/screens/Employee/ManualWorkingTime";
 import EmployeeShiftsScreen from "./app/screens/Employee/EmployeeShiftsScreen";
+import employeeStatisticScreen from "./app/screens/Employee/employeeStatisticScreen";
+
+
 
 //reg and log
 import RegisterUserScreen from "./app/screens/RegistrationAndLogin/RegisterUserScreen";
@@ -30,7 +33,7 @@ import ManagerToolsScreen from "./app/screens/Manager/ManagerToolsScreen";
 import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequestScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
 import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
-
+import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForRes'
 const listScreen =
   [
     { LoginScreen: LoginScreen },
@@ -54,6 +57,8 @@ const listScreen =
     { ManualWorkingTime: ManualWorkingTime },
     { NewTaskScreen: NewTaskScreen },
     { EmployeeShiftsScreen: EmployeeShiftsScreen },
+    { employeeStatisticScreen: employeeStatisticScreen },
+    { GetCodeForRes: GetCodeForRes },
   ];
 var screens = {}
 

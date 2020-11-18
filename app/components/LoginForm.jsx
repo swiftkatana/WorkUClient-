@@ -1,7 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { globalObject } from "../src/globalObject";
 import requestList from "../src/api/apiKeys";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
+const storeData = async (value, key) => {
+  try {
+    const jsonValue = JSON.stringify(value)
+    await AsyncStorage.setItem(key, jsonValue)
+  } catch (e) {
+    // saving error
+  }
+}
+
+const getData = async (key) => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(key)
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // error reading value
+  }
+}
 
 const pressHandler = async (email, password, setShouldShow) => {
   if (!email || !password) {
@@ -11,6 +31,8 @@ const pressHandler = async (email, password, setShouldShow) => {
     Alert.alert(title, msg, alertButton, { cancelable: false });
   } else {
     setShouldShow(true);
+    storeData(password, 'password');
+    storeData(email, 'email')
     const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password });
     if (user) {
       globalObject.User = user;
@@ -50,6 +72,21 @@ export default function LoginForm() {
   const [password, setPassword] = useState('')
   const [shouldShow, setShouldShow] = useState(false);
 
+  useEffect(() => {
+    (async () => {
+      let password = await getData('password')
+      let email = await getData('email')
+
+      if (password && email) {
+        setEmail(email);
+        setPassword(password);
+        console.log('found email and password on login', email, password)
+      } else {
+        console.log('didnt find password and email');
+      }
+    })()
+  }, [])
+
   return (
 
     <View style={styles.container}>
@@ -58,8 +95,19 @@ export default function LoginForm() {
       <TouchableOpacity onPress={() => pressHandler(email, password, setShouldShow)} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
+
+      <View style={styles.signupTextCont}>
+        <Text style={styles.signupText}> שכחת סיסמה?</Text>
+        <TouchableOpacity onPress={() => globalObject.Navigation.navigate('GetCodeForRes')}>
+          <Text style={styles.signupButton}>לחץ כאן</Text>
+        </TouchableOpacity>
+        <Text style={styles.signupButton} />
+      </View>
+
       {}
+
       {shouldShow ? <Image style={styles.tinyLogo} source={require('../assets/loading_animation.gif')} /> : null}
+
     </View>
   );
 }
@@ -100,7 +148,20 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
 
-  }
+  },
+  signupTextCont: {
+
+    flexDirection: 'row-reverse'
+  },
+  signupText: {
+    fontSize: 16,
+  },
+  signupButton: {
+    paddingRight: 5,
+    color: "#7f71e3",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
 
 });
 
