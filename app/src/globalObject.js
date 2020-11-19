@@ -69,8 +69,13 @@ class global {
                 title = "ההרשמה נכשלה";
                 msg = "האימייל אינו תקין";
                 break;
+              case responedList.infoInvalid:
+                title = "המידע שהכנסת סגוי";
+                msg = "בבקשה תבדוק את המידע שהכנסת";
+                break;
               default:
-                title = error;
+                console.log(responedList.infoInvalid === res.data.err)
+                title = res.data.err;
                 msg = "error";
                 break;
             }

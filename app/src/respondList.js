@@ -1,6 +1,6 @@
 const responedList = {
   DBError: "DBError",
-  InfoInvalid: "InfoInvalid",
+  infoInvalid: "infoInvalid",
   route: "koral | Michael you send me bad request! ",
   FaildSave: "FaildSave",
   loginFaildAlreadyConnect: "loginFaildAlreadyConnect",
