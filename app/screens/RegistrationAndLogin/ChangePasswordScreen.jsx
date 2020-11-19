@@ -10,12 +10,12 @@ export default function ChangePasswordScreen({ navigation }) {
     const [verifyPassword, setVerifyPassword] = useState('')
 
     const pressHandler = async () => {
-        if (!email || !password || !verifyPassword) {
+        if (!verifyPassword || !oldPassword || !newPassword) {
             title = "השינוי נכשל";
             msg = "אחד או יותר מהשדות ריקים, נסו שנית"
             alertButton = [{ text: "הבנתי" }];
             Alert.alert(title, msg, alertButton, { cancelable: false });
-        } else if (password != verifyPassword) {
+        } else if (newPassword != verifyPassword) {
             title = "השינוי נכשל";
             msg = "הוזנו שני סיסמאות שונות, נסו שנית"
             alertButton = [{ text: "הבנתי" }];
