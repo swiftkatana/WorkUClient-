@@ -79,7 +79,7 @@ export default function Main({ navigation }) {
                 </View>
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
 
-                <View style={{ height: 150 }}>
+ixc                <View style={{ flexShrink: 1, }}>
                     <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} src={require('../../assets/information_icon.png')} />
                 </View>
 

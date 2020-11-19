@@ -37,8 +37,9 @@ export default function TaskBoard({ navigation }) {
             <Text style={styles.boardTitle}>
                 לוח משימות
             </Text>
-            <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} textColor={"grey"} opacity={0.4} src={require('../assets/empty_icon.png')} />
-
+            <View style={{ flex: 1, }}>
+                <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} textColor={"grey"} opacity={0.4} src={require('../assets/empty_icon.png')} />
+            </View>
         </View>
     )
 }
