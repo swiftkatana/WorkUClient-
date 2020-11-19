@@ -1,6 +1,6 @@
 const responedList = {
   DBError: "DBError",
-  InfoUnvalid: "InfoUnvalid",
+  infoInvalid: "infoInvalid",
   route: "koral | Michael you send me bad request! ",
   FaildSave: "FaildSave",
   loginFaildAlreadyConnect: "loginFaildAlreadyConnect",
@@ -10,8 +10,6 @@ const responedList = {
   UserNotCreated: "UserNotCreated",
   // when try to create a company and there is already a company with this name
   companyNameExists: "companyNameExists",
-  // error when password is unvalid
-  UnvalidPassword: "UnvalidPassword",
   // error when someone try to login but user not exists or wrong info
   usersNotFound: "usersNotFound",
   // error when someone try to use a fake or not exists email

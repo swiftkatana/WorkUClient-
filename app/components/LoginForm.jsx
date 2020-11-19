@@ -40,7 +40,8 @@ export default function LoginForm({ navigation }) {
       storeData(password, 'password');
       storeData(email, 'email')
       var naviTo = "";
-      const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password });
+      let expoId = await globalObject.registerForPushNotificationsAsync();
+      const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password, expoId });
       if (user) {
         globalObject.User = user;
         if (globalObject.User.permission.manager) {

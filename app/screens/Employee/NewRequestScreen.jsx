@@ -15,7 +15,11 @@ export default function Main({ navigation }) {
         const res = await globalObject.SendRequest(requestList.userSendPersonalRequestUrl, { type, body, fullName: globalObject.User.fullName, email: globalObject.User.email });
         if (res) {
             globalObject.User.personalRequests[res._id] = res;
+
             navigation.navigate('EmployeeMainScreen');
+            let managerExpoId = await globalObject.SendRequest(requestList.getExpoIdUrl, { email: globalObject.User.managerEmail });
+            if (managerExpoId)
+                globalObject.sendNotification(managerExpoId, res, 'newPersonalRequest')
 
         }
     }

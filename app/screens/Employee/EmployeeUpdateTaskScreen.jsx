@@ -23,7 +23,10 @@ export default function Main({ navigation }) {
             if (status == "completed") {
                 globalObject.User.tasks.completed[id] = globalObject.User.tasks.processing[id];
                 delete globalObject.User.tasks.processing[id];
-                navigation.navigate("ManagerMainScreen");
+                let managerExpoId = await globalObject.SendRequest(requestList.getExpoIdUrl, { email: globalObject.User.managerEmail });
+                if (managerExpoId)
+                    globalObject.sendNotification(managerExpoId, res, 'updateTask')
+                navigation.navigate("EmployeeMainScreen");
             }
         }
     };

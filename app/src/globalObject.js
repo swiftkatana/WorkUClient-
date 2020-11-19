@@ -13,7 +13,25 @@ class global {
     this.company;
     this.timer;
     this.language;
+    this.sendNotification = async (expoId, data, type) => {
+      const message = {
+        to: expoId,
+        sound: 'default',
+        title: 'Original Title',
+        body: type,
+        data: data,
+      };
 
+      await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Accept-encoding': 'gzip, deflate',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+      });
+    }
     this.SendRequest = async (url, obj) => {
       title = "";
       msg = "";
@@ -51,8 +69,13 @@ class global {
                 title = "ההרשמה נכשלה";
                 msg = "האימייל אינו תקין";
                 break;
+              case responedList.infoInvalid:
+                title = "המידע שהכנסת סגוי";
+                msg = "בבקשה תבדוק את המידע שהכנסת";
+                break;
               default:
-                title = error;
+                console.log(responedList.infoInvalid === res.data.err)
+                title = res.data.err;
                 msg = "error";
                 break;
             }
