@@ -79,6 +79,7 @@ export default function Main({ navigation }) {
                     <VoiceRecording />
                 </View>
             </View>
+            <VoiceRecording/>
         </View>
     );
 }

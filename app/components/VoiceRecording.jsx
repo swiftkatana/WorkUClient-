@@ -1,37 +1,59 @@
 import React, { useState,useRef } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { Audio } from 'expo-av';
 import { Recording } from "expo-av/build/Audio";
 import * as Permissions from "expo-permissions";
 
+const recording = new Audio.Recording();
 
 export default function VoiceRecording() {
     const [haveRecordingPermissions, setHaveRecordingPermissions] = useState(false);
-    const [status, SetStatus] = useState("completed");
+    const [isRecording, setIsRecording] = useState(false);
 
-   const recording = useRef(new Audio.Recording()) 
+    const [status, SetStatus] = useState("completed");
+    //const recording = useRef(new Audio.Recording());
+
     const askForPermissions = async () => {
         const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
-          setHaveRecordingPermissions(response.status === "granted");
-      };
+        setHaveRecordingPermissions(response.status === "granted");
+    };
     
     const recordingHandler = async() =>{
-    
-        askForPermissions();
-        try {
-            await recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
-            await recording.startAsync();
-            console.log("You are now recording!");
-          } catch (error) {
-              //console.log(error)
-            console.log("err!");
-          }
+        if(!(Permissions.getAsync(Permissions.AUDIO_RECORDING) === "granted"))
+        {
+            askForPermissions();
+        }
+        if(haveRecordingPermissions){
+            try {
+                await recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+                await recording.startAsync();
+                setIsRecording(true);
+                console.log("You are now recording!");
+            } catch (error) {
+                //console.log(error)
+            console.log(error);
+            setIsRecording(false);
+            }
+        }else{
+            console.log("no premission!");
+            setIsRecording(false);
+        }
     };
+    const stopRecordingHandler = async() =>{
+        console.log("no 1111111111!");
+        try {
+            await this.recording.stopAndUnloadAsync();
+        } catch (error) {
+          
+        }
+    };
+
     
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.button} onPress={() => recordingHandler()}>
+            <TouchableOpacity style={styles.button} onPressIn={() => recordingHandler()} onPressOut={() => stopRecordingHandler()}>
+                <Image style={styles.tinyLogo} source={require('../assets/microphone_icon.png')}/>  
                 <Text style={styles.buttonText}>רמקול</Text>
             </TouchableOpacity>
         </View>
@@ -57,6 +79,19 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         color: "seashell",
         textAlign: "center",
+    },
+    tinyLogo:{
+        width: 20,
+        height: 20,
+        //alignItems: 'center',
+        //justifyContent: 'center',
+        //marginBottom: 50,
+        //marginRight: 10,
+        //marginTop: 14,
+        left: 30,
+        bottom: 2,
+        zIndex: 5,
+        
     },
     exitButton: {
         marginLeft: 30,

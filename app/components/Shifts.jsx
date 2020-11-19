@@ -10,21 +10,106 @@ import { set } from 'react-native-reanimated';
 export default function Shifts(test) 
 {
 
-    const [onFocus1, setOnFocus1] = useState(false);
-    const [onFocus2, setOnFocus2] = useState(false);
-    const [onFocus3, setOnFocus3] = useState(false);
+    const [lBtn, setLBtn] = useState(-1);
+    const [notEmpty, setNotEmpty] = useState([0,0,0,0,0,0,0]);
+    const [fill, setFill] = useState({
+        day1:{
+            morning:0,
+            lunch:0,
+            evening:0,
+        },
+        day2:{
+            morning:0,
+            lunch:0,
+            evening:0,
+        },
+        day3:{
+            morning:0,
+            lunch:0,
+            evening:0,
+        },
+        day4:{
+            morning:0,
+            lunch:0,
+            evening:0,
+        },
+        day5:{
+            morning:0,
+            lunch:0,
+            evening:0,
+        },
+        day6:{
+            morning:0,
+            lunch:0,
+            evening:0,
+        },
+        day7:{
+            morning:0,
+            lunch:0,
+            evening:0,
+        },
+    });
 
-    const [lableButton1, setLableButton1] = useState(styles.lableButton);
-    const [lableButton2, setLableButton2] = useState(styles.lableButton);
-    const [lableButton3, setLableButton3] = useState(styles.lableButton);
+    const green = require('../assets/checked_icon_green.png');
+    const yellow = require('../assets/checked_icon_yellow.png');
+    const red = require('../assets/unchecked_icon_red.png');
 
-  const [lBtn, setLBtn] = useState(-1);
+    const imgSrc = {
+        day1:{
+            morning:null,
+            lunch:null,
+            evening:null,
+        },
+        day2:{
+            morning:null,
+            lunch:null,
+            evening:null,
+        },
+        day3:{
+            morning:null,
+            lunch:null,
+            evening:null,
+        },
+        day4:{
+            morning:null,
+            lunch:null,
+            evening:null,
+        },
+        day5:{
+            morning:null,
+            lunch:null,
+            evening:null,
+        },
+        day6:{
+            morning:null,
+            lunch:null,
+            evening:null,
+        },
+        day7:{
+            morning:null,
+            lunch:null,
+            evening:null,
+        },
+    }
+
+
+    var imgSrc_1m = require('../assets/unchecked_icon_red.png');
+    var imgSrc_1l = require('../assets/unchecked_icon_red.png');
 
     const pressHandler = (index)=>{
         if(index == lBtn)
             index = -1;
             setLBtn(index);
-    }
+    };
+    const pressHandlerFill = (i)=>{
+        if(lBtn == 1){
+        }else{
+            setNotEmpty(true);//fill box
+        }
+        
+        
+    };
+    
    return (<View style={styles.mainView}>
             <Text style={styles.header}>הגשת משמרות לשבוע הבא: </Text>
             <Text style={styles.header}>בחר תוית לסימון: </Text>
@@ -62,8 +147,8 @@ export default function Shifts(test)
                                 <Text style={styles.stateText}>ערב</Text>
                         </View>
                         <View style={styles.stateContainer}>
-                                <View style={styles.dayText}></View>
-                                <View style={styles.dayText}></View>
+                                <View style={styles.dayText}><TouchableOpacity style={styles.touchableStyle}  onPress={()=>pressHandlerFill(fill.day1.morning)}>{!(fill.day1.morning===0)?(<Image style={styles.tinyPluse} source={imgSrc.day1.morning}/>):null}</TouchableOpacity></View>
+                                <View style={styles.dayText}><TouchableOpacity style={styles.touchableStyle}  onPress={()=>pressHandlerFill()}>{notEmpty?(<Image style={styles.tinyPluse} source={imgSrc}/>):null}</TouchableOpacity></View>
                                 <View style={styles.dayText}></View>
                         </View>
                         <View style={styles.stateContainer}>
@@ -186,9 +271,16 @@ const styles = StyleSheet.create({
         margin: 5,
         backgroundColor:"seashell",
         borderRadius:10,
-        fontWeight:"bold",
-        
-        
+        fontWeight:"bold",  
+     },
+     touchableStyle:{
+        textAlign:"center",
+        width:Dimensions.get('window').width/12,
+        height:35,
+        margin: 5,
+        //backgroundColor:"seashell",
+        borderRadius:10,
+        fontWeight:"bold", 
      },
      fillContainer:{
         width:Dimensions.get('window').width,
