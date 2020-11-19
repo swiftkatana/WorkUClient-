@@ -10,6 +10,7 @@ export default function Main({ navigation }) {
     const pressHandler = async (_id, status, email) => {
         const res = await globalObject.SendRequest(requestList.updatePersonalRequestUrl, { _id, status, email });
         if (res) {
+            globalObject.sendNotification(email, res, 'כנס לבקשות שלי', 'בקשה אישית עודכנה', 'updatePersonalReq');
             globalObject.User.personalRequests[res._id] = res;
             navigation.pop();
         }

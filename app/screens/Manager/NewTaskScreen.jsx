@@ -32,9 +32,7 @@ export default function Main({ navigation }) {
         if (res) {
             globalObject.User.tasks.processing[res._id] = res;
             navigation.navigate('ManagerMainScreen');
-            let employeeExpoId = await globalObject.SendRequest(requestList.getExpoIdUrl, { email: sendTo.email });
-            if (employeeExpoId)
-                globalObject.sendNotification(employeeExpoId, res, 'newTask')
+            globalObject.sendNotification(sendTo.email, res, 'אפשר לראות אותה בלוח משימות', 'משימה חדשה נכנסה', 'newTask')
         }
     }
 

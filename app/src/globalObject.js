@@ -13,13 +13,21 @@ class global {
     this.company;
     this.timer;
     this.language;
-    this.sendNotification = async (expoId, data, type) => {
+
+
+    this.sendNotification = async (email, data, body, title, type, sound = 'default') => {
+      let to = await globalObject.SendRequest(requestList.getExpoIdUrl, { email });
+      if (!to) return
+
+
       const message = {
-        to: expoId,
-        sound: 'default',
-        title: 'Original Title',
-        body: type,
-        data: data,
+        to,
+        sound,
+        title,
+        body,
+        data: { data, type },
+        vibrate: true,
+        priority: 'high',
       };
 
       await fetch('https://exp.host/--/api/v2/push/send', {
@@ -32,6 +40,8 @@ class global {
         body: JSON.stringify(message),
       });
     }
+
+
     this.SendRequest = async (url, obj) => {
       title = "";
       msg = "";
@@ -47,6 +57,7 @@ class global {
         try {
           const res = await sever.post(url, obj);
           if (res.data.err) {
+            console.log(res.data)
             switch (res.data.err) {
               case responedList.DBError:
               case responedList.FaildSave:
@@ -82,7 +93,7 @@ class global {
             Alert.alert(title, msg, alertButton, { cancelable: false });
             return null;
           }
-          return res.data == null ? "okay" : res.data;
+          return res.data === null ? "" : res.data;
         } catch (error) {
           title = "תקלה בתקשורת";
           msg = "קיימת בעיה עם השרת נסו מאוחר יותר";
@@ -109,10 +120,18 @@ class global {
           alert("Failed to get push token for push notification!");
           return;
         }
+
+        if (Platform.OS === 'android') {
+          Notifications.setNotificationChannelAsync('default', {
+            name: 'default',
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: '#FF231F7C',
+          });
+        }
         token = await Notifications.getExpoPushTokenAsync();
         return token.data;
       }
-      alert(" push notification not work on emulator!");
       return "";
     };
   }

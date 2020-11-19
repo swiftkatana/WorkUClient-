@@ -23,9 +23,8 @@ export default function Main({ navigation }) {
             if (status == "completed") {
                 globalObject.User.tasks.completed[id] = globalObject.User.tasks.processing[id];
                 delete globalObject.User.tasks.processing[id];
-                let managerExpoId = await globalObject.SendRequest(requestList.getExpoIdUrl, { email: globalObject.User.managerEmail });
-                if (managerExpoId)
-                    globalObject.sendNotification(managerExpoId, res, 'updateTask')
+
+                globalObject.sendNotification(globalObject.User.managerEmail, res, 'למידה נוסף כנס ללוח משימות', "משימה עודכנה", 'updateTask')
                 navigation.navigate("EmployeeMainScreen");
             }
         }

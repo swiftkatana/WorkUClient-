@@ -9,30 +9,36 @@ import * as Notifications from "expo-notifications";
 export default function Main({ navigation }) {
 
 
-    const handleListener = ({ data, body }) => {
-        switch (body) {
+    const handleListener = ({ data }) => {
+        switch (data.type) {
 
             case 'updateTask':
-                Alert.alert('you got notification', body);
-                delete globalObject.User.tasks.processing[data._id]
-                globalObject.User.tasks.completed[data._id] = data;
+                Alert.alert('you got notification', data.type);
+                delete globalObject.User.tasks.processing[data.data._id]
+                globalObject.User.tasks.completed[data.data._id] = data.data;
                 break;
 
             case 'newPersonalRequest':
-                Alert.alert('you got notification', body);
-                globalObject.User.personalRequests[data._id] = data;
+                Alert.alert('you got notification', data.type);
+                globalObject.User.personalRequests[data.data._id] = data.data;
 
                 break;
 
             default:
-                Alert.alert('you got not handler notification', body);
+                Alert.alert('you got not handler notification', data.type);
                 break;
         }
 
     }
 
     useEffect(() => {
-
+        Notifications.setNotificationHandler({
+            handleNotification: async () => ({
+                shouldShowAlert: true,
+                shouldPlaySound: true,
+                shouldSetBadge: true,
+            }),
+        });
         const subscription1 = Notifications.addNotificationReceivedListener(notification => handleListener(notification.request.content));
         const subscription2 = Notifications.addNotificationResponseReceivedListener(response => handleListener(response.notification.request.content));
         return () => {

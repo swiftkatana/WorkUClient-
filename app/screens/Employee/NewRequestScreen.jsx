@@ -17,9 +17,8 @@ export default function Main({ navigation }) {
             globalObject.User.personalRequests[res._id] = res;
 
             navigation.navigate('EmployeeMainScreen');
-            let managerExpoId = await globalObject.SendRequest(requestList.getExpoIdUrl, { email: globalObject.User.managerEmail });
-            if (managerExpoId)
-                globalObject.sendNotification(managerExpoId, res, 'newPersonalRequest')
+
+            globalObject.sendNotification(globalObject.User.managerEmail, res, type, 'בקשה חדשה התקבלה', "newPersonalRequest")
 
         }
     }
