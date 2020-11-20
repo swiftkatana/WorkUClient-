@@ -7,8 +7,9 @@ import requestList from "../../src/api/apiKeys";
 import { Audio } from 'expo-av';
 import * as Permissions from "expo-permissions";
 import VoiceRecording from "../../components/VoiceRecording";
+import { connect } from "react-redux";
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
 
 
     const item = navigation.state.params.item;
@@ -30,7 +31,7 @@ export default function Main({ navigation }) {
         }
     };
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity
                 style={styles.exitButton}
                 onPress={() => navigation.pop()}
@@ -79,7 +80,7 @@ export default function Main({ navigation }) {
                     <VoiceRecording />
                 </View>
             </View>
-            <VoiceRecording/>
+            <VoiceRecording />
         </View>
     );
 }
@@ -87,7 +88,7 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        backgroundColor: "#7f71e3",
+
     },
     container: {
         alignItems: "flex-end",
@@ -183,3 +184,8 @@ const styles = StyleSheet.create({
         color: "seashell",
     },
 });
+
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

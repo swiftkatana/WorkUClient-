@@ -9,9 +9,10 @@ import {
     ContributionGraph,
     StackedBarChart
 } from "react-native-chart-kit";
+import { connect } from 'react-redux';
 
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
     const myData = {
         labels: ["סה''כ לא הושלמו", "סה''כ הושלמו"],
         datasets: [
@@ -28,7 +29,7 @@ export default function Main({ navigation }) {
     const width = Dimensions.get("window").width - 60;
 
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: "#7f71e3",
+
     },
     buttonsContainer:
     {
@@ -122,3 +123,7 @@ const styles = StyleSheet.create({
 
     }
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

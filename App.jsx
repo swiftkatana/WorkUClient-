@@ -1,8 +1,8 @@
 import React from "react";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
-
+import { Provider } from "react-redux";
+import store from "./app/src/store";
 // employee
 import EmployeeMainScreen from "./app/screens/Employee/EmployeeMainScreen"
 import MainRequestScreen from "./app/screens/Employee/MainRequestScreen"
@@ -25,20 +25,25 @@ import SelectionScreen from "./app/screens/RegistrationAndLogin/SelectionScreen"
 import RegisterCompanyScreen from "./app/screens/RegistrationAndLogin/RegisterCompanyScreen";
 import LoginScreen from "./app/screens/RegistrationAndLogin/LoginScreen";
 
-
+//Global
+import SettingsScreen from "./app/screens/SettingsScreen";
+import PreferencesOfUserForStyleScreen from './app/screens/PreferencesOfUserForStyleScreen'
 // managar
 import ManagerMainScreen from "./app/screens/Manager/ManagerMainScreen";
 import ManagerManageRequestsScreen from "./app/screens/Manager/ManagerManageRequestsScreen";
 import ManagerToolsScreen from "./app/screens/Manager/ManagerToolsScreen";
 import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequestScreen";
-import SettingsScreen from "./app/screens/SettingsScreen";
 import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
 import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForResScreen';
 import RestPasswordWithCode from './app/screens/RegistrationAndLogin/RestPasswordWithCodeScreen';
 import ChangePasswordScreen from './app/screens/RegistrationAndLogin/ChangePasswordScreen';
+
+
+
 const listScreen =
   [
     { LoginScreen: LoginScreen },
+    { PreferencesOfUserForStyleScreen: PreferencesOfUserForStyleScreen },
     { SettingsScreen: SettingsScreen },
     { HandleSingleRequestScreen: HandleSingleRequestScreen },
     { ManagerToolsScreen: ManagerToolsScreen },
@@ -73,6 +78,6 @@ export default function App() {
     screens[keyNames[0]] = { screen: listScreen[i][keyNames[0]], navigationOptions: { headerShown: false } }
   }
   const AppContainer = createAppContainer(createStackNavigator(screens));
-  return (<AppContainer />);
+  return (<Provider store={store}><AppContainer /></Provider>);
 }
 

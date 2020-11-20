@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        backgroundColor: "#7f71e3",
+        backgroundColor: globalObject.styles.backGroundColors,
 
 
     }, logoText: {

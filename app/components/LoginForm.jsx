@@ -3,6 +3,8 @@ import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } fro
 import { globalObject } from "../src/globalObject";
 import requestList from "../src/api/apiKeys";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { connect } from 'react-redux';
+import { changeStyle } from '../src/action';
 
 
 const storeData = async (value, key) => {
@@ -23,7 +25,7 @@ const getData = async (key) => {
   }
 }
 
-export default function LoginForm({ navigation }) {
+function LoginForm({ navigation, changeStyle }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -44,6 +46,7 @@ export default function LoginForm({ navigation }) {
       const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password, expoId });
       if (user) {
         globalObject.User = user;
+        if (user.styles) changeStyle(user.styles);
         if (globalObject.User.permission.manager) {
           const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
           if (company) {
@@ -91,9 +94,9 @@ export default function LoginForm({ navigation }) {
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}> שכחת סיסמה?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('GetCodeForRes')}>
-          <Text style={styles.signupButton}>לחץ כאן</Text>
+          <Text style={{ ...styles.signupButton, }}>לחץ כאן</Text>
         </TouchableOpacity>
-        <Text style={styles.signupButton} />
+        <Text style={{ ...styles.signupButton, }} />
       </View>
 
       {}
@@ -157,3 +160,7 @@ const styles = StyleSheet.create({
 
 });
 
+const mapStateToProps = (state) => {
+  return { style: state.styles }
+}
+export default connect(mapStateToProps, { changeStyle })(LoginForm)

@@ -5,10 +5,11 @@ import { Picker } from '@react-native-community/picker';
 import requestList from '../../src/api/apiKeys';
 import { globalObject } from '../../src/globalObject';
 import InfoList from '../../components/InfoList';
+import { connect } from 'react-redux';
 
 
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
 
     const [priority, SetPriority] = useState("גבוהה");
     const [header, SetHeader] = useState("");
@@ -64,7 +65,7 @@ export default function Main({ navigation }) {
     }
 
     return (
-        <KeyboardAvoidingView style={styles.view} behavior={Platform.OS == "ios" ? "padding" : "height"}
+        <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
             enabled={Platform.OS === "ios" ? true : false}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: "#7f71e3",
+        backgroundColor: globalObject.styles.backGroundColors,
     },
     container:
     {
@@ -287,3 +288,7 @@ const styles = StyleSheet.create({
     }
 
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

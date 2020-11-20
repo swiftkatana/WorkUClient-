@@ -191,3 +191,8 @@ const styles = StyleSheet.create({
 
 
 })
+
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(ManagerNaviButton)

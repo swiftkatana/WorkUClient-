@@ -13,7 +13,9 @@ class global {
     this.company;
     this.timer;
     this.language;
-
+    this.styles = {
+      backGroundColors: "#7f71e3"
+    }
 
     this.sendNotification = async (email, data, body, title, type, sound = 'default') => {
       let to = await globalObject.SendRequest(requestList.getExpoIdUrl, { email });
