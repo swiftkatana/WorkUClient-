@@ -7,6 +7,7 @@ import requestList from "../../src/api/apiKeys";
 import { Audio } from 'expo-av';
 import * as Permissions from "expo-permissions";
 import VoiceRecording from "../../components/VoiceRecording";
+import { connect } from "react-redux";
 
 
 
@@ -20,7 +21,7 @@ const pressHandler = () => {
     Alert.alert(title, msg, alertButton, { cancelable: false });
 
 }
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
 
     const play = require('../../assets/play_button_icon.png');
     const pause = require('../../assets/pause_icon.png');
@@ -57,7 +58,7 @@ export default function Main({ navigation }) {
         }
     };
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity
                 style={styles.exitButton}
                 onPress={() => navigation.pop()}
@@ -78,7 +79,7 @@ export default function Main({ navigation }) {
                             {/* <Text style={styles.subTitle}>{item.description}</Text> */}
                             <View style={styles.myVoiceMsg}>
                                 <TouchableOpacity
-                                    style={styles.myVoiceButton}
+                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
                                     onPress={playVoiceBtn}
                                 >
                                     <Image style={styles.tinyLogo} source={imgSrc} />
@@ -87,7 +88,7 @@ export default function Main({ navigation }) {
                             </View>
                             <View style={styles.yourVoiceMsg}>
                                 <TouchableOpacity
-                                    style={styles.yourVoiceButton}
+                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
                                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
@@ -96,7 +97,7 @@ export default function Main({ navigation }) {
                             </View>
                             <View style={styles.yourVoiceMsg}>
                                 <TouchableOpacity
-                                    style={styles.yourVoiceButton}
+                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
                                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
@@ -105,7 +106,7 @@ export default function Main({ navigation }) {
                             </View>
                             <View style={styles.myVoiceMsg}>
                                 <TouchableOpacity
-                                    style={styles.myVoiceButton}
+                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
                                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
@@ -156,7 +157,6 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        backgroundColor: "#7f71e3",
     },
     container: {
         alignItems: "flex-end",
@@ -267,7 +267,6 @@ const styles = StyleSheet.create({
     myVoiceButton: {
         width: 170,
         height: 70,
-        backgroundColor: "#584DA1", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -279,7 +278,6 @@ const styles = StyleSheet.create({
     yourVoiceButton: {
         width: 170,
         height: 70,
-        backgroundColor: "#6f61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -324,3 +322,7 @@ const styles = StyleSheet.create({
         color: "seashell",
     },
 });
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)
