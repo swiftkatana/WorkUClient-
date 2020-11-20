@@ -1,37 +1,102 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native'
 import { connect } from 'react-redux'
 import { changeStyle } from '../src/action'
 import apiKeys from '../src/api/apiKeys'
 import { globalObject } from '../src/globalObject'
 
-let colorsArry = ["#7f71e3", "#5d8aa8", "#191970", "#a4c139", "#ff2052", "#fe6f5e"]
 
-const storeData = async (value, key) => {
-    try {
-        const jsonValue = JSON.stringify(value)
-        await AsyncStorage.setItem(key, jsonValue);
-    } catch (e) {
-        console.log(e)
-        // saving error
-    }
-}
+let colorsArry = [{ color: "#7f71e3", id: 0 }, { color: "#5d8aa8", id: 1 }, { color: "#191970", id: 2 }, { color: "#a4c139", id: 3 }, { color: "#fe6f5e", id: 4 }, { color: "#ff2052", id: 5 }]
 function Main({ navigation, style, changeStyle }) {
 
     const [pickColor, setPickColor] = useState('');
-    const handlerForSwich = (color) => {
-        setPickColor(color)
-        globalObject.SendRequest(apiKeys.userUpdateStyleUrl, { styles: { view: { backgroundColor: color } }, email: globalObject.User.email })
-        changeStyle({ view: { backgroundColor: color } })
+    const handlerForSwich = (item) => {
+        let style = {
+            view: { backgroundColor: item.color }
+        }
+        switch (item.id) {
+            case 0:
+                style.btn1 = {
+                    backgroundColor: item.color
+                }
+                style.btn2 = {
+                    backgroundColor: "#6f61ca"
+                }
+                style.btn3 = {
+                    backgroundColor: "#584DA1"
+                }
+                break;
+            case 1:
+                style.btn1 = {
+                    backgroundColor: item.color
+                }
+                style.btn2 = {
+                    backgroundColor: "#4d8aa8"
+                }
+                style.btn3 = {
+                    backgroundColor: "#3d8aa8"
+                }
+                break;
+            case 2:
+                style.btn1 = {
+                    backgroundColor: item.color
+                }
+                style.btn2 = {
+                    backgroundColor: "#181970"
+                }
+                style.btn3 = {
+                    backgroundColor: "#171970"
+                }
+                break;
+            case 3:
+                style.btn1 = {
+                    backgroundColor: item.color
+                }
+                style.btn2 = {
+                    backgroundColor: "#a3d121"
+                }
+                style.btn3 = {
+                    backgroundColor: "#d2d111"
+                }
+                break;
+            case 4:
+                style.btn1 = {
+                    backgroundColor: item.color
+                }
+                style.btn2 = {
+                    backgroundColor: "#ee5f4e"
+                }
+                style.btn3 = {
+                    backgroundColor: "#eadf4e"
+                }
+                break;
+            case 5:
+                style.btn1 = {
+                    backgroundColor: item.color
+                }
+                style.btn2 = {
+                    backgroundColor: "#fc1052"
+                }
+                style.btn3 = {
+                    backgroundColor: "#fc1012"
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        setPickColor(item.color)
+        globalObject.SendRequest(apiKeys.userUpdateStyleUrl, { styles: style, email: globalObject.User.email })
+        changeStyle(style)
     }
     const renderListColors = () => {
 
-        return colorsArry.map(color => (
-            <TouchableOpacity key={color} onPress={() => handlerForSwich(color)}>
+        return colorsArry.map(item => (
+            <TouchableOpacity key={item.id} onPress={() => handlerForSwich(item)}>
 
 
-                <View style={{ ...styles.colorPicker, backgroundColor: color, borderColor: color === pickColor ? '#000' : pickColor, }}></View>
+                <View style={{ ...styles.colorPicker, backgroundColor: item.color, borderColor: item.color === pickColor ? '#000' : pickColor, }}></View>
             </TouchableOpacity>
         ))
 

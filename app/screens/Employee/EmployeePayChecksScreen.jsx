@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: globalObject.styles.backGroundColors,
     },
     container: {
         alignItems: 'flex-end',

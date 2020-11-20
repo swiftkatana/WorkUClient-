@@ -76,16 +76,7 @@ const styles = StyleSheet.create({
 
 
     },
-    button: {
-        width: 300,
-        backgroundColor: "#6f61ca",// #6357b5
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 16,
-        marginHorizontal: 30,
 
-
-    },
 
     buttonText: {
         fontSize: 16,
