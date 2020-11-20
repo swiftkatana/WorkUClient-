@@ -6,8 +6,9 @@ import Timer from "../../components/Timer"
 import TaskBoard from "../../components/TaskBoard"
 import EmployeeNaviButton from "../../components/EmployeeNaviButton"
 import * as Notifications from "expo-notifications";
+import { connect } from "react-redux"
 
-export default function Main({ navigation }) {
+function Main({ style, navigation }) {
 
     const handleListener = ({ data }) => {
         console.log()
@@ -50,7 +51,7 @@ export default function Main({ navigation }) {
     return (
         <View style={styles.container}>
             <Greeting navigation={navigation} />
-            <Timer navigation={navigation} />
+            <Timer style={style} />
             <TaskBoard navigation={navigation} />
             <EmployeeNaviButton navigation={navigation} />
         </View>
@@ -65,3 +66,8 @@ const styles = StyleSheet.create(
         },
     }
 )
+
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

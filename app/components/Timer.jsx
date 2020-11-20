@@ -40,8 +40,6 @@ class timer {
                 date: getFullDate('/'),
                 id: Math.floor(Math.random() * (999999990000000 - 1000009999999) + 1000009999999).toString().replace('3', 'th3210ty').replace('6', 'ghew#!')
             }
-            let d = [];
-
             globalObject.User.workTimes.unshift(timeWorkObj);
             globalObject.SendRequest(apiKeys.userAddNewWorkTime, { createDateOfUser: globalObject.User.createDateOfUser, email: globalObject.User.email, timeWorkObj })
 
@@ -68,7 +66,7 @@ class timer {
 }
 
 
-export default function Timer() {
+export default function Timer({ style }) {
 
     const [timePass, SetTime] = useState("00:00:00");
     const [buttonName, setButtonName] = useState("תחילת עבודה")
@@ -81,8 +79,6 @@ export default function Timer() {
             SetTime(globalObject.timer.GetPrint());
         }
         const id = setInterval(() => {
-            // {sumOfTime:"10",endTime:"22:00",startTime:"12:00",date:"10.2.20",id:"11"},
-
             if (globalObject.timer.isEnd) {
                 SetTime(globalObject.timer.GetPrint());
                 setButtonName("סיום עבודה")
@@ -101,16 +97,16 @@ export default function Timer() {
 
     return (
         <View style={styles.view}>
-            <Image style={styles.tinyLogo} source={require('../assets/circle_icon_purple.png')} />
-            <TouchableOpacity style={styles.TimerStyle} onPress={() => { globalObject.timer.ButtonHandler() }}>
-                <Text style={textBottonStyle}>
-                    {buttonName}
-                </Text>
-                <Text style={styles.Clock}>
-                    {timePass}
-                </Text>
-            </TouchableOpacity>
-
+            <View style={{ ...styles.circle, borderColor: style.view.backgroundColor }}>
+                <TouchableOpacity style={styles.TimerStyle} onPress={() => { globalObject.timer.ButtonHandler() }}>
+                    <Text style={textBottonStyle}>
+                        {buttonName}
+                    </Text>
+                    <Text style={styles.Clock}>
+                        {timePass}
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -122,38 +118,24 @@ const styles = StyleSheet.create({
         flex: 1.5,
         height: 70,
         width: Dimensions.get('window').width,
-        //flexDirection:"row-reverse",
         justifyContent: "center",
-        //paddingHorizontal: 10,
         alignItems: 'center',
         textAlign: "center",
         marginVertical: 10,
         marginTop: 20,
-
-
     },
     TimerStyle:
     {
-
-        //marginLeft:5,
-        borderRadius: 21,
-        //backgroundColor: "lightgray",
         width: 70,
-        height: 50,
-        justifyContent: 'center',
-        textAlign: "center",
-        //margin: 10,
-
-
-
+        height: 60,
     },
+
     TimerText:
     {
         fontSize: 12,
         textAlign: "center",
         fontWeight: "bold",
         color: "grey",
-
     },
     TimerTextEnd:
     {
@@ -162,33 +144,23 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "black",
         marginHorizontal: 5,
-
     },
     Clock:
     {
-        flexGrow: 1,
-        //marginLeft: 60,
         justifyContent: 'center',
         textAlign: "center",
         fontSize: 11,
         marginTop: 2,
-
     },
-    tinyLogo: {
-        position: "absolute",
-        width: 85,
-        height: 85,
-        opacity: 0.6,
-        //alignItems: 'flex-end',
-        //justifyContent: 'flex-end',
-        //marginBottom: 40,
-        //marginRight: 12,
-        //zIndex: 5,
-
-    },
-
-
-
-
+    circle:
+    {
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 60,
+        width: 90,
+        height: 90,
+        opacity: 0.9,
+        borderWidth: 2.3,
+    }
 })
 
