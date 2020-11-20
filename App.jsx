@@ -16,7 +16,7 @@ import AllRequestScreen from "./app/screens/Employee/AllRequestScreen";
 import ManualWorkingTime from "./app/screens/Employee/ManualWorkingTime";
 import EmployeeShiftsScreen from "./app/screens/Employee/EmployeeShiftsScreen";
 import employeeStatisticScreen from "./app/screens/Employee/employeeStatisticScreen";
-
+import TaskUpdateVoiceScreen from "./app/screens/Employee/TaskUpdateVoiceScreen";
 
 
 //reg and log
@@ -67,7 +67,8 @@ const listScreen =
     { employeeStatisticScreen: employeeStatisticScreen },
     { GetCodeForRes: GetCodeForRes },
     { RestPasswordWithCode: RestPasswordWithCode },
-    { ChangePasswordScreen: ChangePasswordScreen }
+    { ChangePasswordScreen: ChangePasswordScreen },
+    { TaskUpdateVoiceScreen: TaskUpdateVoiceScreen },
 
   ];
 var screens = {}
