@@ -5,10 +5,11 @@ import { Picker } from '@react-native-community/picker';
 import requestList from '../../src/api/apiKeys';
 import { globalObject } from '../../src/globalObject';
 import InfoList from '../../components/InfoList';
+import { connect } from 'react-redux';
 
 
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
 
     const [priority, SetPriority] = useState("גבוהה");
     const [header, SetHeader] = useState("");
@@ -57,6 +58,7 @@ export default function Main({ navigation }) {
             employee.id = employee.email;
             arr.push(employee);
         }
+        console.log(employees)
         return arr;
     }
     const GetLen = () => {
@@ -64,7 +66,7 @@ export default function Main({ navigation }) {
     }
 
     return (
-        <KeyboardAvoidingView style={styles.view} behavior={Platform.OS == "ios" ? "padding" : "height"}
+        <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
             enabled={Platform.OS === "ios" ? true : false}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
@@ -77,7 +79,7 @@ export default function Main({ navigation }) {
                 </View>
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
 
-                <View style={{ flexShrink: 1, }}>
+                <View style={{ height: 35 }}>
                     <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} src={require('../../assets/information_icon.png')} />
                 </View>
 
@@ -114,7 +116,7 @@ export default function Main({ navigation }) {
                 </View>
 
 
-                <TouchableOpacity style={styles.button} onPress={() => { PressHandler() }}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => { PressHandler() }}>
                     <Text style={styles.buttonText} >שלח בקשה</Text>
                 </TouchableOpacity>
             </View>
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: "#7f71e3",
+
     },
     container:
     {
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 300,
-        backgroundColor: "#6f61ca",// #6357b5
+
         borderRadius: 25,
         marginBottom: 120,
         paddingVertical: 16,
@@ -244,7 +246,7 @@ const styles = StyleSheet.create({
         //marginHorizontal: 82,
         marginRight: 35,
         marginLeft: 55,
-        backgroundColor: "#6f61ca",
+
         borderRadius: 20,
         //borderEndWidth: 1,
         //borderStartWidth: 1,
@@ -287,3 +289,7 @@ const styles = StyleSheet.create({
     }
 
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

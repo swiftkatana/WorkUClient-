@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
 import { globalObject } from '../../src/globalObject'
 
 
@@ -20,10 +21,10 @@ const render = ({ item }) => {
     )
 }
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
     const [sum, setSum] = useState(0)
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: "#7f71e3",
+
     },
     container: {
         flex: 1,
@@ -145,3 +146,7 @@ const styles = StyleSheet.create({
 
     }
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

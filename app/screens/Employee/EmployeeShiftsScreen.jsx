@@ -3,16 +3,17 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Shifts from '../../components/Shifts'
 import { globalObject } from '../../src/globalObject'
 import CheckBox from '@react-native-community/checkbox';
-export default function Main({ navigation }) {
+import { connect } from 'react-redux';
+function Main({ navigation, style }) {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>משמרות</Text>
-                <Shifts navigation={navigation} />
+                <Shifts style={style} navigation={navigation} />
             </View>
         </View>
     )
@@ -21,7 +22,7 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        backgroundColor: "#7f71e3",
+        backgroundColor: globalObject.styles.backGroundColors,
     },
     buttonsContainer:
     {
@@ -58,3 +59,7 @@ const styles = StyleSheet.create({
 
     }
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

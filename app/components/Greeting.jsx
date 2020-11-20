@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View, Dimensions, Button } from 'react-native'
 import React, { Component, useEffect, useState } from 'react'
 import { globalObject } from "../src/globalObject"
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
 
 function GetGreetingMsg() {
     var msg;
@@ -18,7 +19,7 @@ function GetGreetingMsg() {
 
 }
 
-export default function Greeting({ navigation }) {
+function Greeting({ navigation, style }) {
     const [GreetingMsg, SetGreeting] = useState("");
     useEffect(() => {
         const id = setInterval(() => {
@@ -29,7 +30,7 @@ export default function Greeting({ navigation }) {
     }, [])
     return (
 
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <Text style={styles.GreetingText}> {GreetingMsg}, {globalObject.User.firstName}</Text>
             <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate("SettingsScreen")}>
                 <Image style={styles.tinyLogo} source={require('../assets/settings_icon.png')} />
@@ -55,7 +56,6 @@ const styles = StyleSheet.create(
             justifyContent: "space-between",
             textAlign: "right",
             borderRadius: 2,
-            backgroundColor: "#7f71e3",
             borderTopRightRadius: 0,
             borderBottomRightRadius: 85,
             borderBottomLeftRadius: 0,
@@ -101,3 +101,8 @@ const styles = StyleSheet.create(
         },
     }
 )
+
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Greeting)

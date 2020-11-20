@@ -1,9 +1,10 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
 import { globalObject } from '../src/globalObject';
 
-export default function ManagerNaviButton({ navigation }) {
+function ManagerNaviButton({ navigation, style }) {
 
 
 
@@ -11,22 +12,22 @@ export default function ManagerNaviButton({ navigation }) {
         <View style={styles.view}>
 
 
-            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate('ManagerManageRequestsScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }} onPress={() => navigation.navigate('ManagerManageRequestsScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/notebook_icon.png')} />
                 <Text style={styles.settingsFont}>ניהול בקשות</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate('ManagerToolsScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }} onPress={() => navigation.navigate('ManagerToolsScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')} />
                 <Text style={styles.settingsFont}>כלי ניהול</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.settings}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }}>
                 <Image style={styles.tinyLogo} source={require('../assets/statistics_icon.png')} />
                 <Text style={styles.settingsFont}>סטטיסטיקה</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate('ManagerMainScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('ManagerMainScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/chat_icon_2.png')} />
                 <Text style={styles.settingsFont}>צ'אט</Text>
             </TouchableOpacity>
@@ -58,7 +59,6 @@ const styles = StyleSheet.create({
     {
         //marginHorizontal:1,
         borderRadius: 30,
-        backgroundColor: "#7f71e3",
         width: 75,
         height: 70,
         justifyContent: 'center',
@@ -83,3 +83,7 @@ const styles = StyleSheet.create({
 
     },
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(ManagerNaviButton)

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native'
 
-
 const CreateList = (fill, options, handler) => {
     var arr2 = [];
     var arrDay = Object.keys(fill);
@@ -28,7 +27,7 @@ const CreateList = (fill, options, handler) => {
 }
 
 
-export default function Shifts() {
+export default function Shifts({ style }) {
 
     const [lBtn, setLBtn] = useState(-1);
     const [updateScreen, SetUpdateScreen] = useState(0);
@@ -99,56 +98,56 @@ export default function Shifts() {
 
 
 
-    return (<View style={styles.mainView}>
-        <Text style={styles.header}>הגשת משמרות לשבוע הבא: </Text>
-        <Text style={styles.header}>בחר תוית לסימון: </Text>
-        <View style={styles.lableContainer}>
+    return (
+        <View style={styles.mainView}>
+            <Text style={styles.header}>הגשת משמרות לשבוע הבא: </Text>
+            <Text style={styles.header}>בחר תוית לסימון: </Text>
+            <View style={styles.lableContainer}>
 
-            <TouchableOpacity style={lBtn == 1 ? styles.lableButtonFocus : styles.lableButton} onPress={() => pressHandler(1)}>
-                <Image style={styles.tinyPluse} source={green} />
-                <Text style={styles.lableText}>יכול</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={lBtn == 1 ? styles.lableButtonFocus : styles.lableButton} onPress={() => pressHandler(1)}>
+                    <Image style={styles.tinyPluse} source={green} />
+                    <Text style={styles.lableText}>יכול</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={lBtn == 2 ? styles.lableButtonFocus : styles.lableButton} onPress={() => pressHandler(2)}>
-                <Image style={styles.tinyPluse} source={red} />
-                <Text style={styles.lableText}>לא יכול</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={lBtn == 3 ? styles.lableButtonFocus : styles.lableButton} onPress={() => pressHandler(3)}>
-                <Image style={styles.tinyPluse} source={yellow} />
-                <Text style={styles.lableText}>מעדיף שלא</Text>
-            </TouchableOpacity>
-        </View>
-        <View style={styles.view}>
-            <View >
-                <View style={styles.daysContainer}>
-                    <Text style={styles.dayText}>א</Text>
-                    <Text style={styles.dayText}>ב</Text>
-                    <Text style={styles.dayText}>ג</Text>
-                    <Text style={styles.dayText}>ד</Text>
-                    <Text style={styles.dayText}>ה</Text>
-                    <Text style={styles.dayText}>ו</Text>
-                    <Text style={styles.dayText}>ז</Text>
-                </View>
-                <View style={styles.fillContainer}>
-                    <View style={styles.stateContainer}>
-                        <Text style={styles.stateText}>בוקר</Text>
-                        <Text style={styles.stateText}>צהוריים</Text>
-                        <Text style={styles.stateText}>ערב</Text>
+                <TouchableOpacity style={lBtn == 2 ? styles.lableButtonFocus : styles.lableButton} onPress={() => pressHandler(2)}>
+                    <Image style={styles.tinyPluse} source={red} />
+                    <Text style={styles.lableText}>לא יכול</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={lBtn == 3 ? styles.lableButtonFocus : styles.lableButton} onPress={() => pressHandler(3)}>
+                    <Image style={styles.tinyPluse} source={yellow} />
+                    <Text style={styles.lableText}>מעדיף שלא</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.view}>
+                <View >
+                    <View style={styles.daysContainer}>
+                        <Text style={styles.dayText}>א</Text>
+                        <Text style={styles.dayText}>ב</Text>
+                        <Text style={styles.dayText}>ג</Text>
+                        <Text style={styles.dayText}>ד</Text>
+                        <Text style={styles.dayText}>ה</Text>
+                        <Text style={styles.dayText}>ו</Text>
+                        <Text style={styles.dayText}>ז</Text>
                     </View>
-                    {CreateList(fill, options, pressHandlerFill)}
+                    <View style={styles.fillContainer}>
+                        <View style={styles.stateContainer}>
+                            <Text style={styles.stateText}>בוקר</Text>
+                            <Text style={styles.stateText}>צהוריים</Text>
+                            <Text style={styles.stateText}>ערב</Text>
+                        </View>
+                        {CreateList(fill, options, pressHandlerFill)}
 
+
+                    </View>
 
                 </View>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }}>
+                    <Text style={styles.buttonText} >שלח משמרות</Text>
+                </TouchableOpacity>
 
             </View>
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText} >שלח משמרות</Text>
-            </TouchableOpacity>
-
+            <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי: </Text>
         </View>
-        <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי: </Text>
-
-    </View>
     )
 }
 
@@ -156,20 +155,16 @@ const styles = StyleSheet.create({
     mainView: {
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
-
         alignItems: 'flex-end',
     },
     view: {
         alignItems: 'center',
-
-
     },
     lableContainer: {
         width: Dimensions.get('window').width,
         flexDirection: 'row-reverse',
         alignItems: 'center',
         justifyContent: 'center',
-        //marginHorizontal:15
     },
     lableButton: {
         textAlign: "center",
@@ -235,7 +230,6 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width / 12,
         height: 35,
         margin: 5,
-        //backgroundColor:"seashell",
         borderRadius: 10,
         fontWeight: "bold",
     },
@@ -243,15 +237,10 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         flexDirection: 'row-reverse',
         marginHorizontal: 10,
-
-
     },
     stateContainer: {
-        //flex:1,
-        //justifyContent:'space-between',
         alignItems: 'flex-end',
         flexDirection: 'column',
-        //marginHorizontal:20,
     },
     stateText: {
         textAlign: "center",
@@ -262,16 +251,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontWeight: "bold",
         fontSize: 11,
-
     },
     button: {
         width: 200,
-        backgroundColor: "#6f61ca",// #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
-        //marginLeft:50,
-
     },
 
     buttonText: {

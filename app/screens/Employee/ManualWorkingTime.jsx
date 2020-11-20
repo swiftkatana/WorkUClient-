@@ -1,11 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
 import { globalObject } from '../../src/globalObject'
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
+    console.log(style.btn2)
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -14,14 +16,14 @@ export default function Main({ navigation }) {
                 <View style={styles.infoConteiner}>
                     <Image style={styles.tinyLogo} source={require('../../assets/information_icon.png')} />
 
-                    <View style={styles.infoTextConteiner}>
+                    <View style={{ ...styles.infoTextConteiner, ...style.btn2 }}>
                         <Text style={styles.infoText}>שים לב, שעות העבודה נוספות באופן אוטומטי לדו"ח החודשי כאשר אתה מפעיל את שעון העבודה שבמסך הראשי.</Text>
                     </View>
                 </View>
                 <TextInput style={styles.inputBox} placeholder="תאריך. דוגמה: 1.1.19" />
                 <TextInput style={styles.inputBox} placeholder="שעת התחלה" />
                 <TextInput style={styles.inputBox} placeholder="שעת סיום" />
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }}>
                     <Text style={styles.buttonText}>כניסה</Text>
                 </TouchableOpacity>
             </View>
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        backgroundColor: "#7f71e3",
+
 
 
     },
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 300,
-        backgroundColor: "#6f61ca",
+
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
         //marginHorizontal: 82,
         marginRight: 35,
         marginLeft: 55,
-        backgroundColor: "#6f61ca",
+
         borderRadius: 20,
         //borderEndWidth: 1,
         //borderStartWidth: 1,
@@ -135,3 +137,7 @@ const styles = StyleSheet.create({
 
     }
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

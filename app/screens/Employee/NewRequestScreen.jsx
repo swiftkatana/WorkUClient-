@@ -4,9 +4,9 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { Picker } from '@react-native-community/picker';
 import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
+import { connect } from 'react-redux';
 
-
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
     const [type, SetType] = useState("חל''ת");
     const [text, SetText] = useState("");
     const PressHandler = async (type, body) => {
@@ -23,7 +23,7 @@ export default function Main({ navigation }) {
         }
     }
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -60,7 +60,7 @@ export default function Main({ navigation }) {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={() => PressHandler(type, text)}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => PressHandler(type, text)}>
                     <Text style={styles.buttonText} >שלח בקשה</Text>
                 </TouchableOpacity>
             </View>
@@ -72,8 +72,6 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: "#7f71e3",
-
     },
     container:
     {
@@ -161,3 +159,7 @@ const styles = StyleSheet.create({
     }
 
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)
