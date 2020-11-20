@@ -1,11 +1,12 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
 import { globalObject } from '../../src/globalObject'
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        backgroundColor: "#7f71e3",
+
 
 
     },
@@ -135,3 +136,7 @@ const styles = StyleSheet.create({
 
     }
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

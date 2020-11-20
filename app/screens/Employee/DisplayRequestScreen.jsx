@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
 import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
 
     const item = navigation.state.params.item;
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: "#7f71e3",
+
 
     },
     container:
@@ -106,3 +107,7 @@ const styles = StyleSheet.create({
     }
 
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

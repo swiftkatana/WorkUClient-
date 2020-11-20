@@ -1,26 +1,27 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
 import { globalObject } from '../src/globalObject';
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate('MainRequestScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('MainRequestScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/notebook_icon.png')} />
                 <Text style={styles.settingsFont}>בקשות</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate('EmployeePortalScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('EmployeePortalScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')} />
                 <Text style={styles.settingsFont}>פורטל עובד</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate('employeeStatisticScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('employeeStatisticScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/statistics_icon.png')} />
                 <Text style={styles.settingsFont}>סטטיסטיקה</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.settings} onPress={() => navigation.navigate('ManagerMainScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('ManagerMainScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/chat_icon_2.png')} />
                 <Text style={styles.settingsFont}>צ'אט</Text>
             </TouchableOpacity>
@@ -67,3 +68,7 @@ const styles = StyleSheet.create({
         height: 30,
     },
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

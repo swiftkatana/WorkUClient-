@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
 import { globalObject } from '../src/globalObject'
 
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
     const logout = async () => {
         await removeValue('password');
         await removeValue('email');
@@ -18,7 +19,7 @@ export default function Main({ navigation }) {
         }
     }
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -27,7 +28,7 @@ export default function Main({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ChangePasswordScreen")}>
                     <Text style={styles.buttonText}>שינוי סיסמה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SelectionScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("PreferencesOfUserForStyleScreen")}>
                     <Text style={styles.buttonText}>ערכת נושא</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SelectionScreen")}>
@@ -46,7 +47,6 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        backgroundColor: "#7f71e3",
 
 
     },
@@ -90,3 +90,7 @@ const styles = StyleSheet.create({
 
     }
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

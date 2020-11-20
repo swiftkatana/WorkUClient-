@@ -25,6 +25,7 @@ export default requestList = {
   // recive none
   userRequestRestCode: "/api/user/createrestpasswordcode",
 
+  userUpdateStyleUrl: 'api/user/updatestyleuser',
   //send{createDateOfUser,email}
   // recive none
   userRestWorkTimesUrl: "/api/user/restuserworktime",

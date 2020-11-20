@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { connect } from 'react-redux';
 import LoginForm from "../../components/LoginForm";
 import Logo from '../../components/Logo';
+import { changeStyle } from '../../src/action';
 import { globalObject } from "../../src/globalObject";
 
 
-export default function Main({ navigation }) {
+function Main({ navigation, changeStyle }) {
 
   return (
     <View style={styles.container}>
@@ -45,4 +47,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+const mapStateToProps = (state) => ({
+  style: state.styles
+})
 
+
+
+export default connect(mapStateToProps, { changeStyle })(Main);
