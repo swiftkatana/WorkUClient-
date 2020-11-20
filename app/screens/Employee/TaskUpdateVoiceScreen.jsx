@@ -7,7 +7,6 @@ import requestList from "../../src/api/apiKeys";
 import { Audio } from 'expo-av';
 import * as Permissions from "expo-permissions";
 import VoiceRecording from "../../components/VoiceRecording";
-import { connect } from "react-redux";
 
 
 
@@ -21,7 +20,7 @@ const pressHandler = () => {
     Alert.alert(title, msg, alertButton, { cancelable: false });
 
 }
-function Main({ navigation, style }) {
+export default function Main({ navigation }) {
 
     const play = require('../../assets/play_button_icon.png');
     const pause = require('../../assets/pause_icon.png');
@@ -58,7 +57,7 @@ function Main({ navigation, style }) {
         }
     };
     return (
-        <View style={{ ...styles.view, ...style.view }}>
+        <View style={styles.view}>
             <TouchableOpacity
                 style={styles.exitButton}
                 onPress={() => navigation.pop()}
@@ -79,7 +78,7 @@ function Main({ navigation, style }) {
                             {/* <Text style={styles.subTitle}>{item.description}</Text> */}
                             <View style={styles.myVoiceMsg}>
                                 <TouchableOpacity
-                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
+                                    style={styles.myVoiceButton}
                                     onPress={playVoiceBtn}
                                 >
                                     <Image style={styles.tinyLogo} source={imgSrc} />
@@ -88,16 +87,16 @@ function Main({ navigation, style }) {
                             </View>
                             <View style={styles.yourVoiceMsg}>
                                 <TouchableOpacity
-                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
+                                    style={styles.yourVoiceButton}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
                                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                                     <Text style={styles.buttonText}>נוח</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ ...styles.yourVoiceButton, ...style.btn2 }}>
+                            <View style={styles.yourVoiceMsg}>
                                 <TouchableOpacity
-                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
+                                    style={styles.yourVoiceButton}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
                                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
@@ -106,7 +105,7 @@ function Main({ navigation, style }) {
                             </View>
                             <View style={styles.myVoiceMsg}>
                                 <TouchableOpacity
-                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
+                                    style={styles.myVoiceButton}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
                                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
@@ -119,19 +118,19 @@ function Main({ navigation, style }) {
             </View>
             <View style={styles.recordSendBtnList}>
                 <TouchableOpacity
-                    style={{ ...styles.button, ...style.btn2 }}
+                    style={styles.button}
                 >
                     <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                     <Text style={styles.buttonText}>הקלט</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{ ...styles.button, ...style.btn2 }}
+                    style={styles.button}
                 >
                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                     <Text style={styles.buttonText}>נגן הקלטה</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{ ...styles.button, ...style.btn2 }}
+                    style={styles.button}
 
                 >
                     <Image style={styles.tinyLogo} source={require('../../assets/paper_plane_icon.png')} />
@@ -142,7 +141,7 @@ function Main({ navigation, style }) {
             </View>
             <View style={styles.updateBtnContainer}>
                 <TouchableOpacity
-                    style={{ ...styles.updateButton }}
+                    style={styles.updateButton}
                     onPress={pressHandler}
                 >
                     <Image style={styles.lessTinyLogo} source={require('../../assets/star_icon.png')} />
@@ -268,6 +267,7 @@ const styles = StyleSheet.create({
     myVoiceButton: {
         width: 170,
         height: 70,
+        backgroundColor: "#584DA1", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -279,6 +279,7 @@ const styles = StyleSheet.create({
     yourVoiceButton: {
         width: 170,
         height: 70,
+        backgroundColor: "#6f61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -323,7 +324,3 @@ const styles = StyleSheet.create({
         color: "seashell",
     },
 });
-const mapStateToProps = (state) => {
-    return { style: state.styles }
-}
-export default connect(mapStateToProps, {})(Main)
