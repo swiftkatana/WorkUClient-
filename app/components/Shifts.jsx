@@ -27,7 +27,7 @@ const CreateList = (fill, options, handler) => {
 }
 
 
-export default function Shifts({ style }) {
+export default function Shifts({ style, navigation }) {
 
     const [lBtn, setLBtn] = useState(-1);
     const [updateScreen, SetUpdateScreen] = useState(0);

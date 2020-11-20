@@ -58,9 +58,6 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        backgroundColor: globalObject.styles.backGroundColors,
-
-
     }, logoText: {
         marginVertical: 20,
         fontSize: 22,
