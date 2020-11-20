@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import LoginForm from "../../components/LoginForm";
 import Logo from '../../components/Logo';
-import { globalObject } from "../../src/globalObject";
-
 
 export default function Main({ navigation }) {
-
   return (
     <View style={styles.container}>
       <Logo />

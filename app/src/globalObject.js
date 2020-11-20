@@ -14,11 +14,18 @@ class global {
     this.timer;
     this.language;
 
-
-    this.sendNotification = async (email, data, body, title, type, sound = 'default') => {
-      let to = await globalObject.SendRequest(requestList.getExpoIdUrl, { email });
-      if (!to) return
-
+    this.sendNotification = async (
+      email,
+      data,
+      body,
+      title,
+      type,
+      sound = "default"
+    ) => {
+      let to = await globalObject.SendRequest(requestList.getExpoIdUrl, {
+        email,
+      });
+      if (!to) return;
 
       const message = {
         to,
@@ -27,20 +34,19 @@ class global {
         body,
         data: { data, type },
         vibrate: true,
-        priority: 'high',
+        priority: "high",
       };
 
-      await fetch('https://exp.host/--/api/v2/push/send', {
-        method: 'POST',
+      await fetch("https://exp.host/--/api/v2/push/send", {
+        method: "POST",
         headers: {
-          Accept: 'application/json',
-          'Accept-encoding': 'gzip, deflate',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Accept-encoding": "gzip, deflate",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(message),
       });
-    }
-
+    };
 
     this.SendRequest = async (url, obj) => {
       title = "";
@@ -57,7 +63,7 @@ class global {
         try {
           const res = await sever.post(url, obj);
           if (res.data.err) {
-            console.log(res.data)
+            console.log(res.data);
             switch (res.data.err) {
               case responedList.DBError:
               case responedList.FaildSave:
@@ -85,7 +91,7 @@ class global {
                 msg = "בבקשה תבדוק את המידע שהכנסת";
                 break;
               default:
-                console.log(responedList.infoInvalid === res.data.err)
+                console.log(responedList.infoInvalid === res.data.err);
                 title = res.data.err;
                 msg = "error";
                 break;
@@ -121,12 +127,12 @@ class global {
           return;
         }
 
-        if (Platform.OS === 'android') {
-          Notifications.setNotificationChannelAsync('default', {
-            name: 'default',
+        if (Platform.OS === "android") {
+          Notifications.setNotificationChannelAsync("default", {
+            name: "default",
             importance: Notifications.AndroidImportance.MAX,
             vibrationPattern: [0, 250, 250, 250],
-            lightColor: '#FF231F7C',
+            lightColor: "#FF231F7C",
           });
         }
         token = await Notifications.getExpoPushTokenAsync();

@@ -48,6 +48,7 @@ export default function Main({ navigation }) {
     }, []);
 
     return (
+
         <View style={styles.container}>
             <Greeting navigation={navigation} />
             <CompanyCode navigation={navigation} />
