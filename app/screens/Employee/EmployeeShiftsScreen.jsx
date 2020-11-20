@@ -13,7 +13,7 @@ function Main({ navigation, style }) {
             </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>משמרות</Text>
-                <Shifts navigation={navigation} />
+                <Shifts style={style} navigation={navigation} />
             </View>
         </View>
     )

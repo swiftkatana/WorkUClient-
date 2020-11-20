@@ -60,7 +60,7 @@ function Main({ navigation, style }) {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={() => PressHandler(type, text)}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => PressHandler(type, text)}>
                     <Text style={styles.buttonText} >שלח בקשה</Text>
                 </TouchableOpacity>
             </View>

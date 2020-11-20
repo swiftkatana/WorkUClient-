@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, SectionList, } from 'react-native'
 import { connect } from 'react-redux'
 import { changeStyle } from '../src/action'
 import apiKeys from '../src/api/apiKeys'
 import { globalObject } from '../src/globalObject'
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 let colorsArry = [{ color: "#7f71e3", id: 0 }, { color: "#5d8aa8", id: 1 }, { color: "#191970", id: 2 }, { color: "#a4c139", id: 3 }, { color: "#fe6f5e", id: 4 }, { color: "#ff2052", id: 5 }]
 function Main({ navigation, style, changeStyle }) {
 
-    const [pickColor, setPickColor] = useState('');
+    const [pickColor, setPickColor] = useState(style.view.backgroundColor);
     const handlerForSwich = (item) => {
         let style = {
             view: { backgroundColor: item.color }
@@ -94,38 +98,53 @@ function Main({ navigation, style, changeStyle }) {
 
         return colorsArry.map(item => (
             <TouchableOpacity key={item.id} onPress={() => handlerForSwich(item)}>
-
-
                 <View style={{ ...styles.colorPicker, backgroundColor: item.color, borderColor: item.color === pickColor ? '#000' : pickColor, }}></View>
             </TouchableOpacity>
         ))
 
     }
-
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
-            <View style={styles.buttonsContainer}>
-                {renderListColors()}
+            <View style={styles.colorsContainer}>
+                <Text>צבע גופן</Text>
+                <View style={styles.buttonsColorsContainer}>
+                    {renderListColors()}
+                </View>
             </View>
         </View>
     )
 }
 const styles = StyleSheet.create({
     view: {
-        //marginTop:50,
         flex: 1,
     }, colorPicker: {
-        borderWidth: 1,
+        borderWidth: 2,
         margin: 1,
-        width: 50,
-        height: 50
+        width: responsiveWidth(15),
+        height: responsiveHeight(10),
+        borderBottomLeftRadius: 35,
+        borderTopRightRadius: 35,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 10
+
+    }, colorsContainer: {
+        flex: 1,
+
+        alignItems: "center",
+        flexDirection: "column",
     },
-    buttonsContainer:
+    buttonsColorsContainer:
     {
-        flex: 231,
+
+        alignItems: "flex-end",
+        justifyContent: "space-between",
+        flex: 1,
         flexDirection: "row",
         margin: 10,
     },

@@ -56,7 +56,6 @@ const styles = StyleSheet.create(
             justifyContent: "space-between",
             textAlign: "right",
             borderRadius: 2,
-            backgroundColor: "#7f71e3",
             borderTopRightRadius: 0,
             borderBottomRightRadius: 85,
             borderBottomLeftRadius: 0,

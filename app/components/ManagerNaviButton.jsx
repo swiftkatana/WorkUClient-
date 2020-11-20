@@ -12,17 +12,17 @@ function ManagerNaviButton({ navigation, style }) {
         <View style={styles.view}>
 
 
-            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('ManagerManageRequestsScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }} onPress={() => navigation.navigate('ManagerManageRequestsScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/notebook_icon.png')} />
                 <Text style={styles.settingsFont}>ניהול בקשות</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('ManagerToolsScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }} onPress={() => navigation.navigate('ManagerToolsScreen')}>
                 <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')} />
                 <Text style={styles.settingsFont}>כלי ניהול</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ ...styles.settings, ...style.view }}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }}>
                 <Image style={styles.tinyLogo} source={require('../assets/statistics_icon.png')} />
                 <Text style={styles.settingsFont}>סטטיסטיקה</Text>
             </TouchableOpacity>
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     {
         //marginHorizontal:1,
         borderRadius: 30,
-        backgroundColor: "#7f71e3",
         width: 75,
         height: 70,
         justifyContent: 'center',

@@ -7,6 +7,7 @@ import requestList from "../../src/api/apiKeys";
 import { Audio } from 'expo-av';
 import * as Permissions from "expo-permissions";
 import VoiceRecording from "../../components/VoiceRecording";
+import { connect } from "react-redux";
 
 
 
@@ -14,13 +15,13 @@ const pressHandler = () => {
     title = "שים לב";
     msg = "פעולה זו תעביר את המשימה לסטטוס ''הושלמה'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות"
     alertButton = [
-        { text: "אישור",},
-        { text: "ביטול",},
+        { text: "אישור", },
+        { text: "ביטול", },
     ];
     Alert.alert(title, msg, alertButton, { cancelable: false });
 
 }
-export default function Main({ navigation }) {
+function Main({ navigation, style }) {
 
     const play = require('../../assets/play_button_icon.png');
     const pause = require('../../assets/pause_icon.png');
@@ -31,10 +32,10 @@ export default function Main({ navigation }) {
     const [onPlay, setOnPlay] = useState(false);
 
     const playVoiceBtn = () => {
-        if(onPlay){
+        if (onPlay) {
             setOnPlay(false);
             imgSrc = play;
-        }else{
+        } else {
             setOnPlay(true);
             imgSrc = pause;
         }
@@ -57,7 +58,7 @@ export default function Main({ navigation }) {
         }
     };
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity
                 style={styles.exitButton}
                 onPress={() => navigation.pop()}
@@ -72,43 +73,43 @@ export default function Main({ navigation }) {
                     <Text style={styles.subTitle}>תקציר: {item.title}</Text>
                     <Text style={styles.subTitle}>שם עובד: </Text>
                     <View style={styles.scrollView}>
-                    {/* <Text style={styles.bodyHeader}>פירוט:</Text> */}
+                        {/* <Text style={styles.bodyHeader}>פירוט:</Text> */}
 
                         <ScrollView>
                             {/* <Text style={styles.subTitle}>{item.description}</Text> */}
                             <View style={styles.myVoiceMsg}>
                                 <TouchableOpacity
-                                    style={styles.myVoiceButton}
+                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
                                     onPress={playVoiceBtn}
                                 >
-                                    <Image style={styles.tinyLogo} source={imgSrc}/> 
+                                    <Image style={styles.tinyLogo} source={imgSrc} />
                                     <Text style={styles.buttonText}>אני</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.yourVoiceMsg}>
                                 <TouchableOpacity
-                                    style={styles.yourVoiceButton}
+                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
-                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')}/> 
+                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                                     <Text style={styles.buttonText}>נוח</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={styles.yourVoiceMsg}>
+                            <View style={{ ...styles.yourVoiceButton, ...style.btn2 }}>
                                 <TouchableOpacity
-                                    style={styles.yourVoiceButton}
+                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
-                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')}/> 
+                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                                     <Text style={styles.buttonText}>נוח</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.myVoiceMsg}>
                                 <TouchableOpacity
-                                    style={styles.myVoiceButton}
+                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
                                     onPress={() => SendUpdateTask(item.id, status)}
                                 >
-                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')}/> 
+                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                                     <Text style={styles.buttonText}>אני</Text>
                                 </TouchableOpacity>
                             </View>
@@ -117,37 +118,37 @@ export default function Main({ navigation }) {
                 </View>
             </View>
             <View style={styles.recordSendBtnList}>
-                    <TouchableOpacity
-                            style={styles.button}
-                        >
-                            <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')}/> 
-                            <Text style={styles.buttonText}>הקלט</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                    >
-                        <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')}/> 
-                        <Text style={styles.buttonText}>נגן הקלטה</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                     
-                    >
-                        <Image style={styles.tinyLogo} source={require('../../assets/paper_plane_icon.png')}/> 
-                        <Text style={styles.buttonText}>שלח הודעה</Text>
-                    </TouchableOpacity>
-                    {/* <VoiceRecording /> */}
-                    
-                </View>
-                <View style={styles.updateBtnContainer}>
-                    <TouchableOpacity
-                        style={styles.updateButton}
-                        onPress ={pressHandler}
-                    >
-                        <Image style={styles.lessTinyLogo} source={require('../../assets/star_icon.png')}/> 
-                        <Text style={styles.buttonText}>סיימתי בהצלחה</Text>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                    style={{ ...styles.button, ...style.btn2 }}
+                >
+                    <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
+                    <Text style={styles.buttonText}>הקלט</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ ...styles.button, ...style.btn2 }}
+                >
+                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
+                    <Text style={styles.buttonText}>נגן הקלטה</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ ...styles.button, ...style.btn2 }}
+
+                >
+                    <Image style={styles.tinyLogo} source={require('../../assets/paper_plane_icon.png')} />
+                    <Text style={styles.buttonText}>שלח הודעה</Text>
+                </TouchableOpacity>
+                {/* <VoiceRecording /> */}
+
+            </View>
+            <View style={styles.updateBtnContainer}>
+                <TouchableOpacity
+                    style={{ ...styles.updateButton }}
+                    onPress={pressHandler}
+                >
+                    <Image style={styles.lessTinyLogo} source={require('../../assets/star_icon.png')} />
+                    <Text style={styles.buttonText}>סיימתי בהצלחה</Text>
+                </TouchableOpacity>
+            </View>
             {/* <VoiceRecording/> */}
         </View>
     );
@@ -168,8 +169,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         textAlign: "right",
         backgroundColor: "seashell",
-        marginHorizontal:25,
-        borderRadius:20,
+        marginHorizontal: 25,
+        borderRadius: 20,
         borderWidth: 3,
         borderColor: "lightgrey",
     },
@@ -193,15 +194,15 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "seashell",
     },
-    tinyLogo:{
+    tinyLogo: {
         width: 20,
         height: 20,
         alignItems: 'center',
         justifyContent: 'center',
         //marginBottom: 50,
-        
+
     },
-    lessTinyLogo:{
+    lessTinyLogo: {
         width: 30,
         height: 30,
         alignItems: 'center',
@@ -248,26 +249,25 @@ const styles = StyleSheet.create({
         textAlign: "right",
         justifyContent: "center",
     },
-    recordSendBtnList:{
+    recordSendBtnList: {
         width: Dimensions.get('window').width,
         flexDirection: 'row-reverse',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop:10,
+        marginTop: 10,
 
     },
-    myVoiceMsg:{
-    width: Dimensions.get('window').width,
-    alignItems:'flex-start',
+    myVoiceMsg: {
+        width: Dimensions.get('window').width,
+        alignItems: 'flex-start',
     },
-    yourVoiceMsg:{
-    width: Dimensions.get('window').width-55,
-    alignItems:'flex-end',
+    yourVoiceMsg: {
+        width: Dimensions.get('window').width - 55,
+        alignItems: 'flex-end',
     },
     myVoiceButton: {
         width: 170,
         height: 70,
-        backgroundColor: "#584DA1", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -279,7 +279,6 @@ const styles = StyleSheet.create({
     yourVoiceButton: {
         width: 170,
         height: 70,
-        backgroundColor: "#6f61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -298,7 +297,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         alignItems: 'center',
     },
-    updateButton:{
+    updateButton: {
         width: 200,
         height: 80,
         backgroundColor: "#6f61ca", // #6357b5
@@ -324,3 +323,7 @@ const styles = StyleSheet.create({
         color: "seashell",
     },
 });
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(Main)

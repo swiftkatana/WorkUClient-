@@ -58,6 +58,7 @@ function Main({ navigation, style }) {
             employee.id = employee.email;
             arr.push(employee);
         }
+        console.log(employees)
         return arr;
     }
     const GetLen = () => {
@@ -78,7 +79,7 @@ function Main({ navigation, style }) {
                 </View>
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
 
-                <View style={{ flexShrink: 1, }}>
+                <View style={{ height: 35 }}>
                     <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} src={require('../../assets/information_icon.png')} />
                 </View>
 
@@ -115,7 +116,7 @@ function Main({ navigation, style }) {
                 </View>
 
 
-                <TouchableOpacity style={styles.button} onPress={() => { PressHandler() }}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => { PressHandler() }}>
                     <Text style={styles.buttonText} >שלח בקשה</Text>
                 </TouchableOpacity>
             </View>
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1,
-        backgroundColor: globalObject.styles.backGroundColors,
+
     },
     container:
     {
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 300,
-        backgroundColor: "#6f61ca",// #6357b5
+
         borderRadius: 25,
         marginBottom: 120,
         paddingVertical: 16,
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
         //marginHorizontal: 82,
         marginRight: 35,
         marginLeft: 55,
-        backgroundColor: "#6f61ca",
+
         borderRadius: 20,
         //borderEndWidth: 1,
         //borderStartWidth: 1,

@@ -25,7 +25,7 @@ function CompanyCode({ style }) {
 
     return (
         <View style={styles.view}>
-            <TouchableOpacity style={{ ...styles.button, ...style.view }} onPress={pressHandler}>
+            <TouchableOpacity style={{ ...styles.button, ...style.btn1 }} onPress={pressHandler}>
                 <Text style={styles.buttonText}>קוד גישה להוספת עובדים</Text>
                 <Image style={styles.tinyLogo} source={require('../assets/employee_icon.png')} />
             </TouchableOpacity>
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
 
     button: {
         width: Dimensions.get('window').width - 170,
-        backgroundColor: "#7f71e3",
         borderRadius: 20,
         marginVertical: 10,
         marginHorizontal: 20,

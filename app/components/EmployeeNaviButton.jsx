@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     settings:
     {
         borderRadius: 30,
-        backgroundColor: "#7f71e3",
         width: 75,
         height: 70,
         justifyContent: 'center',
