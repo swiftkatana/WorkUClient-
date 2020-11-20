@@ -119,19 +119,19 @@ function Main({ navigation, style }) {
             </View>
             <View style={styles.recordSendBtnList}>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{ ...styles.button, ...style.btn2 }}
                 >
                     <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                     <Text style={styles.buttonText}>הקלט</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{ ...styles.button, ...style.btn2 }}
                 >
                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                     <Text style={styles.buttonText}>נגן הקלטה</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{ ...styles.button, ...style.btn2 }}
 
                 >
                     <Image style={styles.tinyLogo} source={require('../../assets/paper_plane_icon.png')} />
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     updateButton: {
         width: 200,
         height: 80,
-        backgroundColor: "#6f61ca", // #6357b5
+        backgroundColor: "#6a61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
