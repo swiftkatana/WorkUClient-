@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Image, Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import apiKeys from '../src/api/apiKeys';
 import { globalObject } from "../src/globalObject"
@@ -95,10 +95,15 @@ export default function Timer({ style }) {
         }
     }, [])
 
+    let title = timePass !== "00:00:00" ? "להפסיק את השעון" : "להתחיל את השעון"
+    let alertButton = [{
+        text: timePass === "00:00:00" ? "התחל" : 'הפסק', onPress: () => globalObject.timer.ButtonHandler()
+    }, { text: "בטל" }];
+
     return (
         <View style={styles.view}>
             <View style={{ ...styles.circle, borderColor: style.view.backgroundColor }}>
-                <TouchableOpacity style={styles.TimerStyle} onPress={() => { globalObject.timer.ButtonHandler() }}>
+                <TouchableOpacity style={styles.TimerStyle} onPress={() => { Alert.alert('', title, alertButton) }}>
                     <Text style={textBottonStyle}>
                         {buttonName}
                     </Text>
