@@ -5,6 +5,7 @@ import CompanyCode from "../../components/CompanyCode"
 import TaskBoard from "../../components/TaskBoard"
 import ManagerNaviButton from "../../components/ManagerNaviButton"
 import * as Notifications from "expo-notifications";
+import { globalObject } from '../../src/globalObject'
 
 export default function Main({ navigation }) {
 
