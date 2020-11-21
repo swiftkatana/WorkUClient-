@@ -25,7 +25,7 @@ function Main({ style, navigation }) {
 
                 globalObject.User.personalRequests[data.data._id] = data.data
                 break;
-            case 'updateTask':
+            case 'updateTaskVoice':
                 Alert.alert('you got notification', data.type);
                 globalObject.User.tasks.processing[data.data.taskId].audios.push(data.data);
 

@@ -32,12 +32,23 @@ function Main({ navigation, style }) {
     const imgSrc = [play, pause, square, microphone, paper_plane];
     const item = navigation.state.params.item;
     const [onPlay, setOnPlay] = useState(false);
-    const [update, setUpdate] = useState(true);
+    const [update, setUpdate] = useState(globalObject.User.tasks.processing[item._id].audios.length);
     const myScroll = useRef(null)
     const Rec = new Recorder();
 
     useEffect(() => {
+
+        const handle = setInterval(() => {
+
+            if (update !== globalObject.User.tasks.processing[item._id].audios.length)
+                setUpdate(update + 1)
+            console.log(globalObject.User.tasks.processing[item._id].audios.length)
+
+        }, 1000);
         myScroll.current.scrollToEnd({ animated: true })
+        return () => {
+            clearInterval(handle);
+        }
     }, [update])
 
 
@@ -52,8 +63,8 @@ function Main({ navigation, style }) {
         if (audio) {
             globalObject.User.tasks.processing[item._id].audios.push(audio);
             audio.taskId = item._id;
-            globalObject.sendNotification(noti, audio, 'התקבלה הודעה קולית חדשה', 'התקבל עדכון', 'updateTask');
-            setUpdate(!update);
+            globalObject.sendNotification(noti, audio, 'התקבלה הודעה קולית חדשה', 'התקבל עדכון', 'updateTaskVoice');
+            setUpdate(update + 1);
         }
     }
 
@@ -114,10 +125,7 @@ function Main({ navigation, style }) {
                     <Text style={styles.subTitle}>שם עובד: </Text>
                     <View style={styles.scrollView}>
 
-                        <ScrollView ref={(ref) => myScroll.current = ref}
-                            pagingEnabled={true}
-                            showsHorizontalScrollIndicator={false}
-                            bounces={true}>
+                        <ScrollView ref={(ref) => myScroll.current = ref}>
 
                             {renderVoiceList()}
 

@@ -15,7 +15,7 @@ export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity,
             if (currentLen != len)
                 UpdateCurrentLen(len);
 
-        }, 300);
+        }, 100);
 
         let arr = GetList();
         if (arr.length == 0) {
