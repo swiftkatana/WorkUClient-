@@ -12,7 +12,6 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 
-
 const pressHandler = () => {
     title = "שים לב";
     msg = "פעולה זו תעביר את המשימה לסטטוס ''הושלמה'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות"
@@ -182,14 +181,15 @@ const styles = StyleSheet.create({
         borderColor: "seashell",
     },
     subTitle: {
-        marginRight: 30,
-        marginLeft: 30,
+        textAlign: "center",
+        //marginRight: 30,
+        //marginLeft: 30,
         fontSize: 18,
         color: "seashell",
     },
     descriptionStyle: {
-        textAlign: "right",
-        marginRight: 30,
+        textAlign: "center",
+        //marginRight: 30,
         marginLeft: 30,
         fontSize: 18,
         color: "seashell",
@@ -288,22 +288,22 @@ const styles = StyleSheet.create({
         borderColor: "lightgrey",
     },
     button: {
-        width: 100,
-        height: 80,
+        width: responsiveWidth(25),
+        height: responsiveHeight(10.2),
         backgroundColor: "#6f61ca", // #6357b5
         borderRadius: 25,
-        marginVertical: 10,
+        marginVertical: 5,
         paddingVertical: 16,
         marginHorizontal: 10,
         alignItems: 'center',
     },
     updateButton: {
-        width: 200,
-        height: 80,
+        width: responsiveWidth(50),
+        height: responsiveHeight(10.2),
         backgroundColor: "#6a61ca", // #6357b5
         borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 16,
+        marginVertical: 5,
+        paddingVertical: 12,
         marginHorizontal: 10,
         alignItems: 'center',
     },
