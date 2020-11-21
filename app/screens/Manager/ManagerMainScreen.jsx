@@ -5,6 +5,7 @@ import CompanyCode from "../../components/CompanyCode"
 import TaskBoard from "../../components/TaskBoard"
 import ManagerNaviButton from "../../components/ManagerNaviButton"
 import * as Notifications from "expo-notifications";
+import { globalObject } from '../../src/globalObject'
 
 export default function Main({ navigation }) {
 
@@ -23,7 +24,10 @@ export default function Main({ navigation }) {
                 globalObject.User.personalRequests[data.data._id] = data.data;
 
                 break;
-
+            case 'updateTaskVoice':
+                Alert.alert('you got notification', data.type);
+                globalObject.User.tasks.processing[data.data.taskId].audios.push(data.data);
+                break;
             default:
                 Alert.alert('you got not handler notification', data.type);
                 break;
