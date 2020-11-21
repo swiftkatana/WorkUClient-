@@ -155,12 +155,12 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: "flex-end",
-        height: responsiveHeight(63),
+        height: responsiveHeight(53),
         
     },
     scrollView:
     {
-        height: responsiveHeight(40),
+        height: responsiveHeight(30),
         marginTop: 10,
         justifyContent: 'flex-end',
         textAlign: "right",
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     },
     myVoiceButton: {
         width: responsiveWidth(50),
-        height: responsiveHeight(10),
+        height: responsiveHeight(11),
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     },
     yourVoiceButton: {
         width: responsiveWidth(50),
-        height: responsiveHeight(10),
+        height: responsiveHeight(11),
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
