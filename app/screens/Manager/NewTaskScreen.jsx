@@ -6,15 +6,14 @@ import requestList from '../../src/api/apiKeys';
 import { globalObject } from '../../src/globalObject';
 import InfoList from '../../components/InfoList';
 import { connect } from 'react-redux';
-
+import Recording from '../../class/VoiceRecording';
 
 
 function Main({ navigation, style }) {
-
     const [priority, SetPriority] = useState("גבוהה");
     const [header, SetHeader] = useState("");
-    const [text, SetText] = useState("");
     const [sendTo, SetSendTo] = useState({});
+    const recording = new Recording();
     const PressHandler = async () => {
 
         if (!sendTo.email) {
@@ -25,13 +24,16 @@ function Main({ navigation, style }) {
             Alert.alert("הפעולה נחשלה", "חסר תקציר", [{ text: "הבנתי" }]);
             return;
         }
-        if (text.length < 5) {
-            Alert.alert("הפעולה נחשלה", "חסר הסבר", [{ text: "הבנתי" }]);
-            return;
-        }
-        const res = await globalObject.SendRequest(requestList.createTaskUrl, { employees: [sendTo.email], task: { title: header, priority: priority, description: text } });
+
+        const res = await globalObject.SendRequest(requestList.createTaskUrl, { employees: [sendTo.email], task: { title: header, priority: priority } });
         if (res) {
             globalObject.User.tasks.processing[res._id] = res;
+            let audio = await recording.UploadToServer(globalObject.User.email, res._id, globalObject.User.fullName);
+            if (audio) {
+
+                globalObject.User.tasks.processing[res._id].audios.push(audio);
+            }
+            console.log(globalObject.User.tasks.processing[res._id])
             navigation.navigate('ManagerMainScreen');
             globalObject.sendNotification(sendTo.email, res, 'אפשר לראות אותה בלוח המשימות', 'משימה חדשה נכנסה', 'newTask')
         }
@@ -108,17 +110,20 @@ function Main({ navigation, style }) {
                 <View style={styles.recordSendBtnList}>
                     <TouchableOpacity
                         style={{ ...styles.vButton, ...style.btn2 }}
+                        onPressIn={recording.StartRecording}
+                        onPressOut={recording.StopRecording}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                         <Text style={styles.buttonText}>הקלט משימה</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={{ ...styles.vButton, ...style.btn2 }}
+                        onPress={recording.playAudio}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                         <Text style={styles.buttonText}>נגן הקלטה</Text>
                     </TouchableOpacity>
-                    {/* <VoiceRecording /> */}
+
 
                 </View>
                 <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => { PressHandler() }}>
@@ -136,20 +141,20 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
         height: Dimensions.get('window').height,
 
 
     },
-    
+
     container:
     {
         //paddingTop: 10,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        
+
 
 
     },
@@ -159,10 +164,10 @@ const styles = StyleSheet.create({
         //marginRight: 30,
         fontSize: 48,
         color: "seashell",
-        borderBottomWidth:2,
+        borderBottomWidth: 2,
         borderColor: "seashell",
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
+        textAlign: "center",
+        width: Dimensions.get('window').width * 0.80,
 
     },
     subTitle:
@@ -171,31 +176,31 @@ const styles = StyleSheet.create({
         color: "seashell",
 
     },
-    mainListCon:{
-        height: Dimensions.get('window').height/6,
-        width: Dimensions.get('window').width/1.3,
+    mainListCon: {
+        height: Dimensions.get('window').height / 6,
+        width: Dimensions.get('window').width / 1.3,
         backgroundColor: "#6f61ca",
-        borderWidth:1,
+        borderWidth: 1,
         borderColor: "#584DA1",
         borderRadius: 25,
-        marginTop:10,
+        marginTop: 10,
     },
-    listContainer:{
-        alignItems:'center',
+    listContainer: {
+        alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height/1.6 -20,
+        height: Dimensions.get('window').height / 1.6 - 20,
         marginTop: 10,
     },
     list:
     {
         flex: 1,
-        height: Dimensions.get('window').height/18,
-        width: Dimensions.get('window').width/1.5,
+        height: Dimensions.get('window').height / 18,
+        width: Dimensions.get('window').width / 1.5,
         backgroundColor: "seashell",
         flexDirection: "row-reverse",
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal:30,
+        paddingHorizontal: 30,
         //marginHorizontal: 35,
         borderRadius: 25,
         marginBottom: 5,
@@ -209,11 +214,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     picker: {
-        width: Dimensions.get('window').width/2,
+        width: Dimensions.get('window').width / 2,
 
-        flexDirection:'row-reverse',
+        flexDirection: 'row-reverse',
         textAlign: "center",
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
         marginTop: 5,
 
@@ -221,11 +226,11 @@ const styles = StyleSheet.create({
     },
     itemList:
     {
-        width: Dimensions.get('window').width/2.5,
+        width: Dimensions.get('window').width / 2.5,
         color: "#ffffff",
         textAlign: 'right',
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
 
 
     },
@@ -237,19 +242,19 @@ const styles = StyleSheet.create({
         //marginRight: 30,
     },
     shortInputBox: {
-        width: Dimensions.get('window').width/1.3,
-        height: Dimensions.get('window').height/15,
+        width: Dimensions.get('window').width / 1.3,
+        height: Dimensions.get('window').height / 15,
         backgroundColor: '#ededed',
         borderRadius: 25,
         paddingHorizontal: 16,
-        marginTop:10,
+        marginTop: 10,
         textAlign: "right"
     },
     button: {
-        width: Dimensions.get('window').width/1.3,
-        height: Dimensions.get('window').height/13,
+        width: Dimensions.get('window').width / 1.3,
+        height: Dimensions.get('window').height / 13,
         borderRadius: 25,
-        marginTop:10,
+        marginTop: 10,
         //marginBottom: 120,
         paddingVertical: 16,
         //marginHorizontal: 30,
@@ -306,8 +311,8 @@ const styles = StyleSheet.create({
 
     },
     vButton: {
-        width: Dimensions.get('window').width/3,
-        height: Dimensions.get('window').height/9,
+        width: Dimensions.get('window').width / 3,
+        height: Dimensions.get('window').height / 9,
         backgroundColor: "#6f61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
@@ -322,9 +327,9 @@ const styles = StyleSheet.create({
         //marginLeft: 30,
 
     },
-    exitIcon:{
-        height:50,
-        width:50,
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 
 })

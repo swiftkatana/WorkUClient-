@@ -5,11 +5,8 @@ import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
 import Recorder from '../../class/VoiceRecording';
-import {
-    responsiveHeight,
-    responsiveWidth,
-    responsiveFontSize
-} from "react-native-responsive-dimensions";
+import { render } from "react-dom";
+
 
 const pressHandler = () => {
     title = "שים לב";
@@ -57,6 +54,35 @@ function Main({ navigation, style }) {
             }
         }
     };
+    const renderVoiceList = () => {
+        console.log(item)
+        return item.audios.map(obj => {
+            if (obj.email === globalObject.User.email) {
+                return (
+                    <View style={styles.myVoiceMsg}>
+                        <TouchableOpacity
+                            style={{ ...styles.myVoiceButton, ...style.btn3 }}
+                            onPress={playVoiceBtn}
+                        >
+                            <Image style={styles.tinyLogo} source={imgSrc} />
+                            <Text style={styles.buttonText}>אני</Text>
+                        </TouchableOpacity>
+                    </View>
+                )
+            }
+            return (
+                <View style={styles.yourVoiceMsg}>
+                    <TouchableOpacity
+                        style={{ ...styles.yourVoiceButton, ...style.btn2 }}
+                        onPress={() => SendUpdateTask(item.id, status)}
+                    >
+                        <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
+                        <Text style={styles.buttonText}>נוח</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    }
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity
@@ -75,42 +101,9 @@ function Main({ navigation, style }) {
                     <View style={styles.scrollView}>
 
                         <ScrollView>
-                            <View style={styles.myVoiceMsg}>
-                                <TouchableOpacity
-                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
-                                    onPress={playVoiceBtn}
-                                >
-                                    <Image style={styles.tinyLogo} source={imgSrc} />
-                                    <Text style={styles.buttonText}>אני</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.yourVoiceMsg}>
-                                <TouchableOpacity
-                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
-                                    onPress={() => SendUpdateTask(item.id, status)}
-                                >
-                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
-                                    <Text style={styles.buttonText}>נוח</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.yourVoiceMsg}>
-                                <TouchableOpacity
-                                    style={{ ...styles.yourVoiceButton, ...style.btn2 }}
-                                    onPress={() => SendUpdateTask(item.id, status)}
-                                >
-                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
-                                    <Text style={styles.buttonText}>נוח</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.myVoiceMsg}>
-                                <TouchableOpacity
-                                    style={{ ...styles.myVoiceButton, ...style.btn3 }}
-                                    onPress={() => SendUpdateTask(item.id, status)}
-                                >
-                                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
-                                    <Text style={styles.buttonText}>אני</Text>
-                                </TouchableOpacity>
-                            </View>
+
+                            {renderVoiceList()}
+
                         </ScrollView>
                     </View>
                 </View>
@@ -151,16 +144,13 @@ function Main({ navigation, style }) {
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        
     },
     container: {
         alignItems: "flex-end",
-        height: responsiveHeight(63),
-        
     },
     scrollView:
     {
-        height: responsiveHeight(40),
+        height: 300,
         marginTop: 10,
         justifyContent: 'flex-end',
         textAlign: "right",
@@ -214,16 +204,15 @@ const styles = StyleSheet.create({
     },
     itemList: {
         textAlign: "right",
-        height: responsiveHeight(63),
-        width: responsiveWidth(14.5),
+        width: 300,
         textAlign: "right",
         justifyContent: "center",
     },
     infoContainer: {},
     inputBoxContainer: {},
     inputBox: {
-        width: responsiveWidth(14.5),
-        height: responsiveHeight(63),
+        width: 300,
+        height: 100,
         backgroundColor: "#ededed",
         borderRadius: 25,
         marginVertical: 60,
@@ -236,7 +225,7 @@ const styles = StyleSheet.create({
     },
     itemList: {
         textAlign: "right",
-        width: responsiveWidth(14.5),
+        width: 300,
         textAlign: "right",
         justifyContent: "center",
     },
@@ -255,7 +244,7 @@ const styles = StyleSheet.create({
 
     },
     myVoiceMsg: {
-        width: responsiveWidth(14.5),
+        width: Dimensions.get('window').width,
         alignItems: 'flex-start',
     },
     yourVoiceMsg: {
@@ -263,8 +252,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     myVoiceButton: {
-        width: responsiveWidth(50),
-        height: responsiveHeight(10),
+        width: 170,
+        height: 70,
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -274,8 +263,8 @@ const styles = StyleSheet.create({
         borderColor: "lightgrey",
     },
     yourVoiceButton: {
-        width: responsiveWidth(50),
-        height: responsiveHeight(10),
+        width: 170,
+        height: 70,
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -285,8 +274,8 @@ const styles = StyleSheet.create({
         borderColor: "lightgrey",
     },
     button: {
-        width: responsiveWidth(25),
-        height: responsiveHeight(11),
+        width: 100,
+        height: 80,
         backgroundColor: "#6f61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
@@ -295,8 +284,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     updateButton: {
-        width: responsiveWidth(50),
-        height: responsiveHeight(11),
+        width: 200,
+        height: 80,
         backgroundColor: "#6a61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
