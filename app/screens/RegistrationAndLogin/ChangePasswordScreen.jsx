@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
 import apiKeys from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 
-export default function ChangePasswordScreen({ navigation }) {
+function ChangePasswordScreen({ navigation, style }) {
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setnewPassword] = useState('')
     const [verifyPassword, setVerifyPassword] = useState('')
@@ -29,7 +30,7 @@ export default function ChangePasswordScreen({ navigation }) {
     }
 
     return (
-        <View style={styles.view}>
+        <View style={{ ...styles.view, ...style.view }}>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Text style={styles.exitText}>X</Text>
             </TouchableOpacity>
@@ -38,11 +39,10 @@ export default function ChangePasswordScreen({ navigation }) {
                 <TextInput value={oldPassword} onChangeText={setOldPassword} style={styles.inputBox} placeholder='סיסמה ישנה' />
                 <TextInput value={newPassword} onChangeText={setnewPassword} style={styles.inputBox} placeholder="סיסמה חדשה" secureTextEntry={true} />
                 <TextInput value={verifyPassword} onChangeText={setVerifyPassword} style={styles.inputBox} placeholder="אימות סיסמה" secureTextEntry={true} />
-                <TouchableOpacity style={styles.button} onPress={pressHandler} >
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={pressHandler} >
                     <Text style={styles.buttonText} >שנה סיסמה</Text>
                 </TouchableOpacity>
             </View>
-
         </View >
     )
 }
@@ -116,3 +116,7 @@ const styles = StyleSheet.create({
 
     }
 })
+const mapStateToProps = (state) => {
+    return { style: state.styles }
+}
+export default connect(mapStateToProps, {})(ChangePasswordScreen)
