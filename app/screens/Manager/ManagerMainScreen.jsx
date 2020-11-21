@@ -23,7 +23,10 @@ export default function Main({ navigation }) {
                 globalObject.User.personalRequests[data.data._id] = data.data;
 
                 break;
-
+            case 'updateTask':
+                Alert.alert('you got notification', data.type);
+                globalObject.User.personalRequests[data.data.taskId].audios.push(data.data);
+                break;
             default:
                 Alert.alert('you got not handler notification', data.type);
                 break;

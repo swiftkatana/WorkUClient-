@@ -19,7 +19,7 @@ export default class VoiceRecording {
           await this.recording.prepareToRecordAsync(
             Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
           );
-          
+
 
           await this.recording.startAsync();
           console.log("start rec");
@@ -32,12 +32,11 @@ export default class VoiceRecording {
     this.StopRecording = async () => {
       console.log("stop rec");
       try {
-        if((await this.recording.getStatusAsync()).isRecording)
-        {
-        await this.recording.stopAndUnloadAsync();
-        this.uri = this.recording.getURI();
-        delete this.recording;
-        this.recording = new Audio.Recording();
+        if ((await this.recording.getStatusAsync()).isRecording) {
+          await this.recording.stopAndUnloadAsync();
+          this.uri = this.recording.getURI();
+          delete this.recording;
+          this.recording = new Audio.Recording();
         }
       } catch (error) {
         console.log(error);
@@ -73,13 +72,11 @@ export default class VoiceRecording {
 
     this.playAudio = async (url) => {
       try {
-        if(this.sound)
-        {
-          if(await (await this.sound.getStatusAsync()).isLoaded)
-          {
+        if (this.sound) {
+          if (await (await this.sound.getStatusAsync()).isLoaded) {
             await this.sound.unloadAsync();
           }
-          
+
         }
         console.log('play music', url || this.uri);
         this.sound = new Audio.Sound();

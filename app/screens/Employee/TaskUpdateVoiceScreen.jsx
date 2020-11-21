@@ -29,7 +29,7 @@ function Main({ navigation, style }) {
     const square = require('../../assets/square_icon.png');
     const microphone = require('../../assets/microphone_icon.png');
     const paper_plane = require('../../assets/paper_plane_icon.png');
-    const imgSrc = [play,pause,square,microphone,paper_plane];
+    const imgSrc = [play, pause, square, microphone, paper_plane];
     const item = navigation.state.params.item;
     const [onPlay, setOnPlay] = useState(false);
     const [update, setUpdate] = useState(true);
@@ -38,18 +38,21 @@ function Main({ navigation, style }) {
 
     useEffect(() => {
         myScroll.current.scrollToEnd({ animated: true })
-    },[update])
+    }, [update])
 
-    
-    const playVoiceBtn = () => 
-    {
+
+    const playVoiceBtn = () => {
 
     };
     const handlerSendVoice = async () => {
         let to = item.employee;
+        let noti = globalObject.User.email === globalObject.User.tasks.processing[item._id].employee ? globalObject.User.managerEmail : globalObject.User.tasks.processing[item._id].employee;
+
         let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName);
         if (audio) {
             globalObject.User.tasks.processing[item._id].audios.push(audio);
+            audio.taskId = item._id;
+            globalObject.sendNotification(noti, audio, 'התקבלה הודעה קולית חדשה', 'התקבל עדכון', 'updateTask');
             setUpdate(!update);
         }
     }
