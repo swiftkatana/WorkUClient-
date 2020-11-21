@@ -20,7 +20,6 @@ export default class VoiceRecording {
             Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
           );
           await this.recording.startAsync();
-          console.log(await this.recording.getStatusAsync());
           console.log("start rec");
         } catch (error) {
           console.log(error);
@@ -32,15 +31,14 @@ export default class VoiceRecording {
       console.log("stop rec");
       try {
         await this.recording.stopAndUnloadAsync();
-        await this.recording.getStatusAsync();
         this.uri = this.recording.getURI();
         this.recording = new Audio.Recording();
       } catch (error) {
         console.log(error);
       }
     };
-    this.UploadToServer = async (uri, email, _id) => {
-      this.url = await FileSystem.uploadAsync(apiKeys.UploadAudioUrl, uri, {
+    this.UploadToServer = async (email, _id, fullName) => {
+      let res = await FileSystem.uploadAsync(apiKeys.UploadAudioUrl, this.uri, {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
@@ -52,13 +50,21 @@ export default class VoiceRecording {
         parameters: {
           email,
           _id,
+          fullName
         },
       });
+      if (res.body.err) {
+        console.log(res.body.err)
+        return res.body.err
+      }
+      return res.body
     };
 
     this.playAudio = async () => {
+      console.log('play music', this.uri)
       this.sound = new Audio.Sound();
       await this.sound.loadAsync({ uri: this.uri }, { shouldPlay: true });
+      await this.sound.playAsync();
       await this.sound.unloadAsync();
     };
   }
