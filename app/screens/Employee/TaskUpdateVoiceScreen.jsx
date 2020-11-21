@@ -85,15 +85,9 @@ function Main({ navigation, style }) {
     }
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity
-                style={styles.exitButton}
-                onPress={() => navigation.pop()}
-            >
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
-                    <Text style={styles.header}>משימה</Text>
+                    <Text style={styles.title}>משימה</Text>
 
                     <Text style={styles.subTitle}>דחיפות: {item.priority}</Text>
                     <Text style={styles.subTitle}>תקציר: {item.title}</Text>
@@ -136,6 +130,9 @@ function Main({ navigation, style }) {
                     <Text style={styles.buttonText}>סיימתי בהצלחה</Text>
                 </TouchableOpacity>
             </View>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+            </TouchableOpacity>
 
         </View>
     );
@@ -143,14 +140,22 @@ function Main({ navigation, style }) {
 
 const styles = StyleSheet.create({
     view: {
+        //marginTop:50,
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+
     },
     container: {
-        alignItems: "flex-end",
+        height: responsiveHeight(53),
+        alignItems: 'center',
+        justifyContent: 'center',
+
     },
     scrollView:
     {
-        height: 300,
+        height: responsiveHeight(28),
         marginTop: 10,
         justifyContent: 'flex-end',
         textAlign: "right",
@@ -160,37 +165,42 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: "lightgrey",
     },
-    header: {
+    title:
+    {
+
+        textAlign: "center",
+        //width: Dimensions.get('window').width*0.80,
         margin: 20,
-        marginRight: 30,
-        fontSize: 28,
+        //marginRight: 30,
+        fontSize: 48,
         color: "seashell",
-        textDecorationLine: "underline",
+        borderBottomWidth: 2,
+        borderColor: "seashell",
     },
     subTitle: {
         marginRight: 30,
         marginLeft: 30,
-        fontSize: 16,
+        fontSize: 18,
         color: "seashell",
     },
     descriptionStyle: {
         textAlign: "right",
         marginRight: 30,
         marginLeft: 30,
-        fontSize: 16,
+        fontSize: 18,
         color: "seashell",
     },
     tinyLogo: {
-        width: 20,
-        height: 20,
+        width: 18,
+        height: 18,
         alignItems: 'center',
         justifyContent: 'center',
         //marginBottom: 50,
 
     },
     lessTinyLogo: {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
         alignItems: 'center',
         justifyContent: 'center',
         //marginBottom: 50,
@@ -240,7 +250,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10,
+        marginTop: 20,
 
     },
     myVoiceMsg: {
@@ -252,8 +262,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     myVoiceButton: {
-        width: 170,
-        height: 70,
+        width: responsiveWidth(50),
+        height: responsiveHeight(10.1),
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -263,8 +273,8 @@ const styles = StyleSheet.create({
         borderColor: "lightgrey",
     },
     yourVoiceButton: {
-        width: 170,
-        height: 70,
+        width: responsiveWidth(50),
+        height: responsiveHeight(10.1),
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -300,13 +310,13 @@ const styles = StyleSheet.create({
         color: "seashell",
         textAlign: "center",
     },
-    exitButton: {
-        marginLeft: 30,
-        paddingTop: 60,
+    exitButton:
+    {
+        paddingTop: 10,
     },
-    exitText: {
-        fontSize: 30,
-        color: "seashell",
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 });
 const mapStateToProps = (state) => {
