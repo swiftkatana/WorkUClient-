@@ -80,7 +80,7 @@ function Main({ navigation, style }) {
                         onPress={() => SendUpdateTask(item.id, status)}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
-                        <Text style={styles.buttonText}>נוח</Text>
+                        <Text style={styles.buttonText}>{obj.fullName}</Text>
                     </TouchableOpacity>
                 </View>
             )
