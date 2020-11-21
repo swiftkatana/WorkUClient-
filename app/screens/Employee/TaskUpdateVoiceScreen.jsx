@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Alert, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Directions, TextInput, TouchableOpacity } from "react-native-gesture-handler";
-import { Picker } from "@react-native-community/picker";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
-import { Audio } from 'expo-av';
-import * as Permissions from "expo-permissions";
-import VoiceRecording from "../../components/VoiceRecording";
 import { connect } from "react-redux";
-
+import Recorder from '../../class/VoiceRecording';
 
 
 const pressHandler = () => {
@@ -30,7 +26,7 @@ function Main({ navigation, style }) {
     const item = navigation.state.params.item;
     const [status, SetStatus] = useState("completed");
     const [onPlay, setOnPlay] = useState(false);
-
+    const Rec = new Recorder();
     const playVoiceBtn = () => {
         if (onPlay) {
             setOnPlay(false);
@@ -118,15 +114,11 @@ function Main({ navigation, style }) {
                 </View>
             </View>
             <View style={styles.recordSendBtnList}>
-                <TouchableOpacity
-                    style={{ ...styles.button, ...style.btn2 }}
-                >
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.StartRecording}>
                     <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                     <Text style={styles.buttonText}>הקלט</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={{ ...styles.button, ...style.btn2 }}
-                >
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.StopRecording}>
                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                     <Text style={styles.buttonText}>נגן הקלטה</Text>
                 </TouchableOpacity>
@@ -137,7 +129,7 @@ function Main({ navigation, style }) {
                     <Image style={styles.tinyLogo} source={require('../../assets/paper_plane_icon.png')} />
                     <Text style={styles.buttonText}>שלח הודעה</Text>
                 </TouchableOpacity>
-                {/* <VoiceRecording /> */}
+
 
             </View>
             <View style={styles.updateBtnContainer}>
@@ -149,7 +141,7 @@ function Main({ navigation, style }) {
                     <Text style={styles.buttonText}>סיימתי בהצלחה</Text>
                 </TouchableOpacity>
             </View>
-            {/* <VoiceRecording/> */}
+
         </View>
     );
 }

@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Picker } from "@react-native-community/picker";
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
-import { Audio } from 'expo-av';
-import * as Permissions from "expo-permissions";
-import VoiceRecording from "../../components/VoiceRecording";
 import { connect } from "react-redux";
 
 function Main({ navigation, style }) {
@@ -77,10 +74,8 @@ function Main({ navigation, style }) {
                     >
                         <Text style={styles.buttonText}>שלח עדכון</Text>
                     </TouchableOpacity>
-                    <VoiceRecording />
                 </View>
             </View>
-            <VoiceRecording />
         </View>
     );
 }
