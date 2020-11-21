@@ -6,7 +6,11 @@ import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
 import Recorder from '../../class/VoiceRecording';
 import { render } from "react-dom";
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const pressHandler = () => {
     title = "שים לב";
