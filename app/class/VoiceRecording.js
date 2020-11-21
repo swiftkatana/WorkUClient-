@@ -20,9 +20,11 @@ export default class VoiceRecording {
             Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
           );
 
+          if ((await this.recording.getStatusAsync()).canRecord) {
+            await this.recording.startAsync();
+            console.log("start rec");
+          }
 
-          await this.recording.startAsync();
-          console.log("start rec");
         } catch (error) {
           console.log(error);
         }
