@@ -85,7 +85,7 @@ function LoginForm({ navigation, changeStyle }) {
   return (
 
     <View style={styles.container}>
-      <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' autoCapitalize="none" secureTextEntry={true} keyboardType={"visible-password"} />
+      <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' autoCapitalize="none"/>
       <TextInput value={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true} />
       <TouchableOpacity onPress={() => pressHandler(email, password, setShouldShow)} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>

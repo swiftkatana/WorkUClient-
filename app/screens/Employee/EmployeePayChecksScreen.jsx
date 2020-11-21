@@ -9,29 +9,36 @@ var arr = [{ type: "חופשת מחלה", date: "10.2.20", id: "123" }, { type: 
 
 const render = ({ item }) => {
     return (
-        <View style={styles.list}>
-            <Text style={styles.listText}>תאריך: {item.date}</Text>
-            <TouchableOpacity>
-                <Image style={styles.tinyLogo} source={require('../../assets/pdf_icon.png')} />
-            </TouchableOpacity>
+        <View style={styles.container}>
+            <View style={styles.list}>
+                <Text style={styles.listText}>תאריך: {item.date}</Text>
+                <TouchableOpacity>
+                    <Image style={styles.tinyLogo} source={require('../../assets/pdf_icon.png')} />
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
 function Main({ navigation, style }) {
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <View style={styles.container}>
 
                 <Text style={styles.title}>
                     תלושי שכר</Text>
-                <FlatList
-                    data={arr}
-                    renderItem={render}
-                    keyExtractor={item => item.id}
-                />
+                <View style={styles.mainListCon}>
+                    <View style={styles.listContainer}>
+
+                        <FlatList
+                            data={arr}
+                            renderItem={render}
+                            keyExtractor={item => item.id}
+                        />
+                    </View>
+                </View>
+                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                        <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -39,26 +46,56 @@ function Main({ navigation, style }) {
 
 const styles = StyleSheet.create({
 
-    view:
-    {
+    view: {
+        //marginTop:50,
         flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height,
+
+
     },
     container: {
-        alignItems: 'flex-end',
+        flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+
+
+        //borderWidth:1,
+    },
+    mainListCon:{
+        height: Dimensions.get('window').height/1.6,
+        width: Dimensions.get('window').width/1.1,
+        backgroundColor: "#6f61ca",
+        borderWidth:1,
+        borderColor: "#584DA1",
+        borderRadius: 25,
+
+    },
+    listContainer:{
+        //flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height/2,
+        width: Dimensions.get('window').width/1.1,
+        marginTop: 10,
     },
     title:
     {
-        margin: 20,
-        marginRight: 30,
-        fontSize: 28,
-        color: "seashell",
-        textDecorationLine: "underline"
 
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
+        margin: 20,
+        //marginRight: 30,
+        fontSize: 48,
+        color: "seashell",
+        borderBottomWidth:2,
+        borderColor: "seashell",
     },
     tinyLogo:
     {
-        width: 45,
-        height: 45,
+        width: 40,
+        height: 40,
         alignItems: 'center',
         justifyContent: 'center',
 
@@ -70,8 +107,8 @@ const styles = StyleSheet.create({
         backgroundColor: "seashell",
         flexDirection: "row-reverse",
         alignItems: 'center',
-        textAlign: "right",
-        marginHorizontal: 20,
+        textAlign: "center",
+        //marginHorizontal: 20,
         justifyContent: 'space-evenly',
         borderRadius: 25,
         marginBottom: 10,
@@ -80,23 +117,21 @@ const styles = StyleSheet.create({
     },
     listText:
     {
-        textAlign: "right",
+        textAlign: "center",
         fontSize: 14,
         justifyContent: 'center',
     },
 
     exitButton:
     {
-        marginLeft: 30,
-        paddingTop: 60,
+        paddingTop: 40,
+
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
-
-    }
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }

@@ -25,72 +25,103 @@ function Main({ navigation, style }) {
     const [sum, setSum] = useState(0)
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <View style={styles.container}>
 
                 <Text style={styles.title}>
                     דו"ח שעות חודשי
                 </Text>
-                <View style={styles.header}>
-                    <FlatList
-                        data={[{ sumOfTime: "סך שעות", endTime: "שעת סיום", startTime: "שעת התחלה", date: "תאריך", id: "13" }]}
-                        renderItem={render}
-                        keyExtractor={item => item.id}
-                    />
+                <View style={styles.mainListCon}>
+                    <View style={styles.header}>
+                        <FlatList
+                            data={[{ sumOfTime: "סך שעות", endTime: "שעת סיום", startTime: "שעת התחלה", date: "תאריך", id: "13" }]}
+                            renderItem={render}
+                            keyExtractor={item => item.id}
+                        />
+                    </View>
+                    <View style={styles.listContainer}>
+                        <FlatList
+
+                            data={globalObject.User.workTimes}
+                            renderItem={render}
+                            keyExtractor={item => item.id}
+                        />
+                    </View>
                 </View>
-                <FlatList
-
-                    data={globalObject.User.workTimes}
-                    renderItem={render}
-                    keyExtractor={item => item.id}
-                />
-                <Text style={styles.mainSum}>סה"כ שעות עבודה במצטבר לחודש זה: {sum}</Text>
+                <Text style={styles.mainSum}>סה"כ שעות במצטבר לחודש זה: {sum}</Text>
                 <TouchableOpacity style={styles.logo} onPress={() => navigation.navigate("ManualWorkingTime")}>
-                    <Image style={styles.tinyLogo} source={require('../../assets/plus_icon.png')} />
-
+                    <Image style={styles.tinyLogo} source={require('../../assets/plus_icon_white.png')} />
+                    <Text style={styles.btnText}>הוסף שעות ידנית</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+            </TouchableOpacity>
             </View>
+ 
         </View>
     )
 }
 
 const styles = StyleSheet.create({
 
-    view:
-    {
+    view: {
+        //marginTop:50,
         flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+
 
     },
     container: {
         flex: 1,
-        alignItems: 'flex-end',
+        alignItems:'center',
+        justifyContent: 'center',
+    },
+    mainListCon:{
+        height: Dimensions.get('window').height/2.5,
+        width: Dimensions.get('window').width/1.1,
+        backgroundColor: "#6f61ca",
+        borderWidth:1,
+        borderColor: "#584DA1",
+        borderRadius: 2,
+
+    },
+    listContainer:{
+        //flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height/2.5 -20,
+        width: Dimensions.get('window').width/1.1,
+        marginTop: 10,
     },
     title:
     {
-        margin: 20,
-        marginRight: 30,
-        fontSize: 28,
-        color: "seashell",
-        textDecorationLine: "underline"
 
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.90,
+        margin: 20,
+        //marginRight: 30,
+        fontSize: 48,
+        color: "seashell",
+        borderBottomWidth:2,
+        borderColor: "seashell",
     },
     header: {
-        height: 40,
-        marginBottom: 5,
-        borderColor: "lightgray",
+        alignItems:'center',
+        justifyContent:'center',
+        height: Dimensions.get('window').height/18,
+        //height: 40,
+        //marginBottom: 5,
 
     },
     list:
     {
-        height: 42,
+        height: 40,
         width: Dimensions.get('window').width - 50,
         backgroundColor: "seashell",
         flexDirection: "row-reverse",
         alignItems: 'center',
         textAlign: "center",
-        marginLeft: 25,
+        //marginLeft: 25,
         justifyContent: 'center',
         borderRadius: 2,
         marginBottom: 1,
@@ -105,18 +136,19 @@ const styles = StyleSheet.create({
     },
     mainSum:
     {
-        flexGrow: 1,
+        //flexGrow: 1,
+        textAlign:'center',
         margin: 20,
-        marginBottom: 40,
-        marginRight: 30,
-        fontSize: 16,
+        //marginBottom: 40,
+        //marginRight: 30,
+        fontSize: 22,
         color: "seashell",
     },
     status:
     {
         flex: 1,
         textAlign: "center",
-        marginRight: 15,
+        //marginRight: 15,
         fontSize: 14,
         fontWeight: "bold",
     },
@@ -126,25 +158,29 @@ const styles = StyleSheet.create({
 
     },
     tinyLogo: {
-        width: 60,
-        height: 60,
+        width: 40,
+        height: 40,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 50,
-        marginRight: 30,
+        //marginBottom: 50,
+       // marginRight: 30,
+    },
+    btnText:{
+        marginTop:10,
+        color: "seashell",
+        fontSize: 14,
+        fontWeight: 'bold',
     },
     exitButton:
     {
-        marginLeft: 30,
-        paddingTop: 60,
+        paddingTop: 40,
+
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
-
-    }
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { Picker } from '@react-native-community/picker';
 import requestList from '../../src/api/apiKeys'
@@ -24,13 +24,11 @@ function Main({ navigation, style }) {
     }
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
+
             <View style={styles.container}>
 
                 <View>
-                    <Text style={styles.header}>בקשה חדשה</Text>
+                    <Text style={styles.title}>בקשה חדשה</Text>
                 </View>
                 <View style={styles.picker}>
                     <Text style={styles.subTitle}>סוג הבקשה</Text>
@@ -63,49 +61,70 @@ function Main({ navigation, style }) {
                 <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => PressHandler(type, text)}>
                     <Text style={styles.buttonText} >שלח בקשה</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                </TouchableOpacity>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    view:
-    {
+    view: {
+        //marginTop:50,
         flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+
+
     },
     container:
     {
-        alignItems: 'flex-end',
-    },
-    header:
-    {
-        margin: 20,
-        marginRight: 30,
-        fontSize: 28,
-        color: "seashell",
-        textDecorationLine: "underline"
+        alignItems:'center',
+        justifyContent: 'center',
+        textAlign: 'center',
 
+    },
+    title:
+    {
+
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
+       // margin: 20,
+        //marginRight: 30,
+        fontSize: 48,
+        color: "seashell",
+        borderBottomWidth:2,
+        borderColor: "seashell",
     },
     subTitle:
     {
-        marginRight: 30,
-        fontSize: 16,
+        margin:20,
+        fontSize: 18,
         color: "seashell",
 
 
     },
     picker: {
-        textAlign: 'right',
+        width: Dimensions.get('window').width / 2,
+        flexDirection: 'row-reverse',
+        textAlign: "center",
+        alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 5,
+
+
 
 
     },
     itemList:
     {
-        width: 200,
+        width: Dimensions.get('window').width / 3,
         color: "#ffffff",
         textAlign: 'right',
         justifyContent: 'center',
+        alignItems: 'center',
+
 
     },
     pickerItem: {
@@ -117,7 +136,7 @@ const styles = StyleSheet.create({
 
     },
     inputBoxContainer: {
-        marginRight: 30,
+//marginRight: 30,
     },
     inputBox: {
         width: 300,
@@ -147,16 +166,14 @@ const styles = StyleSheet.create({
     },
     exitButton:
     {
-        marginLeft: 30,
-        paddingTop: 60,
+        paddingTop: 40,
+
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
-
-    }
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 
 })
 const mapStateToProps = (state) => {

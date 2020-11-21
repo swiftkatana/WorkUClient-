@@ -112,7 +112,7 @@ function Main({ navigation, style, changeStyle }) {
                     {renderListColors()}
                 </View>
             </View>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
                 </TouchableOpacity>
         </View>
