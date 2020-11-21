@@ -9,7 +9,6 @@ import InfoList from '../components/InfoList';
 export default function TaskBoard({ navigation }) {
 
     const render = ({ item }) => {
-        console.log(item)
         return (
             <View>
                 <TouchableOpacity style={styles.list} onPress={() => navigation.navigate('TaskUpdateVoiceScreen', { item: item })}>
@@ -27,8 +26,7 @@ export default function TaskBoard({ navigation }) {
     const GetList = () => {
         let arr = [];
         for (var obj in globalObject.User.tasks.processing) {
-            let task = globalObject.User.tasks.processing[obj];
-            arr.push({ title: task.title, id: obj, priority: task.priority, description: task.description, status: task.status, date: task.date, audios: task.audios || [] });
+            arr.push(globalObject.User.tasks.processing[obj]);
         }
         return arr;
     }

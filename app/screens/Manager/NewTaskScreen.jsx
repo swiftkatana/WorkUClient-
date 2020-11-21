@@ -33,7 +33,6 @@ function Main({ navigation, style }) {
 
                 globalObject.User.tasks.processing[res._id].audios.push(audio);
             }
-            console.log(globalObject.User.tasks.processing[res._id])
             navigation.navigate('ManagerMainScreen');
             globalObject.sendNotification(sendTo.email, res, 'אפשר לראות אותה בלוח המשימות', 'משימה חדשה נכנסה', 'newTask')
         }

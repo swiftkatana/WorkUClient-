@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Alert, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { globalObject } from "../../src/globalObject";
@@ -31,6 +31,15 @@ function Main({ navigation, style }) {
     const item = navigation.state.params.item;
     const [status, SetStatus] = useState("completed");
     const [onPlay, setOnPlay] = useState(false);
+    const [update, setUpdate] = useState(item.audios);
+    const myScroll = useRef(null)
+
+    useEffect(() => {
+        console.log('new list', update)
+        console.log('scroll ?')
+        myScroll.current.scrollToEnd({ animated: true })
+    }, [update.length])
+
     const Rec = new Recorder();
     const playVoiceBtn = () => {
         if (onPlay) {
@@ -41,9 +50,13 @@ function Main({ navigation, style }) {
             imgSrc = pause;
         }
     };
-    const handlerSendVoice = () => {
-        let to = item.employee.email === globalObject.User.email ? globalObject.User.mangaerEmail : item.employee.email
-
+    const handlerSendVoice = async () => {
+        let to = item.employee
+        let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName)
+        if (audio) {
+            globalObject.User.tasks.processing[item._id].audios.push(audio);
+            setUpdate(globalObject.User.tasks.processing[item._id].audios)
+        }
     }
 
     const SendUpdateTask = async (id, status) => {
@@ -63,7 +76,7 @@ function Main({ navigation, style }) {
         }
     };
     const renderVoiceList = () => {
-        return item.audios.map(obj => {
+        return update.map(obj => {
             if (obj.email === globalObject.User.email) {
                 return (
                     <View key={obj.url} style={styles.myVoiceMsg}>
@@ -81,7 +94,7 @@ function Main({ navigation, style }) {
                 <View key={obj.url} style={styles.yourVoiceMsg}>
                     <TouchableOpacity
                         style={{ ...styles.yourVoiceButton, ...style.btn2 }}
-                        onPress={() => SendUpdateTask(item.id, status)}
+                        onPress={() => Rec.playAudio(obj.url)}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                         <Text style={styles.buttonText}>{obj.fullName}</Text>
@@ -101,7 +114,10 @@ function Main({ navigation, style }) {
                     <Text style={styles.subTitle}>שם עובד: </Text>
                     <View style={styles.scrollView}>
 
-                        <ScrollView>
+                        <ScrollView ref={(ref) => myScroll.current = ref}
+                            pagingEnabled={true}
+                            showsHorizontalScrollIndicator={false}
+                            bounces={true}>
 
                             {renderVoiceList()}
 

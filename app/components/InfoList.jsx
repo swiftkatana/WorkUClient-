@@ -45,7 +45,7 @@ export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity,
             <FlatList
                 data={list}
                 renderItem={render}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id || item._id}
             />
         </View>
     )
