@@ -59,6 +59,7 @@ function Main({ navigation, style }) {
         }
     };
     const renderVoiceList = () => {
+        console.log(item.audios);
         return item.audios.map(obj => {
             if (obj.email === globalObject.User.email) {
                 return (
@@ -159,6 +160,8 @@ const styles = StyleSheet.create({
     scrollView:
     {
         height: responsiveHeight(28),
+        width: responsiveWidth(85),
+
         marginTop: 10,
         justifyContent: 'flex-end',
         textAlign: "right",
