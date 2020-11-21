@@ -5,7 +5,11 @@ import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
 import Recorder from '../../class/VoiceRecording';
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const pressHandler = () => {
     title = "שים לב";
@@ -147,13 +151,16 @@ function Main({ navigation, style }) {
 const styles = StyleSheet.create({
     view: {
         flex: 1,
+        
     },
     container: {
         alignItems: "flex-end",
+        height: responsiveHeight(63),
+        
     },
     scrollView:
     {
-        height: 300,
+        height: responsiveHeight(40),
         marginTop: 10,
         justifyContent: 'flex-end',
         textAlign: "right",
@@ -207,15 +214,16 @@ const styles = StyleSheet.create({
     },
     itemList: {
         textAlign: "right",
-        width: 300,
+        height: responsiveHeight(63),
+        width: responsiveWidth(14.5),
         textAlign: "right",
         justifyContent: "center",
     },
     infoContainer: {},
     inputBoxContainer: {},
     inputBox: {
-        width: 300,
-        height: 100,
+        width: responsiveWidth(14.5),
+        height: responsiveHeight(63),
         backgroundColor: "#ededed",
         borderRadius: 25,
         marginVertical: 60,
@@ -228,7 +236,7 @@ const styles = StyleSheet.create({
     },
     itemList: {
         textAlign: "right",
-        width: 300,
+        width: responsiveWidth(14.5),
         textAlign: "right",
         justifyContent: "center",
     },
@@ -247,7 +255,7 @@ const styles = StyleSheet.create({
 
     },
     myVoiceMsg: {
-        width: Dimensions.get('window').width,
+        width: responsiveWidth(14.5),
         alignItems: 'flex-start',
     },
     yourVoiceMsg: {
@@ -255,8 +263,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     myVoiceButton: {
-        width: 170,
-        height: 70,
+        width: responsiveWidth(50),
+        height: responsiveHeight(10),
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -266,8 +274,8 @@ const styles = StyleSheet.create({
         borderColor: "lightgrey",
     },
     yourVoiceButton: {
-        width: 170,
-        height: 70,
+        width: responsiveWidth(50),
+        height: responsiveHeight(10),
         borderRadius: 25,
         marginVertical: 10,
         paddingVertical: 16,
@@ -277,8 +285,8 @@ const styles = StyleSheet.create({
         borderColor: "lightgrey",
     },
     button: {
-        width: 100,
-        height: 80,
+        width: responsiveWidth(25),
+        height: responsiveHeight(11),
         backgroundColor: "#6f61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
@@ -287,8 +295,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     updateButton: {
-        width: 200,
-        height: 80,
+        width: responsiveWidth(50),
+        height: responsiveHeight(11),
         backgroundColor: "#6a61ca", // #6357b5
         borderRadius: 25,
         marginVertical: 10,
