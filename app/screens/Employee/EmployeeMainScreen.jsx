@@ -27,7 +27,7 @@ function Main({ style, navigation }) {
                 break;
             case 'updateTask':
                 Alert.alert('you got notification', data.type);
-                globalObject.User.personalRequests[data.data.taskId].audios.push(data.data);
+                globalObject.User.tasks[data.data.taskId].audios.push(data.data);
 
                 break;
             default:
