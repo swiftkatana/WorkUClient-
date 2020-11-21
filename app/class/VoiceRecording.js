@@ -60,8 +60,8 @@ export default class VoiceRecording {
       return res.body
     };
 
-    this.playAudio = async () => {
-      console.log('play music', this.uri)
+    this.playAudio = async (url) => {
+      console.log('play music', url || this.uri)
       this.sound = new Audio.Sound();
       await this.sound.loadAsync({ uri: this.uri }, { shouldPlay: true });
       await this.sound.playAsync();

@@ -66,7 +66,7 @@ function Main({ navigation, style }) {
                     <View key={obj.url} style={styles.myVoiceMsg}>
                         <TouchableOpacity
                             style={{ ...styles.myVoiceButton, ...style.btn3 }}
-                            onPress={playVoiceBtn}
+                            onPress={() => playVoiceBtn(obj.url)}
                         >
                             <Image style={styles.tinyLogo} source={imgSrc} />
                             <Text style={styles.buttonText}>אני</Text>
