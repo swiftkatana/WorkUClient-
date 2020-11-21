@@ -49,7 +49,7 @@ function Main({ navigation, style }) {
                 <View style={styles.mainListCon}>
 
                     <View style={styles.listContainer}>
-                        <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין בקשות לטפל'} opacity={0.1} src={require('../../assets/empty_icon.png')} />
+                        <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין בקשות לטיפול'} opacity={1} src={require('../../assets/empty_icon_white.png')} />
                     </View>
                 </View>
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>

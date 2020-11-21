@@ -179,6 +179,8 @@ const styles = StyleSheet.create({
     scrollView:
     {
         height: responsiveHeight(28),
+        width: responsiveWidth(85),
+
         marginTop: 10,
         justifyContent: 'flex-end',
         textAlign: "right",
