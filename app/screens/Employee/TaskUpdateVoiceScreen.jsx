@@ -69,10 +69,8 @@ function Main({ navigation, style }) {
                     <Text style={styles.subTitle}>תקציר: {item.title}</Text>
                     <Text style={styles.subTitle}>שם עובד: </Text>
                     <View style={styles.scrollView}>
-                        {/* <Text style={styles.bodyHeader}>פירוט:</Text> */}
 
                         <ScrollView>
-                            {/* <Text style={styles.subTitle}>{item.description}</Text> */}
                             <View style={styles.myVoiceMsg}>
                                 <TouchableOpacity
                                     style={{ ...styles.myVoiceButton, ...style.btn3 }}
@@ -114,11 +112,11 @@ function Main({ navigation, style }) {
                 </View>
             </View>
             <View style={styles.recordSendBtnList}>
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.StartRecording}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPressIn={Rec.StartRecording} onPressOut={Rec.StopRecording}>
                     <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                     <Text style={styles.buttonText}>הקלט</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.StopRecording}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} >
                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                     <Text style={styles.buttonText}>נגן הקלטה</Text>
                 </TouchableOpacity>

@@ -1,3 +1,5 @@
+import serverApi from "./serverApi";
+import ServerIp from "./serverIP";
 export default requestList = {
   //user api
   //send {email, password,expoId}
@@ -25,7 +27,7 @@ export default requestList = {
   // recive none
   userRequestRestCode: "/api/user/createrestpasswordcode",
 
-  userUpdateStyleUrl: 'api/user/updatestyleuser',
+  userUpdateStyleUrl: "api/user/updatestyleuser",
   //send{createDateOfUser,email}
   // recive none
   userRestWorkTimesUrl: "/api/user/restuserworktime",
@@ -71,4 +73,5 @@ export default requestList = {
   // send {_id,email,status}
   // recive {reuqest}
   updatePersonalRequestUrl: "/api/company/updatepersonalreuqest",
+  UploadAudioUrl: ServerIp + "/api/company/uploadaudio",
 };
