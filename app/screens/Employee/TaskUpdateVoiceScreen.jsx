@@ -27,35 +27,30 @@ function Main({ navigation, style }) {
     const play = require('../../assets/play_button_icon.png');
     const pause = require('../../assets/pause_icon.png');
     const square = require('../../assets/square_icon.png');
-    var imgSrc = play;
+    const microphone = require('../../assets/microphone_icon.png');
+    const paper_plane = require('../../assets/paper_plane_icon.png');
+    const imgSrc = [play,pause,square,microphone,paper_plane];
     const item = navigation.state.params.item;
-    const [status, SetStatus] = useState("completed");
     const [onPlay, setOnPlay] = useState(false);
-    const [update, setUpdate] = useState(item.audios);
+    const [update, setUpdate] = useState(true);
     const myScroll = useRef(null)
+    const Rec = new Recorder();
 
     useEffect(() => {
-        console.log('new list', update)
-        console.log('scroll ?')
         myScroll.current.scrollToEnd({ animated: true })
-    }, [update.length])
+    },[update])
 
-    const Rec = new Recorder();
-    const playVoiceBtn = () => {
-        if (onPlay) {
-            setOnPlay(false);
-            imgSrc = play;
-        } else {
-            setOnPlay(true);
-            imgSrc = pause;
-        }
+    
+    const playVoiceBtn = () => 
+    {
+
     };
     const handlerSendVoice = async () => {
-        let to = item.employee
-        let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName)
+        let to = item.employee;
+        let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName);
         if (audio) {
             globalObject.User.tasks.processing[item._id].audios.push(audio);
-            setUpdate(globalObject.User.tasks.processing[item._id].audios)
+            setUpdate(!update);
         }
     }
 
@@ -75,8 +70,9 @@ function Main({ navigation, style }) {
             }
         }
     };
+
     const renderVoiceList = () => {
-        return update.map(obj => {
+        return globalObject.User.tasks.processing[item._id].audios.map(obj => {
             if (obj.email === globalObject.User.email) {
                 return (
                     <View key={obj.url} style={styles.myVoiceMsg}>
@@ -84,7 +80,7 @@ function Main({ navigation, style }) {
                             style={{ ...styles.myVoiceButton, ...style.btn3 }}
                             onPress={() => Rec.playAudio(obj.url)}
                         >
-                            <Image style={styles.tinyLogo} source={imgSrc} />
+                            <Image style={styles.tinyLogo} source={imgSrc[0]} />
                             <Text style={styles.buttonText}>אני</Text>
                         </TouchableOpacity>
                     </View>
@@ -96,13 +92,14 @@ function Main({ navigation, style }) {
                         style={{ ...styles.yourVoiceButton, ...style.btn2 }}
                         onPress={() => Rec.playAudio(obj.url)}
                     >
-                        <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
+                        <Image style={styles.tinyLogo} source={imgSrc[0]} />
                         <Text style={styles.buttonText}>{obj.fullName}</Text>
                     </TouchableOpacity>
                 </View>
             )
         })
     }
+
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.container}>
@@ -127,18 +124,18 @@ function Main({ navigation, style }) {
             </View>
             <View style={styles.recordSendBtnList}>
                 <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPressIn={Rec.StartRecording} onPressOut={Rec.StopRecording}>
-                    <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
+                    <Image style={styles.tinyLogo} source={imgSrc[3]} />
                     <Text style={styles.buttonText}>הקלט</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.playAudio} >
-                    <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
+                    <Image style={styles.tinyLogo} source={imgSrc[0]} />
                     <Text style={styles.buttonText}>נגן הקלטה</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ ...styles.button, ...style.btn2 }}
                     onPress={handlerSendVoice}
                 >
-                    <Image style={styles.tinyLogo} source={require('../../assets/paper_plane_icon.png')} />
+                    <Image style={styles.tinyLogo} source={imgSrc[4]} />
                     <Text style={styles.buttonText}>שלח הודעה</Text>
                 </TouchableOpacity>
 
