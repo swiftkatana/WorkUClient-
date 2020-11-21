@@ -59,7 +59,6 @@ function Main({ navigation, style }) {
             employee.id = employee.email;
             arr.push(employee);
         }
-        console.log(employees)
         return arr;
     }
     const GetLen = () => {
