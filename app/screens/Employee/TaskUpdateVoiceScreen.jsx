@@ -59,11 +59,10 @@ function Main({ navigation, style }) {
         }
     };
     const renderVoiceList = () => {
-        console.log(item)
         return item.audios.map(obj => {
             if (obj.email === globalObject.User.email) {
                 return (
-                    <View style={styles.myVoiceMsg}>
+                    <View key={obj.url} style={styles.myVoiceMsg}>
                         <TouchableOpacity
                             style={{ ...styles.myVoiceButton, ...style.btn3 }}
                             onPress={playVoiceBtn}
@@ -75,7 +74,7 @@ function Main({ navigation, style }) {
                 )
             }
             return (
-                <View style={styles.yourVoiceMsg}>
+                <View key={obj.url} style={styles.yourVoiceMsg}>
                     <TouchableOpacity
                         style={{ ...styles.yourVoiceButton, ...style.btn2 }}
                         onPress={() => SendUpdateTask(item.id, status)}
