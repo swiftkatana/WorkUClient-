@@ -37,7 +37,7 @@ export default class VoiceRecording {
         console.log(error);
       }
     };
-    this.UploadToServer = async (email, _id, fullName) => {
+    this.UploadToServer = async (email, to, _id, fullName) => {
       let res = await FileSystem.uploadAsync(apiKeys.UploadAudioUrl, this.uri, {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -50,7 +50,8 @@ export default class VoiceRecording {
         parameters: {
           email,
           _id,
-          fullName
+          fullName,
+          to
         },
       });
       if (res.body.err) {
@@ -63,7 +64,7 @@ export default class VoiceRecording {
     this.playAudio = async (url) => {
       console.log('play music', url || this.uri)
       this.sound = new Audio.Sound();
-      await this.sound.loadAsync({ uri: this.uri }, { shouldPlay: true });
+      await this.sound.loadAsync({ uri: url || this.uri }, { shouldPlay: true });
       await this.sound.playAsync();
       await this.sound.unloadAsync();
     };
