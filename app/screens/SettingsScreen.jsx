@@ -85,8 +85,7 @@ const styles = StyleSheet.create({
     exitButton:
     {
         paddingTop: 40,
-        //position:'absolute',
-        //marginLeft: 30,
+
 
     },
     exitIcon:{

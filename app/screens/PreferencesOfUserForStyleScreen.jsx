@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, SectionList, } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, SectionList, Dimensions, Image, } from 'react-native'
 import { connect } from 'react-redux'
 import { changeStyle } from '../src/action'
 import apiKeys from '../src/api/apiKeys'
@@ -98,35 +98,42 @@ function Main({ navigation, style, changeStyle }) {
 
         return colorsArry.map(item => (
             <TouchableOpacity key={item.id} onPress={() => handlerForSwich(item)}>
-                <View style={{ ...styles.colorPicker, backgroundColor: item.color, borderColor: item.color === pickColor ? '#000' : pickColor, }}></View>
+                <View style={{ ...styles.colorPicker, backgroundColor: item.color, borderColor: item.color === pickColor ? "white" : pickColor, }}></View>
             </TouchableOpacity>
         ))
 
     }
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <View style={styles.colorsContainer}>
-                <Text>צבע גופן</Text>
+                <Text style={styles.title}>צבע גופן</Text>
+                <Text style={styles.textStyle}>בחר צבע רקע לאפליקצייה:</Text>
                 <View style={styles.buttonsColorsContainer}>
                     {renderListColors()}
                 </View>
             </View>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
+                </TouchableOpacity>
         </View>
     )
 }
 const styles = StyleSheet.create({
     view: {
+        //marginTop:50,
         flex: 1,
-    }, colorPicker: {
+        alignItems:'center',
+        justifyContent: 'center',
+
+
+    },
+    colorPicker: {
+        
         borderWidth: 2,
         margin: 1,
-        width: responsiveWidth(15),
-        height: responsiveHeight(10),
-        borderBottomLeftRadius: 35,
-        borderTopRightRadius: 35,
+        width: responsiveWidth(14.5),
+        height: responsiveHeight(8),
+        borderRadius:90,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.5,
@@ -134,24 +141,24 @@ const styles = StyleSheet.create({
         elevation: 10
 
     }, colorsContainer: {
-        flex: 1,
+        //flex: 1,
 
-        alignItems: "center",
+        alignItems:'center',
+        justifyContent: 'center',
         flexDirection: "column",
     },
     buttonsColorsContainer:
     {
-
-        alignItems: "flex-end",
-        justifyContent: "space-between",
-        flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+        //flex: 1,
         flexDirection: "row",
-        margin: 10,
+        //margin: 10,
     },
     button:
     {
-        margin: 20,
-        marginRight: 30,
+        //margin: 20,
+        //marginRight: 30,
 
     },
     buttonText:
@@ -162,26 +169,31 @@ const styles = StyleSheet.create({
     },
     title:
     {
-        margin: 20,
-        marginRight: 30,
-        fontSize: 28,
-        color: "seashell",
-        textDecorationLine: "underline"
 
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
+        margin: 20,
+        //marginRight: 30,
+        fontSize: 48,
+        color: "seashell",
+        borderBottomWidth:2,
+        borderColor: "seashell",
+    },
+    textStyle:{
+        margin:20,
+        fontSize: 24,
+        color: "seashell",
     },
     exitButton:
     {
-        paddingTop: 60,
-        //position:'absolute',
-        marginLeft: 30,
+        paddingTop: 40,
+
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
-
-    }
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }

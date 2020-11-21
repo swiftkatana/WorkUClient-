@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Image, Dimensions } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import apiKeys from '../../src/api/apiKeys'
@@ -31,9 +31,6 @@ function ChangePasswordScreen({ navigation, style }) {
 
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <Text style={styles.title}>שינוי סיסמה</Text>
             <View style={styles.container}>
                 <TextInput value={oldPassword} onChangeText={setOldPassword} style={styles.inputBox} placeholder='סיסמה ישנה' />
@@ -43,11 +40,22 @@ function ChangePasswordScreen({ navigation, style }) {
                     <Text style={styles.buttonText} >שנה סיסמה</Text>
                 </TouchableOpacity>
             </View>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+            </TouchableOpacity>
         </View >
     )
 }
 
 const styles = StyleSheet.create({
+    view: {
+        //marginTop:50,
+        flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+
+
+    },
     container: {
         //flexGrow: 0.8,
         justifyContent: 'center',
@@ -55,10 +63,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
 
     },
-    view: {
-        //marginTop:50,
-        flex: 1,
-    }, logoText: {
+    logoText: {
         marginVertical: 20,
         fontSize: 22,
         color: '#000000',
@@ -87,13 +92,16 @@ const styles = StyleSheet.create({
     },
     title:
     {
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
         margin: 20,
-        marginRight: 30,
-        fontSize: 28,
+        //marginRight: 30,
+        fontSize: 48,
         color: "seashell",
-        textDecorationLine: "underline"
-
-    }, inputBox: {
+        borderBottomWidth:2,
+        borderColor: "seashell",
+    },
+    inputBox: {
         width: 300,
         height: 60,
         backgroundColor: '#ededed',
@@ -104,17 +112,14 @@ const styles = StyleSheet.create({
     },
     exitButton:
     {
-        paddingTop: 60,
-        //position:'absolute',
-        marginLeft: 30,
+        paddingTop: 40,
+
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
-
-    }
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }
