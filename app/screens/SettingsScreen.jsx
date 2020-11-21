@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { globalObject } from '../src/globalObject'
 
@@ -20,10 +20,8 @@ function Main({ navigation, style }) {
     }
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <View style={styles.buttonsContainer}>
+
                 <Text style={styles.title}>הגדרות</Text>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ChangePasswordScreen")}>
                     <Text style={styles.buttonText}>שינוי סיסמה</Text>
@@ -35,9 +33,11 @@ function Main({ navigation, style }) {
                     <Text style={styles.buttonText}>עזרה</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={logout}>
-                    <Text style={styles.buttonText}>יציאה</Text>
+                    <Text style={styles.buttonText}>התנתקות</Text>
                 </TouchableOpacity>
-
+                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -47,48 +47,53 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
 
 
     },
     buttonsContainer:
     {
         //paddingTop: 10,
-        alignItems: 'flex-end',
+        alignItems: 'center',
+
     },
     button:
     {
         margin: 20,
-        marginRight: 30,
+        //marginRight: 30,
 
     },
     buttonText:
     {
-        fontSize: 16,
+        fontSize: 24,
         color: "seashell",
 
     },
     title:
     {
-        margin: 20,
-        marginRight: 30,
-        fontSize: 28,
-        color: "seashell",
-        textDecorationLine: "underline"
 
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
+        margin: 20,
+        //marginRight: 30,
+        fontSize: 48,
+        color: "seashell",
+        borderBottomWidth:2,
+        borderColor: "seashell",
     },
     exitButton:
     {
-        paddingTop: 60,
+        paddingTop: 40,
         //position:'absolute',
-        marginLeft: 30,
+        //marginLeft: 30,
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 
-    }
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }

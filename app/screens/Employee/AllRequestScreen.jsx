@@ -31,7 +31,7 @@ function Main({ navigation, style }) {
 
     const render = ({ item }) => {
         return (
-            <View>
+            <View style={styles.container}>
                 <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("DisplayRequestScreen", { item: item })}>
                     <Text style={styles.listText}>תאריך: {item.date}</Text>
                     <Text style={styles.listText} >סוג הבקשה: {item.type}</Text>
@@ -46,63 +46,98 @@ function Main({ navigation, style }) {
 
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
-            <View style={styles.container}>
 
-                <Text style={styles.title}>
-                    כל הבקשות
-                </Text>
-                <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין בקשות'} src={require('../../assets/empty_icon_white.png')} />
+
+            <Text style={styles.title}>
+                כל הבקשות
+            </Text>
+            <View style={styles.mainListCon}>
+
+                <View style={styles.listContainer}>
+
+                    <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין בקשות'} src={require('../../assets/empty_icon_white.png')} />
+                </View>
             </View>
+
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+            </TouchableOpacity>
         </View>
     )
 }
 const styles = StyleSheet.create({
 
-    view:
-    {
+    view: {
+        //marginTop:50,
         flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height,
+
 
     },
     container:
     {
-        alignItems: 'flex-end',
+        //paddingTop: 10,
+        flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+
+
+    },
+    mainListCon:{
+        height: Dimensions.get('window').height/1.6,
+        width: Dimensions.get('window').width/1.1,
+        backgroundColor: "#6f61ca",
+        borderWidth:1,
+        borderColor: "#584DA1",
+        borderRadius: 25,
+
+    },
+    listContainer:{
+        //flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height/1.6 -20,
+        width: Dimensions.get('window').width/1.1,
+        marginTop: 10,
     },
     title:
     {
         margin: 20,
-        marginRight: 30,
-        fontSize: 28,
+        //marginRight: 30,
+        fontSize: 48,
         color: "seashell",
-        textDecorationLine: "underline"
+        borderBottomWidth:2,
+        borderColor: "seashell",
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
 
     },
     list:
     {
-        height: 55,
-        width: Dimensions.get('window').width - 40,
-        backgroundColor: "seashell",
+        height: 70,
+        width: Dimensions.get('window').width/1.16,
+        backgroundColor: "white",
         flexDirection: "row-reverse",
         alignItems: 'center',
         textAlign: "center",
-        marginHorizontal: 20,
+        //marginHorizontal: 20,
         justifyContent: 'center',
         borderRadius: 25,
-        marginBottom: 10,
-        borderWidth: 1,
+        marginBottom: 6,
+        borderWidth: 2,
         borderColor: "lightgray",
     },
     listText:
     {
-        flex: 5,
+        flex: 3,
         textAlign: "center",
         fontSize: 14,
-        marginLeft: 5,
+        //marginLeft: 5,
         marginRight: 10,
     },
-    status:
+    employeeName:
     {
         flex: 3,
         textAlign: "center",
@@ -110,8 +145,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "bold",
     },
-    tinyLogo:
-    {
+    tinyLogo: {
+
         width: 20,
         height: 20,
         marginLeft: 15,
@@ -119,21 +154,14 @@ const styles = StyleSheet.create({
     },
     exitButton:
     {
-        marginLeft: 30,
-        paddingTop: 60,
-    },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
+        paddingTop: 40,
+        //position:'absolute',
+        //marginLeft: 30,
 
     },
-    tinyLogo: {
-        width: 20,
-        height: 20,
-        marginLeft: 15,
-        opacity: 0.7,
-
+    exitIcon:{
+        height:50,
+        width:50,
     },
 })
 
