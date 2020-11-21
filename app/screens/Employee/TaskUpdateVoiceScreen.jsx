@@ -41,6 +41,10 @@ function Main({ navigation, style }) {
             imgSrc = pause;
         }
     };
+    const handlerSendVoice = () => {
+        let to = item.employee.email === globalObject.User.email ? globalObject.User.mangaerEmail : item.employee.email
+
+    }
 
     const SendUpdateTask = async (id, status) => {
         var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
@@ -66,7 +70,7 @@ function Main({ navigation, style }) {
                     <View key={obj.url} style={styles.myVoiceMsg}>
                         <TouchableOpacity
                             style={{ ...styles.myVoiceButton, ...style.btn3 }}
-                            onPress={() => playVoiceBtn(obj.url)}
+                            onPress={() => Rec.playAudio(obj.url)}
                         >
                             <Image style={styles.tinyLogo} source={imgSrc} />
                             <Text style={styles.buttonText}>אני</Text>
@@ -111,13 +115,13 @@ function Main({ navigation, style }) {
                     <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                     <Text style={styles.buttonText}>הקלט</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} >
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.playAudio} >
                     <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                     <Text style={styles.buttonText}>נגן הקלטה</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{ ...styles.button, ...style.btn2 }}
-
+                    onPress={handlerSendVoice}
                 >
                     <Image style={styles.tinyLogo} source={require('../../assets/paper_plane_icon.png')} />
                     <Text style={styles.buttonText}>שלח הודעה</Text>
