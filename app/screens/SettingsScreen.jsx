@@ -29,7 +29,7 @@ function Main({ navigation, style }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("PreferencesOfUserForStyleScreen")}>
                     <Text style={styles.buttonText}>ערכת נושא</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SelectionScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ChangeProfileImageScreen")}>
                     <Text style={styles.buttonText}>עזרה</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={logout}>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
 
 
@@ -73,13 +73,13 @@ const styles = StyleSheet.create({
     title:
     {
 
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
+        textAlign: "center",
+        width: Dimensions.get('window').width * 0.80,
         margin: 20,
         //marginRight: 30,
         fontSize: 48,
         color: "seashell",
-        borderBottomWidth:2,
+        borderBottomWidth: 2,
         borderColor: "seashell",
     },
     exitButton:
@@ -88,9 +88,9 @@ const styles = StyleSheet.create({
 
 
     },
-    exitIcon:{
-        height:50,
-        width:50,
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 
 })

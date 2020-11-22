@@ -30,7 +30,7 @@ import SettingsScreen from "./app/screens/SettingsScreen";
 import PreferencesOfUserForStyleScreen from './app/screens/PreferencesOfUserForStyleScreen'
 import ContactsScreen from "./app/screens/ContactsScreen";
 import DisplaySingleContactScreen from "./app/screens/DisplaySingleContactScreen";
-
+import ChangeProfileImageScreen from './app/screens/ChangeProfileImageScreen';
 
 
 // managar
@@ -75,10 +75,10 @@ const listScreen =
     { RestPasswordWithCode: RestPasswordWithCode },
     { ChangePasswordScreen: ChangePasswordScreen },
     { TaskUpdateVoiceScreen: TaskUpdateVoiceScreen },
-    { ContactsScreen: ContactsScreen},
-    { DisplaySingleContactScreen: DisplaySingleContactScreen},
-
-    { OldTasksScreen:OldTasksScreen},
+    { ContactsScreen: ContactsScreen },
+    { DisplaySingleContactScreen: DisplaySingleContactScreen },
+    { ChangeProfileImageScreen: ChangeProfileImageScreen },
+    { OldTasksScreen: OldTasksScreen },
   ];
 var screens = {}
 
