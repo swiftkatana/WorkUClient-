@@ -28,6 +28,11 @@ import LoginScreen from "./app/screens/RegistrationAndLogin/LoginScreen";
 //Global
 import SettingsScreen from "./app/screens/SettingsScreen";
 import PreferencesOfUserForStyleScreen from './app/screens/PreferencesOfUserForStyleScreen'
+import ContactsScreen from "./app/screens/ContactsScreen";
+import DisplaySingleContactScreen from "./app/screens/DisplaySingleContactScreen";
+
+
+
 // managar
 import ManagerMainScreen from "./app/screens/Manager/ManagerMainScreen";
 import ManagerManageRequestsScreen from "./app/screens/Manager/ManagerManageRequestsScreen";
@@ -69,6 +74,8 @@ const listScreen =
     { RestPasswordWithCode: RestPasswordWithCode },
     { ChangePasswordScreen: ChangePasswordScreen },
     { TaskUpdateVoiceScreen: TaskUpdateVoiceScreen },
+    { ContactsScreen: ContactsScreen},
+    { DisplaySingleContactScreen: DisplaySingleContactScreen},
 
   ];
 var screens = {}

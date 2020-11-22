@@ -1,16 +1,17 @@
 import React, { useState } from "react"
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
 
 
 export default function Main({ navigation }) {
 
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [verifyPassword, setVerifyPassword] = useState('')
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
 
 
 
@@ -26,7 +27,7 @@ export default function Main({ navigation }) {
       alertButton = [{ text: "הבנתי" }];
       Alert.alert(title, msg, alertButton, { cancelable: false });
     } else {
-      const user = await globalObject.SendRequest(requestList.userRegisterUrl, { firstName, lastName, email, password });
+      const user = await globalObject.SendRequest(requestList.userRegisterUrl, { firstName, lastName,phone, email, password });
       if (user) {
         // register content ok
         globalObject.User = user;
@@ -40,6 +41,7 @@ export default function Main({ navigation }) {
         <Text style={styles.logoText}>הרשמה</Text>
         <TextInput value={firstName} onChangeText={setFirstName} style={styles.inputBox} placeholder='שם פרטי' />
         <TextInput value={lastName} onChangeText={setLastName} style={styles.inputBox} placeholder="שם משפחה" />
+        <TextInput value={phone} onChangeText={setPhone} style={styles.inputBox} placeholder="מספר טלפון" keyboardType={'numeric'} />
         <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' />
         <TextInput value={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true} />
         <TextInput value={verifyPassword} onChangeText={setVerifyPassword} style={styles.inputBox} placeholder="אימות סיסמה" secureTextEntry={true} />
@@ -62,26 +64,26 @@ export default function Main({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    //flexGrow: 0.8,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: Dimensions.get('window').height/20,
 
   },
   inputBox: {
     width: 300,
-    height: 60,
+    height: 50,
     backgroundColor: '#ededed',
     borderRadius: 25,
     paddingHorizontal: 16,
-    marginVertical: 10,
+    marginVertical: Dimensions.get('window').height/85,
     textAlign: "right"
   },
   button: {
     width: 300,
+    height: 50,
     backgroundColor: "#7f71e3",
     borderRadius: 25,
-    marginVertical: 10,
+    marginVertical: Dimensions.get('window').height/85,
     paddingVertical: 16,
   },
   buttonText: {
