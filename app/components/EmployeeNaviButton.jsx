@@ -16,7 +16,7 @@ function Main({ navigation, style }) {
                 <Text style={styles.settingsFont}>פורטל עובד</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('employeeStatisticScreen')}>
+            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('EmployeeCurrentShifts')}>
                 <Image style={styles.tinyLogo} source={require('../assets/time_icon_3.png')} />
                 <Text style={styles.settingsFont}>משמרות</Text>
             </TouchableOpacity>

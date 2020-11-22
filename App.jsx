@@ -17,6 +17,9 @@ import ManualWorkingTime from "./app/screens/Employee/ManualWorkingTime";
 import EmployeeShiftsScreen from "./app/screens/Employee/EmployeeShiftsScreen";
 import employeeStatisticScreen from "./app/screens/Employee/employeeStatisticScreen";
 import TaskUpdateVoiceScreen from "./app/screens/Employee/TaskUpdateVoiceScreen";
+import EmployeeCurrentShifts from "./app/screens/Employee/EmployeeCurrentShifts";
+
+
 
 
 //reg and log
@@ -24,6 +27,9 @@ import RegisterUserScreen from "./app/screens/RegistrationAndLogin/RegisterUserS
 import SelectionScreen from "./app/screens/RegistrationAndLogin/SelectionScreen";
 import RegisterCompanyScreen from "./app/screens/RegistrationAndLogin/RegisterCompanyScreen";
 import LoginScreen from "./app/screens/RegistrationAndLogin/LoginScreen";
+import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForResScreen';
+import RestPasswordWithCode from './app/screens/RegistrationAndLogin/RestPasswordWithCodeScreen';
+import ChangePasswordScreen from './app/screens/RegistrationAndLogin/ChangePasswordScreen';
 
 //Global
 import SettingsScreen from "./app/screens/SettingsScreen";
@@ -39,10 +45,9 @@ import ManagerManageRequestsScreen from "./app/screens/Manager/ManagerManageRequ
 import ManagerToolsScreen from "./app/screens/Manager/ManagerToolsScreen";
 import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequestScreen";
 import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
-import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForResScreen';
-import RestPasswordWithCode from './app/screens/RegistrationAndLogin/RestPasswordWithCodeScreen';
-import ChangePasswordScreen from './app/screens/RegistrationAndLogin/ChangePasswordScreen';
 import OldTasksScreen from "./app/screens/Manager/OldTasksScreen";
+import ManageShifts from "./app/screens/Manager/ManageShifts";
+
 
 
 
@@ -77,8 +82,9 @@ const listScreen =
     { TaskUpdateVoiceScreen: TaskUpdateVoiceScreen },
     { ContactsScreen: ContactsScreen},
     { DisplaySingleContactScreen: DisplaySingleContactScreen},
-
     { OldTasksScreen:OldTasksScreen},
+    { EmployeeCurrentShifts: EmployeeCurrentShifts},
+    { ManageShifts: ManageShifts},
   ];
 var screens = {}
 

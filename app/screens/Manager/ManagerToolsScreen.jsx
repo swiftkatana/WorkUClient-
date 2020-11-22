@@ -21,7 +21,7 @@ function Main({ navigation, style }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("NewTaskScreen")}>
                     <Text style={styles.buttonText}>שלח משימה לעובד</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WorkingTimeReportScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ManageShifts")}>
                     <Text style={styles.buttonText}>ניהול משמרות</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
