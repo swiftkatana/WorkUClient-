@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react'
+import { Dimensions, Image, StyleSheet, Text, View, VirtualizedList } from 'react-native'
+import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { globalObject } from '../../src/globalObject'
 import InfoList from '../../components/InfoList'
+import apiKeys from '../../src/api/apiKeys'
+import { responsiveHeight } from 'react-native-responsive-dimensions'
 
 
 
@@ -11,6 +13,16 @@ import InfoList from '../../components/InfoList'
 function Main({ navigation, style }) {
     const [sum, setSum] = useState(0);
     const [sendTo, SetSendTo] = useState({});
+    const [workTimes, setworkTimes] = useState([])
+    console.log('da')
+    useEffect(() => {
+        (async () => {
+            console.log(apiKeys.getWorkTimesOfUser)
+            let res = await globalObject.SendRequest(apiKeys.getWorkTimesOfUser, { email: sendTo.email });
+            if (res) setworkTimes(res)
+        })()
+
+    }, [sendTo])
 
     const render2 = ({ item }) => {
         return (
@@ -25,17 +37,17 @@ function Main({ navigation, style }) {
     }
 
 
-const render = ({ item }) => {
-    return (
-        <View style={styles.list}>
-            <Text style={styles.listText}>{item.date}</Text>
-            <Text style={styles.listText}>{item.startTime}</Text>
-            <Text style={styles.listText}>{item.endTime}</Text>
-            <Text style={styles.listText}>{item.sumOfTime}</Text>
+    const render = ({ item }) => {
+        return (
+            <View style={styles.list}>
+                <Text style={styles.listText}>{item.date}</Text>
+                <Text style={styles.listText}>{item.startTime}</Text>
+                <Text style={styles.listText}>{item.endTime}</Text>
+                <Text style={styles.listText}>{item.sumOfTime}</Text>
 
-        </View>
-    )
-}
+            </View>
+        )
+    }
 
 
 
@@ -98,15 +110,16 @@ const render = ({ item }) => {
                         />
                     </View>
                     <View style={styles.listContainer}>
-                        <FlatList
 
-                            data={globalObject.User.employees.workTimes}
+                        <FlatList
+                            data={workTimes}
                             renderItem={render}
                             keyExtractor={item => item.id}
                         />
+
                     </View>
                 </View>
-                <Text style={styles.mainSum}>סה"כ שעות במצטבר לחודש זה: {sum}</Text>
+                {/* <Text style={styles.mainSum}>סה"כ שעות במצטבר לחודש זה: {sum}</Text> */}
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
@@ -132,7 +145,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     mainListCon: {
-        height: Dimensions.get('window').height / 5,
+        height: Dimensions.get('window').height / 4,
         width: Dimensions.get('window').width / 1.1,
         backgroundColor: "#6f61ca",
         borderWidth: 1,
@@ -241,12 +254,12 @@ const styles = StyleSheet.create({
         borderColor: "#584DA1",
         borderRadius: 25,
         marginTop: 10,
-        marginBottom:15,
+        marginBottom: 15,
     },
     listContainer2: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height / 1.6 - 20,
+        height: responsiveHeight(15),
         marginTop: 10,
     },
     list2: {

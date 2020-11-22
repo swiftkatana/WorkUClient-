@@ -47,7 +47,7 @@ function Main({ navigation, style }) {
                         />
                     </View>
                 </View>
-                <Text style={styles.mainSum}>סה"כ שעות במצטבר לחודש זה: {sum}</Text>
+                {/* <Text style={styles.mainSum}>סה"כ שעות במצטבר לחודש זה: {sum}</Text> */}
                 <TouchableOpacity style={styles.logo} onPress={() => navigation.navigate("ManualWorkingTime")}>
                     <Image style={styles.tinyLogo} source={require('../../assets/plus_icon_white.png')} />
                     <Text style={styles.btnText}>הוסף שעות ידנית</Text>

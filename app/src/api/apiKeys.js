@@ -28,6 +28,9 @@ export default requestList = {
   useruploadshfits: "/api/user/uploadshifts",
 
   // send{email}
+  // recive [] of work times
+  getWorkTimesOfUser: "/api/company/getworktimes",
+  // send{email}
   // recive none
   userRequestRestCode: "/api/user/createrestpasswordcode",
   // send{email}
