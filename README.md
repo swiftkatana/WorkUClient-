@@ -37,7 +37,7 @@ Employees can conveniently submit their preferred shifts and schedules to the em
 The application can be tailored by each user to fit his or her work environment. The application colors can be changed and reset based on personal preference, adding an extra touch of fun to a work day. 
 
 This application ensures the success of every workplace, especially when it is run remotely. Quick, clear organization and easy access between the employer and employees, in an interactive and user-friendly application, makes work from home that much more fun.  
-![alt text](https://media.discordapp.net/attachments/620043596879364118/780182439283654707/mediamodifier_image3.png?width=984&height=681")
+[logo]: https://media.discordapp.net/attachments/620043596879364118/780182439283654707/mediamodifier_image3.png?width=984&height=681"
 ## Installation
 #### We have Wirerd Bug On heroku you cant login but you can still check all just you need to register first 
 #### but you can run the app on expo 
