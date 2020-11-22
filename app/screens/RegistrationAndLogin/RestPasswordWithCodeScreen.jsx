@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { responsiveScreenHeight } from "react-native-responsive-dimensions";
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
 
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
         //flexGrow: 0.8,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: responsiveScreenHeight(5),
 
     },
     inputBox: {
