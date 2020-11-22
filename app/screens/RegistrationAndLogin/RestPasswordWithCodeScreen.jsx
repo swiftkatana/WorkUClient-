@@ -63,7 +63,7 @@ export default function Main({ navigation }) {
             <View style={styles.signinTextCont}>
                 <Text style={styles.signinText}> לחזור אחרוה?</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('GetCodeForRes')}>
-                    <Text style={styles.signinButton}>כניסה</Text>
+                    <Text style={styles.signinButton}>לחץ כאן</Text>
                 </TouchableOpacity>
                 <Text style={styles.signinButton} />
             </View>
