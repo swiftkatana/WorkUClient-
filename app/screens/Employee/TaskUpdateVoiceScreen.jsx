@@ -7,9 +7,7 @@ import { connect } from "react-redux";
 import Recorder from '../../class/VoiceRecording';
 import {responsiveHeight,responsiveWidth} from "react-native-responsive-dimensions";
 
-
 function Main({ navigation, style }) {
-
 
     const play = require('../../assets/play_button_icon.png');
     const pause = require('../../assets/pause_icon.png');
@@ -18,7 +16,7 @@ function Main({ navigation, style }) {
     const paper_plane = require('../../assets/paper_plane_icon.png');
     const imgSrc = [play, pause, square, microphone, paper_plane];
     const item = navigation.state.params.item;
-    const [update, setUpdate] = useState(globalObject.User.tasks.processing[item._id].audios.length);
+    const [update, setUpdate] = useState(0);
     const myScroll = useRef(null)
     const Rec = new Recorder();
     const status = globalObject.User.role === "manager" ?  "בוטל" : "הושלם";
@@ -26,12 +24,50 @@ function Main({ navigation, style }) {
     const butText = globalObject.User.role === "manager" ?  "ביטול משימה": "סיימתי בהצלחה" ;
     const email = item.employee;
     const notiEmail = globalObject.User.role === "manager" ?  item.employee : globalObject.User.managerEmail;
+    const audios = navigation.state.params.shouldRender ?  globalObject.User.tasks.processing[item._id].audios : globalObject.User.tasks.completed[item._id].audios ;
+    const renderTaskOptions = ()=>
+    {
+        if (!navigation.state.params.shouldRender)
+            return null;
+
+
+        return (
+            <View>
+                <View style={styles.recordSendBtnList}>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPressIn={Rec.StartRecording} onPressOut={Rec.StopRecording}>
+                    <Image style={styles.tinyLogo} source={imgSrc[3]} />
+                    <Text style={styles.buttonText}>הקלט</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.playAudio} >
+                    <Image style={styles.tinyLogo} source={imgSrc[0]} />
+                    <Text style={styles.buttonText}>נגן הקלטה</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ ...styles.button, ...style.btn2 }}
+                    onPress={handlerSendVoice}
+                >
+                    <Image style={styles.tinyLogo} source={imgSrc[4]} />
+                    <Text style={styles.buttonText}>שלח הודעה</Text>
+                </TouchableOpacity>
+                </View>
+                <View style={styles.updateBtnContainer}>
+                    <TouchableOpacity
+                        style={styles.updateButton}
+                        onPress={pressHandler}
+                    >
+                        <Image style={styles.lessTinyLogo} source={require('../../assets/star_icon.png')} />
+                        <Text style={styles.buttonText}> {butText} </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+
+
     useEffect(() => {
 
         const handle = setInterval(() => {
-
-            if(globalObject.User.tasks.processing[item._id])
-                if (update !== globalObject.User.tasks.processing[item._id].audios.length)
+                if (update !== audios.length)
                     setUpdate(update + 1)
 
         }, 100);
@@ -40,7 +76,6 @@ function Main({ navigation, style }) {
             clearInterval(handle);
         }
     }, [update])
-
 
     const SendUpdateTask = async () => {
         var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
@@ -67,26 +102,21 @@ function Main({ navigation, style }) {
         Alert.alert(title, msg, alertButton, { cancelable: false });
     
     }
-
-    const playVoiceBtn = () => {
-
-    };
     const handlerSendVoice = async () => {
         let to = item.employee;
         let noti = globalObject.User.email === globalObject.User.tasks.processing[item._id].employee ? globalObject.User.managerEmail : globalObject.User.tasks.processing[item._id].employee;
 
         let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName);
         if (audio) {
-            globalObject.User.tasks.processing[item._id].audios.push(audio);
+            audios.push(audio);
             audio.taskId = item._id;
             globalObject.sendNotification(noti, audio, 'התקבלה הודעה קולית חדשה', 'התקבל עדכון', 'updateTaskVoice');
             setUpdate(update + 1);
         }
     }
 
-
     const renderVoiceList = () => {
-        return globalObject.User.tasks.processing[item._id].audios.map(obj => {
+        return audios.map(obj => {
             if (obj.email === globalObject.User.email) {
                 return (
                     <View key={obj.url} style={styles.myVoiceMsg}>
@@ -133,34 +163,9 @@ function Main({ navigation, style }) {
                     </View>
                 </View>
             </View>
-            <View style={styles.recordSendBtnList}>
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPressIn={Rec.StartRecording} onPressOut={Rec.StopRecording}>
-                    <Image style={styles.tinyLogo} source={imgSrc[3]} />
-                    <Text style={styles.buttonText}>הקלט</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.playAudio} >
-                    <Image style={styles.tinyLogo} source={imgSrc[0]} />
-                    <Text style={styles.buttonText}>נגן הקלטה</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{ ...styles.button, ...style.btn2 }}
-                    onPress={handlerSendVoice}
-                >
-                    <Image style={styles.tinyLogo} source={imgSrc[4]} />
-                    <Text style={styles.buttonText}>שלח הודעה</Text>
-                </TouchableOpacity>
+            
+            {renderTaskOptions()}
 
-
-            </View>
-            <View style={styles.updateBtnContainer}>
-                <TouchableOpacity
-                    style={styles.updateButton}
-                    onPress={pressHandler}
-                >
-                    <Image style={styles.lessTinyLogo} source={require('../../assets/star_icon.png')} />
-                    <Text style={styles.buttonText}> {butText} </Text>
-                </TouchableOpacity>
-            </View>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
             </TouchableOpacity>
@@ -200,11 +205,8 @@ const styles = StyleSheet.create({
     },
     title:
     {
-
         textAlign: "center",
-        //width: Dimensions.get('window').width*0.80,
         margin: 20,
-        //marginRight: 30,
         fontSize: 48,
         color: "seashell",
         borderBottomWidth: 2,
@@ -212,14 +214,11 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         textAlign: "center",
-        //marginRight: 30,
-        //marginLeft: 30,
         fontSize: 18,
         color: "seashell",
     },
     descriptionStyle: {
         textAlign: "center",
-        //marginRight: 30,
         marginLeft: 30,
         fontSize: 18,
         color: "seashell",
@@ -229,18 +228,14 @@ const styles = StyleSheet.create({
         height: 18,
         alignItems: 'center',
         justifyContent: 'center',
-        //marginBottom: 50,
-
     },
     lessTinyLogo: {
         width: 25,
         height: 25,
         alignItems: 'center',
         justifyContent: 'center',
-        //marginBottom: 50,
     },
     bodyHeader: {
-
         marginRight: 30,
         marginLeft: 30,
         fontSize: 16,
@@ -320,7 +315,7 @@ const styles = StyleSheet.create({
     button: {
         width: responsiveWidth(25),
         height: responsiveHeight(10.2),
-        backgroundColor: "#6f61ca", // #6357b5
+        backgroundColor: "#6f61ca",
         borderRadius: 25,
         marginVertical: 5,
         paddingVertical: 16,
@@ -330,14 +325,13 @@ const styles = StyleSheet.create({
     updateButton: {
         width: responsiveWidth(50),
         height: responsiveHeight(10.2),
-        backgroundColor: "#6a61ca", // #6357b5
+        backgroundColor: "#6a61ca", 
         borderRadius: 25,
         marginVertical: 5,
         paddingVertical: 12,
         marginHorizontal: 10,
         alignItems: 'center',
     },
-
     buttonText: {
         fontSize: 16,
         fontWeight: "500",
