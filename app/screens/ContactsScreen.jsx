@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
 import InfoList from '../components/InfoList';
 import { connect } from 'react-redux';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 
 
@@ -52,6 +53,7 @@ function Main({ navigation, style }) {
                 </View>
             </View>
 
+
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
             </TouchableOpacity>
@@ -71,7 +73,6 @@ const styles = StyleSheet.create({
     },
     container:
     {
-        //paddingTop: 10,
         flex: 1,
         alignItems:'center',
         justifyContent: 'center',

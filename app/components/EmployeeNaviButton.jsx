@@ -2,7 +2,6 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-import { globalObject } from '../src/globalObject';
 function Main({ navigation, style }) {
     return (
         <View style={styles.view}>

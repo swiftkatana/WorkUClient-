@@ -29,8 +29,6 @@ export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity,
             clearInterval(handle);
         }
     }, [currentLen])
-
-    console.log(GetList());
     return (
         <View>
 

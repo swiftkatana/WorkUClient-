@@ -6,12 +6,8 @@ import 'moment/locale/he';
 //import moment from 'moment-timezone';
 
 const onSelected = (date) => {
-    console.log(date);
 }
 function Calander(test,) {
-    // var heLocaleData = moment.localeData('he');
-    // console.log(heLocaleData);
-    //moment().tz('Asia/Jerusalem').format('MM/DD/YYYY')
     return (
         <View style={styles.view}>
             <CalendarStrip
