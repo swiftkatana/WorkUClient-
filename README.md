@@ -39,7 +39,8 @@ The application can be tailored by each user to fit his or her work environment.
 This application ensures the success of every workplace, especially when it is run remotely. Quick, clear organization and easy access between the employer and employees, in an interactive and user-friendly application, makes work from home that much more fun.  
 
 ## Installation
-
+#### We have Wirerd Bug On heroku you cant login but you can still check all just you need to register first 
+#### but you can run the app on expo 
 ### [click here](https://worku.herokuapp.com/WorkU.apk)
 
 In order to access all that the application offers, you are required to grant the application access to your microphone and turn on notifications. 
