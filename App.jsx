@@ -36,7 +36,7 @@ import SettingsScreen from "./app/screens/SettingsScreen";
 import PreferencesOfUserForStyleScreen from './app/screens/PreferencesOfUserForStyleScreen'
 import ContactsScreen from "./app/screens/ContactsScreen";
 import DisplaySingleContactScreen from "./app/screens/DisplaySingleContactScreen";
-
+import ChangeProfileImageScreen from './app/screens/ChangeProfileImageScreen';
 
 
 // managar

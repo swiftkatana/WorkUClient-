@@ -22,7 +22,6 @@ export default class VoiceRecording {
 
           if ((await this.recording.getStatusAsync()).canRecord) {
             await this.recording.startAsync();
-            console.log("start rec");
           }
 
         } catch (error) {
@@ -32,7 +31,6 @@ export default class VoiceRecording {
     };
 
     this.StopRecording = async () => {
-      console.log("stop rec");
       try {
         if ((await this.recording.getStatusAsync()).isRecording) {
           await this.recording.stopAndUnloadAsync();
@@ -44,7 +42,7 @@ export default class VoiceRecording {
         console.log(error);
       }
     };
-    this.UploadToServer = async (email, to, _id, fullName) => {
+    this.UploadToServer = async (email, to, _id, fullName, readComOrUser) => {
       if (!this.uri) {
         return null; 
       }
@@ -61,7 +59,8 @@ export default class VoiceRecording {
           email,
           _id,
           fullName,
-          to
+          to,
+          readComOrUser
         },
       });
       let body = JSON.parse(res.body);
@@ -76,7 +75,6 @@ export default class VoiceRecording {
           if (await (await this.sound.getStatusAsync()).isLoaded) {
             await this.sound.unloadAsync();
           }
-
         }
         console.log('play music', url || this.uri);
         this.sound = new Audio.Sound();

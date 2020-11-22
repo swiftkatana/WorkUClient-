@@ -24,7 +24,7 @@ class global {
     ) => {
       let to = await globalObject.SendRequest(requestList.getExpoIdUrl, { email });
       if (!to) return;
-
+      if (to === this.User.expoId) return
       const message = {
         to,
         sound,
@@ -61,7 +61,6 @@ class global {
         try {
           const res = await sever.post(url, obj);
           if (res.data.err) {
-            console.log(res.data);
             switch (res.data.err) {
               case responedList.DBError:
               case responedList.FaildSave:
@@ -89,7 +88,6 @@ class global {
                 msg = "בבקשה תבדוק את המידע שהכנסת";
                 break;
               default:
-                console.log(responedList.infoInvalid === res.data.err);
                 title = res.data.err;
                 msg = "error";
                 break;

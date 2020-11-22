@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
 import InfoList from '../components/InfoList';
 import { connect } from 'react-redux';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 
 
@@ -12,19 +13,15 @@ import { connect } from 'react-redux';
 
 function Main({ navigation, style }) {
     const GetLen = () => {
-        let keys = Object.keys(globalObject.User.personalRequests);
-        let len = 0;
-        for (let i = 0; i < keys.length; i++) {
-            if (globalObject.User.personalRequests[keys[i]].status == "בטיפול")
-                len++;
-        }
+        let keys = Object.keys(globalObject.User.employees);
+        let len = keys.length;
         return len;
     }
     const GetList = () => {
         var arr = [];
-        for (var obj in globalObject.User.personalRequests) {
-            let request = globalObject.User.personalRequests[obj];
-            arr.push({ id: request._id, email: request.email, type: request.type, body: request.body, fullName: request.fullName, status: request.status, date: request.date });
+        for (var obj in globalObject.User.employees) {
+            let employee = globalObject.User.employees[obj];
+            arr.push({...employee,id:employee.phone});
         }
         return arr;
     }
@@ -33,8 +30,8 @@ function Main({ navigation, style }) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("DisplaySingleContactScreen", { item: item })}>
-                    <Image style={styles.userIcon} source={require('../assets/user_icon.png')} />
-                    <Text style={styles.listText}>שם: {item.date}</Text>
+                    <Image style={styles.userIcon} source={{uri: item.imageProfile}} />
+                    <Text style={styles.listText}>שם: {item.fullName}</Text>
                     <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
                 </TouchableOpacity>
             </View>
@@ -56,6 +53,7 @@ function Main({ navigation, style }) {
                 </View>
             </View>
 
+
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
             </TouchableOpacity>
@@ -75,7 +73,6 @@ const styles = StyleSheet.create({
     },
     container:
     {
-        //paddingTop: 10,
         flex: 1,
         alignItems:'center',
         justifyContent: 'center',

@@ -1,60 +1,45 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { globalObject } from '../src/globalObject';
-import InfoList from '../components/InfoList';
 import { connect } from 'react-redux';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
-
+import * as Linking from 'expo-linking';
 
 
 
 
 function Main({ navigation, style }) {
-    const GetLen = () => {
-        let keys = Object.keys(globalObject.User.personalRequests);
-        let len = 0;
-        for (let i = 0; i < keys.length; i++) {
-            if (globalObject.User.personalRequests[keys[i]].status == "בטיפול")
-                len++;
-        }
-        return len;
-    }
-    const GetList = () => {
-        var arr = [];
-        for (var obj in globalObject.User.personalRequests) {
-            let request = globalObject.User.personalRequests[obj];
-            arr.push({ id: request._id, email: request.email, type: request.type, body: request.body, fullName: request.fullName, status: request.status, date: request.date });
-        }
-        return arr;
-    }
-
-    const render = ({ item }) => {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("DisplayRequestScreen", { item: item })}>
-                    <Image style={styles.userIcon} source={require('../assets/user_icon.png')} />
-                    <Text style={styles.listText}>שם: {item.date}</Text>
-                    <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
-                </TouchableOpacity>
-            </View>
-        )
-    }
 
 
+    const item = navigation.state.params.item;
 
     return (
         <View style={{ ...styles.view, ...style.view }}>
 
+            <Image style={styles.imageProfileStyle} source={{uri:item.imageProfile}} />
 
-            <Text style={styles.title}>עודד מנשה</Text>
+            <Text style={styles.title}> {item.fullName} </Text>
             <View style={styles.mainListCon}>
-                <View style={styles.listContainer}>
                     <TouchableOpacity >
                         <Text></Text>
                     </TouchableOpacity>
-                </View>
+
+
+                    <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={()=>{ Linking.openURL("tel://" + item.phone);}}>
+                        <Text style={styles.buttonText}>טלפון</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={{ ...styles.button, ...style.btn2 }}  onPress={()=>{ Linking.openURL('http://api.whatsapp.com/send?phone=972' + + item.phone);}} >
+                        <Text style={styles.buttonText}>וואצפ</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={()=>{ Linking.openURL("mailto://" + item.email);}}>
+                        <Text style={styles.buttonText}>אימייל</Text>
+                    </TouchableOpacity>
             </View>
+
+
 
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
@@ -73,36 +58,26 @@ const styles = StyleSheet.create({
 
 
     },
-    container:
-    {
-        //paddingTop: 10,
-        flex: 1,
-        alignItems:'center',
-        justifyContent: 'center',
-
-
-    },
     mainListCon:{
-        height: Dimensions.get('window').height/1.6,
-        width: Dimensions.get('window').width/1.1,
+        height: Dimensions.get('window').height*0.40,
         backgroundColor: "seashell",
         borderWidth:1,
         borderColor: "grey",
         borderRadius: 25,
 
     },
-    listContainer:{
-        //flex: 1,
-        alignItems:'center',
-        justifyContent: 'center',
-        height: Dimensions.get('window').height/1.6 -20,
-        width: Dimensions.get('window').width/1.1,
-        marginTop: 10,
+    button: {
+        width: responsiveWidth(70),
+        height: responsiveHeight(10),
+        borderRadius: 60,
+        marginVertical: 5,
+        marginHorizontal: 10,
+        alignItems: 'center',
+        justifyContent:"center",
     },
     title:
     {
         margin: 20,
-        //marginRight: 30,
         fontSize: 48,
         color: "seashell",
         borderBottomWidth:2,
@@ -111,60 +86,24 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width*0.80,
 
     },
-    list:
-    {
-        height: 70,
-        width: Dimensions.get('window').width/1.16,
-        backgroundColor: "white",
-        flexDirection: "row-reverse",
-        alignItems: 'center',
-        textAlign: "center",
-        //marginHorizontal: 20,
-        justifyContent: 'center',
-        borderRadius: 25,
-        marginBottom: 6,
-        borderWidth: 2,
-        borderColor: "lightgray",
-    },
-    listText:
-    {
-        flex: 3,
-        textAlign: "center",
-        fontSize: 14,
-        //marginLeft: 5,
-        marginRight: 10,
-    },
-    employeeName:
-    {
-        flex: 3,
-        textAlign: "center",
-        marginRight: 10,
-        fontSize: 14,
-        fontWeight: "bold",
-    },
-    userIcon:{
-        width: 35,
-        height: 35,
-        //marginLeft: 15,
-        marginRight: 15,
-    },
-    tinyLogo: {
-
-        width: 20,
-        height: 20,
-        marginLeft: 15,
-        marginRight: 10,
+    buttonText:{
+        color:"seashell",
+        fontSize:18,
     },
     exitButton:
     {
-        paddingTop: 40,
-        //position:'absolute',
-        //marginLeft: 30,
+        paddingTop: Dimensions.get('window').height*0.05,
+        
 
     },
     exitIcon:{
         height:50,
         width:50,
+    },
+    imageProfileStyle:
+    {
+        height:70,
+        width:70,
     },
 })
 

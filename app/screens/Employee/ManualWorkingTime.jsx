@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { globalObject } from '../../src/globalObject'
 
 function Main({ navigation, style }) {
-    console.log(style.btn2)
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>

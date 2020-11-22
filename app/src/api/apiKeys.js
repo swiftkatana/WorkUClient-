@@ -26,7 +26,11 @@ export default requestList = {
   // send{email}
   // recive none
   userRequestRestCode: "/api/user/createrestpasswordcode",
-
+  // send{email}
+  // recive none
+  readTaskUpdateUrl: '/api/company/readTaskUpdate',
+  // send{audio, email, read={audio:comapny||user},task=true}
+  // recive none
   userUpdateStyleUrl: "api/user/updatestyleuser",
   //send{createDateOfUser,email}
   // recive none
