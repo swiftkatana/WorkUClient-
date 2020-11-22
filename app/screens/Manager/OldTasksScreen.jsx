@@ -20,7 +20,6 @@ function Main({ navigation, style }) {
     }
 
     const render = ({ item }) => {
-        console.log(item);
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.list} onPress={() =>  navigation.navigate('TaskUpdateVoiceScreen', { item: item,shouldRender:false })}>

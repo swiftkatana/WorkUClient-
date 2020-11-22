@@ -11,7 +11,6 @@ import { connect } from "react-redux"
 function Main({ style, navigation }) {
 
     const handleListener = ({ data }) => {
-        console.log()
         switch (data.type) {
 
             case 'newTask':
