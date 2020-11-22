@@ -7,6 +7,7 @@ import TaskBoard from "../../components/TaskBoard"
 import EmployeeNaviButton from "../../components/EmployeeNaviButton"
 import * as Notifications from "expo-notifications";
 import { connect } from "react-redux"
+import apiKeys from "../../src/api/apiKeys"
 
 function Main({ style, navigation }) {
 
@@ -37,6 +38,16 @@ function Main({ style, navigation }) {
 
     useEffect(() => {
 
+        (async () => {
+            const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: globalObject.User.email, comapnyName: globalObject.User.company });
+            if (company) {
+                // console.log(globalObject.User.employees[company.manager.email])
+                globalObject.User.employees = company.employees;
+                globalObject.User.employees[company.manager.email] = { ...company.manager }
+                console.log('company!!!!!!!!!!!!!!', globalObject.User.employees)
+            }
+
+        })()
         Notifications.setNotificationHandler({
             handleNotification: async () => ({
                 shouldShowAlert: true,

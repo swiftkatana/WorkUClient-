@@ -9,10 +9,10 @@ function Main({ navigation, style }) {
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>כלי ניהול</Text>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WorkingTimeReportScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("DisplayWorkingTimeReportOfEmployee")}>
                     <Text style={styles.buttonText}>דו"ח שעות חודשי של עובד</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WorkingTimeReportScreen")}>
+                <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>שליחת תלוש משכורת</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("OldTasksScreen")}>

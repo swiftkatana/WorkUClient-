@@ -51,7 +51,7 @@ function Main({ navigation, style }) {
                 </View>
                 <View style={styles.updateBtnContainer}>
                     <TouchableOpacity
-                        style={styles.updateButton}
+                        style={{ ...styles.updateButton, ...style.btn2 }}
                         onPress={pressHandler}
                     >
                         <Image style={styles.lessTinyLogo} source={require('../../assets/star_icon.png')} />
@@ -314,7 +314,6 @@ const styles = StyleSheet.create({
     button: {
         width: responsiveWidth(25),
         height: responsiveHeight(10.2),
-        backgroundColor: "#6f61ca",
         borderRadius: 25,
         marginVertical: 5,
         paddingVertical: 16,

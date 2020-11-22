@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { responsiveScreenHeight } from "react-native-responsive-dimensions";
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
 
@@ -62,7 +63,7 @@ export default function Main({ navigation }) {
             <View style={styles.signinTextCont}>
                 <Text style={styles.signinText}> לחזור אחרוה?</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('GetCodeForRes')}>
-                    <Text style={styles.signinButton}>כניסה</Text>
+                    <Text style={styles.signinButton}>לחץ כאן</Text>
                 </TouchableOpacity>
                 <Text style={styles.signinButton} />
             </View>
@@ -77,12 +78,12 @@ const styles = StyleSheet.create({
         //flexGrow: 0.8,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: responsiveScreenHeight(5),
 
     },
     inputBox: {
         width: 300,
-        height: 60,
+        height: responsiveScreenHeight(8),
         backgroundColor: '#ededed',
         borderRadius: 25,
         paddingHorizontal: 16,

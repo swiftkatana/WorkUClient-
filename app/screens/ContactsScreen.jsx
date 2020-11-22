@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
@@ -12,6 +12,10 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 
 
 function Main({ navigation, style }) {
+
+
+
+    console.log(globalObject.User)
     const GetLen = () => {
         let keys = Object.keys(globalObject.User.employees);
         let len = keys.length;
@@ -21,7 +25,8 @@ function Main({ navigation, style }) {
         var arr = [];
         for (var obj in globalObject.User.employees) {
             let employee = globalObject.User.employees[obj];
-            arr.push({...employee,id:employee.phone});
+            if (employee.email !== globalObject.User.email)
+                arr.push({ ...employee, id: employee.phone });
         }
         return arr;
     }
@@ -30,7 +35,7 @@ function Main({ navigation, style }) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("DisplaySingleContactScreen", { item: item })}>
-                    <Image style={styles.userIcon} source={{uri: item.imageProfile}} />
+                    <Image style={styles.userIcon} source={{ uri: item.imageProfile }} />
                     <Text style={styles.listText}>שם: {item.fullName}</Text>
                     <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
                 </TouchableOpacity>
@@ -38,14 +43,34 @@ function Main({ navigation, style }) {
         )
     }
 
+    if (GetLen() <= 0) {
+        return (
+            <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
+                keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
+                enabled={Platform.OS === "ios" ? true : false}>
+                <View style={styles.container}>
 
+                    <View>
+                        <Text style={styles.title}>משימה חדשה</Text>
+                    </View>
+
+                    <Image style={{ ...styles.emptyIcon, opacity: 1 }} source={require('../assets/information_icon.png')} />
+                    <Text style={styles.emptyText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
+                    <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                        <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
+                    </TouchableOpacity>
+                </View>
+
+            </KeyboardAvoidingView>
+        )
+    }
 
     return (
         <View style={{ ...styles.view, ...style.view }}>
 
 
             <Text style={styles.title}>אנשי קשר</Text>
-            <View style={styles.mainListCon}>
+            <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
 
                 <View style={styles.listContainer}>
 
@@ -65,7 +90,7 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
         height: Dimensions.get('window').height,
 
@@ -74,26 +99,24 @@ const styles = StyleSheet.create({
     container:
     {
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
 
 
     },
-    mainListCon:{
-        height: Dimensions.get('window').height/1.6,
-        width: Dimensions.get('window').width/1.1,
-        backgroundColor: "#6f61ca",
-        borderWidth:1,
-        borderColor: "#584DA1",
+    mainListCon: {
+        height: Dimensions.get('window').height / 1.6,
+        width: Dimensions.get('window').width / 1.1,
+        borderWidth: 1,
         borderRadius: 25,
 
     },
-    listContainer:{
+    listContainer: {
         //flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height/1.6 -20,
-        width: Dimensions.get('window').width/1.1,
+        height: Dimensions.get('window').height / 1.6 - 20,
+        width: Dimensions.get('window').width / 1.1,
         marginTop: 10,
     },
     title:
@@ -102,16 +125,16 @@ const styles = StyleSheet.create({
         //marginRight: 30,
         fontSize: 48,
         color: "seashell",
-        borderBottomWidth:2,
+        borderBottomWidth: 2,
         borderColor: "seashell",
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
+        textAlign: "center",
+        width: Dimensions.get('window').width * 0.80,
 
     },
     list:
     {
         height: 70,
-        width: Dimensions.get('window').width/1.16,
+        width: Dimensions.get('window').width / 1.16,
         backgroundColor: "white",
         flexDirection: "row-reverse",
         alignItems: 'center',
@@ -139,7 +162,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "bold",
     },
-    userIcon:{
+    userIcon: {
         width: 35,
         height: 35,
         //marginLeft: 15,
@@ -159,9 +182,9 @@ const styles = StyleSheet.create({
         //marginLeft: 30,
 
     },
-    exitIcon:{
-        height:50,
-        width:50,
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 })
 

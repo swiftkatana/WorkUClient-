@@ -47,6 +47,9 @@ import HandleSingleRequestScreen from "./app/screens/Manager/HandleSingleRequest
 import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
 import OldTasksScreen from "./app/screens/Manager/OldTasksScreen";
 import ManageShifts from "./app/screens/Manager/ManageShifts";
+import DisplayWorkingTimeReportOfEmployee from "./app/screens/Manager/DisplayWorkingTimeReportOfEmployee";
+
+
 
 
 
@@ -85,6 +88,7 @@ const listScreen =
     { OldTasksScreen:OldTasksScreen},
     { EmployeeCurrentShifts: EmployeeCurrentShifts},
     { ManageShifts: ManageShifts},
+    {DisplayWorkingTimeReportOfEmployee: DisplayWorkingTimeReportOfEmployee},
   ];
 var screens = {}
 

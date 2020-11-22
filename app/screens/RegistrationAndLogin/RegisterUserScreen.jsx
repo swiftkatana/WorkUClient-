@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { responsiveHeight } from "react-native-responsive-dimensions";
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
 
@@ -27,7 +28,7 @@ export default function Main({ navigation }) {
       alertButton = [{ text: "הבנתי" }];
       Alert.alert(title, msg, alertButton, { cancelable: false });
     } else {
-      const user = await globalObject.SendRequest(requestList.userRegisterUrl, { firstName, lastName,phone, email, password });
+      const user = await globalObject.SendRequest(requestList.userRegisterUrl, { firstName, lastName, phone, email, password });
       if (user) {
         // register content ok
         globalObject.User = user;
@@ -66,16 +67,16 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: Dimensions.get('window').height/20,
+    marginTop: responsiveHeight(5)
 
   },
   inputBox: {
     width: 300,
-    height: 50,
+    height: responsiveHeight(8),
     backgroundColor: '#ededed',
     borderRadius: 25,
     paddingHorizontal: 16,
-    marginVertical: Dimensions.get('window').height/85,
+    marginVertical: Dimensions.get('window').height / 85,
     textAlign: "right"
   },
   button: {
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#7f71e3",
     borderRadius: 25,
-    marginVertical: Dimensions.get('window').height/85,
+    marginVertical: Dimensions.get('window').height / 85,
     paddingVertical: 16,
   },
   buttonText: {

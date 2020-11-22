@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
 
 
@@ -43,8 +43,9 @@ const styles = StyleSheet.create({
     {
         //paddingTop: 10,
         flex: 1,
-        alignItems:'center',
-        justifyContent: 'center',    },
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     button: {
         width: 300,
 
@@ -65,12 +66,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         justifyContent: 'center',
         alignItems: 'center',
-        textAlign:'center',
+        textAlign: 'center',
 
 
     },
     infoTextConteiner: {
-        textAlign:'center',
+        textAlign: 'center',
         padding: 10,
         //marginHorizontal: 82,
         marginRight: 35,
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
         fontSize: 11,
         color: "seashell",
         fontWeight: 'bold',
-        textAlign:'center',
+        textAlign: 'center',
 
     },
     tinyLogo: {
@@ -122,13 +123,13 @@ const styles = StyleSheet.create({
     title:
     {
 
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
+        textAlign: "center",
+        width: Dimensions.get('window').width * 0.80,
         margin: 20,
         //marginRight: 30,
         fontSize: 48,
         color: "seashell",
-        borderBottomWidth:2,
+        borderBottomWidth: 2,
         borderColor: "seashell",
     },
     exitButton:
@@ -137,9 +138,9 @@ const styles = StyleSheet.create({
 
 
     },
-    exitIcon:{
-        height:50,
-        width:50,
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 
 })
