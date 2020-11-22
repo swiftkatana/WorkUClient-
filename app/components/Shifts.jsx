@@ -11,7 +11,7 @@ const CreateList = (fill, options, handler) => {
         var arr = [];
         for (let column = 0; column < 3; column++) {
 
-            arr.push(<View key={key} style={styles.dayText}><TouchableOpacity style={styles.touchableStyle} onPress={() => handler(row, column)}><Image style={styles.tinyPluse} source={options[fill[arrDay[row]][state[column]]]} /></TouchableOpacity></View>);
+            arr.push(<View key={key} style={styles.fillBox}><TouchableOpacity style={styles.touchableStyle} onPress={() => handler(row, column)}><Image style={styles.tinyPluse} source={options[fill[arrDay[row]][state[column]]]} /></TouchableOpacity></View>);
             key++;
         }
         arr2.push(
@@ -146,20 +146,19 @@ export default function Shifts({ style, navigation }) {
                 </TouchableOpacity>
 
             </View>
-            <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי: </Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     mainView: {
-        height: Dimensions.get('window').height,
+        //height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
-        alignItems: 'flex-end',
-    },
+        alignItems:'center',
+        justifyContent: 'center',    },
     view: {
-        alignItems: 'center',
-    },
+        alignItems:'center',
+        justifyContent: 'center',    },
     lableContainer: {
         width: Dimensions.get('window').width,
         flexDirection: 'row-reverse',
@@ -203,9 +202,9 @@ const styles = StyleSheet.create({
 
     },
     header: {
-        fontSize: 16,
+        fontSize: 18,
         color: "seashell",
-        marginHorizontal: 22,
+       // marginHorizontal: 22,
         marginVertical: 2,
     },
     daysContainer: {
@@ -214,9 +213,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row-reverse',
         marginHorizontal: Dimensions.get('window').width / 50 - 10,
+        
 
     },
     dayText: {
+        textAlign: "center",
+        width: Dimensions.get('window').width / 12,
+        height: 35,
+        margin: 5,
+        backgroundColor: "seashell",
+        borderRadius: 10,
+        fontWeight: "bold",
+        backgroundColor:"lightgrey",
+    },
+    fillBox:{
         textAlign: "center",
         width: Dimensions.get('window').width / 12,
         height: 35,
@@ -251,6 +261,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontWeight: "bold",
         fontSize: 11,
+        backgroundColor:"lightgrey",
+
     },
     button: {
         width: 200,

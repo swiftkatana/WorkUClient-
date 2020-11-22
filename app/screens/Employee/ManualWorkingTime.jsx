@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { globalObject } from '../../src/globalObject'
@@ -8,9 +8,6 @@ function Main({ navigation, style }) {
     console.log(style.btn2)
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>הוספת שעות</Text>
                 <View style={styles.infoConteiner}>
@@ -26,6 +23,9 @@ function Main({ navigation, style }) {
                 <TouchableOpacity style={{ ...styles.button, ...style.btn2 }}>
                     <Text style={styles.buttonText}>כניסה</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -35,15 +35,17 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-
+        alignItems:'center',
+        justifyContent: 'center',
 
 
     },
     buttonsContainer:
     {
         //paddingTop: 10,
-        alignItems: 'flex-end',
-    },
+        flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',    },
     button: {
         width: 300,
 
@@ -64,9 +66,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         justifyContent: 'center',
         alignItems: 'center',
+        textAlign:'center',
+
 
     },
     infoTextConteiner: {
+        textAlign:'center',
         padding: 10,
         //marginHorizontal: 82,
         marginRight: 35,
@@ -86,6 +91,8 @@ const styles = StyleSheet.create({
         fontSize: 11,
         color: "seashell",
         fontWeight: 'bold',
+        textAlign:'center',
+
     },
     tinyLogo: {
         width: 20,
@@ -115,27 +122,27 @@ const styles = StyleSheet.create({
     },
     title:
     {
-        margin: 20,
-        marginBottom: 30,
-        marginRight: 30,
-        fontSize: 28,
-        color: "seashell",
-        textDecorationLine: "underline"
 
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
+        margin: 20,
+        //marginRight: 30,
+        fontSize: 48,
+        color: "seashell",
+        borderBottomWidth:2,
+        borderColor: "seashell",
     },
     exitButton:
     {
-        paddingTop: 60,
-        //position:'absolute',
-        marginLeft: 30,
+        paddingTop: 40,
+
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 
-    }
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }

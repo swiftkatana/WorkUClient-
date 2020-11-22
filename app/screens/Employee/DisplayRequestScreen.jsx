@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import requestList from '../../src/api/apiKeys'
@@ -11,50 +11,69 @@ function Main({ navigation, style }) {
     const item = navigation.state.params.item;
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Text style={styles.exitText}>X</Text>
-            </TouchableOpacity>
             <View style={styles.container}>
 
                 <View >
-                    <Text style={styles.header}>בקשה</Text>
+                    <Text style={styles.title}>בקשה</Text>
                 </View>
-                <Text style={styles.subTitle}>תאריך: {item.date}</Text>
-                <Text style={styles.subTitle}>סוג בקשה: {item.type}</Text>
-                <Text style={styles.subTitle}>סטטוס: {item.status}</Text>
-                <Text style={styles.bodyHeader}>פירוט:</Text>
-                <Text style={styles.subTitle}>{item.body}</Text>
+                <View style={styles.requestContainer}>
+                    <Text style={styles.subTitle}>תאריך: {item.date}</Text>
+                    <Text style={styles.subTitle}>סוג בקשה: {item.type}</Text>
+                    <Text style={styles.subTitle}>סטטוס: {item.status}</Text>
+                    <Text style={styles.bodyHeader}>פירוט:</Text>
+                    <Text style={styles.subTitle}>{item.body}</Text>
+                </View>
             </View>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+            </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    view:
-    {
+    view: {
+        //marginTop:50,
         flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
 
 
     },
     container:
     {
-        alignItems: 'flex-end',
-    },
-    header:
-    {
-        margin: 20,
-        marginRight: 30,
-        fontSize: 28,
-        color: "seashell",
-        textDecorationLine: "underline"
+        alignItems:'center',
+        justifyContent: 'center',
 
+    },
+    title:
+    {
+
+        textAlign:"center",
+        width: Dimensions.get('window').width*0.80,
+        margin: 20,
+        //marginRight: 30,
+        fontSize: 48,
+        color: "seashell",
+        borderBottomWidth:2,
+        borderColor: "seashell",
+    },
+    requestContainer:{
+        alignItems:'center',
+        justifyContent: 'center',
+        borderWidth:2,
+        borderColor: "grey",
+        borderRadius:30,
+        width: Dimensions.get('window').width*0.80,
+        height: Dimensions.get('window').height*0.30,
+        backgroundColor: "seashell",
     },
     subTitle:
     {
         marginRight: 30,
         marginLeft: 30,
-        fontSize: 16,
-        color: "seashell",
+        fontSize: 18,
+        color: "black",
 
 
     },
@@ -86,16 +105,15 @@ const styles = StyleSheet.create({
     },
     exitButton:
     {
-        marginLeft: 30,
-        paddingTop: 60,
+        paddingTop: 40,
+
 
     },
-    exitText:
-    {
-        fontSize: 30,
-        color: "seashell",
+    exitIcon:{
+        height:50,
+        width:50,
+    },
 
-    }
 
 })
 const mapStateToProps = (state) => {

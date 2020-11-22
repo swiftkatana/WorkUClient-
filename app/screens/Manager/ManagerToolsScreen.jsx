@@ -15,7 +15,7 @@ function Main({ navigation, style }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WorkingTimeReportScreen")}>
                     <Text style={styles.buttonText}>שליחת תלוש משכורת</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("NewRequestScreen")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("OldTasksScreen")}>
                     <Text style={styles.buttonText}>היסטוריית משימות</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("NewTaskScreen")}>

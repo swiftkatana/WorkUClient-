@@ -19,7 +19,6 @@ export default function Main({ navigation }) {
         globalObject.User.joinCode = company.joinCode;
         globalObject.User.company = companyName;
         globalObject.company = company;
-
         navigation.navigate('ManagerMainScreen');
       }
 

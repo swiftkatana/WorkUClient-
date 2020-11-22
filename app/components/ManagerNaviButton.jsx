@@ -27,9 +27,9 @@ function ManagerNaviButton({ navigation, style }) {
                 <Text style={styles.settingsFont}>סטטיסטיקה</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('ManagerMainScreen')}>
-                <Image style={styles.tinyLogo} source={require('../assets/chat_icon_2.png')} />
-                <Text style={styles.settingsFont}>צ'אט</Text>
+            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('ContactsScreen')}>
+                <Image style={styles.tinyLogo} source={require('../assets/group_icon.png')} />
+                <Text style={styles.settingsFont}>אנשי קשר</Text>
             </TouchableOpacity>
 
         </View>

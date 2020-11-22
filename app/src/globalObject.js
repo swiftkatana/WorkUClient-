@@ -85,7 +85,7 @@ class global {
                 msg = "האימייל אינו תקין";
                 break;
               case responedList.infoInvalid:
-                title = "המידע שהכנסת סגוי";
+                title = "המידע שהכנסת שגוי";
                 msg = "בבקשה תבדוק את המידע שהכנסת";
                 break;
               default:

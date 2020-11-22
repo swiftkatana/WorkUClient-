@@ -15,11 +15,11 @@ function Main({ navigation, style }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WorkingTimeReportScreen")}>
                     <Text style={styles.buttonText}>דו"ח שעות חודשי</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("EmployeeShiftsScreen")}>
+                    <Text style={styles.buttonText}>שליחת משמרות</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("EmployeePayChecksScreen")}>
                     <Text style={styles.buttonText}>תלושי שכר</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("EmployeeShiftsScreen")}>
-                    <Text style={styles.buttonText}>משמרות</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
