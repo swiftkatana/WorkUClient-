@@ -23,6 +23,12 @@ export default requestList = {
   // recive none
   userChangePasswordWithRestCode: "/api/user/restpasswordrestcode",
 
+
+  //send {shitfs,email}
+  //recivce shfit
+  useruploadshfits:"/api/user/uploadshifts",
+
+
   // send{email}
   // recive none
   userRequestRestCode: "/api/user/createrestpasswordcode",
