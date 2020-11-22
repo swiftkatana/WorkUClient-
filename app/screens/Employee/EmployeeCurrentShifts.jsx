@@ -11,28 +11,32 @@ function Main({ navigation, style }) {
     const blue = require('../../assets/checked_icon_blue.png');
     const options = [blue, blue, blue];
     const fill = useRef({});
-    const getShift = async () => {
-        const res = await globalObject.SendRequest(requestList.getShiftUrl, { email: globalObject.User.email });
-        fill.current = res[0];
-    }
+    const [updateScreen, SetUpdateScreen] = useState();
+
+
     useEffect(() => {
-        getShift();
+        setTimeout(async () => {
+            const res = await globalObject.SendRequest(requestList.getShiftUrl, { email: globalObject.User.email });
+            fill.current = res[0];
+            SetUpdateScreen(updateScreen + 1);
+        }, 0);
+    }, [])
 
-    })
-
-    const CreateList = (fill, options) => {
+    const CreateList = (fill) => {
         var arr2 = [];
         var arrDay = Object.keys(fill);
         if (!arrDay.length)
             return;
         var state = Object.keys(fill[arrDay[0]]);
+
         let key = 0;
         for (let row = 0; row < 7; row++) {
-
             var arr = [];
             for (let column = 0; column < 3; column++) {
-
-                arr.push(<View key={key} style={styles.fillBox}><View style={styles.notTouchableStyle}><Image style={styles.tinyPluse} source={blue} /></View></View>);
+                if (fill[arrDay[row]][state[column]][0] === globalObject.User.email)
+                    arr.push(<View key={key} style={styles.fillBox}><View style={styles.notTouchableStyle}><Image style={styles.tinyPluse} source={blue} /></View></View>);
+                else
+                    arr.push(<View key={key} style={styles.fillBox}><View style={styles.notTouchableStyle}><Image style={styles.tinyPluse} source={null} /></View></View>);
                 key++;
             }
             arr2.push(
@@ -43,7 +47,6 @@ function Main({ navigation, style }) {
         }
         return (
             <>{arr2.map(item => item)}</>
-
         )
     }
 
