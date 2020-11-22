@@ -5,24 +5,11 @@ import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
 import Recorder from '../../class/VoiceRecording';
-import { render } from "react-dom";
-import {
-    responsiveHeight,
-    responsiveWidth,
-    responsiveFontSize
-} from "react-native-responsive-dimensions";
+import {responsiveHeight,responsiveWidth} from "react-native-responsive-dimensions";
 
-const pressHandler = () => {
-    title = "שים לב";
-    msg = "פעולה זו תעביר את המשימה לסטטוס ''הושלמה'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות"
-    alertButton = [
-        { text: "אישור", },
-        { text: "ביטול", },
-    ];
-    Alert.alert(title, msg, alertButton, { cancelable: false });
 
-}
 function Main({ navigation, style }) {
+
 
     const play = require('../../assets/play_button_icon.png');
     const pause = require('../../assets/pause_icon.png');
@@ -31,26 +18,55 @@ function Main({ navigation, style }) {
     const paper_plane = require('../../assets/paper_plane_icon.png');
     const imgSrc = [play, pause, square, microphone, paper_plane];
     const item = navigation.state.params.item;
-    const [onPlay, setOnPlay] = useState(false);
     const [update, setUpdate] = useState(globalObject.User.tasks.processing[item._id].audios.length);
     const myScroll = useRef(null)
     const Rec = new Recorder();
-
+    const status = globalObject.User.role === "manager" ?  "בוטל" : "הושלם";
+    const  navi = globalObject.User.role === "manager" ?  "ManagerMainScreen"  : "EmployeeMainScreen";
+    const butText = globalObject.User.role === "manager" ?  "ביטול משימה": "סיימתי בהצלחה" ;
+    const email = item.employee;
+    const notiEmail = globalObject.User.role === "manager" ?  item.employee : globalObject.User.managerEmail;
     useEffect(() => {
 
         const handle = setInterval(() => {
 
-            if (update !== globalObject.User.tasks.processing[item._id].audios.length)
-                setUpdate(update + 1)
-            console.log(globalObject.User.tasks.processing[item._id].audios.length)
+            if(globalObject.User.tasks.processing[item._id])
+                if (update !== globalObject.User.tasks.processing[item._id].audios.length)
+                    setUpdate(update + 1)
 
-        }, 1000);
+        }, 100);
         myScroll.current.scrollToEnd({ animated: true })
         return () => {
             clearInterval(handle);
         }
     }, [update])
 
+
+    const SendUpdateTask = async () => {
+        var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
+            _id: item._id,
+            email,
+            complete: "completed",
+            status,
+        });
+        if (res) {
+                globalObject.User.tasks.completed[item._id] = res;
+                delete globalObject.User.tasks.processing[item._id];
+
+                globalObject.sendNotification(notiEmail, res, 'למידה נוסף כנס ללוח משימות', "משימה עודכנה", 'updateTask')
+                navigation.navigate(navi);
+            }
+    }
+    const pressHandler = () => {
+        title = "שים לב";
+        msg = "פעולה זו תעביר את המשימה לסטטוס ''הושלמה'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות"
+        alertButton = [
+            { text: "אישור", onPress:()=>{SendUpdateTask()}},
+            { text: "ביטול", },
+        ];
+        Alert.alert(title, msg, alertButton, { cancelable: false });
+    
+    }
 
     const playVoiceBtn = () => {
 
@@ -68,22 +84,6 @@ function Main({ navigation, style }) {
         }
     }
 
-    const SendUpdateTask = async (id, status) => {
-        var res = await globalObject.SendRequest(requestList.userUpdateTaskUrl, {
-            _id: id,
-            email: globalObject.User.email,
-            complete: status,
-        });
-        if (res) {
-            if (status == "completed") {
-                globalObject.User.tasks.completed[id] = globalObject.User.tasks.processing[id];
-                delete globalObject.User.tasks.processing[id];
-
-                globalObject.sendNotification(globalObject.User.managerEmail, res, 'למידה נוסף כנס ללוח משימות', "משימה עודכנה", 'updateTask')
-                navigation.navigate("EmployeeMainScreen");
-            }
-        }
-    };
 
     const renderVoiceList = () => {
         return globalObject.User.tasks.processing[item._id].audios.map(obj => {
@@ -158,7 +158,7 @@ function Main({ navigation, style }) {
                     onPress={pressHandler}
                 >
                     <Image style={styles.lessTinyLogo} source={require('../../assets/star_icon.png')} />
-                    <Text style={styles.buttonText}>סיימתי בהצלחה</Text>
+                    <Text style={styles.buttonText}> {butText} </Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>

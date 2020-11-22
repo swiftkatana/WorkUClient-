@@ -37,6 +37,7 @@ import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
 import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForResScreen';
 import RestPasswordWithCode from './app/screens/RegistrationAndLogin/RestPasswordWithCodeScreen';
 import ChangePasswordScreen from './app/screens/RegistrationAndLogin/ChangePasswordScreen';
+import OldTasksScreen from "./app/screens/Manager/OldTasksScreen";
 
 
 
@@ -69,7 +70,7 @@ const listScreen =
     { RestPasswordWithCode: RestPasswordWithCode },
     { ChangePasswordScreen: ChangePasswordScreen },
     { TaskUpdateVoiceScreen: TaskUpdateVoiceScreen },
-
+    { OldTasksScreen:OldTasksScreen},
   ];
 var screens = {}
 
