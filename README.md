@@ -40,7 +40,7 @@ This application ensures the success of every workplace, especially when it is r
 
 ## Installation
 
-WorkU has been designed for gradual adoption from the start, and **you can use as little or as much React as you need**:
+[click here](https://worku.herokuapp.com/WorkU.apk)
 
 In order to access all that the application offers, you are required to grant the application access to your microphone and turn on notifications. 
 
