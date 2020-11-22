@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
@@ -12,6 +12,10 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 
 
 function Main({ navigation, style }) {
+
+
+
+    console.log(globalObject.User)
     const GetLen = () => {
         let keys = Object.keys(globalObject.User.employees);
         let len = keys.length;
@@ -21,7 +25,8 @@ function Main({ navigation, style }) {
         var arr = [];
         for (var obj in globalObject.User.employees) {
             let employee = globalObject.User.employees[obj];
-            arr.push({ ...employee, id: employee.phone });
+            if (employee.email !== globalObject.User.email)
+                arr.push({ ...employee, id: employee.phone });
         }
         return arr;
     }
@@ -38,7 +43,27 @@ function Main({ navigation, style }) {
         )
     }
 
+    if (GetLen() <= 0) {
+        return (
+            <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
+                keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
+                enabled={Platform.OS === "ios" ? true : false}>
+                <View style={styles.container}>
 
+                    <View>
+                        <Text style={styles.title}>משימה חדשה</Text>
+                    </View>
+
+                    <Image style={{ ...styles.emptyIcon, opacity: 1 }} source={require('../assets/information_icon.png')} />
+                    <Text style={styles.emptyText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
+                    <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                        <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
+                    </TouchableOpacity>
+                </View>
+
+            </KeyboardAvoidingView>
+        )
+    }
 
     return (
         <View style={{ ...styles.view, ...style.view }}>

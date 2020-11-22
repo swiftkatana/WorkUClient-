@@ -10,8 +10,7 @@ export default class VoiceRecording {
     this.url;
     this.canRecord = true;
     this.StartRecording = async () => {
-      if ((await this.recording.getStatusAsync()).isRecording) return
-
+      if (!this.canRecord) return;
       if (
         (await Permissions.getAsync(Permissions.AUDIO_RECORDING)).status !==
         "granted"
@@ -77,14 +76,12 @@ export default class VoiceRecording {
     };
 
     this.playAudio = async (url) => {
-      if (!url && !this.uri) return;
       try {
         if (this.sound) {
           if (await (await this.sound.getStatusAsync()).isLoaded) {
             await this.sound.unloadAsync();
           }
         }
-
         console.log('play music', url || this.uri);
         this.sound = new Audio.Sound();
         await this.sound.loadAsync({ uri: url || this.uri }, { shouldPlay: true });
