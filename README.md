@@ -40,7 +40,7 @@ This application ensures the success of every workplace, especially when it is r
 
 ## Installation
 
-[click here](https://worku.herokuapp.com/WorkU.apk)
+### [click here](https://worku.herokuapp.com/WorkU.apk)
 
 In order to access all that the application offers, you are required to grant the application access to your microphone and turn on notifications. 
 
