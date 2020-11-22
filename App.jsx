@@ -42,6 +42,7 @@ import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
 import GetCodeForRes from './app/screens/RegistrationAndLogin/GetCodeForResScreen';
 import RestPasswordWithCode from './app/screens/RegistrationAndLogin/RestPasswordWithCodeScreen';
 import ChangePasswordScreen from './app/screens/RegistrationAndLogin/ChangePasswordScreen';
+import OldTasksScreen from "./app/screens/Manager/OldTasksScreen";
 
 
 
@@ -77,6 +78,7 @@ const listScreen =
     { ContactsScreen: ContactsScreen},
     { DisplaySingleContactScreen: DisplaySingleContactScreen},
 
+    { OldTasksScreen:OldTasksScreen},
   ];
 var screens = {}
 

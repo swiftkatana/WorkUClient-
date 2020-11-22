@@ -21,7 +21,7 @@ function Main({ navigation, style }) {
             return;
         }
         if (header.length < 1) {
-            Alert.alert("הפעולה נחשלה", "חסר תקציר", [{ text: "הבנתי" }]);
+            Alert.alert("הפעולה נכשלה", "חסר תקציר", [{ text: "הבנתי" }]);
             return;
         }
 
@@ -32,9 +32,13 @@ function Main({ navigation, style }) {
             if (audio) {
 
                 globalObject.User.tasks.processing[res._id].audios.push(audio);
+                navigation.navigate('ManagerMainScreen');
+                globalObject.sendNotification(sendTo.email, res, 'אפשר לראות אותה בלוח המשימות', 'משימה חדשה נכנסה', 'newTask')
             }
-            navigation.navigate('ManagerMainScreen');
-            globalObject.sendNotification(sendTo.email, res, 'אפשר לראות אותה בלוח המשימות', 'משימה חדשה נכנסה', 'newTask')
+            else
+            {
+                Alert.alert("הפעולה נכשלה", "יש להקליט הודעה קולית לפני השליחה", [{ text: "הבנתי" }]);
+            }
         }
     }
 
@@ -59,7 +63,6 @@ function Main({ navigation, style }) {
             employee.id = employee.email;
             arr.push(employee);
         }
-        console.log(employees)
         return arr;
     }
     const GetLen = () => {
