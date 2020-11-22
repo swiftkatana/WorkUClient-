@@ -5,7 +5,7 @@ import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
 import Recorder from '../../class/VoiceRecording';
-import {responsiveHeight,responsiveWidth} from "react-native-responsive-dimensions";
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 function Main({ navigation, style }) {
 
@@ -19,14 +19,13 @@ function Main({ navigation, style }) {
     const [update, setUpdate] = useState(0);
     const myScroll = useRef(null)
     const Rec = new Recorder();
-    const status = globalObject.User.role === "manager" ?  "בוטל" : "הושלם";
-    const  navi = globalObject.User.role === "manager" ?  "ManagerMainScreen"  : "EmployeeMainScreen";
-    const butText = globalObject.User.role === "manager" ?  "ביטול משימה": "סיימתי בהצלחה" ;
+    const status = globalObject.User.role === "manager" ? "בוטל" : "הושלם";
+    const navi = globalObject.User.role === "manager" ? "ManagerMainScreen" : "EmployeeMainScreen";
+    const butText = globalObject.User.role === "manager" ? "ביטול משימה" : "סיימתי בהצלחה";
     const email = item.employee;
-    const notiEmail = globalObject.User.role === "manager" ?  item.employee : globalObject.User.managerEmail;
-    const audios = navigation.state.params.shouldRender ?  globalObject.User.tasks.processing[item._id].audios : globalObject.User.tasks.completed[item._id].audios ;
-    const renderTaskOptions = ()=>
-    {
+    const notiEmail = globalObject.User.role === "manager" ? item.employee : globalObject.User.managerEmail;
+    const audios = navigation.state.params.shouldRender ? globalObject.User.tasks.processing[item._id].audios : globalObject.User.tasks.completed[item._id].audios;
+    const renderTaskOptions = () => {
         if (!navigation.state.params.shouldRender)
             return null;
 
@@ -34,21 +33,21 @@ function Main({ navigation, style }) {
         return (
             <View>
                 <View style={styles.recordSendBtnList}>
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPressIn={Rec.StartRecording} onPressOut={Rec.StopRecording}>
-                    <Image style={styles.tinyLogo} source={imgSrc[3]} />
-                    <Text style={styles.buttonText}>הקלט</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.playAudio} >
-                    <Image style={styles.tinyLogo} source={imgSrc[0]} />
-                    <Text style={styles.buttonText}>נגן הקלטה</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{ ...styles.button, ...style.btn2 }}
-                    onPress={handlerSendVoice}
-                >
-                    <Image style={styles.tinyLogo} source={imgSrc[4]} />
-                    <Text style={styles.buttonText}>שלח הודעה</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPressIn={Rec.StartRecording} onPressOut={Rec.StopRecording}>
+                        <Image style={styles.tinyLogo} source={imgSrc[3]} />
+                        <Text style={styles.buttonText}>הקלט</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={Rec.playAudio} >
+                        <Image style={styles.tinyLogo} source={imgSrc[0]} />
+                        <Text style={styles.buttonText}>נגן הקלטה</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{ ...styles.button, ...style.btn2 }}
+                        onPress={handlerSendVoice}
+                    >
+                        <Image style={styles.tinyLogo} source={imgSrc[4]} />
+                        <Text style={styles.buttonText}>שלח הודעה</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.updateBtnContainer}>
                     <TouchableOpacity
@@ -67,8 +66,8 @@ function Main({ navigation, style }) {
     useEffect(() => {
 
         const handle = setInterval(() => {
-                if (update !== audios.length)
-                    setUpdate(update + 1)
+            if (update !== audios.length)
+                setUpdate(update + 1)
 
         }, 100);
         myScroll.current.scrollToEnd({ animated: true })
@@ -85,28 +84,28 @@ function Main({ navigation, style }) {
             status,
         });
         if (res) {
-                globalObject.User.tasks.completed[item._id] = res;
-                delete globalObject.User.tasks.processing[item._id];
+            globalObject.User.tasks.completed[item._id] = res;
+            delete globalObject.User.tasks.processing[item._id];
 
-                globalObject.sendNotification(notiEmail, res, 'למידה נוסף כנס ללוח משימות', "משימה עודכנה", 'updateTask')
-                navigation.navigate(navi);
-            }
+            globalObject.sendNotification(notiEmail, res, 'למידה נוסף כנס ללוח משימות', "משימה עודכנה", 'updateTask')
+            navigation.navigate(navi);
+        }
     }
     const pressHandler = () => {
         title = "שים לב";
         msg = "פעולה זו תעביר את המשימה לסטטוס ''הושלמה'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות"
         alertButton = [
-            { text: "אישור", onPress:()=>{SendUpdateTask()}},
+            { text: "אישור", onPress: () => { SendUpdateTask() } },
             { text: "ביטול", },
         ];
         Alert.alert(title, msg, alertButton, { cancelable: false });
-    
+
     }
     const handlerSendVoice = async () => {
         let to = item.employee;
-        let noti = globalObject.User.email === globalObject.User.tasks.processing[item._id].employee ? globalObject.User.managerEmail : globalObject.User.tasks.processing[item._id].employee;
+        let noti = globalObject.User.role === 'manager' ? globalObject.User.tasks.processing[item._id].employee : globalObject.User.managerEmail;
 
-        let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName);
+        let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName, globalObject.User.role);
         if (audio) {
             audios.push(audio);
             audio.taskId = item._id;
@@ -163,7 +162,7 @@ function Main({ navigation, style }) {
                     </View>
                 </View>
             </View>
-            
+
             {renderTaskOptions()}
 
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
@@ -325,7 +324,7 @@ const styles = StyleSheet.create({
     updateButton: {
         width: responsiveWidth(50),
         height: responsiveHeight(10.2),
-        backgroundColor: "#6a61ca", 
+        backgroundColor: "#6a61ca",
         borderRadius: 25,
         marginVertical: 5,
         paddingVertical: 12,

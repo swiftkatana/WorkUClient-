@@ -24,7 +24,7 @@ class global {
     ) => {
       let to = await globalObject.SendRequest(requestList.getExpoIdUrl, { email });
       if (!to) return;
-
+      if (to === this.User.expoId) return
       const message = {
         to,
         sound,

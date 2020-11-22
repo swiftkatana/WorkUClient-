@@ -44,7 +44,7 @@ export default class VoiceRecording {
         console.log(error);
       }
     };
-    this.UploadToServer = async (email, to, _id, fullName) => {
+    this.UploadToServer = async (email, to, _id, fullName, readComOrUser) => {
       if (!this.uri) {
         return null; 
       }
@@ -61,7 +61,8 @@ export default class VoiceRecording {
           email,
           _id,
           fullName,
-          to
+          to,
+          readComOrUser
         },
       });
       let body = JSON.parse(res.body);
