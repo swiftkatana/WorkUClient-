@@ -12,19 +12,15 @@ import { connect } from 'react-redux';
 
 function Main({ navigation, style }) {
     const GetLen = () => {
-        let keys = Object.keys(globalObject.User.personalRequests);
-        let len = 0;
-        for (let i = 0; i < keys.length; i++) {
-            if (globalObject.User.personalRequests[keys[i]].status == "בטיפול")
-                len++;
-        }
+        let keys = Object.keys(globalObject.User.employees);
+        let len = keys.length;
         return len;
     }
     const GetList = () => {
         var arr = [];
-        for (var obj in globalObject.User.personalRequests) {
-            let request = globalObject.User.personalRequests[obj];
-            arr.push({ id: request._id, email: request.email, type: request.type, body: request.body, fullName: request.fullName, status: request.status, date: request.date });
+        for (var obj in globalObject.User.employees) {
+            let employee = globalObject.User.employees[obj];
+            arr.push({...employee,id:employee.phone});
         }
         return arr;
     }
@@ -33,8 +29,8 @@ function Main({ navigation, style }) {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("DisplaySingleContactScreen", { item: item })}>
-                    <Image style={styles.userIcon} source={require('../assets/user_icon.png')} />
-                    <Text style={styles.listText}>שם: {item.date}</Text>
+                    <Image style={styles.userIcon} source={{uri: item.imageProfile}} />
+                    <Text style={styles.listText}>שם: {item.fullName}</Text>
                     <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
                 </TouchableOpacity>
             </View>

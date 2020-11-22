@@ -30,6 +30,7 @@ export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity,
         }
     }, [currentLen])
 
+    console.log(GetList());
     return (
         <View>
 
