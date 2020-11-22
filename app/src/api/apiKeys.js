@@ -23,18 +23,16 @@ export default requestList = {
   // recive none
   userChangePasswordWithRestCode: "/api/user/restpasswordrestcode",
 
-
   //send {shitfs,email}
   //recivce shfit
-  useruploadshfits:"/api/user/uploadshifts",
-
+  useruploadshfits: "/api/user/uploadshifts",
 
   // send{email}
   // recive none
   userRequestRestCode: "/api/user/createrestpasswordcode",
   // send{email}
   // recive none
-  readTaskUpdateUrl: '/api/company/readTaskUpdate',
+  readTaskUpdateUrl: "/api/company/readTaskUpdate",
   // send{audio, email, read={audio:comapny||user},task=true}
   // recive none
   userUpdateStyleUrl: "api/user/updatestyleuser",
@@ -80,6 +78,7 @@ export default requestList = {
   // recvice {company}
   getCompanyUrl: "/api/company/getcompany",
 
+  sendNewShiftUrl: "/api/company/sendshiftsforemployee",
   // send {_id,email,status}
   // recive {reuqest}
   updatePersonalRequestUrl: "/api/company/updatepersonalreuqest",

@@ -22,9 +22,11 @@ class global {
       type,
       sound = "default"
     ) => {
-      let to = await globalObject.SendRequest(requestList.getExpoIdUrl, { email });
+      let to = await globalObject.SendRequest(requestList.getExpoIdUrl, {
+        email,
+      });
       if (!to) return;
-      if (to === this.User.expoId) return
+      if (to === this.User.expoId) return;
       const message = {
         to,
         sound,

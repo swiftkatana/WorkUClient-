@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
 import { globalObject } from '../../src/globalObject'
+import requestList from "../../src/api/apiKeys";
 import { connect } from 'react-redux';
 import { Picker } from '@react-native-community/picker';
 import { FlatList } from 'react-native-gesture-handler';
 function Main({ navigation, style }) {
 
     const [day, SetDay] = useState(0);
-    const [state, Setstate] = useState(0);
+    const [state, Setstate] = useState(2);
 
     const finalShift = useRef(
         {
@@ -87,32 +88,45 @@ function Main({ navigation, style }) {
         },
     });
 
+    const [num, SetNum] = useState(0);
 
+    const Send = async () => {
+        console.log(finalShift.current);
+        const res = await globalObject.SendRequest(requestList.sendNewShiftUrl, { email: globalObject.User.email, shift: finalShift.current });
+        if (res) {
+
+        }
+
+    }
 
     const HandlePress = (item, shift) => {
+
         var key = ["morning", "lunch", "evening"];
         const employees = globalObject.company.employees;
         var keys = Object.keys(employees);
-        const days = Object.keys(employees[keys[0]].shift);
-        console.log(state);
+        const d = Object.keys(employees[keys[0]].shift);
         if (item.email) {
-            finalShift.current[days[day]][key[shift]].push(item.email);
-            console.log(finalShift.current);
+            finalShift.current[d[day]][key[shift]].push(item.email);
+            var newDays = days;
+            newDays[d[day]][key[shift]] += 1;
+            SetDays(newDays);
+            SetNum(num + 1);
+
         }
 
     }
     const renderButton = ({ item }) => {
         return (
             <View style={styles.list}>
-                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(0)}>
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(1)}>
                     <Text style={styles.listText}>{item.can}</Text>
                 </TouchableOpacity >
 
-                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(1)}>
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(2)}>
                     <Text style={styles.listText}>{item.perferNot}</Text>
                 </TouchableOpacity >
 
-                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(2)}>
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(3)}>
                     <Text style={styles.listText}>{item.cannot}</Text>
                 </TouchableOpacity >
 
@@ -128,8 +142,8 @@ function Main({ navigation, style }) {
             </View>
         )
     }
-    const renderEmployee = ({ item }, shift) => {
-        console.log(item);
+    const renderEmployee = (obj, shift) => {
+        const item = obj.item;
         return (
             <TouchableOpacity onPress={() => HandlePress(item, shift)}>
                 <View style={styles.listC}>
@@ -175,23 +189,20 @@ function Main({ navigation, style }) {
         if (keys.length > 0) {
             const days = Object.keys(employees[keys[0]].shift);
             const states = Object.keys(employees[keys[0]].shift[days[0]]);
-            for (let j = 0; j < 3; j++) {
-                for (let i = 0; i < keys.length; i++) {
-                    if (employees[keys[i]].shift)
+            for (let i = 0; i < keys.length; i++) {
+                if (employees[keys[i]].shift)
+                    for (let j = 0; j < 3; j++) {
+
                         if (employees[keys[i]].shift[days[day]][states[j]] === state) {
                             arr[j].push({ ...employees[keys[i]], id: ((j + 1) * i).toString() });
                         }
-                }
+                    }
             }
         }
-        console.log(arr);
         return arr;
     }
 
     const employyes = GetEmployyesFromDay();
-
-
-
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>
@@ -235,7 +246,7 @@ function Main({ navigation, style }) {
                     <View style={styles.header3}>
                         <FlatList
                             data={employyes[0]}
-                            renderItem={(item) => { renderEmployee(item, 0) }}
+                            renderItem={(obj) => renderEmployee(obj, 0)}
                             keyExtractor={item => item.id}
                         />
                     </View>
@@ -243,7 +254,7 @@ function Main({ navigation, style }) {
                     <View style={styles.header3}>
                         <FlatList
                             data={employyes[1]}
-                            renderItem={(item) => { renderEmployee(item, 1) }}
+                            renderItem={(obj) => renderEmployee(obj, 1)}
                             keyExtractor={item => item.id}
                         />
                     </View>
@@ -251,7 +262,7 @@ function Main({ navigation, style }) {
                     <View style={styles.header3}>
                         <FlatList
                             data={employyes[2]}
-                            renderItem={(item) => { renderEmployee(item, 2) }}
+                            renderItem={(obj) => renderEmployee(obj, 2)}
                             keyExtractor={item => item.id}
                         />
                     </View>
@@ -281,7 +292,9 @@ function Main({ navigation, style }) {
                 </View>
 
 
-
+                <TouchableOpacity style={styles.sendBtn} onPress={Send}>
+                    <Text style={styles.sendBtnText}>עדכן משמרות לשבוע הבא</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
@@ -364,6 +377,18 @@ const styles = StyleSheet.create({
         color: "seashell",
         borderBottomWidth: 2,
         borderColor: "seashell",
+    },
+    sendBtn: {
+
+        width: 200,
+        height: 50,
+        backgroundColor: "white",
+        borderRadius: 25,
+        justifyContent: 'center',
+    },
+    sendBtnText: {
+        textAlign: "center",
+        fontWeight: 'bold',
     },
     exitButton:
     {
