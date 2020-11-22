@@ -67,12 +67,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: responsiveHeight(1)
+    marginTop: responsiveHeight(5)
 
   },
   inputBox: {
     width: 300,
-    height: 50,
+    height: responsiveHeight(8),
     backgroundColor: '#ededed',
     borderRadius: 25,
     paddingHorizontal: 16,
