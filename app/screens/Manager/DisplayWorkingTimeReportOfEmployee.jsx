@@ -14,20 +14,19 @@ function Main({ navigation, style }) {
     const [sum, setSum] = useState(0);
     const [sendTo, SetSendTo] = useState({});
     const [workTimes, setworkTimes] = useState([])
-    console.log('da')
-    useEffect(() => {
-        (async () => {
-            console.log(apiKeys.getWorkTimesOfUser)
-            let res = await globalObject.SendRequest(apiKeys.getWorkTimesOfUser, { email: sendTo.email });
-            if (res) setworkTimes(res)
-        })()
 
-    }, [sendTo])
+    const ButHandler = async (item) => {
+        let res = await globalObject.SendRequest(apiKeys.getWorkTimesOfUser, { email: item.email });
+        SetSendTo(item);
+        if (res)
+            setworkTimes(res);
+    }
+
 
     const render2 = ({ item }) => {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.list2} onPress={() => SetSendTo(item)}>
+                <TouchableOpacity style={styles.list2} onPress={() => ButHandler(item)}>
 
                     <Text style={styles.listText2}>שם: {item.firstName + " " + item.lastName}</Text>
                     <Image style={styles.tinyLogo2} source={require('../../assets/plus_icon_black.png')} />
@@ -119,7 +118,6 @@ function Main({ navigation, style }) {
 
                     </View>
                 </View>
-                {/* <Text style={styles.mainSum}>סה"כ שעות במצטבר לחודש זה: {sum}</Text> */}
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>

@@ -14,7 +14,7 @@ export default function Main({ navigation }) {
   const [codeText, SetCodeText] = useState("");
 
   const pressHandler = async () => {
-    const user = await globalObject.SendRequest(requestList.userJoinCompanyUrl, { email: globalObject.User.email, code: codeText });
+    const user = await globalObject.SendRequest(requestList.userJoinCompanyUrl, { email: globalObject.User.email, code: codeText.trim() });
     if (user) {
 
       globalObject.User = user;

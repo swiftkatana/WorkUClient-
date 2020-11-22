@@ -81,7 +81,10 @@ export default requestList = {
   // recvice {company}
   getCompanyUrl: "/api/company/getcompany",
 
+  // send {email}
   sendNewShiftUrl: "/api/company/sendshiftsforemployee",
+
+  getShiftUrl: "/api/company/getshiftsworkscom",
   // send {_id,email,status}
   // recive {reuqest}
   updatePersonalRequestUrl: "/api/company/updatepersonalreuqest",

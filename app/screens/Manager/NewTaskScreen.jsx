@@ -116,7 +116,7 @@ function Main({ navigation, style }) {
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
                 <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
 
-                    <View style={styles.listContainer}>
+                    <View style={{ flex: 1, }}>
                         <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} />
                     </View>
                 </View>
@@ -228,7 +228,8 @@ const styles = StyleSheet.create({
 
     },
     mainListCon: {
-        height: Dimensions.get('window').height / 6,
+        // flex: 1,
+        height: Dimensions.get('window').height * 0.3,
         width: Dimensions.get('window').width / 1.3,
         backgroundColor: "#6f61ca",
         borderWidth: 1,
@@ -239,7 +240,7 @@ const styles = StyleSheet.create({
     listContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height / 1.6 - 20,
+        height: Dimensions.get('window').height * 0.5,
         marginTop: 10,
     },
     list: {

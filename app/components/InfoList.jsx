@@ -30,7 +30,7 @@ export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity,
         }
     }, [currentLen])
     return (
-        <View>
+        <View >
 
             {shouldShow ? (
                 <View style={styles.emptyContainer}>
@@ -50,7 +50,6 @@ export default function Main({ render, GetLen, GetList, emptyInfo, src, opacity,
     )
 }
 const styles = StyleSheet.create({
-
 
     emptyContainer:
     {
