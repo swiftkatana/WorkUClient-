@@ -7,13 +7,28 @@ import { globalObject } from '../../src/globalObject';
 import InfoList from '../../components/InfoList';
 import { connect } from 'react-redux';
 import Recording from '../../class/VoiceRecording';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 
 function Main({ navigation, style }) {
     const [priority, SetPriority] = useState("גבוהה");
     const [header, SetHeader] = useState("");
     const [sendTo, SetSendTo] = useState({});
+    let canrecord = true;
     const recording = new Recording();
+    const handlerRecorod = async () => {
+        if (canrecord) {
+            await recording.StartRecording()
+            console.log('record')
+            canrecord = false;
+        }
+        else if (!canrecord) {
+            await recording.StopRecording();
+            console.log('stop')
+            canrecord = true;
+
+        }
+    }
     const PressHandler = async () => {
 
         if (!sendTo.email) {
@@ -35,8 +50,7 @@ function Main({ navigation, style }) {
                 navigation.navigate('ManagerMainScreen');
                 globalObject.sendNotification(sendTo.email, res, 'אפשר לראות אותה בלוח המשימות', 'משימה חדשה נכנסה', 'newTask')
             }
-            else
-            {
+            else {
                 Alert.alert("הפעולה נכשלה", "יש להקליט הודעה קולית לפני השליחה", [{ text: "הבנתי" }]);
             }
         }
@@ -68,6 +82,27 @@ function Main({ navigation, style }) {
     const GetLen = () => {
         return Object.keys(globalObject.company.employees).length;
     }
+    if (GetLen() <= 0) {
+        return (
+            <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
+                keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
+                enabled={Platform.OS === "ios" ? true : false}>
+                <View style={styles.container}>
+
+                    <View>
+                        <Text style={styles.title}>משימה חדשה</Text>
+                    </View>
+
+                    <Image style={{ ...styles.emptyIcon, opacity: 1 }} source={require('../../assets/information_icon.png')} />
+                    <Text style={styles.emptyText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
+                    <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                        <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                    </TouchableOpacity>
+                </View>
+
+            </KeyboardAvoidingView>
+        )
+    }
 
     return (
         <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -79,10 +114,10 @@ function Main({ navigation, style }) {
                     <Text style={styles.title}>משימה חדשה</Text>
                 </View>
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
-                <View style={styles.mainListCon}>
+                <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
 
                     <View style={styles.listContainer}>
-                        <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} src={require('../../assets/information_icon.png')} />
+                        <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} />
                     </View>
                 </View>
 
@@ -112,8 +147,9 @@ function Main({ navigation, style }) {
                 <View style={styles.recordSendBtnList}>
                     <TouchableOpacity
                         style={{ ...styles.vButton, ...style.btn2 }}
-                        onPressIn={recording.StartRecording}
-                        onPressOut={recording.StopRecording}
+                        onPressIn={handlerRecorod}
+                        onPressOut={handlerRecorod}
+                        onPress={null}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                         <Text style={styles.buttonText}>הקלט משימה</Text>
@@ -160,8 +196,22 @@ const styles = StyleSheet.create({
 
 
     },
-    title:
-    {
+    emptyContainer: {
+        width: Dimensions.get('window').width,
+        alignItems: "center",
+    },
+    emptyIcon: {
+        marginTop: 90,
+        width: 80,
+        height: 80,
+
+    },
+
+    emptyText: {
+        color: "white",
+        fontWeight: 'bold',
+    },
+    title: {
         margin: 20,
         //marginRight: 30,
         fontSize: 48,
@@ -172,8 +222,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * 0.80,
 
     },
-    subTitle:
-    {
+    subTitle: {
         fontSize: 24,
         color: "seashell",
 
@@ -193,8 +242,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height / 1.6 - 20,
         marginTop: 10,
     },
-    list:
-    {
+    list: {
         flex: 1,
         height: Dimensions.get('window').height / 18,
         width: Dimensions.get('window').width / 1.5,
@@ -209,8 +257,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "lightgray",
     },
-    listText:
-    {
+    listText: {
         // flex:1,
         textAlign: "right",
         fontSize: 14,
@@ -226,8 +273,7 @@ const styles = StyleSheet.create({
 
 
     },
-    itemList:
-    {
+    itemList: {
         width: Dimensions.get('window').width / 2.5,
         color: "#ffffff",
         textAlign: 'right',
@@ -322,11 +368,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
         alignItems: 'center',
     },
-    exitButton:
-    {
+    exitButton: {
         paddingTop: 40,
         //position:'absolute',
         //marginLeft: 30,
+        marginBottom: responsiveHeight(5),
 
     },
     exitIcon: {

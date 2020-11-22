@@ -4,7 +4,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { globalObject } from '../../src/globalObject'
 import InfoList from '../../components/InfoList';
 import { connect } from 'react-redux';
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 function Main({ navigation, style }) {
 
@@ -22,7 +26,7 @@ function Main({ navigation, style }) {
     const render = ({ item }) => {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.list} onPress={() =>  navigation.navigate('TaskUpdateVoiceScreen', { item: item,shouldRender:false })}>
+                <TouchableOpacity style={styles.list} onPress={() => navigation.navigate('TaskUpdateVoiceScreen', { item: item, shouldRender: false })}>
                     <Text style={styles.listText}>תקציר: {item.title}</Text>
                     <Text style={styles.listText} >עובד: {item.fullName}</Text>
                     <Text style={styles.employeeName}> סטטוס: {item.status}</Text>
@@ -35,18 +39,18 @@ function Main({ navigation, style }) {
 
     return (
         <View style={{ ...styles.view, ...style.view }}>
-                <Text style={styles.title}>
-                    היסטוריית משימות
+            <Text style={styles.title}>
+                היסטוריית משימות
                 </Text>
-                <View style={styles.mainListCon}>
+            <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
 
-                    <View style={styles.listContainer}>
-                        <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות ישנות'} opacity={1} src={require('../../assets/empty_icon_white.png')} />
-                    </View>
+                <View style={styles.listContainer}>
+                    <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות ישנות'} opacity={1} src={require('../../assets/empty_icon_white.png')} />
                 </View>
-                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
-                </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
+                <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+            </TouchableOpacity>
         </View>
     )
 }
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
         height: Dimensions.get('window').height,
 
@@ -66,26 +70,26 @@ const styles = StyleSheet.create({
     {
         //paddingTop: 10,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
 
 
     },
-    mainListCon:{
-        height: Dimensions.get('window').height/1.6,
-        width: Dimensions.get('window').width/1.1,
+    mainListCon: {
+        height: responsiveHeight(50),
+        width: Dimensions.get('window').width / 1.1,
         backgroundColor: "#6f61ca",
-        borderWidth:1,
+        borderWidth: 1,
         borderColor: "#584DA1",
         borderRadius: 25,
 
     },
-    listContainer:{
+    listContainer: {
         //flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height/1.6 -20,
-        width: Dimensions.get('window').width/1.1,
+        height: Dimensions.get('window').height / 1.6 - 20,
+        width: Dimensions.get('window').width / 1.1,
         marginTop: 10,
     },
     title:
@@ -94,15 +98,15 @@ const styles = StyleSheet.create({
         //marginRight: 30,
         fontSize: 48,
         color: "seashell",
-        borderBottomWidth:2,
+        borderBottomWidth: 2,
         borderColor: "seashell",
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
+        textAlign: "center",
+        width: Dimensions.get('window').width * 0.80,
     },
     list:
     {
         height: 70,
-        width: Dimensions.get('window').width/1.16,
+        width: Dimensions.get('window').width / 1.16,
         backgroundColor: "white",
         flexDirection: "row-reverse",
         alignItems: 'center',
@@ -144,9 +148,9 @@ const styles = StyleSheet.create({
         //marginLeft: 30,
 
     },
-    exitIcon:{
-        height:50,
-        width:50,
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 })
 const mapStateToProps = (state) => {

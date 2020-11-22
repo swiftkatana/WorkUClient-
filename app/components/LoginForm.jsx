@@ -4,7 +4,7 @@ import { globalObject } from "../src/globalObject";
 import requestList from "../src/api/apiKeys";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
-import { changeStyle } from '../src/action';
+import { changeLoginStyle } from '../src/action';
 
 
 const storeData = async (value, key) => {
@@ -25,7 +25,7 @@ const getData = async (key) => {
   }
 }
 
-function LoginForm({ navigation, changeStyle }) {
+function LoginForm({ navigation, changeLoginStyle }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -46,7 +46,7 @@ function LoginForm({ navigation, changeStyle }) {
       const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password, expoId });
       if (user) {
         globalObject.User = user;
-        if (user.styles) changeStyle(user.styles);
+        if (user.styles) changeLoginStyle(user.styles);
         if (globalObject.User.permission.manager) {
           const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
           if (company) {
@@ -85,7 +85,7 @@ function LoginForm({ navigation, changeStyle }) {
   return (
 
     <View style={styles.container}>
-      <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' autoCapitalize="none"/>
+      <TextInput value={email} onChangeText={setEmail} style={styles.inputBox} placeholder='כתובת דוא"ל' autoCapitalize="none" />
       <TextInput value={password} onChangeText={setPassword} style={styles.inputBox} placeholder="סיסמה" secureTextEntry={true} />
       <TouchableOpacity onPress={() => pressHandler(email, password, setShouldShow)} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>
@@ -163,4 +163,4 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return { style: state.styles }
 }
-export default connect(mapStateToProps, { changeStyle })(LoginForm)
+export default connect(mapStateToProps, { changeLoginStyle })(LoginForm)

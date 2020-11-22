@@ -30,7 +30,7 @@ function Main({ navigation, style }) {
                 <Text style={styles.title}>
                     דו"ח שעות חודשי
                 </Text>
-                <View style={styles.mainListCon}>
+                <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
                     <View style={styles.header}>
                         <FlatList
                             data={[{ sumOfTime: "סך שעות", endTime: "שעת סיום", startTime: "שעת התחלה", date: "תאריך", id: "13" }]}
@@ -54,9 +54,9 @@ function Main({ navigation, style }) {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
-            </TouchableOpacity>
+                </TouchableOpacity>
             </View>
- 
+
         </View>
     )
 }
@@ -66,49 +66,49 @@ const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
 
 
     },
     container: {
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
     },
-    mainListCon:{
-        height: Dimensions.get('window').height/2.5,
-        width: Dimensions.get('window').width/1.1,
+    mainListCon: {
+        height: Dimensions.get('window').height / 2.5,
+        width: Dimensions.get('window').width / 1.1,
         backgroundColor: "#6f61ca",
-        borderWidth:1,
+        borderWidth: 1,
         borderColor: "#584DA1",
         borderRadius: 2,
 
     },
-    listContainer:{
+    listContainer: {
         //flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height/2.5 -20,
-        width: Dimensions.get('window').width/1.1,
+        height: Dimensions.get('window').height / 2.5 - 20,
+        width: Dimensions.get('window').width / 1.1,
         marginTop: 10,
     },
     title:
     {
 
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.90,
+        textAlign: "center",
+        width: Dimensions.get('window').width * 0.90,
         margin: 20,
         //marginRight: 30,
         fontSize: 48,
         color: "seashell",
-        borderBottomWidth:2,
+        borderBottomWidth: 2,
         borderColor: "seashell",
     },
     header: {
-        alignItems:'center',
-        justifyContent:'center',
-        height: Dimensions.get('window').height/18,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height / 18,
         //height: 40,
         //marginBottom: 5,
 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     mainSum:
     {
         //flexGrow: 1,
-        textAlign:'center',
+        textAlign: 'center',
         margin: 20,
         //marginBottom: 40,
         //marginRight: 30,
@@ -163,10 +163,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         //marginBottom: 50,
-       // marginRight: 30,
+        // marginRight: 30,
     },
-    btnText:{
-        marginTop:10,
+    btnText: {
+        marginTop: 10,
         color: "seashell",
         fontSize: 14,
         fontWeight: 'bold',
@@ -177,9 +177,9 @@ const styles = StyleSheet.create({
 
 
     },
-    exitIcon:{
-        height:50,
-        width:50,
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 })
 const mapStateToProps = (state) => {

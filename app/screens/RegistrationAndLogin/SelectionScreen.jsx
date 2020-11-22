@@ -2,7 +2,11 @@ import React, { useState } from "react"
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
-
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 export default function Main({ navigation }) {
 
@@ -51,7 +55,7 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     //flexGrow: 1,
-    paddingVertical: 60,
+    paddingVertical: responsiveHeight(1),
     justifyContent: 'center',
     alignItems: 'center'
   },
