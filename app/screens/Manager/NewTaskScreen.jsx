@@ -28,9 +28,9 @@ function Main({ navigation, style }) {
         const res = await globalObject.SendRequest(requestList.createTaskUrl, { employees: [sendTo.email], task: { title: header, priority: priority } });
         if (res) {
             globalObject.User.tasks.processing[res._id] = res;
-            let audio = await recording.UploadToServer(globalObject.User.email, sendTo.email, res._id, globalObject.User.fullName);
+            let audio = await recording.UploadToServer(globalObject.User.email, sendTo.email, res._id, globalObject.User.fullName, globalObject.User.role);
             if (audio) {
-
+                audio.read = true;
                 globalObject.User.tasks.processing[res._id].audios.push(audio);
             }
             navigation.navigate('ManagerMainScreen');

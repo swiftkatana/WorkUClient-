@@ -11,6 +11,7 @@ import {
     responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
+import apiKeys from "../../src/api/apiKeys";
 
 const pressHandler = () => {
     title = "שים לב";
@@ -35,17 +36,32 @@ function Main({ navigation, style }) {
     const [update, setUpdate] = useState(globalObject.User.tasks.processing[item._id].audios.length);
     const myScroll = useRef(null)
     const Rec = new Recorder();
+    useEffect(() => {
+        // send{audio, email, read={audio:comapny||user},task=true}
+        // if (item.read === false) {
+        //     let read = { task: { comapny: false, user: false }, audio: { comapny: false, user: false } };
+        //     if (globalObject.User.role === "manager") {
+        //         read.task.comapny = true;
+        //     } else {
+        //         read.task.user = true;
+        //     }
+        //     globalObject.SendRequest(apiKeys.readTaskUpdateUrl, { email: globalObject.User.email, read })
+        // }
+
+
+    }, [])
 
     useEffect(() => {
 
         const handle = setInterval(() => {
 
-            if (update !== globalObject.User.tasks.processing[item._id].audios.length)
+            if (update !== globalObject.User.tasks.processing[item._id].audios.length) {
                 setUpdate(update + 1)
-            console.log(globalObject.User.tasks.processing[item._id].audios.length)
+                myScroll.current.scrollToEnd({ animated: true });
+            }
 
         }, 1000);
-        myScroll.current.scrollToEnd({ animated: true })
+
         return () => {
             clearInterval(handle);
         }
@@ -57,10 +73,11 @@ function Main({ navigation, style }) {
     };
     const handlerSendVoice = async () => {
         let to = item.employee;
-        let noti = globalObject.User.email === globalObject.User.tasks.processing[item._id].employee ? globalObject.User.managerEmail : globalObject.User.tasks.processing[item._id].employee;
+        let noti = globalObject.User.role === 'manager' ? globalObject.User.tasks.processing[item._id].employee : globalObject.User.managerEmail;
 
-        let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName);
+        let audio = await Rec.UploadToServer(globalObject.User.email, to, item._id, globalObject.User.fullName, globalObject.User.role);
         if (audio) {
+            audio.read = true;
             globalObject.User.tasks.processing[item._id].audios.push(audio);
             audio.taskId = item._id;
             globalObject.sendNotification(noti, audio, 'התקבלה הודעה קולית חדשה', 'התקבל עדכון', 'updateTaskVoice');

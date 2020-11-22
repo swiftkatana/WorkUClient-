@@ -44,7 +44,7 @@ export default class VoiceRecording {
         console.log(error);
       }
     };
-    this.UploadToServer = async (email, to, _id, fullName) => {
+    this.UploadToServer = async (email, to, _id, fullName, readComOrUser) => {
       if (!this.uri) {
         console.log('need to add voice before send ')
         return
@@ -62,7 +62,8 @@ export default class VoiceRecording {
           email,
           _id,
           fullName,
-          to
+          to,
+          readComOrUser
         },
       });
       if (res.body.err) {
