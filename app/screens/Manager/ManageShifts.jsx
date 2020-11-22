@@ -1,62 +1,53 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native'
-import Shifts from '../../components/Shifts'
 import { globalObject } from '../../src/globalObject'
-import CheckBox from '@react-native-community/checkbox';
 import { connect } from 'react-redux';
 import { Picker } from '@react-native-community/picker';
 import { FlatList } from 'react-native-gesture-handler';
 function Main({ navigation, style }) {
 
-    const [day, SetDay] = useState(1);
+    const [day, SetDay] = useState(0);
+    const [state, Setstate] = useState(0);
 
-    const renderHeader = ({ item }) => {
-        return (
-            <View style={styles.list}>
-                <Text style={styles.listText}>{item.can}</Text>
-                <Text style={styles.listText}>{item.perferNot}</Text>
-                <Text style={styles.listText}>{item.cannot}</Text>
-    
-            </View>
-        )
-    }
-
-    const CreateList = () => {
-        var arr2 = [];
-        var arrDay = Object.keys(days);
-        var state = Object.keys(days[arrDay[0]]);
-        let key = 0;
-        for (let row = 0; row < 7; row++) {
-          var arr = [];
-          for (let column = 0; column < 3; column++) {
-            arr.push(
-              <View key={key} style={styles.fillBox}>
-                <View style={styles.touchableStyle}>
-                <Text>{days[arrDay[row]][state[column]]}</Text>
-                </View>
-              </View>
-            );
-            key++;
-          }
-          arr2.push(
-            <View key={key} style={styles.stateContainer}>
-              {arr.map((item) => item)}
-            </View>
-          );
-          key++;
-        }
-        return <>{arr2.map((item) => item)}</>;
-      };
-
-    
-    const GetEmployyesFromDay = (index,state)=>
-    {
-        var keys = Object.keys(globalObject.company.pendingShifts);
-        for(let i = 0;i<keys.length;i++)
+    const finalShift = useRef(
         {
-            globalObject.company.pendingShifts[keys[i]].days[index][state];
+            day1: {
+                morning: [],
+                lunch: [],
+                evening: [],
+            },
+            day2: {
+                morning: [],
+                lunch: [],
+                evening: [],
+            },
+            day3: {
+                morning: [],
+                lunch: [],
+                evening: [],
+            },
+            day4: {
+                morning: [],
+                lunch: [],
+                evening: [],
+            },
+            day5: {
+                morning: [],
+                lunch: [],
+                evening: [],
+            },
+            day6: {
+                morning: [],
+                lunch: [],
+                evening: [],
+            },
+            day7: {
+                morning: [],
+                lunch: [],
+                evening: [],
+            },
         }
-    }
+    );
 
     const [days, SetDays] = useState({
         day1: {
@@ -98,69 +89,199 @@ function Main({ navigation, style }) {
 
 
 
+    const HandlePress = (item, shift) => {
+        var key = ["morning", "lunch", "evening"];
+        const employees = globalObject.company.employees;
+        var keys = Object.keys(employees);
+        const days = Object.keys(employees[keys[0]].shift);
+        console.log(state);
+        if (item.email) {
+            finalShift.current[days[day]][key[shift]].push(item.email);
+            console.log(finalShift.current);
+        }
+
+    }
+    const renderButton = ({ item }) => {
+        return (
+            <View style={styles.list}>
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(0)}>
+                    <Text style={styles.listText}>{item.can}</Text>
+                </TouchableOpacity >
+
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(1)}>
+                    <Text style={styles.listText}>{item.perferNot}</Text>
+                </TouchableOpacity >
+
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(2)}>
+                    <Text style={styles.listText}>{item.cannot}</Text>
+                </TouchableOpacity >
+
+            </View>
+        )
+    }
+    const renderHeader = ({ item }) => {
+        return (
+            <View style={styles.list}>
+                <Text style={styles.listText}>{item.can}</Text>
+                <Text style={styles.listText}>{item.perferNot}</Text>
+                <Text style={styles.listText}>{item.cannot}</Text>
+            </View>
+        )
+    }
+    const renderEmployee = ({ item }, shift) => {
+        console.log(item);
+        return (
+            <TouchableOpacity onPress={() => HandlePress(item, shift)}>
+                <View style={styles.listC}>
+                    <Text style={styles.listText}>{item.fullName}</Text>
+                </View>
+            </TouchableOpacity>
+
+        )
+    }
+
+    const CreateList = () => {
+        var arr2 = [];
+        var arrDay = Object.keys(days);
+        var state = Object.keys(days[arrDay[0]]);
+        let key = 0;
+        for (let row = 0; row < 7; row++) {
+            var arr = [];
+            for (let column = 0; column < 3; column++) {
+                arr.push(
+                    <View key={key} style={styles.fillBox}>
+                        <View style={styles.touchableStyle}>
+                            <Text>{days[arrDay[row]][state[column]]}</Text>
+                        </View>
+                    </View>
+                );
+                key++;
+            }
+            arr2.push(
+                <View key={key} style={styles.stateContainer}>
+                    {arr.map((item) => item)}
+                </View>
+            );
+            key++;
+        }
+        return <>{arr2.map((item) => item)}</>;
+    };
+
+    const GetEmployyesFromDay = () => {
+        var arr = [[], [], []];
+
+        const employees = globalObject.company.employees;
+        var keys = Object.keys(employees);
+        if (keys.length > 0) {
+            const days = Object.keys(employees[keys[0]].shift);
+            const states = Object.keys(employees[keys[0]].shift[days[0]]);
+            for (let j = 0; j < 3; j++) {
+                for (let i = 0; i < keys.length; i++) {
+                    if (employees[keys[i]].shift)
+                        if (employees[keys[i]].shift[days[day]][states[j]] === state) {
+                            arr[j].push({ ...employees[keys[i]], id: ((j + 1) * i).toString() });
+                        }
+                }
+            }
+        }
+        console.log(arr);
+        return arr;
+    }
+
+    const employyes = GetEmployyesFromDay();
+
+
+
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>ניהול משמרות</Text>
-                    <Picker
-                        prompt='בחר יום'
-                        mode='dialog'
-                        selectedValue={day}
-                        style={styles.itemList}
-                        onValueChange={(itemValue) => SetDay(itemValue)}>
+                <Picker
+                    prompt='בחר יום'
+                    mode='dialog'
+                    selectedValue={day}
+                    style={styles.itemList}
+                    onValueChange={(itemValue) => SetDay(itemValue)}>
 
-                        <Picker.Item label="א'" value="1'" />
-                        <Picker.Item label="ב'" value="2" />
-                        <Picker.Item label="ג'" value="3" />
-                        <Picker.Item label="ד'" value="4" />
-                        <Picker.Item label="ה'" value="5'" />
-                        <Picker.Item label="ו'" value="6" />
-                        <Picker.Item label="ש'" value="7" />
-                    </Picker>
-                    <View  style={styles.header}>
+                    <Picker.Item label="א'" value="0" />
+                    <Picker.Item label="ב'" value="1" />
+                    <Picker.Item label="ג'" value="2" />
+                    <Picker.Item label="ד'" value="3" />
+                    <Picker.Item label="ה'" value="4" />
+                    <Picker.Item label="ו'" value="5" />
+                    <Picker.Item label="ש'" value="6" />
+                </Picker>
+
+
+                <View style={styles.header}>
+                    <FlatList
+                        data={[{ cannot: "לא יכול", perferNot: "מעדיף שלא", can: "יכול", id: "-1" }]}
+                        renderItem={renderButton}
+                        keyExtractor={item => item.id}
+                    />
+                </View>
+
+                <View style={styles.header}>
+                    <FlatList
+                        data={[{ cannot: "ערב", perferNot: "צהוריים", can: "בוקר", id: "-2" }]}
+                        renderItem={renderHeader}
+                        keyExtractor={item => item.id}
+                    />
+                </View>
+
+                <View style={styles.header2}>
+
+
+                    <View style={styles.header3}>
                         <FlatList
-                            data={[{ cannot: "לא יכול", perferNot: "מעדיף שלא", can: "יכול", id: "-1" }]}
-                            renderItem={renderHeader}
+                            data={employyes[0]}
+                            renderItem={(item) => { renderEmployee(item, 0) }}
                             keyExtractor={item => item.id}
                         />
                     </View>
-                    {/* <View  style={styles.header}>
+
+                    <View style={styles.header3}>
                         <FlatList
-                            data={}
-                            renderItem={renderHeader}
+                            data={employyes[1]}
+                            renderItem={(item) => { renderEmployee(item, 1) }}
                             keyExtractor={item => item.id}
                         />
-                    </View> */}
-
-
-                    <View style={{marginBottom:20,}}>
-
                     </View>
 
+                    <View style={styles.header3}>
+                        <FlatList
+                            data={employyes[2]}
+                            renderItem={(item) => { renderEmployee(item, 2) }}
+                            keyExtractor={item => item.id}
+                        />
+                    </View>
 
-                    <View>
-                        <View style={styles.daysContainer}>
-                            <Text style={styles.dayText}>א</Text>
-                            <Text style={styles.dayText}>ב</Text>
-                            <Text style={styles.dayText}>ג</Text>
-                            <Text style={styles.dayText}>ד</Text>
-                            <Text style={styles.dayText}>ה</Text>
-                            <Text style={styles.dayText}>ו</Text>
-                            <Text style={styles.dayText}>ז</Text>
-                        </View>
-                        <View style={styles.fillContainer}>
-                            <View style={styles.stateContainer}>
+                </View>
+
+
+                <View>
+                    <View style={styles.daysContainer}>
+                        <Text style={styles.dayText}>א</Text>
+                        <Text style={styles.dayText}>ב</Text>
+                        <Text style={styles.dayText}>ג</Text>
+                        <Text style={styles.dayText}>ד</Text>
+                        <Text style={styles.dayText}>ה</Text>
+                        <Text style={styles.dayText}>ו</Text>
+                        <Text style={styles.dayText}>ז</Text>
+                    </View>
+                    <View style={styles.fillContainer}>
+                        <View style={styles.stateContainer}>
                             <Text style={styles.stateText}>בוקר</Text>
                             <Text style={styles.stateText}>צהוריים</Text>
                             <Text style={styles.stateText}>ערב</Text>
-                            </View>
-                            {CreateList()}
                         </View>
-
+                        {CreateList()}
                     </View>
 
+                </View>
 
-                    
+
+
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
@@ -172,20 +293,21 @@ function Main({ navigation, style }) {
 
 const styles = StyleSheet.create({
     view:
-     {
+    {
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
     },
     listText:
     {
         flex: 1,
         textAlign: "center",
+        justifyContent: "center",
         fontSize: 14,
     },
     itemList:
     {
-        width: Dimensions.get('window').width ,
+        width: Dimensions.get('window').width,
         color: "#ffffff",
         textAlign: 'right',
     },
@@ -196,39 +318,60 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
-        alignItems:'center',
-        justifyContent:'center',
-        height: Dimensions.get('window').height/18,
-
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height / 18,
+        marginHorizontal: 10,
+    },
+    header2:
+    {
+        flexDirection: "row-reverse",
+    },
+    header3: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height * 0.25,
+        width: Dimensions.get('window').width * 0.315,
+        borderColor: "white",
+        borderWidth: 1,
     },
     list:
     {
-        width: Dimensions.get('window').width*0.95,
-        height:Dimensions.get('window').height*0.05,
+        width: Dimensions.get('window').width * 0.95,
+        height: Dimensions.get('window').height * 0.05,
         backgroundColor: "white",
         flexDirection: "row-reverse",
         alignItems: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "lightgrey",
-        marginHorizontal:5,
+    },
+    listC:
+    {
+        width: Dimensions.get('window').width * 0.3,
+        height: Dimensions.get('window').height * 0.05,
+        backgroundColor: "white",
+        flexDirection: "column-reverse",
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: "lightgrey",
     },
     title:
     {
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
+        textAlign: "center",
+        width: Dimensions.get('window').width * 0.80,
         margin: 20,
         fontSize: 48,
         color: "seashell",
-        borderBottomWidth:2,
+        borderBottomWidth: 2,
         borderColor: "seashell",
     },
     exitButton:
     {
         paddingTop: 40,
     },
-    exitIcon:{
-        height:50,
-        width:50,
+    exitIcon: {
+        height: 50,
+        width: 50,
     },
 
     fillBox: {
@@ -239,24 +382,24 @@ const styles = StyleSheet.create({
         backgroundColor: "seashell",
         borderRadius: 10,
         fontWeight: "bold",
-      },
-      touchableStyle: {
+    },
+    touchableStyle: {
         textAlign: "center",
         width: Dimensions.get("window").width / 12,
         height: 35,
         margin: 5,
         borderRadius: 10,
         fontWeight: "bold",
-      },
-      daysContainer: {
-        
+    },
+    daysContainer: {
+
         width: Dimensions.get("window").width,
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row-reverse",
         marginHorizontal: Dimensions.get("window").width / 50 - 10,
-      },
-      dayText: {
+    },
+    dayText: {
         textAlign: "center",
         width: Dimensions.get("window").width / 12,
         height: 35,
@@ -265,9 +408,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontWeight: "bold",
         backgroundColor: "lightgrey",
-      },
+    },
 
-      stateText: {
+    stateText: {
         textAlign: "center",
         width: 50,
         height: 35,
@@ -277,19 +420,26 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 11,
         backgroundColor: "lightgrey",
-      },
+    },
 
-      stateContainer: {
+    stateContainer: {
         alignItems: "flex-end",
         flexDirection: "column",
-      },
+    },
 
-      fillContainer: {
+    fillContainer: {
         width: Dimensions.get("window").width,
         flexDirection: "row-reverse",
         marginHorizontal: 10,
-      },
-
+    },
+    styleState:
+    {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "gray",
+        marginHorizontal: 2,
+    },
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }
