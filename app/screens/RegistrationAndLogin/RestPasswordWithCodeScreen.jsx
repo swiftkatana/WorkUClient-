@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     inputBox: {
         width: 300,
-        height: 60,
+        height: responsiveScreenHeight(8),
         backgroundColor: '#ededed',
         borderRadius: 25,
         paddingHorizontal: 16,
