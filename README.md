@@ -52,8 +52,11 @@ The application can be tailored by each user to fit his or her work environment.
 This application ensures the success of every workplace, especially when it is run remotely. Quick, clear organization and easy access between the employer and employees, in an interactive and user-friendly application, makes work from home that much more fun.  
  <img align="center" width="50%" alt="portfolio_view" src="https://drive.google.com/uc?export=view&id=1ZWBCK5PEUQmubtbMdKqpD9xO4z1CKftI">
 ## Installation
+#### Just be aware that the first request sent to the server may take some time because the heroku server falls asleep so as soon as you send the request it turns on
 
 ### [click here](https://worku.herokuapp.com/WorkU.apk)
+
+
 
 In order to access all that the application offers, you are required to grant the application access to your microphone and turn on notifications. 
 
