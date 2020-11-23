@@ -26,10 +26,6 @@ function Main({ navigation, style }) {
     const notiEmail = globalObject.User.role === "manager" ? item.employee : globalObject.User.managerEmail;
     const audios = navigation.state.params.shouldRender ? globalObject.User.tasks.processing[item._id].audios : globalObject.User.tasks.completed[item._id].audios;
     const renderTaskOptions = () => {
-        if (!navigation.state.params.shouldRender)
-            return null;
-
-
         return (
             <View>
                 <View style={styles.recordSendBtnList}>

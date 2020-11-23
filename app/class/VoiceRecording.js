@@ -7,7 +7,6 @@ export default class VoiceRecording {
     this.recording = new Audio.Recording();
     this.sound;
     this.uri;
-    this.url;
     this.StartRecording = async () => {
       if ((await Permissions.getAsync(Permissions.AUDIO_RECORDING)).status !=="granted") {
             await Permissions.askAsync(Permissions.AUDIO_RECORDING);
@@ -42,9 +41,8 @@ export default class VoiceRecording {
       }
     };
     this.UploadToServer = async (email, to, _id, fullName, readComOrUser) => {
-      if (!this.uri) {
+      if (!this.uri) 
         return null;
-      }
       let res = await FileSystem.uploadAsync(apiKeys.UploadAudioUrl, this.uri, {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -70,7 +68,7 @@ export default class VoiceRecording {
 
     this.playAudio = async (url) => {
       try {
-        if(!this.uri && !this.url)
+        if(!this.uri && !url)
           return;
         if (this.sound) {
             await this.sound.pauseAsync();
