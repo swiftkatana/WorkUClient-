@@ -91,10 +91,16 @@ function Main({ navigation, style }) {
     const [num, SetNum] = useState(0);
 
     const Send = async () => {
-        console.log(finalShift.current);
+        console.log(1);
         const res = await globalObject.SendRequest(requestList.sendNewShiftUrl, { email: globalObject.User.email, shift: finalShift.current });
+        console.log(1);
         if (res) {
-
+            navigation.navigate("ManagerMainScreen");
+            return;
+        }
+        else
+        {
+            console.log(res);
         }
 
     }
