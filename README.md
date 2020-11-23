@@ -53,7 +53,6 @@ This application ensures the success of every workplace, especially when it is r
  <img align="center" width="50%" alt="portfolio_view" src="https://drive.google.com/uc?export=view&id=1ZWBCK5PEUQmubtbMdKqpD9xO4z1CKftI">
 ## Installation
 #### first request for the server may take bit longer because of Heroku servers policy so after the build we thought that there is a problem with the login screen but it turns out everything is ok and you just need to wait a bit longer for the first login to work and Heroku server to wake up.
-L
 
 ### [click here](https://worku.herokuapp.com/WorkU.apk)
 
