@@ -12,10 +12,6 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 
 
 function Main({ navigation, style }) {
-
-
-
-    console.log(globalObject.User)
     const GetLen = () => {
         if (globalObject.User.employees) {
             let keys = Object.keys(globalObject.User.employees);

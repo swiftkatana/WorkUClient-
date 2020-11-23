@@ -55,6 +55,8 @@ const styles = StyleSheet.create({
     {
         width: Dimensions.get('window').width,
         alignItems: "center",
+        justifyContent:"center",
+        flex:1,
     },
 
     emptyText:
@@ -63,7 +65,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     emptyIcon: {
-        marginTop: 90,
         width: 80,
         height: 80,
 
