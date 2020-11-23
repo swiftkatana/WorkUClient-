@@ -3,7 +3,14 @@ import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 
 import { responsiveHeight } from "react-native-responsive-dimensions";
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
-
+const storeData = async (value, key) => {
+  try {
+    const jsonValue = JSON.stringify(value)
+    await AsyncStorage.setItem(key, jsonValue)
+  } catch (e) {
+    // saving error
+  }
+}
 
 export default function Main({ navigation }) {
 
@@ -30,6 +37,8 @@ export default function Main({ navigation }) {
     } else {
       const user = await globalObject.SendRequest(requestList.userRegisterUrl, { firstName, lastName, phone, email: email.trim().toLowerCase(), password });
       if (user) {
+        storeData(password, 'password');
+        storeData(email, 'email')
         // register content ok
         globalObject.User = user;
         navigation.navigate('SelectionScreen', { user: globalObject.User });

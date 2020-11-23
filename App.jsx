@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Provider } from "react-redux";
+import socketIO from 'socket.io-client';
+
+import ip from "./app/src/api/serverIP";
 import store from "./app/src/store";
 // employee
 import EmployeeMainScreen from "./app/screens/Employee/EmployeeMainScreen"
@@ -48,6 +51,7 @@ import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
 import OldTasksScreen from "./app/screens/Manager/OldTasksScreen";
 import ManageShifts from "./app/screens/Manager/ManageShifts";
 import DisplayWorkingTimeReportOfEmployee from "./app/screens/Manager/DisplayWorkingTimeReportOfEmployee";
+import { globalObject } from "./app/src/globalObject";
 
 
 
@@ -93,6 +97,17 @@ const listScreen =
 var screens = {}
 
 export default function App() {
+
+  useEffect(() => {
+    const socket = socketIO(ip );   
+      socket.on('connect', () => { 
+        console.log('connected to socket server'); 
+      }); 
+      globalObject.socket = socket; 
+      
+
+  },[])
+
   for (let i = 0; i < listScreen.length; i++) {
     var keyNames = Object.keys(listScreen[i]);
     screens[keyNames[0]] = { screen: listScreen[i][keyNames[0]], navigationOptions: { headerShown: false } }
