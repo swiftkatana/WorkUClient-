@@ -7,27 +7,21 @@ export default class VoiceRecording {
     this.recording = new Audio.Recording();
     this.sound;
     this.uri;
-    this.url;
-    this.canRecord = true;
     this.StartRecording = async () => {
-      if (!this.canRecord) return;
-      if (
-        (await Permissions.getAsync(Permissions.AUDIO_RECORDING)).status !==
-        "granted"
-      ) {
-        await Permissions.askAsync(Permissions.AUDIO_RECORDING);
+      if ((await Permissions.getAsync(Permissions.AUDIO_RECORDING)).status !=="granted") {
+            await Permissions.askAsync(Permissions.AUDIO_RECORDING);
+            return;
       } else {
         try {
-          await this.recording.prepareToRecordAsync(
-            Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
-          );
-
-          if ((await this.recording.getStatusAsync()).canRecord) {
-            this.canRecord = false;
-            await this.recording.startAsync();
-            return true
-          }
-
+            if(this.recording._isDoneRecording) return;
+            if((await this.recording.getStatusAsync()).canRecord === false)
+               {
+                await this.recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+               }
+            if(!(await this.recording.getStatusAsync()).isRecording)
+                await this.recording.startAsync();
+            this.url = null;
+            this.uri = null;
         } catch (error) {
           console.log('start error', error);
         }
@@ -36,22 +30,19 @@ export default class VoiceRecording {
 
     this.StopRecording = async () => {
       try {
-        if ((await this.recording.getStatusAsync()).isRecording) {
-          this.canRecord = true;
+        if((await this.recording.getStatusAsync()).durationMillis > 300) {
           await this.recording.stopAndUnloadAsync();
           this.uri = this.recording.getURI();
           delete this.recording;
           this.recording = new Audio.Recording();
-          return true
         }
       } catch (error) {
         console.log('stop error', error);
       }
     };
     this.UploadToServer = async (email, to, _id, fullName, readComOrUser) => {
-      if (!this.uri) {
+      if (!this.uri) 
         return null;
-      }
       let res = await FileSystem.uploadAsync(apiKeys.UploadAudioUrl, this.uri, {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -77,10 +68,11 @@ export default class VoiceRecording {
 
     this.playAudio = async (url) => {
       try {
+        if(!this.uri && !url)
+          return;
         if (this.sound) {
-          if (await (await this.sound.getStatusAsync()).isLoaded) {
+            await this.sound.pauseAsync();
             await this.sound.unloadAsync();
-          }
         }
         console.log('play music', url || this.uri);
         this.sound = new Audio.Sound();

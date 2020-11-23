@@ -14,21 +14,7 @@ function Main({ navigation, style }) {
     const [priority, SetPriority] = useState("גבוהה");
     const [header, SetHeader] = useState("");
     const [sendTo, SetSendTo] = useState({});
-    let canrecord = true;
     const recording = new Recording();
-    const handlerRecorod = async () => {
-        if (canrecord) {
-            await recording.StartRecording()
-            console.log('record')
-            canrecord = false;
-        }
-        else if (!canrecord) {
-            await recording.StopRecording();
-            console.log('stop')
-            canrecord = true;
-
-        }
-    }
     const PressHandler = async () => {
 
         if (!sendTo.email) {
@@ -82,27 +68,6 @@ function Main({ navigation, style }) {
     const GetLen = () => {
         return Object.keys(globalObject.company.employees).length;
     }
-    if (GetLen() <= 0) {
-        return (
-            <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
-                keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
-                enabled={Platform.OS === "ios" ? true : false}>
-                <View style={styles.container}>
-
-                    <View>
-                        <Text style={styles.title}>משימה חדשה</Text>
-                    </View>
-
-                    <Image style={{ ...styles.emptyIcon, opacity: 1 }} source={require('../../assets/information_icon.png')} />
-                    <Text style={styles.emptyText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
-                    <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                        <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
-                    </TouchableOpacity>
-                </View>
-
-            </KeyboardAvoidingView>
-        )
-    }
 
     return (
         <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -116,10 +81,11 @@ function Main({ navigation, style }) {
                 <Text style={styles.subTitle}>תייג עובד: {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}  </Text>
                 <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
 
-                    <View style={{ flex: 1, }}>
-                        <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} />
+                    <View style={styles.listContainer}>
+                        <InfoList render={render} GetLen={GetLen} GetList={GetList} src={require('../../assets/empty_icon_white.png')} emptyInfo={'אין לך עובדים כרגע.'}  />
                     </View>
                 </View>
+                {GetLen() > 0 ? <View> 
 
                 <View style={styles.inputBoxContainer}>
                     <TextInput
@@ -147,9 +113,8 @@ function Main({ navigation, style }) {
                 <View style={styles.recordSendBtnList}>
                     <TouchableOpacity
                         style={{ ...styles.vButton, ...style.btn2 }}
-                        onPressIn={handlerRecorod}
-                        onPressOut={handlerRecorod}
-                        onPress={null}
+                        onPressIn={recording.StartRecording} 
+                        onPressOut={recording.StopRecording}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                         <Text style={styles.buttonText}>הקלט משימה</Text>
@@ -167,6 +132,7 @@ function Main({ navigation, style }) {
                 <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => { PressHandler() }}>
                     <Text style={styles.buttonText} >צור משימה</Text>
                 </TouchableOpacity>
+                </View> : null} 
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
@@ -185,7 +151,14 @@ const styles = StyleSheet.create({
 
 
     },
-
+    listContainer: {
+        //flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: Dimensions.get('window').height / 1.6 - 20,
+        width: Dimensions.get('window').width / 1.1,
+        marginTop: 10,
+    },
     container:
     {
         //paddingTop: 10,

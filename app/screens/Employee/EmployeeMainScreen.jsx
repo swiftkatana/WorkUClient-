@@ -44,7 +44,7 @@ function Main({ style, navigation }) {
                 // console.log(globalObject.User.employees[company.manager.email])
                 globalObject.User.employees = company.employees;
                 globalObject.User.employees[company.manager.email] = { ...company.manager }
-                console.log('company!!!!!!!!!!!!!!', globalObject.User.employees)
+               
             }
 
         })()
