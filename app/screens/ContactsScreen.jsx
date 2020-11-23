@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
 import InfoList from '../components/InfoList';
@@ -17,12 +17,16 @@ function Main({ navigation, style }) {
 
     console.log(globalObject.User)
     const GetLen = () => {
-        let keys = Object.keys(globalObject.User.employees);
-        let len = keys.length;
-        return len;
+        if (globalObject.User.employees) {
+            let keys = Object.keys(globalObject.User.employees);
+            let len = keys.length;
+            return len;
+        }
+        return 0;
     }
     const GetList = () => {
         var arr = [];
+
         for (var obj in globalObject.User.employees) {
             let employee = globalObject.User.employees[obj];
             if (employee.email !== globalObject.User.email)
@@ -40,28 +44,6 @@ function Main({ navigation, style }) {
                     <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
                 </TouchableOpacity>
             </View>
-        )
-    }
-
-    if (GetLen() <= 0) {
-        return (
-            <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
-                keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
-                enabled={Platform.OS === "ios" ? true : false}>
-                <View style={styles.container}>
-
-                    <View>
-                        <Text style={styles.title}>משימה חדשה</Text>
-                    </View>
-
-                    <Image style={{ ...styles.emptyIcon, opacity: 1 }} source={require('../assets/information_icon.png')} />
-                    <Text style={styles.emptyText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
-                    <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                        <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
-                    </TouchableOpacity>
-                </View>
-
-            </KeyboardAvoidingView>
         )
     }
 

@@ -28,7 +28,7 @@ export default function Main({ navigation }) {
       alertButton = [{ text: "הבנתי" }];
       Alert.alert(title, msg, alertButton, { cancelable: false });
     } else {
-      const user = await globalObject.SendRequest(requestList.userRegisterUrl, { firstName, lastName, phone, email, password });
+      const user = await globalObject.SendRequest(requestList.userRegisterUrl, { firstName, lastName, phone, email: email.trim().toLowerCase(), password });
       if (user) {
         // register content ok
         globalObject.User = user;

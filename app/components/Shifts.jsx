@@ -77,14 +77,11 @@ export default function Shifts({ style, navigation }) {
     const options = [null, green, red, yellow];
 
 
-    const SendShifts = async()=>
-    {
-      const res =  await globalObject.SendRequest("/api/user/uploadshifts",{email:globalObject.User.email,shifts:{...fill}})
-
-      if(res)
-      {
-          console.log(res);
-      }
+    const SendShifts = async () => {
+        const res = await globalObject.SendRequest("/api/user/uploadshifts", { email: globalObject.User.email, shifts: { ...fill } })
+        if (res) {
+            navigation.navigate("EmployeeMainScreen");
+        }
 
     }
 
@@ -166,11 +163,13 @@ const styles = StyleSheet.create({
     mainView: {
         //height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
-        alignItems:'center',
-        justifyContent: 'center',    },
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     view: {
-        alignItems:'center',
-        justifyContent: 'center',    },
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     lableContainer: {
         width: Dimensions.get('window').width,
         flexDirection: 'row-reverse',
@@ -216,7 +215,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 18,
         color: "seashell",
-       // marginHorizontal: 22,
+        // marginHorizontal: 22,
         marginVertical: 2,
     },
     daysContainer: {
@@ -225,7 +224,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row-reverse',
         marginHorizontal: Dimensions.get('window').width / 50 - 10,
-        
+
 
     },
     dayText: {
@@ -236,9 +235,9 @@ const styles = StyleSheet.create({
         backgroundColor: "seashell",
         borderRadius: 10,
         fontWeight: "bold",
-        backgroundColor:"lightgrey",
+        backgroundColor: "lightgrey",
     },
-    fillBox:{
+    fillBox: {
         textAlign: "center",
         width: Dimensions.get('window').width / 12,
         height: 35,
@@ -273,7 +272,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontWeight: "bold",
         fontSize: 11,
-        backgroundColor:"lightgrey",
+        backgroundColor: "lightgrey",
 
     },
     button: {

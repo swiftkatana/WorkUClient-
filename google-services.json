@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "193760977985",
+    "firebase_url": "https://worku-71e9d.firebaseio.com",
+    "project_id": "worku-71e9d",
+    "storage_bucket": "worku-71e9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193760977985:android:690b06651e0100755cd2c0",
+        "android_client_info": {
+          "package_name": "com.koreruchan.WorkU"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193760977985-jmi7gohq3ftlb68afrt5sscvp850pf30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqOO1q5Gnnp6p7R1YrK7Aa28GP9dA8RiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193760977985-jmi7gohq3ftlb68afrt5sscvp850pf30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -63,27 +63,7 @@ function Main({ navigation, style }) {
     const GetLen = () => {
         return Object.keys(globalObject.company.employees).length;
     }
-    if (GetLen() <= 0) {
-        return (
-            <KeyboardAvoidingView style={{ ...styles.view, ...style.view }} behavior={Platform.OS == "ios" ? "padding" : "height"}
-                keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
-                enabled={Platform.OS === "ios" ? true : false}>
-                <View style={styles.container}>
 
-                    <View>
-                        <Text style={styles.title}>דו"ח שעות של עובד</Text>
-                    </View>
-
-                    <Image style={{ ...styles.emptyIcon, opacity: 1 }} source={require('../../assets/information_icon.png')} />
-                    <Text style={styles.emptyText}>אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי</Text>
-                    <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                        <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
-                    </TouchableOpacity>
-                </View>
-
-            </KeyboardAvoidingView>
-        )
-    }
 
 
     return (
@@ -97,27 +77,29 @@ function Main({ navigation, style }) {
                 <View style={{ ...styles.mainListCon2, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
 
                     <View style={styles.listContainer2}>
-                        <InfoList render={render2} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע. להוספת עובדים לחץ על כפתור קוד גישה להוספת עובדים במסך הראשי'} />
+                        <InfoList render={render2} GetLen={GetLen} GetList={GetList} emptyInfo={'אין לך עובדים כרגע.'} />
                     </View>
                 </View>
-                <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
-                    <View style={styles.header}>
-                        <FlatList
-                            data={[{ sumOfTime: "סך שעות", endTime: "שעת סיום", startTime: "שעת התחלה", date: "תאריך", id: "13" }]}
-                            renderItem={render}
-                            keyExtractor={item => item.id}
-                        />
-                    </View>
-                    <View style={styles.listContainer}>
+                {GetLen() <= 0 ? null :
+                    <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
+                        <View style={styles.header}>
+                            <FlatList
+                                data={[{ sumOfTime: "סך שעות", endTime: "שעת סיום", startTime: "שעת התחלה", date: "תאריך", id: "13" }]}
+                                renderItem={render}
+                                keyExtractor={item => item.id}
+                            />
+                        </View>
+                        <View style={styles.listContainer}>
 
-                        <FlatList
-                            data={workTimes}
-                            renderItem={render}
-                            keyExtractor={item => item.id}
-                        />
+                            <FlatList
+                                data={workTimes}
+                                renderItem={render}
+                                keyExtractor={item => item.id}
+                            />
 
+                        </View>
                     </View>
-                </View>
+                }
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
