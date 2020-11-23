@@ -46,11 +46,36 @@ Employees can conveniently submit their preferred shifts and schedules to the em
 <img align="center" width="50%" alt="portfolio_view" src="https://drive.google.com/uc?export=view&id=1TOrFRVPmhpwNheOe4SsUE7XLKeg7Cx1O">
 
 
+
 #### App personalization:
 The application can be tailored by each user to fit his or her work environment. The application colors can be changed and reset based on personal preference, adding an extra touch of fun to a work day. 
 
 This application ensures the success of every workplace, especially when it is run remotely. Quick, clear organization and easy access between the employer and employees, in an interactive and user-friendly application, makes work from home that much more fun.  
  <img align="center" width="50%" alt="portfolio_view" src="https://drive.google.com/uc?export=view&id=1ZWBCK5PEUQmubtbMdKqpD9xO4z1CKftI">
+ ## הודעה חשובה!
+אנחנו מאוד מתנצלים אבל לאחר שעשינו בילד לאפליקצייה קרו הרבה באגים כולל בעייה במסך הכניסה כפי שציינו במייל הקודם. מסתבר שהבעייה הזו קוראת בגלל באג של
+
+Expo
+
+עם ההתראות (נוטיפציות) בעת הבילד
+לכן נבקש שאם יש אפשרות תוכלו להריץ את הקוד במלואו בגירסת ה
+
+Expo
+
+שם הכל עובד.
+רק צריך להוריד את
+
+Expo
+
+מחנות האפליקציות  לפלאפון פיזי ולהיכנס עם המשתמש והסיסמא שנשלחו אליכם במייל
+שם תראו את האפליקציה שלנו בשם 
+
+WorkU
+
+עם האייקון הסגול ומשם תוכלו להשתמש באפליקציה כרגיל .  
+זו הפעם הראשונה שאנו עושים אפליקציה כזו עם בילד ולא חשבנו שיכול להיות בעיות אם הכל פועל בגירסה הלא בנוייה . עבדנו על זה הרבה ונשמח אם תוכלו לבדוק את זה דרך האקספו
+אנחנו מאמינים במוצר שלנו וכמובן שנפתור את הבאג עם הבילד הבקדם
+
 ## Installation
 #### first request for the server may take bit longer because of Heroku servers policy so after the build we thought that there is a problem with the login screen but it turns out everything is ok and you just need to wait a bit longer for the first login to work and Heroku server to wake up.
 
