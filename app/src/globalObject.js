@@ -5,6 +5,7 @@ import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
 import NetInfo from "@react-native-community/netinfo";
+import { responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 
 class global {
   constructor() {
@@ -13,6 +14,16 @@ class global {
     this.timer;
     this.language;
     this.styles = {
+      
+      inputBox: {
+        width: responsiveScreenWidth(80),
+        height: responsiveScreenHeight(7),
+        backgroundColor: "#ededed",
+        borderRadius: 25,
+        paddingHorizontal: responsiveScreenWidth(6),
+        marginVertical: responsiveScreenHeight(1),
+        textAlign: "right",
+      },
       exitButton:
       {
           paddingTop: 40,
