@@ -28,8 +28,6 @@ class global {
       this.socket.removeAllListeners("updateTaskVoice" + this.User.email);
       this.socket.removeAllListeners("newTaskGot" + this.User.email);
       this.socket.removeAllListeners("taskStatusChange" + this.User.email);
-      this.socket.removeAllListeners("" + this.User.email);
-      this.socket.removeAllListeners("" + this.User.email);
       this.socket.send({ type: "logout" });
     };
     this.sendSocketMessage = (type = "", data, to = "") => {
