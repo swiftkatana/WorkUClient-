@@ -26,18 +26,14 @@ const storeData = async (value, key) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
-  } catch (e) {
-    // saving error
-  }
+  } catch (e) {}
 };
 
 const getData = async (key) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    // error reading value
-  }
+  } catch (e) {}
 };
 
 function LoginForm({ navigation, changeLoginStyle }) {
@@ -145,7 +141,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: responsiveScreenFontSize(2),
-    // fontWeight: '500',
     color: "seashell",
     textAlign: "center",
   },

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Dimensions, Image, Alert, Clipboard } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-//import Clipboard from '@react-native-community/clipboard';
 import { globalObject } from "../src/globalObject"
 
 const copyToClipboard = () => {
@@ -40,25 +39,18 @@ const styles = StyleSheet.create({
         flex: 1.5,
         height: 70,
         width: Dimensions.get('window').width,
-        //flexDirection:"row-reverse",
         justifyContent: "center",
-        //paddingHorizontal: 10,
         alignItems: 'center',
         textAlign: "center",
         marginVertical: 10,
         marginTop: 20,
-
-
     },
-
-
     button: {
         width: Dimensions.get('window').width - 170,
         borderRadius: 20,
         marginVertical: 10,
         marginHorizontal: 20,
         paddingVertical: 16,
-        //alignItems:'flex-start',
         justifyContent: 'center',
     },
     buttonText: {
@@ -75,17 +67,7 @@ const styles = StyleSheet.create({
         height: 58,
         opacity: 0.8,
         marginLeft: 10,
-        //alignItems: 'flex-end',
-        //justifyContent: 'flex-end',
-        //marginBottom: 40,
-        //marginRight: 12,
-        //zIndex: 5,
-
     },
-
-
-
-
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }

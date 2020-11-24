@@ -66,31 +66,24 @@ function Main({ navigation, style }) {
 const styles = StyleSheet.create({
 
     view: {
-        //marginTop:50,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         height: Dimensions.get('window').height,
-
-
     },
     container:
     {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-
-
     },
     mainListCon: {
         height: Dimensions.get('window').height / 1.6,
         width: Dimensions.get('window').width / 1.1,
         borderWidth: 1,
         borderRadius: 25,
-
     },
     listContainer: {
-        //flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         height: Dimensions.get('window').height / 1.6 - 20,
@@ -100,14 +93,12 @@ const styles = StyleSheet.create({
     title:
     {
         margin: 20,
-        //marginRight: 30,
         fontSize: 48,
         color: "seashell",
         borderBottomWidth: 2,
         borderColor: "seashell",
         textAlign: "center",
         width: Dimensions.get('window').width * 0.80,
-
     },
     list:
     {
@@ -117,7 +108,6 @@ const styles = StyleSheet.create({
         flexDirection: "row-reverse",
         alignItems: 'center',
         textAlign: "center",
-        //marginHorizontal: 20,
         justifyContent: 'center',
         borderRadius: 25,
         marginBottom: 6,
@@ -129,7 +119,6 @@ const styles = StyleSheet.create({
         flex: 3,
         textAlign: "center",
         fontSize: 14,
-        //marginLeft: 5,
         marginRight: 10,
     },
     employeeName:
@@ -143,7 +132,6 @@ const styles = StyleSheet.create({
     userIcon: {
         width: 35,
         height: 35,
-        //marginLeft: 15,
         marginRight: 15,
     },
     tinyLogo: {
@@ -156,9 +144,6 @@ const styles = StyleSheet.create({
     exitButton:
     {
         paddingTop: 40,
-        //position:'absolute',
-        //marginLeft: 30,
-
     },
     exitIcon: {
         height: 50,

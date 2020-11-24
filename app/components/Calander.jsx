@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-nati
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 import 'moment/locale/he';
-//import moment from 'moment-timezone';
 
 const onSelected = (date) => {
 }
@@ -25,9 +24,6 @@ function Calander(test,) {
                 iconContainer={{ flex: 0.1 }}
                 numDaysInWeek={7}
                 onDateSelected={onSelected}
-            //useIsoWeekday ={false}
-            //locale={loc}
-
             />
         </View>
     )

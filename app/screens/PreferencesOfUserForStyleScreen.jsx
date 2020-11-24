@@ -120,7 +120,6 @@ function Main({ navigation, style, changeStyle }) {
 }
 const styles = StyleSheet.create({
     view: {
-        //marginTop:50,
         flex: 1,
         alignItems:'center',
         justifyContent: 'center',
@@ -141,8 +140,6 @@ const styles = StyleSheet.create({
         elevation: 10
 
     }, colorsContainer: {
-        //flex: 1,
-
         alignItems:'center',
         justifyContent: 'center',
         flexDirection: "column",
@@ -151,21 +148,15 @@ const styles = StyleSheet.create({
     {
         alignItems:'center',
         justifyContent: 'center',
-        //flex: 1,
         flexDirection: "row",
-        //margin: 10,
     },
     button:
     {
-        //margin: 20,
-        //marginRight: 30,
-
     },
     buttonText:
     {
         fontSize: 16,
         color: "seashell",
-
     },
     title:
     {
@@ -173,7 +164,6 @@ const styles = StyleSheet.create({
         textAlign:"center",
         width: Dimensions.get('window').width*0.80,
         margin: 20,
-        //marginRight: 30,
         fontSize: 48,
         color: "seashell",
         borderBottomWidth:2,
@@ -187,8 +177,6 @@ const styles = StyleSheet.create({
     exitButton:
     {
         paddingTop: 40,
-
-
     },
     exitIcon:{
         height:50,

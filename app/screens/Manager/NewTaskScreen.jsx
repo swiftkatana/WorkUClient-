@@ -209,7 +209,6 @@ function Main({ navigation, style }) {
 
 const styles = StyleSheet.create({
   view: {
-    //marginTop:50,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -217,7 +216,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
   },
   listContainer: {
-    //flex: 1,
     alignItems: "center",
     justifyContent: "center",
     height: Dimensions.get("window").height / 1.6 - 20,
@@ -225,7 +223,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   container: {
-    //paddingTop: 10,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -246,7 +243,6 @@ const styles = StyleSheet.create({
   },
   title: {
     margin: 20,
-    //marginRight: 30,
     fontSize: 48,
     color: "seashell",
     borderBottomWidth: 2,
@@ -259,7 +255,6 @@ const styles = StyleSheet.create({
     color: "seashell",
   },
   mainListCon: {
-    // flex: 1,
     height: Dimensions.get("window").height * 0.3,
     width: Dimensions.get("window").width / 1.3,
     backgroundColor: "#6f61ca",
@@ -283,14 +278,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 30,
-    //marginHorizontal: 35,
     borderRadius: 25,
     marginBottom: 5,
     borderWidth: 1,
     borderColor: "lightgray",
   },
   listText: {
-    // flex:1,
     textAlign: "right",
     fontSize: 14,
   },
@@ -317,7 +310,6 @@ const styles = StyleSheet.create({
     color: "#00ffff",
   },
   inputBoxContainer: {
-    //marginRight: 30,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -335,9 +327,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height / 13,
     borderRadius: 25,
     marginTop: 10,
-    //marginBottom: 120,
     paddingVertical: 16,
-    //marginHorizontal: 30,
   },
 
   buttonText: {
@@ -353,15 +343,8 @@ const styles = StyleSheet.create({
   },
   infoTextConteiner: {
     padding: 10,
-    //marginHorizontal: 82,
-    //marginRight: 35,
-    //marginLeft: 55,
-
     borderRadius: 20,
-    //borderEndWidth: 1,
-    //borderStartWidth: 1,
     borderWidth: 1,
-    //right: 10,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "seashell",
@@ -376,7 +359,6 @@ const styles = StyleSheet.create({
     height: 20,
     alignItems: "center",
     justifyContent: "center",
-    //marginBottom: 50,
   },
   recordSendBtnList: {
     width: Dimensions.get("window").width,
@@ -397,8 +379,6 @@ const styles = StyleSheet.create({
   },
   exitButton: {
     paddingTop: 40,
-    //position:'absolute',
-    //marginLeft: 30,
     marginBottom: responsiveHeight(5),
   },
   exitIcon: {
