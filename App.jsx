@@ -14,6 +14,8 @@ const connectionConfig = {
 };
 import ip from "./app/src/api/serverIP";
 import store from "./app/src/store";
+import { I18nManager } from "react-native";
+import {Restart} from 'fiction-expo-restart';
 // employee
 import EmployeeMainScreen from "./app/screens/Employee/EmployeeMainScreen"
 import MainRequestScreen from "./app/screens/Employee/MainRequestScreen"
@@ -106,6 +108,11 @@ var screens = {}
 
 export default function App() {
 
+  if(I18nManager.isRTL == true){
+    I18nManager.forceRTL(false);
+    I18nManager.allowRTL(false);
+    Restart();
+ }
   useEffect(() => {
   ( async ()=>{
     const socket = io(ip);

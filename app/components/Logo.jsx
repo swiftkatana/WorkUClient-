@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 
 export default function Logo() {
     return (
@@ -15,16 +16,18 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        paddingTop: 100
+        paddingTop: responsiveScreenHeight(12),
     },
     logo: {
-        width: 120,
-        height: 120,
+        width: responsiveScreenWidth(30),
+        height: responsiveScreenWidth(30),
+       // width: 120,
+        //height: 120,
     },
     logoText: {
-        paddingBottom: 5,
-        marginVertical: 15,
-        fontSize: 18,
+        paddingBottom: responsiveScreenHeight(1),
+        marginVertical: responsiveScreenHeight(2),
+        fontSize: responsiveScreenFontSize(2.2),
         color: '#000000',
     }
 });
