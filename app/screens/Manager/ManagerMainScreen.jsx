@@ -27,6 +27,10 @@ export default function Main({ navigation }) {
           data.data
         );
         break;
+
+      case "gotNewShiftPen":
+        globalObject.company.employees[data.email].shift = data;
+        break;
       default:
         Alert.alert("you got not handler notification", data.type);
         break;
