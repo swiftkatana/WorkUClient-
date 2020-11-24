@@ -119,9 +119,10 @@ function Main({ navigation, style }) {
         globalObject.User.role === "manager"
           ? { title: "משימה בוטלה", body: "המשימה הוסרה מלוח המשימות" }
           : {
-              title: "משימה הושלמה",
-              body: "העובד " + globalObject.User.fullName + " השלים משימה",
-            };
+            title: "משימה הושלמה",
+            body: "העובד " + globalObject.User.fullName + " השלים משימה",
+          };
+      globalObject.sendSocketMessage("taskStatusChange", res, notiEmail);
       globalObject.sendNotification(
         notiEmail,
         res,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native'
 import { globalObject } from '../src/globalObject';
-import requestList from '../src/respondList';
+import requestList from "../src/api/apiKeys";
 const CreateList = (fill, options, handler) => {
     var arr2 = [];
     var arrDay = Object.keys(fill);
@@ -78,8 +78,9 @@ export default function Shifts({ style, navigation }) {
 
 
     const SendShifts = async () => {
-        const res = await globalObject.SendRequest("/api/user/uploadshifts", { email: globalObject.User.email, shifts: { ...fill } })
+        const res = await globalObject.SendRequest(requestList.useruploadshfits, { email: globalObject.User.email, shifts: { ...fill } });
         if (res) {
+            globalObject.sendSocketMessage("employeeSendShift", res, globalObject.User.managerEmail);
             navigation.navigate("EmployeeMainScreen");
         }
 

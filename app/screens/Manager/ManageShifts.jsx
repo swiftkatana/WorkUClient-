@@ -10,8 +10,8 @@ function Main({ navigation, style }) {
     const [day, SetDay] = useState(0);
     const [state, Setstate] = useState(2);
 
-    const daysString = ["day1","day2","day3","day4","day5","day6","day7"];
-    const stateString = ["morning","lunch","evening"];
+    const daysString = ["day1", "day2", "day3", "day4", "day5", "day6", "day7"];
+    const stateString = ["morning", "lunch", "evening"];
 
     const finalShift = useRef(
         {
@@ -96,12 +96,11 @@ function Main({ navigation, style }) {
     const Send = async () => {
         const res = await globalObject.SendRequest(requestList.sendNewShiftUrl, { email: globalObject.User.email, shift: finalShift.current });
         if (res) {
+            globalObject.sendSocketMessage("managerSendFinalShift", res, globalObject.User.company);
             navigation.navigate("ManagerMainScreen");
-            return;
         }
-        else
-        {
-           // add alert to the user 
+        else {
+            // add alert to the user 
         }
 
     }
@@ -190,8 +189,7 @@ function Main({ navigation, style }) {
         var keys = Object.keys(employees);
         if (keys.length > 0) {
             for (let i = 0; i < keys.length; i++) {
-                if (employees[keys[i]].shift.day1)
-                {
+                if (employees[keys[i]].shift.day1) {
                     for (let j = 0; j < 3; j++) {
                         if (employees[keys[i]].shift[daysString[day]][stateString[j]] === state) {
                             arr[j].push({ ...employees[keys[i]], id: ((j + 1) * i).toString() });

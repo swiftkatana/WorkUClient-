@@ -16,8 +16,7 @@ function Main({ navigation, style }) {
   const logout = async () => {
     await removeValue("password");
     await removeValue("email");
-    globalObject.logout();
-
+    globalObject.unmountSocket();
     const resetAction = StackActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: "LoginScreen" })],
