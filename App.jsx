@@ -118,9 +118,6 @@ export default function App() {
     const socket = io(ip);
     globalObject.socket = socket;
 
-    socket.on('newTaskGot',(data)=>{
-      globalObject.User.tasks.processing[data._id]=data
-    })
 
   })();
 

@@ -3,6 +3,9 @@ import React, { Component, useEffect, useState } from 'react'
 import { globalObject } from "../src/globalObject"
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
+window.navigator.userAgent = "react-native"; // for some versions of socketio this is needed also in React Native
+import io from 'socket.io-client/dist/socket.io'; // note the /dist/ subdirectory (socket.io-client v.2.1.1)!
+import ip from '../src/api/serverIP';
 
 function GetGreetingMsg() {
     var msg;
@@ -20,6 +23,19 @@ function GetGreetingMsg() {
 }
 
 function Greeting({ navigation, style }) {
+
+    useEffect(() => {
+        ( async ()=>{
+      
+          globalObject.socket.on('newTaskGot'+globalObject.User.email,(data)=>{
+            globalObject.User.tasks.processing[data._id]=data
+            console.log('daad')
+          })
+      
+        })();
+      
+        },[])
+
     const [GreetingMsg, SetGreeting] = useState("");
     useEffect(() => {
         const id = setInterval(() => {
