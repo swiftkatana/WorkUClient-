@@ -10,6 +10,9 @@ function Main({ navigation, style }) {
     const [day, SetDay] = useState(0);
     const [state, Setstate] = useState(2);
 
+    const daysString = ["day1","day2","day3","day4","day5","day6","day7"];
+    const stateString = ["morning","lunch","evening"];
+
     const finalShift = useRef(
         {
             day1: {
@@ -91,30 +94,24 @@ function Main({ navigation, style }) {
     const [num, SetNum] = useState(0);
 
     const Send = async () => {
-        console.log(1);
         const res = await globalObject.SendRequest(requestList.sendNewShiftUrl, { email: globalObject.User.email, shift: finalShift.current });
-        console.log(1);
         if (res) {
             navigation.navigate("ManagerMainScreen");
             return;
         }
         else
         {
-            console.log(res);
+           // add alert to the user 
         }
 
     }
 
     const HandlePress = (item, shift) => {
 
-        var key = ["morning", "lunch", "evening"];
-        const employees = globalObject.company.employees;
-        var keys = Object.keys(employees);
-        const d = Object.keys(employees[keys[0]].shift);
         if (item.email) {
-            finalShift.current[d[day]][key[shift]].push(item.email);
+            finalShift.current[daysString[day]][stateString[shift]].push(item.email);
             var newDays = days;
-            newDays[d[day]][key[shift]] += 1;
+            newDays[daysString[day]][stateString[shift]] += 1;
             SetDays(newDays);
             SetNum(num + 1);
 
@@ -128,11 +125,11 @@ function Main({ navigation, style }) {
                     <Text style={styles.listText}>{item.can}</Text>
                 </TouchableOpacity >
 
-                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(2)}>
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(3)}>
                     <Text style={styles.listText}>{item.perferNot}</Text>
                 </TouchableOpacity >
 
-                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(3)}>
+                <TouchableOpacity style={styles.styleState} onPress={() => Setstate(2)}>
                     <Text style={styles.listText}>{item.cannot}</Text>
                 </TouchableOpacity >
 
@@ -189,20 +186,18 @@ function Main({ navigation, style }) {
 
     const GetEmployyesFromDay = () => {
         var arr = [[], [], []];
-
         const employees = globalObject.company.employees;
         var keys = Object.keys(employees);
         if (keys.length > 0) {
-            const days = Object.keys(employees[keys[0]].shift);
-            const states = Object.keys(employees[keys[0]].shift[days[0]]);
             for (let i = 0; i < keys.length; i++) {
-                if (employees[keys[i]].shift)
+                if (employees[keys[i]].shift.day1)
+                {
                     for (let j = 0; j < 3; j++) {
-
-                        if (employees[keys[i]].shift[days[day]][states[j]] === state) {
+                        if (employees[keys[i]].shift[daysString[day]][stateString[j]] === state) {
                             arr[j].push({ ...employees[keys[i]], id: ((j + 1) * i).toString() });
                         }
                     }
+                }
             }
         }
         return arr;

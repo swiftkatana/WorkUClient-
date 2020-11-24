@@ -13,7 +13,7 @@ class global {
     this.company;
     this.timer;
     this.language;
-
+    this.scoket;
     this.sendNotification = async (
       email,
       data,

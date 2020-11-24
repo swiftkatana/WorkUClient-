@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Alert, Dimensions, Image, KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
 import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-community/picker';
@@ -14,7 +14,8 @@ function Main({ navigation, style }) {
     const [priority, SetPriority] = useState("גבוהה");
     const [header, SetHeader] = useState("");
     const [sendTo, SetSendTo] = useState({});
-    const recording = new Recording();
+
+    const recording = useRef(new Recording());
     const PressHandler = async () => {
 
         if (!sendTo.email) {
@@ -29,7 +30,7 @@ function Main({ navigation, style }) {
         const res = await globalObject.SendRequest(requestList.createTaskUrl, { employees: [sendTo.email], task: { title: header, priority: priority } });
         if (res) {
             globalObject.User.tasks.processing[res._id] = res;
-            let audio = await recording.UploadToServer(globalObject.User.email, sendTo.email, res._id, globalObject.User.fullName, globalObject.User.role);
+            let audio = await recording.current.UploadToServer(globalObject.User.email, sendTo.email, res._id, globalObject.User.fullName, globalObject.User.role);
             if (audio) {
                 audio.read = true;
                 globalObject.User.tasks.processing[res._id].audios.push(audio);
@@ -113,15 +114,15 @@ function Main({ navigation, style }) {
                 <View style={styles.recordSendBtnList}>
                     <TouchableOpacity
                         style={{ ...styles.vButton, ...style.btn2 }}
-                        onPressIn={recording.StartRecording} 
-                        onPressOut={recording.StopRecording}
+                        onPressIn={recording.current.StartRecording} 
+                        onPressOut={recording.current.StopRecording}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/microphone_icon.png')} />
                         <Text style={styles.buttonText}>הקלט משימה</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={{ ...styles.vButton, ...style.btn2 }}
-                        onPress={recording.playAudio}
+                        onPress={recording.current.playAudio}
                     >
                         <Image style={styles.tinyLogo} source={require('../../assets/play_button_icon.png')} />
                         <Text style={styles.buttonText}>נגן הקלטה</Text>

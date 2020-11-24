@@ -10,19 +10,24 @@ function Main({ navigation, style }) {
 
     const blue = require('../../assets/checked_icon_blue.png');
     const options = [blue, blue, blue];
-    const fill = useRef({});
+    const fill = useRef();
     const [updateScreen, SetUpdateScreen] = useState();
 
 
     useEffect(() => {
-        setTimeout(async () => {
+
+        (async()=>{
             const res = await globalObject.SendRequest(requestList.getShiftUrl, { email: globalObject.User.email });
+            
             fill.current = res[0];
             SetUpdateScreen(updateScreen + 1);
-        }, 0);
+        })();
     }, [])
 
     const CreateList = (fill) => {
+
+        if(!fill)
+            return;
         var arr2 = [];
         var arrDay = Object.keys(fill);
         if (!arrDay.length)
@@ -55,9 +60,9 @@ function Main({ navigation, style }) {
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>המשמרות שלי</Text>
-                <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי:</Text>
-
+                {fill.current === undefined ?<Text style={styles.header}>אין לך משמרות השבוע</Text> :
                 <View style={styles.shiftsCon}>
+                    <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי:</Text>
                     <View style={styles.view}>
                         <View style={styles.shiftsCon}>
                             <View style={styles.daysContainer}>
@@ -84,6 +89,7 @@ function Main({ navigation, style }) {
 
                     </View>
                 </View>
+                }
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>

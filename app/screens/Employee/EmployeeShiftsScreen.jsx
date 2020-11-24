@@ -5,7 +5,6 @@ import { globalObject } from '../../src/globalObject'
 import CheckBox from '@react-native-community/checkbox';
 import { connect } from 'react-redux';
 function Main({ navigation, style }) {
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>

@@ -5,7 +5,8 @@ import requestList from "../src/api/apiKeys";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 import { changeLoginStyle } from '../src/action';
-
+import io from 'socket.io-client/dist/socket.io';
+import ip from '../src/api/serverIP';
 
 const storeData = async (value, key) => {
   try {

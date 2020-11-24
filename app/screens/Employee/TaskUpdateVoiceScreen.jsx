@@ -82,14 +82,14 @@ function Main({ navigation, style }) {
         if (res) {
             globalObject.User.tasks.completed[item._id] = res;
             delete globalObject.User.tasks.processing[item._id];
-
-            globalObject.sendNotification(notiEmail, res, 'למידה נוסף כנס ללוח משימות', "משימה עודכנה", 'updateTask')
+            let status = globalObject.User.role === 'manager' ? {title:"משימה בוטלה",body:"המשימה הוסרה מלוח המשימות"} : {title:"משימה הושלמה",body:"העובד "+globalObject.User.fullName + " השלים משימה"}; 
+            globalObject.sendNotification(notiEmail, res,status.body,status.body , 'updateTask')
             navigation.navigate(navi);
         }
     }
     const pressHandler = () => {
         title = "שים לב";
-        msg = "פעולה זו תעביר את המשימה לסטטוס ''הושלמה'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות"
+        msg =  globalObject.User.role !== 'manager' ? "פעולה זו תעביר את המשימה לסטטוס ''הושלמה'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות" : "פעולה זו תעביר את המשימה לסטטוס ''נסגר'' ולאחר מכן חדר המשימה יסגר ויוסר מרשימת המשימות הפתוחות"
         alertButton = [
             { text: "אישור", onPress: () => { SendUpdateTask() } },
             { text: "ביטול", },
@@ -144,10 +144,9 @@ function Main({ navigation, style }) {
             <View style={styles.container}>
                 <View style={styles.infoContainer}>
                     <Text style={styles.title}>משימה</Text>
-
                     <Text style={styles.subTitle}>דחיפות: {item.priority}</Text>
                     <Text style={styles.subTitle}>תקציר: {item.title}</Text>
-                    <Text style={styles.subTitle}>שם עובד: </Text>
+                    <Text style={styles.subTitle}>שם עובד: {item.fullName} </Text>
                     <View style={styles.scrollView}>
 
                         <ScrollView ref={(ref) => myScroll.current = ref}>
@@ -159,7 +158,7 @@ function Main({ navigation, style }) {
                 </View>
             </View>
 
-            {renderTaskOptions()}
+            {navigation.state.params.shouldRender === true ? renderTaskOptions() : null}
 
             <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                 <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
