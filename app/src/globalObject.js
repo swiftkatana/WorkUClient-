@@ -29,6 +29,7 @@ class global {
     this.language;
     this.login = false;
     this.socket;
+    this.firstTimeInitSocket = true;
     this.styles = {
       inputBox: {
         width: responsiveScreenWidth(80),
@@ -57,7 +58,6 @@ class global {
       this.socket.send({ type: "logout" });
     };
     this.sendSocketMessage = (type = "", data, to = "") => {
-      console.log(1, to);
       let message = {
         type,
         data,
@@ -70,48 +70,54 @@ class global {
       try {
         this.socket = socketClient(ip, connectionConfig);
         this.socket.on("disconnect", () => {
-          console.log("error", this.User.email);
-          this.socket = this.socket.connect();
+          this.SocketConnect();
         });
       } catch (e) {
         console.log(e);
       }
-      this.unmountSocket();
+      if (this.firstTimeInitSocket) {
+        this.firstTimeInitSocket = false;
+        this.unmountSocket();
 
-      this.socket.on("newTaskGot" + this.User.email, (data) => {
-        console.log("new");
-        this.User.tasks.processing[data._id] = data;
-      });
-
-      this.socket.on("updateTaskVoice" + this.User.email, (data) => {
-        console.log("new audio");
-        this.User.tasks.processing[data.taskId].audios[data.url] = data.audio;
-        console.log(this.User.tasks.processing[data.taskId]);
-      });
-      this.socket.on("updateOrNewPersonalRequest" + this.User.email, (data) => {
-        console.log("updateOrNewPersonalRequest");
-        this.User.personalRequests[data._id] = data;
-      });
-
-      this.socket.on("taskStatusChange" + this.User.email, (data) => {
-        console.log("taskStatusChange");
-        delete this.User.tasks.processing[data._id];
-        this.User.tasks.completed[data._id] = data;
-      });
-
-      this.socket.on("managerGotShift" + this.User.email, (data) => {
-        console.log("managerGotShift");
-        this.company.employees[data.email].shift = data;
-      });
-      if (this.User.role !== "manager") {
-        console.log(this.User.company);
-        this.socket.on("employeeGotFinalShift" + this.User.company, (data) => {
-          console.log("employeeGotFinalShift");
-          if (this.User.shifts.length > 1) {
-            this.User.shifts.shift();
-          }
-          this.User.shifts.push(data);
+        this.socket.on("newTaskGot" + this.User.email, (data) => {
+          console.log("new");
+          this.User.tasks.processing[data._id] = data;
         });
+
+        this.socket.on("updateTaskVoice" + this.User.email, (data) => {
+          console.log("new audio");
+          this.User.tasks.processing[data.taskId].audios[data.url] = data.audio;
+        });
+        this.socket.on(
+          "updateOrNewPersonalRequest" + this.User.email,
+          (data) => {
+            console.log("updateOrNewPersonalRequest");
+            this.User.personalRequests[data._id] = data;
+          }
+        );
+
+        this.socket.on("taskStatusChange" + this.User.email, (data) => {
+          console.log("taskStatusChange");
+          delete this.User.tasks.processing[data._id];
+          this.User.tasks.completed[data._id] = data;
+        });
+
+        this.socket.on("managerGotShift" + this.User.email, (data) => {
+          console.log("managerGotShift");
+          this.company.employees[data.email].shift = data;
+        });
+        if (this.User.role !== "manager") {
+          this.socket.on(
+            "employeeGotFinalShift" + this.User.company,
+            (data) => {
+              console.log("employeeGotFinalShift");
+              if (this.User.shifts.length > 1) {
+                this.User.shifts.shift();
+              }
+              this.User.shifts.push(data);
+            }
+          );
+        }
       }
     };
 
