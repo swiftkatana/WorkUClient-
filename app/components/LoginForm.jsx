@@ -28,14 +28,14 @@ const storeData = async (value, key) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
-  } catch (e) {}
+  } catch (e) { }
 };
 
 const getData = async (key) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {}
+  } catch (e) { }
 };
 
 function LoginForm({ navigation, changeLoginStyle }) {
@@ -51,7 +51,6 @@ function LoginForm({ navigation, changeLoginStyle }) {
       Alert.alert(title, msg, alertButton, { cancelable: false });
     } else {
       setShouldShow(true);
-
       var naviTo = "";
       let expoId = await globalObject.registerForPushNotificationsAsync();
       const user = await globalObject.SendRequest(requestList.userLoginUrl, {
@@ -63,7 +62,6 @@ function LoginForm({ navigation, changeLoginStyle }) {
         globalObject.User = user;
         globalObject.SocketConnect();
         globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
-        // globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
         storeData(password, "password");
         storeData(email, "email");
         if (user.styles) changeLoginStyle(user.styles);
@@ -81,16 +79,13 @@ function LoginForm({ navigation, changeLoginStyle }) {
           }
         } else if (globalObject.User.company) naviTo = "EmployeeMainScreen";
         else naviTo = "SelectionScreen";
+
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: naviTo })],
+        });
+        navigation.dispatch(resetAction);
       }
-
-      const resetAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: naviTo })],
-      });
-      //  globalObject.socket.on("connect", globalObject.addEventListenerOnSocket);
-      // globalObject.addEventListenerOnSocket();
-
-      navigation.dispatch(resetAction);
     }
     setShouldShow(false);
   };

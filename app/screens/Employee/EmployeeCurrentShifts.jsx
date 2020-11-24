@@ -11,22 +11,25 @@ function Main({ navigation, style }) {
     const blue = require('../../assets/checked_icon_blue.png');
     const options = [blue, blue, blue];
     const fill = useRef();
+    var state = true;
     const [updateScreen, SetUpdateScreen] = useState();
 
 
     useEffect(() => {
 
-        (async()=>{
+        (async () => {
             const res = await globalObject.SendRequest(requestList.getShiftUrl, { email: globalObject.User.email });
-            
+
             fill.current = res[0];
             SetUpdateScreen(updateScreen + 1);
+            state = false;
         })();
+
     }, [])
 
     const CreateList = (fill) => {
 
-        if(!fill)
+        if (!fill)
             return;
         var arr2 = [];
         var arrDay = Object.keys(fill);
@@ -60,35 +63,35 @@ function Main({ navigation, style }) {
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>המשמרות שלי</Text>
-                {fill.current === undefined ?<Text style={styles.header}>אין לך משמרות השבוע</Text> :
-                <View style={styles.shiftsCon}>
-                    <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי:</Text>
-                    <View style={styles.view}>
-                        <View style={styles.shiftsCon}>
-                            <View style={styles.daysContainer}>
-                                <Text style={styles.dayText}>א</Text>
-                                <Text style={styles.dayText}>ב</Text>
-                                <Text style={styles.dayText}>ג</Text>
-                                <Text style={styles.dayText}>ד</Text>
-                                <Text style={styles.dayText}>ה</Text>
-                                <Text style={styles.dayText}>ו</Text>
-                                <Text style={styles.dayText}>ז</Text>
-                            </View>
-                            <View style={styles.fillContainer}>
-                                <View style={styles.stateContainer}>
-                                    <Text style={styles.stateText}>בוקר</Text>
-                                    <Text style={styles.stateText}>צהוריים</Text>
-                                    <Text style={styles.stateText}>ערב</Text>
+                {state === false ? <Text style={styles.header}>אין לך משמרות השבוע</Text> :
+                    <View style={styles.shiftsCon}>
+                        <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי:</Text>
+                        <View style={styles.view}>
+                            <View style={styles.shiftsCon}>
+                                <View style={styles.daysContainer}>
+                                    <Text style={styles.dayText}>א</Text>
+                                    <Text style={styles.dayText}>ב</Text>
+                                    <Text style={styles.dayText}>ג</Text>
+                                    <Text style={styles.dayText}>ד</Text>
+                                    <Text style={styles.dayText}>ה</Text>
+                                    <Text style={styles.dayText}>ו</Text>
+                                    <Text style={styles.dayText}>ז</Text>
                                 </View>
-                                {CreateList(fill.current, options)}
+                                <View style={styles.fillContainer}>
+                                    <View style={styles.stateContainer}>
+                                        <Text style={styles.stateText}>בוקר</Text>
+                                        <Text style={styles.stateText}>צהוריים</Text>
+                                        <Text style={styles.stateText}>ערב</Text>
+                                    </View>
+                                    {CreateList(fill.current, options)}
 
+
+                                </View>
 
                             </View>
 
                         </View>
-
                     </View>
-                </View>
                 }
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
