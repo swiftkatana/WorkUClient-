@@ -10,14 +10,19 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { globalObject } from "../src/globalObject";
+import { StackActions, NavigationActions } from "react-navigation";
 
 function Main({ navigation, style }) {
   const logout = async () => {
     await removeValue("password");
     await removeValue("email");
     globalObject.logout();
-    globalObject.User = {};
-    navigation.navigate("LoginScreen");
+
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: "LoginScreen" })],
+    });
+    navigation.dispatch(resetAction);
   };
   const removeValue = async (key) => {
     try {

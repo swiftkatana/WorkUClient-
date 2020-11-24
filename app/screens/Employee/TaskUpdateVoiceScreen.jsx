@@ -7,8 +7,12 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
@@ -44,6 +48,8 @@ function Main({ navigation, style }) {
   const audios = navigation.state.params.shouldRender
     ? globalObject.User.tasks.processing[item._id].audios
     : globalObject.User.tasks.completed[item._id].audios;
+
+  const [toolTipVisible, setToolTipVisible] = useState(false);
   const renderTaskOptions = () => {
     return (
       <View>
@@ -56,6 +62,7 @@ function Main({ navigation, style }) {
             <Image style={styles.tinyLogo} source={imgSrc[3]} />
             <Text style={styles.buttonText}>הקלט</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={{ ...styles.button, ...style.btn2 }}
             onPress={Rec.playAudio}
@@ -63,6 +70,7 @@ function Main({ navigation, style }) {
             <Image style={styles.tinyLogo} source={imgSrc[0]} />
             <Text style={styles.buttonText}>נגן הקלטה</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={{ ...styles.button, ...style.btn2 }}
             onPress={handlerSendVoice}

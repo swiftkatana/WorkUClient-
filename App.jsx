@@ -3,13 +3,15 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { Provider } from "react-redux";
 window.navigator.userAgent = "react-native"; // for some versions of socketio this is needed also in React Native
-import io from "socket.io-client/dist/socket.io"; // note the /dist/ subdirectory (socket.io-client v.2.1.1)!
-
+//import io from "socket.io-client/dist/socket.io"; // note the /dist/ subdirectory (socket.io-client v.2.1.1)!
+import socketClient from "socket.io-client";
+const io = require("socket.io-client");
 const connectionConfig = {
   jsonp: false,
   reconnection: true,
   reconnectionDelay: 100,
   reconnectionAttempts: 100000,
+  secure: false,
   transports: ["websocket"], // you need to explicitly tell it to use websockets
 };
 import ip from "./app/src/api/serverIP";
@@ -102,10 +104,6 @@ export default function App() {
     I18nManager.allowRTL(false);
     Restart();
   }
-  useEffect(() => {
-    const socket = io(ip, connectionConfig);
-    globalObject.socket = socket;
-  }, []);
 
   for (let i = 0; i < listScreen.length; i++) {
     var keyNames = Object.keys(listScreen[i]);

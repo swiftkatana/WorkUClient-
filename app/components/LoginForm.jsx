@@ -22,6 +22,8 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 
+import { StackActions, NavigationActions } from "react-navigation";
+
 const storeData = async (value, key) => {
   try {
     const jsonValue = JSON.stringify(value);
@@ -58,10 +60,12 @@ function LoginForm({ navigation, changeLoginStyle }) {
         expoId,
       });
       if (user) {
+        globalObject.User = user;
+        globalObject.SocketConnect();
         globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
+        // globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
         storeData(password, "password");
         storeData(email, "email");
-        globalObject.User = user;
         if (user.styles) changeLoginStyle(user.styles);
         if (globalObject.User.permission.manager) {
           const company = await globalObject.SendRequest(
@@ -78,7 +82,15 @@ function LoginForm({ navigation, changeLoginStyle }) {
         } else if (globalObject.User.company) naviTo = "EmployeeMainScreen";
         else naviTo = "SelectionScreen";
       }
-      navigation.navigate(naviTo);
+
+      const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: naviTo })],
+      });
+      //  globalObject.socket.on("connect", globalObject.addEventListenerOnSocket);
+      // globalObject.addEventListenerOnSocket();
+
+      navigation.dispatch(resetAction);
     }
     setShouldShow(false);
   };
@@ -98,9 +110,24 @@ function LoginForm({ navigation, changeLoginStyle }) {
 
   return (
     <View style={styles.container}>
-      <TextInput value={email} onChangeText={setEmail} style={globalObject.styles.inputBox} placeholder='כתובת דוא"ל' autoCapitalize="none" />
-      <TextInput value={password} onChangeText={setPassword} style={globalObject.styles.inputBox} placeholder="סיסמה" secureTextEntry={true} />
-      <TouchableOpacity onPress={() => pressHandler(email, password, setShouldShow)} style={styles.button}>
+      <TextInput
+        value={email}
+        onChangeText={setEmail}
+        style={globalObject.styles.inputBox}
+        placeholder='כתובת דוא"ל'
+        autoCapitalize="none"
+      />
+      <TextInput
+        value={password}
+        onChangeText={setPassword}
+        style={globalObject.styles.inputBox}
+        placeholder="סיסמה"
+        secureTextEntry={true}
+      />
+      <TouchableOpacity
+        onPress={() => pressHandler(email, password, setShouldShow)}
+        style={styles.button}
+      >
         <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
 
@@ -136,8 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#7f71e3",
     borderRadius: 25,
     marginVertical: responsiveScreenHeight(1),
-    justifyContent: 'center',
-
+    justifyContent: "center",
   },
   buttonText: {
     fontSize: responsiveScreenFontSize(2),
@@ -148,7 +174,6 @@ const styles = StyleSheet.create({
     marginTop: responsiveScreenHeight(2),
     width: responsiveScreenHeight(4),
     height: responsiveScreenHeight(4),
-
   },
   signupTextCont: {
     flexDirection: "row-reverse",

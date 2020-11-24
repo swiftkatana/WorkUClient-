@@ -53,12 +53,12 @@ function Main({ navigation, style }) {
       if (audio) {
         audio.read = true;
         globalObject.User.tasks.processing[res._id].audios.push(audio);
-        navigation.navigate("ManagerMainScreen");
         globalObject.sendSocketMessage(
           "newTaskSend",
           globalObject.User.tasks.processing[res._id],
           sendTo.email
         );
+        navigation.navigate("ManagerMainScreen");
         globalObject.sendNotification(
           sendTo.email,
           res,
