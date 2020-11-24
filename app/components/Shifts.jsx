@@ -99,6 +99,7 @@ export default function Shifts({ style, navigation }) {
         res,
         globalObject.User.managerEmail
       );
+      res.email = globalObject.User.email;
       globalObject.sendNotification(
         globalObject.User.managerEmail,
         res,
