@@ -18,10 +18,10 @@ function Main({ style, navigation }) {
         globalObject.User.tasks.processing[data.data._id] = data.data;
         break;
       case "finalShiftGot":
-        if (this.User.shifts.length > 1) {
-          this.User.shifts.shift();
+        if (globalObject.User.shifts.length > 1) {
+          globalObject.User.shifts.shift();
         }
-        this.User.shifts.push(data);
+        globalObject.User.shifts.push(data);
         break;
       case "updatePersonalReq":
         Alert.alert("you got notification", data.type);
