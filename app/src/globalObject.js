@@ -1,7 +1,6 @@
 import { Alert, Button } from "react-native";
 import sever from "./api/serverApi";
 import { responedList } from "./respondList";
-
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
@@ -26,6 +25,7 @@ class global {
       
     }
 
+    this.socket;
     this.sendNotification = async (
       email,
       data,
