@@ -15,7 +15,7 @@ const storeData = async (value, key) => {
     const jsonValue = JSON.stringify(value)
     await AsyncStorage.setItem(key, jsonValue)
   } catch (e) {
-    // saving error
+    
   }
 }
 
@@ -24,7 +24,7 @@ const getData = async (key) => {
     const jsonValue = await AsyncStorage.getItem(key)
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
-    // error reading value
+    
   }
 }
 
@@ -135,13 +135,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#7f71e3",
     borderRadius: 25,
     marginVertical: responsiveScreenHeight(1),
-    //paddingVertical: responsiveScreenHeight(1),
     justifyContent: 'center',
 
   },
   buttonText: {
     fontSize: responsiveScreenFontSize(2),
-   // fontWeight: '500',
     color: 'seashell',
     textAlign: 'center',
   },

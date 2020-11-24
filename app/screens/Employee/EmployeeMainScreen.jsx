@@ -23,7 +23,7 @@ function Main({ style, navigation }) {
             case 'updatePersonalReq':
                 Alert.alert('you got notification', data.type);
 
-                globalObject.User.personalRequests[data.data._id] = data.data
+                globalObject.User.personalRequests[data.data._id] = data.data;
                 break;
             case 'updateTaskVoice':
                 Alert.alert('you got notification', data.type);

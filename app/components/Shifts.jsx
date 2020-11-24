@@ -161,7 +161,6 @@ export default function Shifts({ style, navigation }) {
 
 const styles = StyleSheet.create({
     mainView: {
-        //height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
         alignItems: 'center',
         justifyContent: 'center',
@@ -215,7 +214,6 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 18,
         color: "seashell",
-        // marginHorizontal: 22,
         marginVertical: 2,
     },
     daysContainer: {
@@ -224,8 +222,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row-reverse',
         marginHorizontal: Dimensions.get('window').width / 50 - 10,
-
-
     },
     dayText: {
         textAlign: "center",

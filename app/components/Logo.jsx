@@ -21,8 +21,6 @@ const styles = StyleSheet.create({
     logo: {
         width: responsiveScreenWidth(30),
         height: responsiveScreenWidth(30),
-       // width: 120,
-        //height: 120,
     },
     logoText: {
         paddingBottom: responsiveScreenHeight(1),

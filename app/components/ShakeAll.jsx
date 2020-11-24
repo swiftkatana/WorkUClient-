@@ -28,11 +28,9 @@ const ShakeAll = (props) => {
       }),
     ]).start();
     setTimeout(() => {
-      //props.afterShake start after delay of props.delay||300ms(default)  props. Shake
       props.afterShake();
     }, props.delay || 300);
   };
-  // props.shake need to pass as true if you want its to shake
   if (props.shake) startShake();
   return (
     <Animated.View
