@@ -26,18 +26,14 @@ const storeData = async (value, key) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
-  } catch (e) {
-    // saving error
-  }
+  } catch (e) {}
 };
 
 const getData = async (key) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    // error reading value
-  }
+  } catch (e) {}
 };
 
 function LoginForm({ navigation, changeLoginStyle }) {
@@ -102,24 +98,9 @@ function LoginForm({ navigation, changeLoginStyle }) {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        value={email}
-        onChangeText={setEmail}
-        style={styles.inputBox}
-        placeholder='כתובת דוא"ל'
-        autoCapitalize="none"
-      />
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        style={styles.inputBox}
-        placeholder="סיסמה"
-        secureTextEntry={true}
-      />
-      <TouchableOpacity
-        onPress={() => pressHandler(email, password, setShouldShow)}
-        style={styles.button}
-      >
+      <TextInput value={email} onChangeText={setEmail} style={globalObject.styles.inputBox} placeholder='כתובת דוא"ל' autoCapitalize="none" />
+      <TextInput value={password} onChangeText={setPassword} style={globalObject.styles.inputBox} placeholder="סיסמה" secureTextEntry={true} />
+      <TouchableOpacity onPress={() => pressHandler(email, password, setShouldShow)} style={styles.button}>
         <Text style={styles.buttonText}>כניסה</Text>
       </TouchableOpacity>
 
@@ -149,34 +130,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  inputBox: {
-    width: responsiveScreenWidth(80),
-    height: responsiveScreenHeight(7),
-    backgroundColor: "#ededed",
-    borderRadius: 25,
-    paddingHorizontal: responsiveScreenWidth(6),
-    marginVertical: responsiveScreenHeight(1),
-    textAlign: "right",
-  },
   button: {
     width: responsiveScreenWidth(80),
     height: responsiveScreenHeight(7),
     backgroundColor: "#7f71e3",
     borderRadius: 25,
     marginVertical: responsiveScreenHeight(1),
-    //paddingVertical: responsiveScreenHeight(1),
-    justifyContent: "center",
+    justifyContent: 'center',
+
   },
   buttonText: {
     fontSize: responsiveScreenFontSize(2),
-    // fontWeight: '500',
     color: "seashell",
     textAlign: "center",
   },
   tinyLogo: {
-    marginTop: 40,
-    width: 30,
-    height: 30,
+    marginTop: responsiveScreenHeight(2),
+    width: responsiveScreenHeight(4),
+    height: responsiveScreenHeight(4),
+
   },
   signupTextCont: {
     flexDirection: "row-reverse",
@@ -187,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveScreenFontSize(2),
   },
   signupButton: {
-    paddingRight: 5,
+    paddingRight: responsiveScreenWidth(1),
     color: "#7f71e3",
     fontSize: responsiveScreenFontSize(2.2),
     fontWeight: "bold",

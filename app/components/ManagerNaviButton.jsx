@@ -47,17 +47,14 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        //backgroundColor: "#ededed",
         backgroundColor: "#efeef4",
         marginHorizontal: 10,
         marginBottom: 5,
         textAlign: "center",
         alignItems: 'center',
-        //#bf3b49
     },
     settings:
     {
-        //marginHorizontal:1,
         borderRadius: 30,
         width: 79,
         height: 70,
@@ -75,12 +72,6 @@ const styles = StyleSheet.create({
     tinyLogo: {
         width: 30,
         height: 30,
-        //alignItems: 'flex-end',
-        //justifyContent: 'flex-end',
-        //marginBottom: 40,
-        //marginRight: 12,
-        //zIndex: 5,
-
     },
 })
 const mapStateToProps = (state) => {

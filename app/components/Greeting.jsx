@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
   settings: {
     marginLeft: 5,
     borderRadius: 25,
-    //backgroundColor: "#6f61ca",
     width: 60,
     height: 60,
     justifyContent: "center",
@@ -126,11 +125,6 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 30,
     height: 30,
-    //alignItems: 'flex-end',
-    //justifyContent: 'flex-end',
-    //marginBottom: 40,
-    //marginRight: 12,
-    //zIndex: 5,
   },
 });
 
