@@ -40,12 +40,14 @@ function LoginForm({ navigation, changeLoginStyle }) {
       Alert.alert(title, msg, alertButton, { cancelable: false });
     } else {
       setShouldShow(true);
-      storeData(password, 'password');
-      storeData(email, 'email')
+
       var naviTo = "";
       let expoId = await globalObject.registerForPushNotificationsAsync();
       const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password, expoId });
       if (user) {
+        globalObject.socket.emit('loginToTheWebSite',email)
+        storeData(password, 'password');
+        storeData(email, 'email')
         globalObject.User = user;
         if (user.styles) changeLoginStyle(user.styles);
         if (globalObject.User.permission.manager) {
@@ -65,8 +67,6 @@ function LoginForm({ navigation, changeLoginStyle }) {
       }
       navigation.navigate(naviTo);
     }
-    setPassword("");
-    setEmail("");
     setShouldShow(false);
   }
 

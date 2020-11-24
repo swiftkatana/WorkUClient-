@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Provider } from "react-redux";
+window.navigator.userAgent = "react-native"; // for some versions of socketio this is needed also in React Native
+import io from 'socket.io-client/dist/socket.io'; // note the /dist/ subdirectory (socket.io-client v.2.1.1)!
+
+const connectionConfig = {
+  jsonp: false,
+  reconnection: true,
+  reconnectionDelay: 100,
+  reconnectionAttempts: 100000,
+  transports: ['websocket'], // you need to explicitly tell it to use websockets
+};
+import ip from "./app/src/api/serverIP";
 import store from "./app/src/store";
 // employee
 import EmployeeMainScreen from "./app/screens/Employee/EmployeeMainScreen"
@@ -48,6 +59,7 @@ import NewTaskScreen from "./app/screens/Manager/NewTaskScreen";
 import OldTasksScreen from "./app/screens/Manager/OldTasksScreen";
 import ManageShifts from "./app/screens/Manager/ManageShifts";
 import DisplayWorkingTimeReportOfEmployee from "./app/screens/Manager/DisplayWorkingTimeReportOfEmployee";
+import { globalObject } from "./app/src/globalObject";
 
 
 
@@ -93,6 +105,20 @@ const listScreen =
 var screens = {}
 
 export default function App() {
+
+  useEffect(() => {
+  ( async ()=>{
+    const socket = io(ip);
+    globalObject.socket = socket;
+
+    socket.on('newTaskGot',(data)=>{
+      globalObject.User.tasks.processing[data._id]=data
+    })
+
+  })();
+
+  },[])
+
   for (let i = 0; i < listScreen.length; i++) {
     var keyNames = Object.keys(listScreen[i]);
     screens[keyNames[0]] = { screen: listScreen[i][keyNames[0]], navigationOptions: { headerShown: false } }

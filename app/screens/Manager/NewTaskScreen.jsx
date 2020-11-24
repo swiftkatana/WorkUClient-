@@ -35,6 +35,7 @@ function Main({ navigation, style }) {
                 audio.read = true;
                 globalObject.User.tasks.processing[res._id].audios.push(audio);
                 navigation.navigate('ManagerMainScreen');
+                globalObject.socket.emit('newTaskSend',{task: { ...res,audios: [audio] },email:sendTo.email});
                 globalObject.sendNotification(sendTo.email, res, 'אפשר לראות אותה בלוח המשימות', 'משימה חדשה נכנסה', 'newTask')
             }
             else {
