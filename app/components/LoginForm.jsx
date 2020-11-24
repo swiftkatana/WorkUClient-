@@ -45,7 +45,6 @@ function LoginForm({ navigation, changeLoginStyle }) {
       const user = await globalObject.SendRequest(requestList.userLoginUrl, { email: email.trim().toLowerCase(), password, expoId });
       if (user) {
         globalObject.socket.emit('loginToTheWebSite',email)
-        console.log(globalObject.socket);
         storeData(password, 'password');
         storeData(email, 'email')
         globalObject.User = user;
