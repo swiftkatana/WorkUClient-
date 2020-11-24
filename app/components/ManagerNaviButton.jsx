@@ -34,6 +34,7 @@ function ManagerNaviButton({ navigation, style }) {
           style={styles.tinyLogo}
           source={require("../assets/statistics_icon.png")}
         />
+
         <Text style={styles.settingsFont}>סטטיסטיקה</Text>
       </TouchableOpacity>
 
