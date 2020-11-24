@@ -6,6 +6,18 @@ import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
 import NetInfo from "@react-native-community/netinfo";
 import { responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
+import socketClient from "socket.io-client";
+import ip from "./api/serverIP";
+const io = require("socket.io-client");
+const connectionConfig = {
+  jsonp: false,
+  reconnection: true,
+  reconnectionDelay: 100,
+  reconnectionAttempts: 100000,
+  secure: false,
+  transports: ["websocket"], // you need to explicitly tell it to use websockets
+};
+
 
 class global {
   constructor() {
@@ -13,6 +25,7 @@ class global {
     this.company;
     this.timer;
     this.language;
+    this.login = false;
     this.styles = {
       
       inputBox: {
@@ -53,6 +66,52 @@ class global {
       this.socket.send({ ...message });
     };
 
+    this.SocketConnect = ()=>{
+
+      
+      try {
+        this.socket = socketClient(ip, { transports: ["websocket"] });
+        this.socket.on("disconnect", () => {
+          console.log(1);
+        });
+      } catch (e) {
+        console.log(e);
+      }
+
+      console.log(this.User.email);
+      this.socket.on("test" + this.User.email, (data) => {
+        console.log("d");
+      });
+  
+      this.socket.on("newTaskGot" + this.User.email, (data) => {
+        console.log("new");
+        this.User.tasks.processing[data._id] = data;
+      });
+  
+      this.socket.on(
+        "updateTaskVoice" + this.User.email,
+        (data) => {
+          console.log("new audio");
+          this.User.tasks.processing[data.taskId].audios.push(data.audio);
+        }
+      );
+      this.socket.on(
+        "updateOrNewPersonalRequest" + this.User.email,
+        (data) => {
+          console.log(1);
+          this.User.personalRequests[data._id] = data;
+        }
+      );
+  
+      this.socket.on(
+        "taskStatusChange" + this.User.email,
+        (data) => {
+          delete this.User.tasks.processing[data._id];
+          this.User.tasks.completed[data._id] = data;
+        }
+      );
+    }
+
     this.socket;
     this.sendNotification = async (
       email,
@@ -62,7 +121,7 @@ class global {
       type,
       sound = "default"
     ) => {
-      let to = await globalObject.SendRequest(requestList.getExpoIdUrl, {
+      let to = await this.SendRequest(requestList.getExpoIdUrl, {
         email,
       });
       if (!to) return;
