@@ -13,35 +13,19 @@ class global {
     this.timer;
     this.language;
     this.styles = {
-      exitButton: {
-        paddingTop: 40,
+      exitButton:
+      {
+          paddingTop: 40,
+  
       },
-      exitIcon: {
-        height: 50,
-        width: 50,
+      exitIcon:{
+          height:50,
+          width:50,
       },
-    };
-    this.socket;
-    this.logout = () => {
-      // updatePersonalReuqest, updateTaskVoice, newTaskGot, taskStatusChange;
-      this.socket.removeAllListeners("updatePersonalReuqest" + this.User.email);
-      this.socket.removeAllListeners("updateTaskVoice" + this.User.email);
-      this.socket.removeAllListeners("newTaskGot" + this.User.email);
-      this.socket.removeAllListeners("taskStatusChange" + this.User.email);
-      this.socket.removeAllListeners("" + this.User.email);
-      this.socket.removeAllListeners("" + this.User.email);
-      this.socket.send({ type: "logout" });
-    };
-    this.sendSocketMessage = (type = "", data, to = "") => {
-      let message = {
-        type,
-        data,
-        to,
-      };
-      // console.log(message);
-      this.socket.send({ ...message });
-    };
+      
+    }
 
+    this.socket;
     this.sendNotification = async (
       email,
       data,
