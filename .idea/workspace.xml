@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e61655df-f86e-4bb0-b44a-a4205fb35b34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Greeting.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Greeting.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/LoginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/Manager/NewTaskScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/Manager/NewTaskScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/SettingsScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/SettingsScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/globalObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/globalObject.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +35,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="525" y="379" width="1200" height="800" key="AVDManager" timestamp="1606216581684">
+    <state x="525" y="379" width="1200" height="800" maximized="true" key="AVDManager" timestamp="1606222152345">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="525" y="379" width="1200" height="800" key="AVDManager/3840.491.1024.1220/0.0.2560.1400/-1920.230.1920.1040@0.0.2560.1400" timestamp="1606216581684" />
+    <state x="525" y="379" width="1200" height="800" maximized="true" key="AVDManager/3840.491.1024.1220/0.0.2560.1400/-1920.230.1920.1040@0.0.2560.1400" timestamp="1606222152345" />
   </component>
 </project>

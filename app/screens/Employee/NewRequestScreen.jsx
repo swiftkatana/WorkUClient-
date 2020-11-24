@@ -8,20 +8,37 @@ import { connect } from 'react-redux';
 import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 
 function Main({ navigation, style }) {
-    const [type, SetType] = useState("חל''ת");
-    const [text, SetText] = useState("");
-    const PressHandler = async (type, body) => {
-        // send {type,body,fullName,email}
-        // recive {reuqest}
-        const res = await globalObject.SendRequest(requestList.userSendPersonalRequestUrl, { type, body, fullName: globalObject.User.fullName, email: globalObject.User.email });
-        if (res) {
-            globalObject.User.personalRequests[res._id] = res;
+  const [type, SetType] = useState("חל''ת");
+  const [text, SetText] = useState("");
+  const PressHandler = async (type, body) => {
+    // send {type,body,fullName,email}
+    // recive {reuqest}
+    const res = await globalObject.SendRequest(
+      requestList.userSendPersonalRequestUrl,
+      {
+        type,
+        body,
+        fullName: globalObject.User.fullName,
+        email: globalObject.User.email,
+      }
+    );
+    if (res) {
+      globalObject.User.personalRequests[res._id] = res;
 
-            navigation.navigate('EmployeeMainScreen');
+      navigation.navigate("EmployeeMainScreen");
 
-            globalObject.sendNotification(globalObject.User.managerEmail, res, type, 'בקשה חדשה התקבלה', "newPersonalRequest")
-
-        }
+      globalObject.sendSocketMessage(
+        "updateOrNewPersonalRequest",
+        res,
+        globalObject.User.managerEmail
+      );
+      globalObject.sendNotification(
+        globalObject.User.managerEmail,
+        res,
+        type,
+        "בקשה חדשה התקבלה",
+        "newPersonalRequest"
+      );
     }
     return (
         <View style={{ ...styles.view, ...style.view }}>
@@ -66,8 +83,9 @@ function Main({ navigation, style }) {
                     <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
             </View>
-        </View>
-    )
+
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -119,8 +137,8 @@ const styles = StyleSheet.create({
         marginVertical: responsiveScreenHeight(1),
         textAlign: "right",
     },
-})
+})}
 const mapStateToProps = (state) => {
-    return { style: state.styles }
-}
-export default connect(mapStateToProps, {})(Main)
+  return { style: state.styles };
+};
+export default connect(mapStateToProps, {})(Main);

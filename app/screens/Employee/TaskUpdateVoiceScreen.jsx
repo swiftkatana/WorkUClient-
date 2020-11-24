@@ -7,8 +7,12 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import { globalObject } from "../../src/globalObject";
 import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
@@ -46,6 +50,8 @@ function Main({ navigation, style }) {
   const audios = navigation.state.params.shouldRender
     ? globalObject.User.tasks.processing[item._id].audios
     : globalObject.User.tasks.completed[item._id].audios;
+
+  const [toolTipVisible, setToolTipVisible] = useState(false);
   const renderTaskOptions = () => {
     return (
       <View>
@@ -58,6 +64,7 @@ function Main({ navigation, style }) {
             <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[3]} />
             <Text style={globalObject.styles.regButtonText}>הקלט</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={{ ...globalObject.styles.voice_3_btns, ...style.btn2 }}
             onPress={Rec.playAudio}
@@ -65,6 +72,7 @@ function Main({ navigation, style }) {
             <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[0]} />
             <Text style={globalObject.styles.regButtonText}>נגן הקלטה</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={{ ...globalObject.styles.voice_3_btns, ...style.btn2 }}
             onPress={handlerSendVoice}
@@ -113,9 +121,10 @@ function Main({ navigation, style }) {
         globalObject.User.role === "manager"
           ? { title: "משימה בוטלה", body: "המשימה הוסרה מלוח המשימות" }
           : {
-              title: "משימה הושלמה",
-              body: "העובד " + globalObject.User.fullName + " השלים משימה",
-            };
+            title: "משימה הושלמה",
+            body: "העובד " + globalObject.User.fullName + " השלים משימה",
+          };
+      globalObject.sendSocketMessage("taskStatusChange", res, notiEmail);
       globalObject.sendNotification(
         notiEmail,
         res,

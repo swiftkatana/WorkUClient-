@@ -22,6 +22,8 @@ import {
   responsiveScreenWidth,
 } from "react-native-responsive-dimensions";
 
+import { StackActions, NavigationActions } from "react-navigation";
+
 const storeData = async (value, key) => {
   try {
     const jsonValue = JSON.stringify(value);
@@ -58,10 +60,12 @@ function LoginForm({ navigation, changeLoginStyle }) {
         expoId,
       });
       if (user) {
+        globalObject.User = user;
+        globalObject.SocketConnect();
         globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
+        // globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
         storeData(password, "password");
         storeData(email, "email");
-        globalObject.User = user;
         if (user.styles) changeLoginStyle(user.styles);
         if (globalObject.User.permission.manager) {
           const company = await globalObject.SendRequest(
@@ -78,7 +82,15 @@ function LoginForm({ navigation, changeLoginStyle }) {
         } else if (globalObject.User.company) naviTo = "EmployeeMainScreen";
         else naviTo = "SelectionScreen";
       }
-      navigation.navigate(naviTo);
+
+      const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: naviTo })],
+      });
+      //  globalObject.socket.on("connect", globalObject.addEventListenerOnSocket);
+      // globalObject.addEventListenerOnSocket();
+
+      navigation.dispatch(resetAction);
     }
     setShouldShow(false);
   };

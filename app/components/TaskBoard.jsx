@@ -8,40 +8,75 @@ import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth
 
 
 export default function TaskBoard({ navigation }) {
+  const render = ({ item }) => {
+    return (
+      <View>
+        <TouchableOpacity
+          style={styles.list}
+          onPress={() =>
+            navigation.navigate("TaskUpdateVoiceScreen", {
+              item: item,
+              shouldRender: true,
+            })
+          }
+        >
+          <Text style={styles.listText}>תקציר: {item.title}</Text>
+          <View style={styles.koral}>
+            <Image
+              style={styles.tinyLogo}
+              source={require("../assets/arrow_icon_black.png")}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  const GetLen = () => {
+    return Object.keys(globalObject.User.tasks.processing).length;
+  };
 
-    const render = ({ item }) => {
-        return (
-            <View>
-                <TouchableOpacity style={globalObject.styles.list} onPress={() => navigation.navigate('TaskUpdateVoiceScreen', { item: item,shouldRender:true })}>
-                    <Text style={styles.listText}>תקציר: {item.title}</Text>
-                    <View>
-                        <Image style={globalObject.styles.arrowIcon} source={require('../assets/arrow_icon_black.png')} />
-                    </View>
-                </TouchableOpacity>
-            </View>
-        )
-    }
     const GetLen = () => {
         return Object.keys(globalObject.User.tasks.processing).length;
     }
     const GetList = () => {
-        let arr = [];
-        for (var obj in globalObject.User.tasks.processing) {
-            arr.push(globalObject.User.tasks.processing[obj]);
+      let arr1 = [];
+      let arr2 = [];
+      let arr3 = [];
+      for (var obj in globalObject.User.tasks.processing) {
+        switch (globalObject.User.tasks.processing[obj].priority) {
+          case "גבוהה":
+            arr1.push(globalObject.User.tasks.processing[obj]);
+            break;
+          case "בינונית":
+            arr2.push(globalObject.User.tasks.processing[obj]);
+  
+            break;
+          case "נמוכה":
+            arr3.push(globalObject.User.tasks.processing[obj]);
+            break;
+          default:
+            break;
         }
-        return arr;
-    }
+      }
+      return [...arr1, ...arr2, ...arr3];
+    };
 
-    return (
-        <View style={styles.view}>
-            <Text style={styles.boardTitle}>
-                לוח משימות
-            </Text>
-            <View style={{ flex: 1, }}>
-                <InfoList render={render} GetLen={GetLen} GetList={GetList} emptyInfo={'אין משימות'} textColor={"grey"} opacity={0.4} src={require('../assets/empty_icon.png')} />
-            </View>
-        </View>
-    )
+  return (
+    <View style={styles.view}>
+      <Text style={styles.boardTitle}>לוח משימות</Text>
+      <View style={{ flex: 1 }}>
+        <InfoList
+          render={render}
+          GetLen={GetLen}
+          GetList={GetList}
+          emptyInfo={"אין משימות"}
+          textColor={"grey"}
+          opacity={0.4}
+          src={require("../assets/empty_icon.png")}
+        />
+      </View>
+    </View>
+  );
 }
 const styles = StyleSheet.create({
     view:
@@ -75,4 +110,4 @@ const styles = StyleSheet.create({
         color: "grey",
         fontWeight: "bold",
     },
-})
+});

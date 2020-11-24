@@ -6,35 +6,51 @@ import { connect } from 'react-redux';
 import { globalObject } from '../src/globalObject';
 
 function ManagerNaviButton({ navigation, style }) {
+  return (
+    <View style={styles.view}>
+      <TouchableOpacity
+        style={{ ...styles.settings, ...style.btn1 }}
+        onPress={() => navigation.navigate("ManagerManageRequestsScreen")}
+      >
+        <Image
+          style={styles.tinyLogo}
+          source={require("../assets/notebook_icon.png")}
+        />
+        <Text style={styles.settingsFont}>ניהול בקשות</Text>
+      </TouchableOpacity>
 
+      <TouchableOpacity
+        style={{ ...styles.settings, ...style.btn1 }}
+        onPress={() => navigation.navigate("ManagerToolsScreen")}
+      >
+        <Image
+          style={styles.tinyLogo}
+          source={require("../assets/suitcase_icon.png")}
+        />
+        <Text style={styles.settingsFont}>כלי ניהול</Text>
+      </TouchableOpacity>
 
+      <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }}>
+        <Image
+          style={styles.tinyLogo}
+          source={require("../assets/statistics_icon.png")}
+        />
 
-    return (
-        <View style={styles.view}>
+        <Text style={styles.settingsFont}>סטטיסטיקה</Text>
+      </TouchableOpacity>
 
-
-            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }} onPress={() => navigation.navigate('ManagerManageRequestsScreen')}>
-                <Image style={styles.tinyLogo} source={require('../assets/notebook_icon.png')} />
-                <Text style={styles.settingsFont}>ניהול בקשות</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }} onPress={() => navigation.navigate('ManagerToolsScreen')}>
-                <Image style={styles.tinyLogo} source={require('../assets/suitcase_icon.png')} />
-                <Text style={styles.settingsFont}>כלי ניהול</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }}>
-                <Image style={styles.tinyLogo} source={require('../assets/statistics_icon.png')} />
-                <Text style={styles.settingsFont}>סטטיסטיקה</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={{ ...styles.settings, ...style.view }} onPress={() => navigation.navigate('ContactsScreen')}>
-                <Image style={styles.tinyLogo} source={require('../assets/group_icon.png')} />
-                <Text style={styles.settingsFont}>אנשי קשר</Text>
-            </TouchableOpacity>
-
-        </View>
-    )
+      <TouchableOpacity
+        style={{ ...styles.settings, ...style.view }}
+        onPress={() => navigation.navigate("ContactsScreen")}
+      >
+        <Image
+          style={styles.tinyLogo}
+          source={require("../assets/group_icon.png")}
+        />
+        <Text style={styles.settingsFont}>אנשי קשר</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -76,6 +92,6 @@ const styles = StyleSheet.create({
     },
 })
 const mapStateToProps = (state) => {
-    return { style: state.styles }
-}
-export default connect(mapStateToProps, {})(ManagerNaviButton)
+  return { style: state.styles };
+};
+export default connect(mapStateToProps, {})(ManagerNaviButton);

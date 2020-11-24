@@ -4,49 +4,50 @@ import { responsiveHeight, responsiveScreenHeight } from "react-native-responsiv
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
 
-
-
 export default function Main({ navigation }) {
+  const [restCode, setRestCode] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [verifyPassword, setVerifyPassword] = useState("");
 
-    const [restCode, setRestCode] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [verifyPassword, setVerifyPassword] = useState('')
-
-    const pressHandler = async () => {
-        if (!restCode || !email || !password || !verifyPassword) {
-            title = "השינוי נכשל";
-            msg = "אחד או יותר מהשדות ריקים, נסו שנית"
-            alertButton = [{ text: "הבנתי" }];
-            Alert.alert(title, msg, alertButton, { cancelable: false });
-        } else if (password != verifyPassword) {
-            title = "השינוי נכשל";
-            msg = "הוזנו שני סיסמאות שונות, נסו שנית"
-            alertButton = [{ text: "הבנתי" }];
-            Alert.alert(title, msg, alertButton, { cancelable: false });
-        } else {
-            var naviTo = "";
-            const user = await globalObject.SendRequest(requestList.userChangePasswordWithRestCode, { restCode, email, newPassword: password });
-            if (user) {
-                globalObject.User = user;
-                if (globalObject.User.permission.manager) {
-                    const company = await globalObject.SendRequest(requestList.getCompanyUrl, { email: user.email, joinCode: user.joinCode });
-                    if (company) {
-                        globalObject.User.tasks = company.tasks;
-                        globalObject.User.personalRequests = company.personalRequests;
-                        globalObject.company = company;
-                        naviTo = 'ManagerMainScreen';
-                    }
-                }
-                else if (globalObject.User.company)
-                    naviTo = 'EmployeeMainScreen';
-                else
-                    naviTo = 'SelectionScreen';
-            }
-            navigation.navigate(naviTo);
-            setShouldShow(false);
-        }
+  const pressHandler = async () => {
+    if (!restCode || !email || !password || !verifyPassword) {
+      title = "השינוי נכשל";
+      msg = "אחד או יותר מהשדות ריקים, נסו שנית";
+      alertButton = [{ text: "הבנתי" }];
+      Alert.alert(title, msg, alertButton, { cancelable: false });
+    } else if (password != verifyPassword) {
+      title = "השינוי נכשל";
+      msg = "הוזנו שני סיסמאות שונות, נסו שנית";
+      alertButton = [{ text: "הבנתי" }];
+      Alert.alert(title, msg, alertButton, { cancelable: false });
+    } else {
+      var naviTo = "";
+      const user = await globalObject.SendRequest(
+        requestList.userChangePasswordWithRestCode,
+        { restCode, email, newPassword: password }
+      );
+      if (user) {
+        globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
+        globalObject.User = user;
+        if (globalObject.User.permission.manager) {
+          const company = await globalObject.SendRequest(
+            requestList.getCompanyUrl,
+            { email: user.email, joinCode: user.joinCode }
+          );
+          if (company) {
+            globalObject.User.tasks = company.tasks;
+            globalObject.User.personalRequests = company.personalRequests;
+            globalObject.company = company;
+            naviTo = "ManagerMainScreen";
+          }
+        } else if (globalObject.User.company) naviTo = "EmployeeMainScreen";
+        else naviTo = "SelectionScreen";
+      }
+      navigation.navigate(naviTo);
+      setShouldShow(false);
     }
+  };
 
     return (
         <View style={styles.container}>

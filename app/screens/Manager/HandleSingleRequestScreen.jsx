@@ -8,14 +8,23 @@ import { globalObject } from '../../src/globalObject'
 
 
 function Main({ navigation, style }) {
+  const pressHandler = async (_id, status, email) => {
+    const res = await globalObject.SendRequest(
+      requestList.updatePersonalRequestUrl,
+      { _id, status, email }
+    );
+    if (res) {
+      globalObject.User.personalRequests[res._id] = res;
+      globalObject.sendSocketMessage("updateOrNewPersonalRequest", res, email);
+      globalObject.sendNotification(
+        email,
+        res,
+        "כנס לבקשות שלי",
+        "בקשה אישית עודכנה",
+        "updatePersonalReq"
+      );
 
-    const pressHandler = async (_id, status, email) => {
-        const res = await globalObject.SendRequest(requestList.updatePersonalRequestUrl, { _id, status, email });
-        if (res) {
-            globalObject.sendNotification(email, res, 'כנס לבקשות שלי', 'בקשה אישית עודכנה', 'updatePersonalReq');
-            globalObject.User.personalRequests[res._id] = res;
-            navigation.pop();
-        }
+      navigation.pop();
     }
 
     const item = navigation.state.params.item;
@@ -47,8 +56,9 @@ function Main({ navigation, style }) {
             <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
             </TouchableOpacity>
-        </View>
-    )
+   
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -120,8 +130,8 @@ const styles = StyleSheet.create({
     },
 
 
-})
+})}
 const mapStateToProps = (state) => {
-    return { style: state.styles }
-}
-export default connect(mapStateToProps, {})(Main)
+  return { style: state.styles };
+};
+export default connect(mapStateToProps, {})(Main);

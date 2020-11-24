@@ -26,36 +26,6 @@ function GetGreetingMsg() {
 }
 
 function Greeting({ navigation, style }) {
-  useEffect(() => {
-    globalObject.socket.on("newTaskGot" + globalObject.User.email, (data) => {
-      console.log("new");
-      globalObject.User.tasks.processing[data._id] = data;
-    });
-
-    globalObject.socket.on(
-      "updateTaskVoice" + globalObject.User.email,
-      (data) => {
-        console.log("new audio");
-        globalObject.User.tasks.processing[data.taskId].audios.push(data.audio);
-      }
-    );
-
-    globalObject.socket.on(
-      "updateOrNewPersonalRequest" + globalObject.User.email,
-      (data) => {
-        globalObject.User.personalRequests[data._id] = data;
-      }
-    );
-
-    globalObject.socket.on(
-      "taskStatusChange" + globalObject.User.email,
-      (data) => {
-        delete globalObject.User.tasks.processing[data._id];
-        globalObject.User.tasks.completed[data._id] = data;
-      }
-    );
-  }, []);
-
   const [GreetingMsg, SetGreeting] = useState("");
   useEffect(() => {
     const id = setInterval(() => {

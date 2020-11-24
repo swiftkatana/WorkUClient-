@@ -6,6 +6,21 @@ import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
 import NetInfo from "@react-native-community/netinfo";
 import { responsiveFontSize, responsiveHeight, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth, responsiveWidth } from "react-native-responsive-dimensions";
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
+import socketClient from "socket.io-client";
+import ip from "./api/serverIP";
+const io = require("socket.io-client");
+const connectionConfig = {
+  jsonp: false,
+  reconnection: true,
+  reconnectionDelay: 100,
+  reconnectionAttempts: 100000,
+  secure: false,
+  transports: ["websocket"], // you need to explicitly tell it to use websockets
+};
 
 class global {
   constructor() {
@@ -13,6 +28,9 @@ class global {
     this.company;
     this.timer;
     this.language;
+    this.login = false;
+    this.socket;
+    this.firstTimeInitSocket = true;
     this.styles = {
       
       regInputBox: {
@@ -193,15 +211,13 @@ class global {
     borderColor: "lightgrey",
   },
     };
-    this.socket;
-    this.logout = () => {
-      // updatePersonalReuqest, updateTaskVoice, newTaskGot, taskStatusChange;
-      this.socket.removeAllListeners("updatePersonalReuqest" + this.User.email);
-      this.socket.removeAllListeners("updateTaskVoice" + this.User.email);
-      this.socket.removeAllListeners("newTaskGot" + this.User.email);
-      this.socket.removeAllListeners("taskStatusChange" + this.User.email);
-      this.socket.removeAllListeners("" + this.User.email);
-      this.socket.removeAllListeners("" + this.User.email);
+
+    this.unmountSocket = () => {
+      //updatePersonalReuqest, updateTaskVoice, newTaskGot, taskStatusChange;
+      this.socket.off("updatePersonalReuqest" + this.User.email);
+      this.socket.off("updateTaskVoice" + this.User.email);
+      this.socket.off("newTaskGot" + this.User.email);
+      this.socket.off("taskStatusChange" + this.User.email);
       this.socket.send({ type: "logout" });
     };
     this.sendSocketMessage = (type = "", data, to = "") => {
@@ -210,8 +226,62 @@ class global {
         data,
         to,
       };
-      // console.log(message);
       this.socket.send({ ...message });
+    };
+
+    this.SocketConnect = () => {
+      try {
+        this.socket = socketClient(ip, connectionConfig);
+        this.socket.on("disconnect", () => {
+          this.SocketConnect();
+        });
+      } catch (e) {
+        console.log(e);
+      }
+      if (this.firstTimeInitSocket) {
+        this.firstTimeInitSocket = false;
+        this.unmountSocket();
+
+        this.socket.on("newTaskGot" + this.User.email, (data) => {
+          console.log("new");
+          this.User.tasks.processing[data._id] = data;
+        });
+
+        this.socket.on("updateTaskVoice" + this.User.email, (data) => {
+          console.log("new audio");
+          this.User.tasks.processing[data.taskId].audios[data.url] = data.audio;
+        });
+        this.socket.on(
+          "updateOrNewPersonalRequest" + this.User.email,
+          (data) => {
+            console.log("updateOrNewPersonalRequest");
+            this.User.personalRequests[data._id] = data;
+          }
+        );
+
+        this.socket.on("taskStatusChange" + this.User.email, (data) => {
+          console.log("taskStatusChange");
+          delete this.User.tasks.processing[data._id];
+          this.User.tasks.completed[data._id] = data;
+        });
+
+        this.socket.on("managerGotShift" + this.User.email, (data) => {
+          console.log("managerGotShift");
+          this.company.employees[data.email].shift = data;
+        });
+        if (this.User.role !== "manager") {
+          this.socket.on(
+            "employeeGotFinalShift" + this.User.company,
+            (data) => {
+              console.log("employeeGotFinalShift");
+              if (this.User.shifts.length > 1) {
+                this.User.shifts.shift();
+              }
+              this.User.shifts.push(data);
+            }
+          );
+        }
+      }
     };
 
     this.sendNotification = async (
@@ -222,7 +292,7 @@ class global {
       type,
       sound = "default"
     ) => {
-      let to = await globalObject.SendRequest(requestList.getExpoIdUrl, {
+      let to = await this.SendRequest(requestList.getExpoIdUrl, {
         email,
       });
       if (!to) return;
@@ -340,5 +410,6 @@ class global {
     };
   }
 }
+
 const globalObject = new global();
 export { globalObject };
