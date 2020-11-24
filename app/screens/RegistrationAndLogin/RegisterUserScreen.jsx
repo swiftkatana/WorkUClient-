@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { responsiveHeight } from "react-native-responsive-dimensions";
+import { responsiveHeight, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
 const storeData = async (value, key) => {
@@ -134,21 +134,21 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(5),
   },
   inputBox: {
-    width: 300,
-    height: responsiveHeight(8),
+    width: responsiveScreenWidth(80),
+    height: responsiveScreenHeight(7),
     backgroundColor: "#ededed",
     borderRadius: 25,
-    paddingHorizontal: 16,
-    marginVertical: Dimensions.get("window").height / 85,
+    paddingHorizontal: responsiveScreenWidth(6),
+    marginVertical: responsiveScreenHeight(1),
     textAlign: "right",
   },
   button: {
-    width: 300,
-    height: 50,
+    width: responsiveScreenWidth(80),
+    height: responsiveScreenHeight(7),
     backgroundColor: "#7f71e3",
     borderRadius: 25,
-    marginVertical: Dimensions.get("window").height / 85,
-    paddingVertical: 16,
+    marginVertical: responsiveScreenHeight(1),
+    justifyContent: 'center',
   },
   buttonText: {
     fontSize: 16,

@@ -104,7 +104,6 @@ export default function App() {
   }
   useEffect(() => {
     const socket = io(ip, connectionConfig);
-
     globalObject.socket = socket;
   }, []);
 
