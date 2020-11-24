@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
+import { responsiveScreenFontSize, responsiveScreenHeight } from 'react-native-responsive-dimensions';
 
 
 
@@ -63,10 +64,10 @@ const styles = StyleSheet.create({
     {
         color: "white",
         fontWeight: 'bold',
+        fontSize: responsiveScreenFontSize(2),
     },
     emptyIcon: {
-        width: 80,
-        height: 80,
-
+        width: responsiveScreenHeight(10),
+        height: responsiveScreenHeight(10),
     },
 });

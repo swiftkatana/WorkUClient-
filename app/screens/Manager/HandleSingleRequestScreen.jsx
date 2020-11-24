@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions'
 import { connect } from 'react-redux'
 import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
@@ -23,7 +24,7 @@ function Main({ navigation, style }) {
             <View style={styles.container}>
 
                 <View>
-                    <Text style={styles.title}>בקשה</Text>
+                    <Text style={globalObject.styles.menuTitle}>בקשה</Text>
                 </View>
                 <View style={styles.requestContainer}>
                         <Text style={styles.subTitle}>תאריך: {item.date}</Text>
@@ -43,8 +44,8 @@ function Main({ navigation, style }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+            <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
             </TouchableOpacity>
         </View>
     )
@@ -65,22 +66,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
     },
-    title:
-    {
-
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
-        margin: 20,
-        //marginRight: 30,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth:2,
-        borderColor: "seashell",
-    },
     requestContainer:{
         alignItems:'center',
         justifyContent: 'center',
-        borderWidth:2,
+        borderWidth:1,
         borderColor: "grey",
         borderRadius:30,
         width: Dimensions.get('window').width*0.80,
@@ -91,15 +80,13 @@ const styles = StyleSheet.create({
     subTitle:
     {
         //marginRight: 30,
-        fontSize: 18,
+        fontSize: responsiveScreenFontSize(2.2),//18
         color: "black",
-
     },
     bodyHeader: {
-        //marginRight: 30,
-        fontSize: 18,
+        fontSize: responsiveScreenFontSize(2.2),//18
         color: "black",
-        marginTop: 10,
+        marginTop: responsiveScreenHeight(1),
         alignItems:'center',
         justifyContent: 'center',
     },
@@ -112,57 +99,26 @@ const styles = StyleSheet.create({
 
     },
     buttonContainer: {
+        width: responsiveScreenWidth(60),
+        height: responsiveScreenHeight(15),
         flexDirection: 'row-reverse',
-        //marginTop: 20,
+        justifyContent:'space-evenly',
+        alignItems:'center',
     },
-    buttonReject: {
-
-        width: 100,
-        //backgroundColor: "#eb4034",// #6357b5
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 16,
-        marginHorizontal: 10,
-
-
-    },
-    buttonOk: {
-
-        width: 100,
-        //backgroundColor: "#20bd57",// #6357b5
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 16,
-        marginHorizontal: 10,
-
-
-    },
-
     buttonText: {
-        fontSize: 12,
+        fontSize: responsiveScreenFontSize(1.5),
         fontWeight: '500',
         color: 'seashell',
         textAlign: 'center',
         fontWeight: 'bold',
-
     },
     tinyLogo: {
-        width: 60,
-        height: 60,
+        width: responsiveScreenHeight(6.5),
+        height: responsiveScreenHeight(6.5),
         marginHorizontal: 20,
-        marginBottom: 10,
-
+        marginBottom: responsiveScreenHeight(1),
     },
-    exitButton:
-    {
-        paddingTop: 40,
 
-
-    },
-    exitIcon:{
-        height:50,
-        width:50,
-    },
 
 })
 const mapStateToProps = (state) => {

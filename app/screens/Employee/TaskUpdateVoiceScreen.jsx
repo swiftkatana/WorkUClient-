@@ -15,6 +15,8 @@ import { connect } from "react-redux";
 import Recorder from "../../class/VoiceRecording";
 import {
   responsiveHeight,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
   responsiveWidth,
 } from "react-native-responsive-dimensions";
 
@@ -47,28 +49,28 @@ function Main({ navigation, style }) {
   const renderTaskOptions = () => {
     return (
       <View>
-        <View style={styles.recordSendBtnList}>
+        <View style={globalObject.styles.recordSendBtnList}>
           <TouchableOpacity
-            style={{ ...styles.button, ...style.btn2 }}
+            style={{ ...globalObject.styles.voice_3_btns, ...style.btn2 }}
             onPressIn={Rec.StartRecording}
             onPressOut={Rec.StopRecording}
           >
-            <Image style={styles.tinyLogo} source={imgSrc[3]} />
-            <Text style={styles.buttonText}>הקלט</Text>
+            <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[3]} />
+            <Text style={globalObject.styles.regButtonText}>הקלט</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ ...styles.button, ...style.btn2 }}
+            style={{ ...globalObject.styles.voice_3_btns, ...style.btn2 }}
             onPress={Rec.playAudio}
           >
-            <Image style={styles.tinyLogo} source={imgSrc[0]} />
-            <Text style={styles.buttonText}>נגן הקלטה</Text>
+            <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[0]} />
+            <Text style={globalObject.styles.regButtonText}>נגן הקלטה</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ ...styles.button, ...style.btn2 }}
+            style={{ ...globalObject.styles.voice_3_btns, ...style.btn2 }}
             onPress={handlerSendVoice}
           >
-            <Image style={styles.tinyLogo} source={imgSrc[4]} />
-            <Text style={styles.buttonText}>שלח הודעה</Text>
+            <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[4]} />
+            <Text style={globalObject.styles.regButtonText}>שלח הודעה</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.updateBtnContainer}>
@@ -77,10 +79,10 @@ function Main({ navigation, style }) {
             onPress={pressHandler}
           >
             <Image
-              style={styles.lessTinyLogo}
+              style={globalObject.styles.tinyVoiceIcon}
               source={require("../../assets/star_icon.png")}
             />
-            <Text style={styles.buttonText}> {butText} </Text>
+            <Text style={globalObject.styles.regButtonText}> {butText} </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -181,25 +183,25 @@ function Main({ navigation, style }) {
     return audios.map((obj) => {
       if (obj.email === globalObject.User.email) {
         return (
-          <View key={obj.url} style={styles.myVoiceMsg}>
+          <View key={obj.url} style={globalObject.styles.VoicPlayeButton}>
             <TouchableOpacity
-              style={{ ...styles.myVoiceButton, ...style.btn3 }}
+              style={{ ...globalObject.styles.VoicPlayeButton, ...style.btn3 }}
               onPress={() => Rec.playAudio(obj.url)}
             >
-              <Image style={styles.tinyLogo} source={imgSrc[0]} />
-              <Text style={styles.buttonText}>אני</Text>
+              <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[0]} />
+              <Text style={globalObject.styles.regButtonText}>אני</Text>
             </TouchableOpacity>
           </View>
         );
       }
       return (
-        <View key={obj.url} style={styles.yourVoiceMsg}>
+        <View key={obj.url} style={globalObject.styles.yourVoiceMsg}>
           <TouchableOpacity
-            style={{ ...styles.yourVoiceButton, ...style.btn2 }}
+            style={{ ...globalObject.styles.VoicPlayeButton, ...style.btn2 }}
             onPress={() => Rec.playAudio(obj.url)}
           >
-            <Image style={styles.tinyLogo} source={imgSrc[0]} />
-            <Text style={styles.buttonText}>{obj.fullName}</Text>
+            <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[0]} />
+            <Text style={globalObject.styles.regButtonText}>{obj.fullName}</Text>
           </TouchableOpacity>
         </View>
       );
@@ -210,16 +212,17 @@ function Main({ navigation, style }) {
     <View style={{ ...styles.view, ...style.view }}>
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>משימה</Text>
-          <Text style={styles.subTitle}>דחיפות: {item.priority}</Text>
-          <Text style={styles.subTitle}>תקציר: {item.title}</Text>
-          <Text style={styles.subTitle}>שם עובד: {item.fullName} </Text>
-          <View style={styles.scrollView}>
+          <Text style={globalObject.styles.menuTitle}>משימה</Text>
+          <Text style={globalObject.styles.subTextWhite}>דחיפות: {item.priority}</Text>
+          <Text style={globalObject.styles.subTextWhite}>תקציר: {item.title}</Text>
+          <Text style={globalObject.styles.subTextWhite}>שם עובד: {item.fullName} </Text>
+
+        </View>
+        <View style={globalObject.styles.VoiceScrollView}>
             <ScrollView ref={(ref) => (myScroll.current = ref)}>
               {renderVoiceList()}
             </ScrollView>
           </View>
-        </View>
       </View>
 
       {navigation.state.params.shouldRender === true
@@ -227,11 +230,11 @@ function Main({ navigation, style }) {
         : null}
 
       <TouchableOpacity
-        style={styles.exitButton}
+        style={globalObject.styles.exitButton}
         onPress={() => navigation.pop()}
       >
         <Image
-          style={styles.exitIcon}
+          style={globalObject.styles.exitIcon}
           source={require("../../assets/exit_icon.png")}
         />
       </TouchableOpacity>
@@ -247,161 +250,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
-    height: responsiveHeight(53),
+    height: responsiveScreenHeight(50),
+    width: responsiveScreenWidth(100),
     alignItems: "center",
     justifyContent: "center",
-  },
-  scrollView: {
-    height: responsiveHeight(28),
-    width: responsiveWidth(85),
-
-    marginTop: 10,
-    justifyContent: "flex-end",
-    textAlign: "right",
-    backgroundColor: "seashell",
-    marginHorizontal: 25,
-    borderRadius: 20,
-    borderWidth: 3,
-    borderColor: "lightgrey",
-  },
-  title: {
-    textAlign: "center",
-    margin: 20,
-    fontSize: 48,
-    color: "seashell",
-    borderBottomWidth: 2,
-    borderColor: "seashell",
-  },
-  subTitle: {
-    textAlign: "center",
-    fontSize: 18,
-    color: "seashell",
-  },
-  descriptionStyle: {
-    textAlign: "center",
-    marginLeft: 30,
-    fontSize: 18,
-    color: "seashell",
-  },
-  tinyLogo: {
-    width: 18,
-    height: 18,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  lessTinyLogo: {
-    width: 25,
-    height: 25,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bodyHeader: {
-    marginRight: 30,
-    marginLeft: 30,
-    fontSize: 16,
-    color: "seashell",
-  },
-  itemList: {
-    textAlign: "right",
-    width: 300,
-    textAlign: "right",
-    justifyContent: "center",
-  },
-  infoContainer: {},
-  inputBoxContainer: {},
-  inputBox: {
-    width: 300,
-    height: 100,
-    backgroundColor: "#ededed",
-    borderRadius: 25,
-    marginVertical: 60,
-    marginHorizontal: 30,
-    textAlign: "right",
   },
   updateBtnContainer: {
     justifyContent: "center",
     alignItems: "center",
   },
-  itemList: {
-    textAlign: "right",
-    width: 300,
-    textAlign: "right",
-    justifyContent: "center",
-  },
-  pickerItem: {
-    fontSize: 16,
-    color: "green",
-    textAlign: "right",
-    justifyContent: "center",
-  },
-  recordSendBtnList: {
-    width: Dimensions.get("window").width,
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-  },
-  myVoiceMsg: {
-    width: Dimensions.get("window").width,
-    alignItems: "flex-start",
-  },
-  yourVoiceMsg: {
-    width: Dimensions.get("window").width - 55,
-    alignItems: "flex-end",
-  },
-  myVoiceButton: {
-    width: responsiveWidth(50),
-    height: responsiveHeight(10.1),
-    borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 16,
-    marginHorizontal: 10,
-    alignItems: "center",
-    borderWidth: 3,
-    borderColor: "lightgrey",
-  },
-  yourVoiceButton: {
-    width: responsiveWidth(50),
-    height: responsiveHeight(10.1),
-    borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 16,
-    marginHorizontal: 10,
-    alignItems: "center",
-    borderWidth: 3,
-    borderColor: "lightgrey",
-  },
-  button: {
-    width: responsiveWidth(25),
-    height: responsiveHeight(10.2),
-    borderRadius: 25,
-    marginVertical: 5,
-    paddingVertical: 16,
-    marginHorizontal: 10,
-    alignItems: "center",
-  },
   updateButton: {
     width: responsiveWidth(50),
     height: responsiveHeight(10.2),
-    backgroundColor: "#6a61ca",
     borderRadius: 25,
-    marginVertical: 5,
-    paddingVertical: 12,
-    marginHorizontal: 10,
+    marginVertical: responsiveHeight(1),
     alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "seashell",
-    textAlign: "center",
-  },
-  exitButton: {
-    paddingTop: 10,
-  },
-  exitIcon: {
-    height: 50,
-    width: 50,
+    justifyContent:'center',
   },
 });
 const mapStateToProps = (state) => {

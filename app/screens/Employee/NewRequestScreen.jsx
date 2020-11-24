@@ -5,6 +5,7 @@ import { Picker } from '@react-native-community/picker';
 import requestList from '../../src/api/apiKeys'
 import { globalObject } from '../../src/globalObject'
 import { connect } from 'react-redux';
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 
 function Main({ navigation, style }) {
     const [type, SetType] = useState("חל''ת");
@@ -28,13 +29,13 @@ function Main({ navigation, style }) {
             <View style={styles.container}>
 
                 <View>
-                    <Text style={styles.title}>בקשה חדשה</Text>
+                    <Text style={globalObject.styles.menuTitle}>בקשה חדשה</Text>
                 </View>
                 <View style={styles.picker}>
                     <Text style={styles.subTitle}>סוג הבקשה</Text>
                     <Picker
-                        prompt='test'
-                        mode='dropdown'
+                        prompt='סוג בקשה'
+                        mode='dialog'
                         selectedValue={type}
                         style={styles.itemList}
 
@@ -58,11 +59,11 @@ function Main({ navigation, style }) {
                     />
                 </View>
 
-                <TouchableOpacity style={{ ...styles.button, ...style.btn2 }} onPress={() => PressHandler(type, text)}>
-                    <Text style={styles.buttonText} >שלח בקשה</Text>
+                <TouchableOpacity style={{ ...globalObject.styles.regButton, ...style.btn2 }} onPress={() => PressHandler(type, text)}>
+                    <Text style={globalObject.styles.regButtonText} >שלח בקשה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -85,96 +86,39 @@ const styles = StyleSheet.create({
         textAlign: 'center',
 
     },
-    title:
-    {
-
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
-       // margin: 20,
-        //marginRight: 30,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth:2,
-        borderColor: "seashell",
-    },
     subTitle:
     {
-        margin:20,
-        fontSize: 18,
+        margin:responsiveScreenHeight(2),
+        fontSize: responsiveScreenFontSize(2.2),//18
         color: "seashell",
 
 
     },
     picker: {
-        width: Dimensions.get('window').width / 2,
+        width: responsiveScreenWidth(50),
         flexDirection: 'row-reverse',
         textAlign: "center",
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 5,
-
-
-
-
+        marginTop: responsiveScreenHeight(1),
     },
     itemList:
     {
-        width: Dimensions.get('window').width / 3,
+        width: responsiveScreenWidth(35),
         color: "#ffffff",
-        textAlign: 'right',
+        textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-
-
-    },
-    pickerItem: {
-        color: "#00ffff",
-
-    },
-    test:
-    {
-
-    },
-    inputBoxContainer: {
-//marginRight: 30,
     },
     inputBox: {
-        width: 300,
-        height: 100,
-        backgroundColor: '#ededed',
+        width: responsiveScreenWidth(80),
+        height: responsiveScreenHeight(15),
+        backgroundColor: "#ededed",
         borderRadius: 25,
-        paddingHorizontal: 16,
-        marginVertical: 10,
-        textAlign: "right"
+        paddingHorizontal: responsiveScreenWidth(6),
+        marginVertical: responsiveScreenHeight(1),
+        textAlign: "right",
     },
-    button: {
-        width: 300,
-        backgroundColor: "#6f61ca",// #6357b5
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 16,
-        marginHorizontal: 30,
-
-
-    },
-
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: 'seashell',
-        textAlign: 'center',
-    },
-    exitButton:
-    {
-        paddingTop: 40,
-
-
-    },
-    exitIcon:{
-        height:50,
-        width:50,
-    },
-
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }

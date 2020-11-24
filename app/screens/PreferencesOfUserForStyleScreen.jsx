@@ -7,7 +7,9 @@ import { globalObject } from '../src/globalObject'
 import {
     responsiveHeight,
     responsiveWidth,
-    responsiveFontSize
+    responsiveFontSize,
+    responsiveScreenFontSize,
+    responsiveScreenHeight
 } from "react-native-responsive-dimensions";
 
 let colorsArry = [{ color: "#7f71e3", id: 0 }, { color: "#5d8aa8", id: 1 }, { color: "#191970", id: 2 }, { color: "#a4c139", id: 3 }, { color: "#fe6f5e", id: 4 }, { color: "#ff2052", id: 5 }]
@@ -106,14 +108,14 @@ function Main({ navigation, style, changeStyle }) {
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.colorsContainer}>
-                <Text style={styles.title}>צבע גופן</Text>
+                <Text style={globalObject.styles.menuTitle}>צבע גופן</Text>
                 <Text style={styles.textStyle}>בחר צבע רקע לאפליקצייה:</Text>
                 <View style={styles.buttonsColorsContainer}>
                     {renderListColors()}
                 </View>
             </View>
-                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
+                <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={globalObject.styles.exitIcon} source={require('../assets/exit_icon.png')} />
                 </TouchableOpacity>
         </View>
     )
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
         height: responsiveHeight(8),
         borderRadius:90,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 3 },
+        shadowOffset: { width: 0, height: responsiveScreenHeight(1) },
         shadowOpacity: 0.5,
         shadowRadius: 5,
         elevation: 10
@@ -150,37 +152,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: "row",
     },
-    button:
-    {
-    },
     buttonText:
     {
-        fontSize: 16,
+        fontSize: responsiveScreenFontSize(2),//16
         color: "seashell",
-    },
-    title:
-    {
-
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
-        margin: 20,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth:2,
-        borderColor: "seashell",
     },
     textStyle:{
-        margin:20,
-        fontSize: 24,
+        margin:responsiveScreenHeight(2),
+        fontSize: responsiveScreenFontSize(3),
         color: "seashell",
-    },
-    exitButton:
-    {
-        paddingTop: 40,
-    },
-    exitIcon:{
-        height:50,
-        width:50,
     },
 })
 const mapStateToProps = (state) => {

@@ -28,10 +28,10 @@ export default function Main({ navigation }) {
   return (
 
     <View style={styles.container}>
-      <Text style={styles.logoText}>רישום בית עסק</Text>
-      <TextInput value={companyName} onChangeText={setCompanyName} style={styles.inputBox} placeholder="שם חברה" />
-      <TouchableOpacity style={styles.button} onPress={() => pressHandler(companyName)}>
-        <Text style={styles.buttonText}>אישור</Text>
+      <Text style={globalObject.styles.regTitleText}>רישום בית עסק</Text>
+      <TextInput value={companyName} onChangeText={setCompanyName} style={globalObject.styles.regInputBox} placeholder="שם חברה" />
+      <TouchableOpacity style={globalObject.styles.regButton} onPress={() => pressHandler(companyName)}>
+        <Text style={globalObject.styles.regButtonText}>אישור</Text>
       </TouchableOpacity>
     </View>
 
@@ -45,33 +45,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  inputBox: {
-    width: 300,
-    height: 60,
-    backgroundColor: '#ededed',
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    marginVertical: 10,
-    textAlign: "right"
-  },
-  button: {
-    width: 300,
-    backgroundColor: "#7f71e3",
-    borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 16,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: 'seashell',
-    textAlign: 'center',
-  },
-  logoText: {
-    marginVertical: 20,
-    fontSize: 22,
-    color: '#000000',
-    fontWeight: "bold"
-  }
-
 });

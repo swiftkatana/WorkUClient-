@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { globalObject } from '../src/globalObject';
 import InfoList from '../components/InfoList';
 import { connect } from 'react-redux';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth, responsiveWidth } from 'react-native-responsive-dimensions';
 
 
 
@@ -34,10 +34,10 @@ function Main({ navigation, style }) {
     const render = ({ item }) => {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.list} onPress={() => navigation.navigate("DisplaySingleContactScreen", { item: item })}>
+                <TouchableOpacity style={globalObject.styles.list} onPress={() => navigation.navigate("DisplaySingleContactScreen", { item: item })}>
                     <Image style={styles.userIcon} source={{ uri: item.imageProfile }} />
                     <Text style={styles.listText}>שם: {item.fullName}</Text>
-                    <Image style={styles.tinyLogo} source={require('../assets/arrow_icon_black.png')} />
+                    <Image style={globalObject.styles.arrowIcon} source={require('../assets/arrow_icon_black.png')} />
                 </TouchableOpacity>
             </View>
         )
@@ -47,7 +47,7 @@ function Main({ navigation, style }) {
         <View style={{ ...styles.view, ...style.view }}>
 
 
-            <Text style={styles.title}>אנשי קשר</Text>
+            <Text style={globalObject.styles.menuTitle}>אנשי קשר</Text>
             <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
 
                 <View style={styles.listContainer}>
@@ -57,8 +57,8 @@ function Main({ navigation, style }) {
             </View>
 
 
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
+            <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                <Image style={globalObject.styles.exitIcon} source={require('../assets/exit_icon.png')} />
             </TouchableOpacity>
         </View>
     )
@@ -86,68 +86,20 @@ const styles = StyleSheet.create({
     listContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height / 1.6 - 20,
+        height: Dimensions.get('window').height / 1.7,
         width: Dimensions.get('window').width / 1.1,
-        marginTop: 10,
-    },
-    title:
-    {
-        margin: 20,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth: 2,
-        borderColor: "seashell",
-        textAlign: "center",
-        width: Dimensions.get('window').width * 0.80,
-    },
-    list:
-    {
-        height: 70,
-        width: Dimensions.get('window').width / 1.16,
-        backgroundColor: "white",
-        flexDirection: "row-reverse",
-        alignItems: 'center',
-        textAlign: "center",
-        justifyContent: 'center',
-        borderRadius: 25,
-        marginBottom: 6,
-        borderWidth: 2,
-        borderColor: "lightgray",
+        marginTop: responsiveScreenHeight(1),
     },
     listText:
     {
-        flex: 3,
+        flex: 4,
         textAlign: "center",
-        fontSize: 14,
-        marginRight: 10,
-    },
-    employeeName:
-    {
-        flex: 3,
-        textAlign: "center",
-        marginRight: 10,
-        fontSize: 14,
-        fontWeight: "bold",
+        fontSize: responsiveScreenFontSize(1.7),
     },
     userIcon: {
-        width: 35,
-        height: 35,
-        marginRight: 15,
-    },
-    tinyLogo: {
-
-        width: 20,
-        height: 20,
-        marginLeft: 15,
-        marginRight: 10,
-    },
-    exitButton:
-    {
-        paddingTop: 40,
-    },
-    exitIcon: {
-        height: 50,
-        width: 50,
+        width: responsiveScreenHeight(4.5),
+        height: responsiveScreenHeight(4.5),
+        marginRight: responsiveScreenWidth(5),
     },
 })
 

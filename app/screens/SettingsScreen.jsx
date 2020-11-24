@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+import { responsiveFontSize, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 import { connect } from "react-redux";
 import { globalObject } from "../src/globalObject";
 
@@ -28,35 +29,35 @@ function Main({ navigation, style }) {
   };
   return (
     <View style={{ ...styles.view, ...style.view }}>
-      <View style={styles.buttonsContainer}>
-        <Text style={styles.title}>הגדרות</Text>
+      <View style={globalObject.styles.menuBtnContainer}>
+        <Text style={globalObject.styles.menuTitle}>הגדרות</Text>
         <TouchableOpacity
-          style={styles.button}
+          style={globalObject.styles.menuBtn}
           onPress={() => navigation.navigate("ChangePasswordScreen")}
         >
-          <Text style={styles.buttonText}>שינוי סיסמה</Text>
+          <Text style={globalObject.styles.menuBtnText}>שינוי סיסמה</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={globalObject.styles.menuBtn}
           onPress={() => navigation.navigate("PreferencesOfUserForStyleScreen")}
         >
-          <Text style={styles.buttonText}>ערכת נושא</Text>
+          <Text style={globalObject.styles.menuBtnText}>ערכת נושא</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={globalObject.styles.menuBtn}
           onPress={() => navigation.navigate("ChangeProfileImageScreen")}
         >
-          <Text style={styles.buttonText}>עזרה</Text>
+          <Text style={globalObject.styles.menuBtnText}>עזרה</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={logout}>
-          <Text style={styles.buttonText}>התנתקות</Text>
+        <TouchableOpacity style={globalObject.styles.menuBtn} onPress={logout}>
+          <Text style={globalObject.styles.menuBtnText}>התנתקות</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.exitButton}
+          style={globalObject.styles.exitButton}
           onPress={() => navigation.pop()}
         >
           <Image
-            style={styles.exitIcon}
+            style={globalObject.styles.exitIcon}
             source={require("../assets/exit_icon.png")}
           />
         </TouchableOpacity>
@@ -71,35 +72,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  buttonsContainer: {
-    //paddingTop: 10,
-    alignItems: "center",
-  },
-  button: {
-    margin: 20,
-    //marginRight: 30,
-  },
-  buttonText: {
-    fontSize: 24,
-    color: "seashell",
-  },
-  title: {
-    textAlign: "center",
-    width: Dimensions.get("window").width * 0.8,
-    margin: 20,
-    //marginRight: 30,
-    fontSize: 48,
-    color: "seashell",
-    borderBottomWidth: 2,
-    borderColor: "seashell",
-  },
-  exitButton: {
-    paddingTop: 40,
-  },
-  exitIcon: {
-    height: 50,
-    width: 50,
   },
 });
 const mapStateToProps = (state) => {
