@@ -12,7 +12,7 @@ export default function TaskBoard({ navigation }) {
     return (
       <View>
         <TouchableOpacity
-          style={styles.list}
+          style={globalObject.styles.list}
           onPress={() =>
             navigation.navigate("TaskUpdateVoiceScreen", {
               item: item,
@@ -23,16 +23,13 @@ export default function TaskBoard({ navigation }) {
           <Text style={styles.listText}>תקציר: {item.title}</Text>
           <View style={styles.koral}>
             <Image
-              style={styles.tinyLogo}
+              style={globalObject.styles.arrowIcon}
               source={require("../assets/arrow_icon_black.png")}
             />
           </View>
         </TouchableOpacity>
       </View>
     );
-  };
-  const GetLen = () => {
-    return Object.keys(globalObject.User.tasks.processing).length;
   };
 
     const GetLen = () => {
