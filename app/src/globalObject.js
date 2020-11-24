@@ -13,6 +13,18 @@ class global {
     this.company;
     this.timer;
     this.language;
+    this.styles = {
+      exitButton:
+      {
+          paddingTop: 40,
+  
+      },
+      exitIcon:{
+          height:50,
+          width:50,
+      },
+      
+    }
 
     this.sendNotification = async (
       email,

@@ -85,7 +85,7 @@ function Main({ navigation, style }) {
                         <InfoList render={render} GetLen={GetLen} GetList={GetList} src={require('../../assets/empty_icon_white.png')} emptyInfo={'אין לך עובדים כרגע.'}  />
                     </View>
                 </View>
-                {GetLen() > 0 ? <View> 
+                {GetLen() > 0 ? <View style={styles.centerWraper}> 
 
                 <View style={styles.inputBoxContainer}>
                     <TextInput
@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
 
 
     },
@@ -209,6 +210,7 @@ const styles = StyleSheet.create({
         borderColor: "#584DA1",
         borderRadius: 25,
         marginTop: 10,
+        
     },
     listContainer: {
         alignItems: 'center',
@@ -236,9 +238,12 @@ const styles = StyleSheet.create({
         textAlign: "right",
         fontSize: 14,
     },
+    centerWraper:{
+        alignItems:'center',
+        justifyContent:'center',
+    },
     picker: {
-        width: Dimensions.get('window').width / 2,
-
+        width: Dimensions.get('window').width/2.5,
         flexDirection: 'row-reverse',
         textAlign: "center",
         alignItems: 'center',
@@ -248,9 +253,9 @@ const styles = StyleSheet.create({
 
     },
     itemList: {
-        width: Dimensions.get('window').width / 2.5,
+        width: Dimensions.get('window').width / 3.5,
         color: "#ffffff",
-        textAlign: 'right',
+        textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
 
@@ -262,6 +267,8 @@ const styles = StyleSheet.create({
     },
     inputBoxContainer: {
         //marginRight: 30,
+        alignItems: 'center',
+        justifyContent:'center',
     },
     shortInputBox: {
         width: Dimensions.get('window').width / 1.3,
@@ -293,6 +300,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         justifyContent: 'center',
         alignItems: 'center',
+        
 
     },
     infoTextConteiner: {

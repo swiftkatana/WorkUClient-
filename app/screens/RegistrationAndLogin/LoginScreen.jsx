@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { responsiveScreenFontSize, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 import { connect } from 'react-redux';
 import LoginForm from "../../components/LoginForm";
 import Logo from '../../components/Logo';
@@ -31,19 +32,19 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   signupTextCont: {
-    flexGrow: 1,
+    flexGrow: 0.5,
     alignItems: 'flex-end',
     justifyContent: 'center',
-    paddingVertical: 16,
+    paddingVertical: responsiveScreenFontSize(2),
     flexDirection: 'row-reverse'
   },
   signupText: {
-    fontSize: 16,
+    fontSize: responsiveScreenFontSize(2),
   },
   signupButton: {
-    paddingRight: 5,
+    paddingRight: responsiveScreenWidth(1),
     color: "#7f71e3",
-    fontSize: 18,
+    fontSize: responsiveScreenFontSize(2.2),
     fontWeight: "bold",
   },
 });

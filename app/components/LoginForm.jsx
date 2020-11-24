@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, PixelRatio, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { globalObject } from "../src/globalObject";
 import requestList from "../src/api/apiKeys";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 import { changeLoginStyle } from '../src/action';
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 
 
 const storeData = async (value, key) => {
@@ -117,24 +118,28 @@ const styles = StyleSheet.create({
 
   },
   inputBox: {
-    width: 300,
-    height: 60,
+    
+    width: responsiveScreenWidth(80),
+    height: responsiveScreenHeight(7),
     backgroundColor: '#ededed',
     borderRadius: 25,
-    paddingHorizontal: 16,
-    marginVertical: 10,
+    paddingHorizontal: responsiveScreenWidth(6),
+    marginVertical: responsiveScreenHeight(1),
     textAlign: "right"
   },
   button: {
-    width: 300,
+    width: responsiveScreenWidth(80),
+    height: responsiveScreenHeight(7),
     backgroundColor: "#7f71e3",
     borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 16,
+    marginVertical: responsiveScreenHeight(1),
+    //paddingVertical: responsiveScreenHeight(1),
+    justifyContent: 'center',
+
   },
   buttonText: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: responsiveScreenFontSize(2),
+   // fontWeight: '500',
     color: 'seashell',
     textAlign: 'center',
   },
@@ -146,15 +151,17 @@ const styles = StyleSheet.create({
   },
   signupTextCont: {
 
-    flexDirection: 'row-reverse'
+    flexDirection: 'row-reverse',
+    justifyContent:'center',
+    alignItems:'center',
   },
   signupText: {
-    fontSize: 16,
+    fontSize: responsiveScreenFontSize(2),
   },
   signupButton: {
     paddingRight: 5,
     color: "#7f71e3",
-    fontSize: 18,
+    fontSize: responsiveScreenFontSize(2.2),
     fontWeight: "bold",
   },
 

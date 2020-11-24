@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { Provider } from "react-redux";
 import store from "./app/src/store";
 import { I18nManager } from "react-native";
+import {Restart} from 'fiction-expo-restart';
 // employee
 import EmployeeMainScreen from "./app/screens/Employee/EmployeeMainScreen"
 import MainRequestScreen from "./app/screens/Employee/MainRequestScreen"
@@ -92,10 +93,14 @@ const listScreen =
     {DisplayWorkingTimeReportOfEmployee: DisplayWorkingTimeReportOfEmployee},
   ];
 var screens = {}
-I18nManager.forceRTL(false);
-I18nManager.allowRTL(false);
+
 export default function App() {
 
+  if(I18nManager.isRTL == true){
+    I18nManager.forceRTL(false);
+    I18nManager.allowRTL(false);
+    Restart();
+ }
   for (let i = 0; i < listScreen.length; i++) {
     var keyNames = Object.keys(listScreen[i]);
     screens[keyNames[0]] = { screen: listScreen[i][keyNames[0]], navigationOptions: { headerShown: false } }
