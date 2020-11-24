@@ -110,40 +110,23 @@ function LoginForm({ navigation, changeLoginStyle }) {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        value={email}
-        onChangeText={setEmail}
-        style={globalObject.styles.inputBox}
-        placeholder='כתובת דוא"ל'
-        autoCapitalize="none"
-      />
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        style={globalObject.styles.inputBox}
-        placeholder="סיסמה"
-        secureTextEntry={true}
-      />
-      <TouchableOpacity
-        onPress={() => pressHandler(email, password, setShouldShow)}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>כניסה</Text>
+      <TextInput value={email} onChangeText={setEmail} style={globalObject.styles.regInputBox} placeholder='כתובת דוא"ל' autoCapitalize="none" />
+      <TextInput value={password} onChangeText={setPassword} style={globalObject.styles.regInputBox} placeholder="סיסמה" secureTextEntry={true} />
+      <TouchableOpacity onPress={() => pressHandler(email, password, setShouldShow)} style={globalObject.styles.regButton}>
+        <Text style={globalObject.styles.regButtonText}>כניסה</Text>
       </TouchableOpacity>
 
-      <View style={styles.signupTextCont}>
-        <Text style={styles.signupText}> שכחת סיסמה?</Text>
+      <View style={globalObject.styles.signupOrLoginTextCont}>
+        <Text style={globalObject.styles.signupOrLoginText}> שכחת סיסמה?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("GetCodeForRes")}>
-          <Text style={{ ...styles.signupButton }}>לחץ כאן</Text>
+          <Text style={globalObject.styles.signupOrLoginButton}>לחץ כאן</Text>
         </TouchableOpacity>
-        <Text style={{ ...styles.signupButton }} />
       </View>
 
-      {}
 
       {shouldShow ? (
         <Image
-          style={styles.tinyLogo}
+          style={globalObject.styles.loadingIcon}
           source={require("../assets/loading_animation.gif")}
         />
       ) : null}
@@ -156,38 +139,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  button: {
-    width: responsiveScreenWidth(80),
-    height: responsiveScreenHeight(7),
-    backgroundColor: "#7f71e3",
-    borderRadius: 25,
-    marginVertical: responsiveScreenHeight(1),
-    justifyContent: "center",
-  },
-  buttonText: {
-    fontSize: responsiveScreenFontSize(2),
-    color: "seashell",
-    textAlign: "center",
-  },
-  tinyLogo: {
-    marginTop: responsiveScreenHeight(2),
-    width: responsiveScreenHeight(4),
-    height: responsiveScreenHeight(4),
-  },
-  signupTextCont: {
-    flexDirection: "row-reverse",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  signupText: {
-    fontSize: responsiveScreenFontSize(2),
-  },
-  signupButton: {
-    paddingRight: responsiveScreenWidth(1),
-    color: "#7f71e3",
-    fontSize: responsiveScreenFontSize(2.2),
-    fontWeight: "bold",
   },
 });
 

@@ -68,9 +68,10 @@ export default function Main({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    //backgroundColor:"white"
-  },
-});
+const styles = StyleSheet.create(
+    {
+        container: {
+            flex: 1,
+        },
+    }
+)

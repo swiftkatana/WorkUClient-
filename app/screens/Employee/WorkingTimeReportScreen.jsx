@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions'
 import { connect } from 'react-redux'
 import { globalObject } from '../../src/globalObject'
 
@@ -27,7 +28,7 @@ function Main({ navigation, style }) {
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.container}>
 
-                <Text style={styles.title}>
+                <Text style={globalObject.styles.menuTitle}>
                     דו"ח שעות חודשי
                 </Text>
                 <View style={{ ...styles.mainListCon, ...style.btn2, borderColor: style.btn3.backgroundColor }}>
@@ -52,8 +53,8 @@ function Main({ navigation, style }) {
                     <Image style={styles.tinyLogo} source={require('../../assets/plus_icon_white.png')} />
                     <Text style={styles.btnText}>הוסף שעות ידנית</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
             </View>
 
@@ -68,8 +69,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-
-
     },
     container: {
         flex: 1,
@@ -77,8 +76,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     mainListCon: {
-        height: Dimensions.get('window').height / 2.5,
-        width: Dimensions.get('window').width / 1.1,
+        height: responsiveScreenHeight(45),
+        width: responsiveScreenWidth(90),
         backgroundColor: "#6f61ca",
         borderWidth: 1,
         borderColor: "#584DA1",
@@ -89,39 +88,23 @@ const styles = StyleSheet.create({
         //flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height / 2.5 - 20,
-        width: Dimensions.get('window').width / 1.1,
-        marginTop: 10,
-    },
-    title:
-    {
-
-        textAlign: "center",
-        width: Dimensions.get('window').width * 0.90,
-        margin: 20,
-        //marginRight: 30,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth: 2,
-        borderColor: "seashell",
+        height: responsiveScreenHeight(42),
+        width: responsiveScreenWidth(90),
+        marginTop: responsiveScreenHeight(0.5),
     },
     header: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: Dimensions.get('window').height / 18,
-        //height: 40,
-        //marginBottom: 5,
-
+        height: responsiveScreenHeight(5),
     },
     list:
     {
-        height: 40,
-        width: Dimensions.get('window').width - 50,
+        height: responsiveScreenHeight(5),
+        width: responsiveScreenWidth(90),
         backgroundColor: "seashell",
         flexDirection: "row-reverse",
         alignItems: 'center',
         textAlign: "center",
-        //marginLeft: 25,
         justifyContent: 'center',
         borderRadius: 2,
         marginBottom: 1,
@@ -132,54 +115,33 @@ const styles = StyleSheet.create({
     {
         flex: 3,
         textAlign: "center",
-        fontSize: 14,
-    },
-    mainSum:
-    {
-        //flexGrow: 1,
-        textAlign: 'center',
-        margin: 20,
-        //marginBottom: 40,
-        //marginRight: 30,
-        fontSize: 22,
-        color: "seashell",
-    },
-    status:
-    {
-        flex: 1,
-        textAlign: "center",
-        //marginRight: 15,
-        fontSize: 14,
-        fontWeight: "bold",
-    },
+        fontSize: responsiveScreenFontSize(1.7),//14
+        },
+    // mainSum:
+    // {
+    //     textAlign: 'center',
+    //     margin: 20,
+    //     fontSize: 22,
+    //     color: "seashell",
+    // },
     logo: {
+        marginTop: responsiveScreenHeight(2),
         alignItems: 'center',
         justifyContent: 'center',
 
     },
     tinyLogo: {
-        width: 40,
-        height: 40,
+        width: responsiveScreenHeight(4),
+        height: responsiveScreenHeight(4),
         alignItems: 'center',
         justifyContent: 'center',
-        //marginBottom: 50,
-        // marginRight: 30,
+
     },
     btnText: {
-        marginTop: 10,
+        marginTop: responsiveScreenHeight(1),
         color: "seashell",
-        fontSize: 14,
+        fontSize: responsiveScreenFontSize(1.7),//14
         fontWeight: 'bold',
-    },
-    exitButton:
-    {
-        paddingTop: 40,
-
-
-    },
-    exitIcon: {
-        height: 50,
-        width: 50,
     },
 })
 const mapStateToProps = (state) => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Dimensions, Image, Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 import apiKeys from '../src/api/apiKeys';
 import { globalObject } from "../src/globalObject"
 var getFullDate = function (sp) {
@@ -121,49 +122,49 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1.5,
-        height: 70,
+        height: responsiveScreenWidth(80),
         width: Dimensions.get('window').width,
         justifyContent: "center",
         alignItems: 'center',
         textAlign: "center",
-        marginVertical: 10,
-        marginTop: 20,
+        marginVertical: responsiveScreenHeight(1),
+        marginTop: responsiveScreenHeight(3),
     },
     TimerStyle:
     {
-        width: 70,
-        height: 60,
+        width: responsiveScreenWidth(15),
+        //height: 60,
     },
 
     TimerText:
     {
-        fontSize: 12,
+        fontSize: responsiveScreenFontSize(1.6),
         textAlign: "center",
         fontWeight: "bold",
         color: "grey",
     },
     TimerTextEnd:
     {
-        fontSize: 12,
+        fontSize: responsiveScreenFontSize(1.6),
         textAlign: "center",
         fontWeight: "bold",
         color: "black",
-        marginHorizontal: 5,
+        marginHorizontal: responsiveScreenWidth(1),
     },
     Clock:
     {
         justifyContent: 'center',
         textAlign: "center",
-        fontSize: 11,
-        marginTop: 2,
+        fontSize: responsiveScreenFontSize(1.4),
+        marginTop: responsiveScreenHeight(0.5),
     },
     circle:
     {
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 60,
-        width: 90,
-        height: 90,
+        width: responsiveScreenHeight(11.5),
+        height: responsiveScreenHeight(11.5),
         opacity: 0.9,
         borderWidth: 2.3,
     }

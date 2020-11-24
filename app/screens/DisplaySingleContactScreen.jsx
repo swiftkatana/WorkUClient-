@@ -2,9 +2,10 @@ import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth, responsiveWidth } from 'react-native-responsive-dimensions';
 
 import * as Linking from 'expo-linking';
+import { globalObject } from '../src/globalObject';
 
 
 
@@ -19,7 +20,7 @@ function Main({ navigation, style }) {
 
             <Image style={styles.imageProfileStyle} source={{uri:item.imageProfile}} />
 
-            <Text style={styles.title}> {item.fullName} </Text>
+            <Text style={globalObject.styles.menuTitle}> {item.fullName} </Text>
             <View style={styles.mainListCon}>
                     <TouchableOpacity >
                         <Text></Text>
@@ -41,8 +42,8 @@ function Main({ navigation, style }) {
 
 
 
-            <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                <Image style={styles.exitIcon} source={require('../assets/exit_icon.png')} />
+            <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                <Image style={globalObject.styles.exitIcon} source={require('../assets/exit_icon.png')} />
             </TouchableOpacity>
         </View>
     )
@@ -60,7 +61,6 @@ const styles = StyleSheet.create({
     },
     mainListCon:{
         height: Dimensions.get('window').height*0.40,
-        backgroundColor: "seashell",
         borderWidth:1,
         borderColor: "grey",
         borderRadius: 25,
@@ -70,40 +70,19 @@ const styles = StyleSheet.create({
         width: responsiveWidth(70),
         height: responsiveHeight(10),
         borderRadius: 60,
-        marginVertical: 5,
-        marginHorizontal: 10,
+        marginVertical: responsiveScreenHeight(1),
+        marginHorizontal: responsiveScreenWidth(1),
         alignItems: 'center',
         justifyContent:"center",
     },
-    title:
-    {
-        margin: 20,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth:2,
-        borderColor: "seashell",
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
-
-    },
     buttonText:{
         color:"seashell",
-        fontSize:18,
-    },
-    exitButton:
-    {
-        paddingTop: Dimensions.get('window').height*0.05,
-        
-
-    },
-    exitIcon:{
-        height:50,
-        width:50,
+        fontSize: responsiveScreenFontSize(2.2),//18
     },
     imageProfileStyle:
     {
-        height:70,
-        width:70,
+        width: responsiveScreenHeight(8),
+        height: responsiveScreenHeight(8),
     },
 })
 

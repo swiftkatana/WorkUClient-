@@ -10,19 +10,19 @@ function Main({ navigation, style }) {
 
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>פורטל עובד</Text>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("WorkingTimeReportScreen")}>
-                    <Text style={styles.buttonText}>דו"ח שעות חודשי</Text>
+            <View style={globalObject.styles.menuBtnContainer}>
+                <Text style={globalObject.styles.menuTitle}>פורטל עובד</Text>
+                <TouchableOpacity style={globalObject.styles.menuBtn} onPress={() => navigation.navigate("WorkingTimeReportScreen")}>
+                    <Text style={globalObject.styles.menuBtnText}>דו"ח שעות חודשי</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("EmployeeShiftsScreen")}>
-                    <Text style={styles.buttonText}>שליחת משמרות</Text>
+                <TouchableOpacity style={globalObject.styles.menuBtn} onPress={() => navigation.navigate("EmployeeShiftsScreen")}>
+                    <Text style={globalObject.styles.menuBtnText}>שליחת משמרות</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("EmployeePayChecksScreen")}>
-                    <Text style={styles.buttonText}>תלושי שכר</Text>
+                <TouchableOpacity style={globalObject.styles.menuBtn} onPress={() => navigation.navigate("EmployeePayChecksScreen")}>
+                    <Text style={globalObject.styles.menuBtnText}>תלושי שכר</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -37,47 +37,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
 
-    },
-    buttonsContainer:
-    {
-        //paddingTop: 10,
-        alignItems: 'center',
-
-    },
-    button:
-    {
-        margin: 20,
-        //marginRight: 30,
-
-    },
-    buttonText:
-    {
-        fontSize: 24,
-        color: "seashell",
-
-    },
-    title:
-    {
-        margin: 20,
-        //marginRight: 30,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth:2,
-        borderColor: "seashell",
-        textAlign:"center",
-        width: Dimensions.get('window').width*0.80,
-
-    },
-    exitButton:
-    {
-        paddingTop: 40,
-        //position:'absolute',
-        //marginLeft: 30,
-
-    },
-    exitIcon:{
-        height:50,
-        width:50,
     },
 
 })

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Dimensions, Image, Alert, Clipboard } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 import { connect } from 'react-redux';
 import { globalObject } from "../src/globalObject"
 
@@ -37,36 +38,36 @@ const styles = StyleSheet.create({
     view:
     {
         flex: 1.5,
-        height: 70,
+        //height: responsiveScreenHeight(10),
         width: Dimensions.get('window').width,
         justifyContent: "center",
         alignItems: 'center',
         textAlign: "center",
-        marginVertical: 10,
-        marginTop: 20,
+        marginVertical: responsiveScreenHeight(1),
+        marginTop: responsiveScreenHeight(3),
     },
     button: {
-        width: Dimensions.get('window').width - 170,
-        borderRadius: 20,
-        marginVertical: 10,
-        marginHorizontal: 20,
-        paddingVertical: 16,
+        width: Dimensions.get('window').width*0.6,
+        borderRadius: 25,
+        //marginVertical: responsiveScreenHeight(1),
+        //marginHorizontal: responsiveScreenWidth(1),
+        paddingVertical: responsiveScreenWidth(4),
         justifyContent: 'center',
     },
     buttonText: {
-        fontSize: 11,
+        fontSize: responsiveScreenFontSize(1.4),
         fontWeight: '500',
         color: 'seashell',
-        marginRight: 18,
+        marginRight: responsiveScreenWidth(5),
         textAlign: 'right',
         fontWeight: 'bold',
     },
     tinyLogo: {
         position: "absolute",
-        width: 58,
-        height: 58,
+        width: responsiveScreenHeight(7.5),
+        height: responsiveScreenHeight(7.5),
         opacity: 0.8,
-        marginLeft: 10,
+        marginLeft: responsiveScreenWidth(3),
     },
 })
 const mapStateToProps = (state) => {

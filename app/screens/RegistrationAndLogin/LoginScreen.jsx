@@ -15,11 +15,10 @@ function Main({ navigation, changeStyle }) {
       <Logo />
       <LoginForm navigation={navigation} />
       <View style={styles.signupTextCont}>
-        <Text style={styles.signupText}> אין לך משתמש?</Text>
+        <Text style={globalObject.styles.signupOrLoginText}> אין לך משתמש?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('RegisterUserScreen')}>
-          <Text style={styles.signupButton}>הירשם</Text>
+          <Text style={globalObject.styles.signupOrLoginButton}>הירשם</Text>
         </TouchableOpacity>
-        <Text style={styles.signupButton} />
       </View>
     </View>
   )
@@ -32,20 +31,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   signupTextCont: {
-    flexGrow: 0.5,
+   // flexGrow: 0.5,
     alignItems: 'flex-end',
     justifyContent: 'center',
     paddingVertical: responsiveScreenFontSize(2),
     flexDirection: 'row-reverse'
-  },
-  signupText: {
-    fontSize: responsiveScreenFontSize(2),
-  },
-  signupButton: {
-    paddingRight: responsiveScreenWidth(1),
-    color: "#7f71e3",
-    fontSize: responsiveScreenFontSize(2.2),
-    fontWeight: "bold",
   },
 });
 const mapStateToProps = (state) => ({

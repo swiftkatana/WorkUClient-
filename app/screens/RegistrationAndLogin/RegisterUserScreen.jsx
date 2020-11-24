@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { responsiveHeight, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
+import { responsiveHeight, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 import requestList from "../../src/api/apiKeys";
 import { globalObject } from "../../src/globalObject";
 const storeData = async (value, key) => {
@@ -67,61 +67,60 @@ export default function Main({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.logoText}>הרשמה</Text>
+        <Text style={globalObject.styles.regTitleText}>הרשמה</Text>
         <TextInput
           value={firstName}
           onChangeText={setFirstName}
-          style={styles.inputBox}
+          style={globalObject.styles.regInputBox}
           placeholder="שם פרטי"
         />
         <TextInput
           value={lastName}
           onChangeText={setLastName}
-          style={styles.inputBox}
+          style={globalObject.styles.regInputBox}
           placeholder="שם משפחה"
         />
         <TextInput
           value={phone}
           onChangeText={setPhone}
-          style={styles.inputBox}
+          style={globalObject.styles.regInputBox}
           placeholder="מספר טלפון"
           keyboardType={"numeric"}
         />
         <TextInput
           value={email}
           onChangeText={setEmail}
-          style={styles.inputBox}
+          style={globalObject.styles.regInputBox}
           placeholder='כתובת דוא"ל'
         />
         <TextInput
           value={password}
           onChangeText={setPassword}
-          style={styles.inputBox}
+          style={globalObject.styles.regInputBox}
           placeholder="סיסמה"
           secureTextEntry={true}
         />
         <TextInput
           value={verifyPassword}
           onChangeText={setVerifyPassword}
-          style={styles.inputBox}
+          style={globalObject.styles.regInputBox}
           placeholder="אימות סיסמה"
           secureTextEntry={true}
         />
         <TouchableOpacity
-          style={styles.button}
+          style={globalObject.styles.regButton}
           onPress={() =>
             pressHandler(firstName, lastName, email, password, verifyPassword)
           }
         >
-          <Text style={styles.buttonText}>אישור</Text>
+          <Text style={globalObject.styles.regButtonText}>אישור</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.signinTextCont}>
-        <Text style={styles.signinText}> כבר יש לך משתמש?</Text>
+      <View style={globalObject.styles.signupOrLoginTextCont}>
+        <Text style={globalObject.styles.signupOrLoginText}> כבר יש לך משתמש?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-          <Text style={styles.signinButton}>כניסה</Text>
+          <Text style={globalObject.styles.signupOrLoginButton}>כניסה</Text>
         </TouchableOpacity>
-        <Text style={styles.signinButton} />
       </View>
     </View>
   );
@@ -132,50 +131,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: responsiveHeight(5),
-  },
-  inputBox: {
-    width: responsiveScreenWidth(80),
-    height: responsiveScreenHeight(7),
-    backgroundColor: "#ededed",
-    borderRadius: 25,
-    paddingHorizontal: responsiveScreenWidth(6),
-    marginVertical: responsiveScreenHeight(1),
-    textAlign: "right",
-  },
-  button: {
-    width: responsiveScreenWidth(80),
-    height: responsiveScreenHeight(7),
-    backgroundColor: "#7f71e3",
-    borderRadius: 25,
-    marginVertical: responsiveScreenHeight(1),
-    justifyContent: 'center',
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "seashell",
-    textAlign: "center",
-  },
-  logoText: {
-    marginVertical: 20,
-    fontSize: 22,
-    color: "#000000",
-    fontWeight: "bold",
-  },
-  signinTextCont: {
-    //flexGrow: 0.1,
-    alignItems: "flex-end",
-    justifyContent: "center",
-    paddingVertical: 16,
-    flexDirection: "row-reverse",
-  },
-  signinText: {
-    fontSize: 16,
-  },
-  signinButton: {
-    paddingRight: 5,
-    color: "#7f71e3",
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });

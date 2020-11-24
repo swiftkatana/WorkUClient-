@@ -19,7 +19,7 @@ import { globalObject } from "../../src/globalObject";
 import InfoList from "../../components/InfoList";
 import { connect } from "react-redux";
 import Recording from "../../class/VoiceRecording";
-import { responsiveHeight } from "react-native-responsive-dimensions";
+import { responsiveHeight, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth, responsiveWidth } from "react-native-responsive-dimensions";
 
 function Main({ navigation, style }) {
   const [priority, SetPriority] = useState("גבוהה");
@@ -82,7 +82,7 @@ function Main({ navigation, style }) {
             שם: {item.firstName + " " + item.lastName}
           </Text>
           <Image
-            style={styles.tinyLogo}
+            style={globalObject.styles.tinyVoiceIcon}
             source={require("../../assets/plus_icon_black.png")}
           />
         </TouchableOpacity>
@@ -113,9 +113,9 @@ function Main({ navigation, style }) {
     >
       <View style={styles.container}>
         <View>
-          <Text style={styles.title}>משימה חדשה</Text>
+          <Text style={globalObject.styles.menuTitle}>משימה חדשה</Text>
         </View>
-        <Text style={styles.subTitle}>
+        <Text style={globalObject.styles.subTextWhite}>
           תייג עובד:{" "}
           {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}{" "}
         </Text>
@@ -140,17 +140,17 @@ function Main({ navigation, style }) {
           <View style={styles.centerWraper}>
             <View style={styles.inputBoxContainer}>
               <TextInput
-                style={styles.shortInputBox}
+                style={globalObject.styles.regInputBox}
                 onChangeText={(header) => SetHeader(header)}
                 value={header}
                 placeholder="תקציר המשימה"
               />
             </View>
             <View style={styles.picker}>
-              <Text style={styles.subTitle}>דחיפות:</Text>
+              <Text style={globalObject.styles.subTextWhite}>דחיפות:</Text>
               <Picker
-                prompt="test"
-                mode="dropdown"
+                prompt="בחר דחיפות"
+                mode="dialog"
                 selectedValue={priority}
                 style={styles.itemList}
                 onValueChange={(itemValue) => SetPriority(itemValue)}
@@ -160,45 +160,42 @@ function Main({ navigation, style }) {
                 <Picker.Item label="נמוכה" value="נמוכה" />
               </Picker>
             </View>
-            <View style={styles.recordSendBtnList}>
+            <View style={globalObject.styles.recordSendBtnList}>
               <TouchableOpacity
                 style={{ ...styles.vButton, ...style.btn2 }}
                 onPressIn={recording.current.StartRecording}
                 onPressOut={recording.current.StopRecording}
               >
                 <Image
-                  style={styles.tinyLogo}
+                  style={globalObject.styles.tinyVoiceIcon}
                   source={require("../../assets/microphone_icon.png")}
                 />
-                <Text style={styles.buttonText}>הקלט משימה</Text>
+                <Text style={globalObject.styles.regButtonText}>הקלט משימה</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{ ...styles.vButton, ...style.btn2 }}
                 onPress={recording.current.playAudio}
               >
                 <Image
-                  style={styles.tinyLogo}
+                  style={globalObject.styles.tinyVoiceIcon}
                   source={require("../../assets/play_button_icon.png")}
                 />
-                <Text style={styles.buttonText}>נגן הקלטה</Text>
+                <Text style={globalObject.styles.regButtonText}>נגן הקלטה</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
-              style={{ ...styles.button, ...style.btn2 }}
+              style={{ ...globalObject.styles.regButton, ...style.btn2 }}
               onPress={() => {
                 PressHandler();
               }}
             >
-              <Text style={styles.buttonText}>צור משימה</Text>
+              <Text style={globalObject.styles.regButtonText}>צור משימה</Text>
             </TouchableOpacity>
           </View>
         ) : null}
-        <TouchableOpacity
-          style={styles.exitButton}
-          onPress={() => navigation.pop()}
-        >
+        <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
           <Image
-            style={styles.exitIcon}
+            style={globalObject.styles.exitIcon}
             source={require("../../assets/exit_icon.png")}
           />
         </TouchableOpacity>
@@ -218,9 +215,8 @@ const styles = StyleSheet.create({
   listContainer: {
     alignItems: "center",
     justifyContent: "center",
-    height: Dimensions.get("window").height / 1.6 - 20,
-    width: Dimensions.get("window").width / 1.1,
-    marginTop: 10,
+    height: responsiveScreenHeight(50),
+    width: responsiveScreenWidth(50),
   },
   container: {
     flex: 1,
@@ -232,60 +228,46 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptyIcon: {
-    marginTop: 90,
-    width: 80,
-    height: 80,
+    marginTop: responsiveScreenHeight(30),
+    width: responsiveScreenHeight(6.5),
+    height: responsiveScreenHeight(6.5),
   },
 
   emptyText: {
     color: "white",
     fontWeight: "bold",
   },
-  title: {
-    margin: 20,
-    fontSize: 48,
-    color: "seashell",
-    borderBottomWidth: 2,
-    borderColor: "seashell",
-    textAlign: "center",
-    width: Dimensions.get("window").width * 0.8,
-  },
-  subTitle: {
-    fontSize: 24,
-    color: "seashell",
-  },
   mainListCon: {
-    height: Dimensions.get("window").height * 0.3,
+    height: responsiveScreenHeight(20),
     width: Dimensions.get("window").width / 1.3,
     backgroundColor: "#6f61ca",
     borderWidth: 1,
-    borderColor: "#584DA1",
     borderRadius: 25,
-    marginTop: 10,
+    marginTop: responsiveScreenHeight(1),
   },
   listContainer: {
     alignItems: "center",
     justifyContent: "center",
     height: Dimensions.get("window").height * 0.5,
-    marginTop: 10,
+    marginTop: responsiveScreenHeight(1),
   },
   list: {
     flex: 1,
-    height: Dimensions.get("window").height / 18,
+    height: responsiveScreenHeight(5),
     width: Dimensions.get("window").width / 1.5,
     backgroundColor: "seashell",
     flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 30,
+    paddingHorizontal: responsiveScreenWidth(8),
     borderRadius: 25,
-    marginBottom: 5,
+    marginBottom: responsiveScreenHeight(0.5),
     borderWidth: 1,
     borderColor: "lightgray",
   },
   listText: {
     textAlign: "right",
-    fontSize: 14,
+    fontSize: responsiveScreenFontSize(1.7),//14
   },
   centerWraper: {
     alignItems: "center",
@@ -293,11 +275,12 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: Dimensions.get("window").width / 2.5,
+    height: responsiveScreenHeight(4),
     flexDirection: "row-reverse",
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 5,
+
   },
   itemList: {
     width: Dimensions.get("window").width / 3.5,
@@ -306,35 +289,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  pickerItem: {
-    color: "#00ffff",
-  },
   inputBoxContainer: {
     alignItems: "center",
     justifyContent: "center",
-  },
-  shortInputBox: {
-    width: Dimensions.get("window").width / 1.3,
-    height: Dimensions.get("window").height / 15,
-    backgroundColor: "#ededed",
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    marginTop: 10,
-    textAlign: "right",
-  },
-  button: {
-    width: Dimensions.get("window").width / 1.3,
-    height: Dimensions.get("window").height / 13,
-    borderRadius: 25,
-    marginTop: 10,
-    paddingVertical: 16,
-  },
-
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "seashell",
-    textAlign: "center",
   },
   infoConteiner: {
     flexDirection: "row-reverse",
@@ -342,7 +299,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   infoTextConteiner: {
-    padding: 10,
+    padding: responsiveScreenWidth(2),
     borderRadius: 20,
     borderWidth: 1,
     justifyContent: "center",
@@ -350,40 +307,20 @@ const styles = StyleSheet.create({
     borderColor: "seashell",
   },
   infoText: {
-    fontSize: 11,
+    fontSize: responsiveScreenFontSize(1.4),//11,
     color: "seashell",
     fontWeight: "bold",
   },
-  tinyLogo: {
-    width: 20,
-    height: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  recordSendBtnList: {
-    width: Dimensions.get("window").width,
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
-  },
   vButton: {
-    width: Dimensions.get("window").width / 3,
-    height: Dimensions.get("window").height / 9,
-    backgroundColor: "#6f61ca", // #6357b5
+    justifyContent:'center',
+    width: responsiveScreenWidth(30),
+    height: responsiveScreenHeight(10.2),
+ // backgroundColor: "#6f61ca", // #6357b5
     borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 16,
-    marginHorizontal: 5,
+    marginVertical: responsiveScreenFontSize(1),
+    //paddingVertical: 16,
+    marginHorizontal: responsiveScreenWidth(2),
     alignItems: "center",
-  },
-  exitButton: {
-    paddingTop: 40,
-    marginBottom: responsiveHeight(5),
-  },
-  exitIcon: {
-    height: 50,
-    width: 50,
   },
 });
 const mapStateToProps = (state) => {

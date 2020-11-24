@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 window.navigator.userAgent = "react-native"; // for some versions of socketio this is needed also in React Native
 import io from "socket.io-client/dist/socket.io"; // note the /dist/ subdirectory (socket.io-client v.2.1.1)!
 import ip from "../src/api/serverIP";
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 
 function GetGreetingMsg() {
   var msg;
@@ -59,43 +60,41 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 30,
+    paddingHorizontal:responsiveScreenWidth(3),
+    paddingVertical: responsiveScreenHeight(3),
     width: Dimensions.get("window").width,
     flexDirection: "row-reverse",
     justifyContent: "space-between",
     textAlign: "right",
     borderRadius: 2,
-    borderTopRightRadius: 0,
     borderBottomRightRadius: 85,
-    borderBottomLeftRadius: 0,
   },
   GreetingText: {
-    fontSize: 16,
+    fontSize: responsiveScreenFontSize(2),
     color: "seashell",
     fontWeight: "bold",
-    paddingRight: 30,
-    marginTop: 45,
+    paddingRight: responsiveScreenWidth(9),
+    marginTop: responsiveScreenHeight(4),
   },
   settings: {
-    marginLeft: 5,
+    marginLeft: responsiveScreenWidth(1),
     borderRadius: 25,
-    width: 60,
-    height: 60,
+    width: responsiveScreenWidth(15),
+    height: responsiveScreenHeight(10),
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 35,
+    marginTop: responsiveScreenHeight(4),
   },
   settingsFont: {
-    fontSize: 11,
+    fontSize: responsiveScreenFontSize(1.4),
     color: "seashell",
     textAlign: "center",
     fontWeight: "bold",
   },
   tinyLogo: {
-    width: 30,
-    height: 30,
-  },
+    width: responsiveScreenHeight(3.5),
+    height: responsiveScreenHeight(3.5),
+},
 });
 
 const mapStateToProps = (state) => {

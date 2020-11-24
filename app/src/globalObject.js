@@ -1,14 +1,11 @@
-import { Alert, Button } from "react-native";
+import { Alert, Button, Dimensions } from "react-native";
 import sever from "./api/serverApi";
 import { responedList } from "./respondList";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
 import NetInfo from "@react-native-community/netinfo";
-import {
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-} from "react-native-responsive-dimensions";
+import { responsiveFontSize, responsiveHeight, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth, responsiveWidth } from "react-native-responsive-dimensions";
 import socketClient from "socket.io-client";
 import ip from "./api/serverIP";
 const io = require("socket.io-client");
@@ -31,7 +28,8 @@ class global {
     this.socket;
     this.firstTimeInitSocket = true;
     this.styles = {
-      inputBox: {
+      
+      regInputBox: {
         width: responsiveScreenWidth(80),
         height: responsiveScreenHeight(7),
         backgroundColor: "#ededed",
@@ -40,13 +38,174 @@ class global {
         marginVertical: responsiveScreenHeight(1),
         textAlign: "right",
       },
+      regButton: {
+        width: responsiveScreenWidth(80),
+        height: responsiveScreenHeight(7),
+        backgroundColor: "#7f71e3",
+        borderRadius: 25,
+        marginVertical: responsiveScreenHeight(1),
+        justifyContent: 'center',
+      },
+      regButtonText: {
+        fontSize: responsiveScreenFontSize(2),//16
+        color: "seashell",
+        textAlign: "center",
+      },
+      signupOrLoginTextCont: {
+        flexDirection: "row-reverse",
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      signupOrLoginText: {
+        fontSize: responsiveScreenFontSize(2),//16
+      },
+      signupOrLoginButton: {
+        paddingRight: responsiveScreenWidth(1),
+        color: "#7f71e3",
+        fontSize: responsiveScreenFontSize(2.2),//18
+        fontWeight: "bold",
+      },
+      loadingIcon: {
+        marginTop: responsiveScreenHeight(2),
+        width: responsiveScreenHeight(4),
+        height: responsiveScreenHeight(4),
+      },
+      regTitleText: {
+        marginVertical: responsiveScreenHeight(4),
+        fontSize: responsiveScreenFontSize(2.9),//22
+        color: "#000000",
+        fontWeight: "bold",
+      },
+      menuTitle: {
+        textAlign: "center",
+        width: Dimensions.get("window").width * 0.8,
+        margin: responsiveScreenWidth(5),
+        fontSize: responsiveScreenFontSize(6),//48
+        color: "seashell",
+        borderBottomWidth: 2,
+        borderColor: "seashell",
+      },
+      menuBtnContainer: {
+        alignItems: "center",
+      },
+      menuBtn: {
+        margin: responsiveScreenWidth(5),
+      },
+      menuBtnText:{
+        fontSize: responsiveScreenFontSize(3),
+        color: "seashell",
+      },
       exitButton: {
-        paddingTop: 40,
+        paddingTop: responsiveScreenHeight(3),
       },
       exitIcon: {
-        height: 50,
-        width: 50,
+        width: responsiveScreenHeight(6.5),
+        height: responsiveScreenHeight(6.5),
       },
+      subTextBlack:
+      {
+          fontSize: responsiveScreenFontSize(2.2),//18
+          color: "black",
+      },
+      subTextWhite: {
+        textAlign: "center",
+        fontSize: responsiveScreenFontSize(2.2),//18
+        color: "seashell",
+      },
+      mainListCon: {
+        height: Dimensions.get('window').height / 1.6,
+        width: Dimensions.get('window').width / 1.1,
+        borderWidth: 1,
+        borderRadius: 25,
+    },
+      listContainer: {
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: Dimensions.get('window').height / 1.7,
+          width: Dimensions.get('window').width / 1.1,
+          marginTop: responsiveScreenHeight(1),
+      },
+      listText:
+      {
+          flex: 4,
+          textAlign: "center",
+          fontSize: responsiveScreenFontSize(1.7),//14
+      },
+      list:
+      {
+          height: responsiveScreenHeight(9),
+          width: Dimensions.get('window').width*0.85,
+          backgroundColor: "white",
+          flexDirection: "row-reverse",
+          alignItems: 'center',
+          //marginHorizontal: 20,
+          borderRadius: 25,
+          marginBottom: responsiveScreenHeight(1),
+          borderWidth: 1,
+          borderColor: "lightgrey",
+      },
+      arrowIcon:{
+        width: responsiveScreenHeight(2.5),
+        height: responsiveScreenHeight(2.5),
+        marginLeft: responsiveScreenWidth(5),
+        opacity: 0.7,
+    },
+    //for tasks screens
+    voice_3_btns: {
+      width: responsiveScreenWidth(25),
+      height: responsiveScreenHeight(10.2),
+      borderRadius: 25,
+      marginVertical: responsiveScreenHeight(1),
+      marginHorizontal: responsiveScreenWidth(2),
+      alignItems: "center",
+      justifyContent:'center',
+    },
+    VoicPlayeButton: {
+      width: responsiveWidth(50),
+      height: responsiveHeight(10.1),
+      justifyContent:'center',
+      borderRadius: 25,
+      marginHorizontal: responsiveScreenWidth(5),
+      alignItems: "center",
+      borderWidth: 3,
+      borderColor: "lightgrey",
+    },
+    tinyVoiceIcon: {
+      width: responsiveScreenHeight(2),
+      height: responsiveScreenHeight(2),
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    recordSendBtnList: {
+      flexDirection: "row-reverse",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: responsiveScreenWidth(5),
+    },
+    myVoiceMsg: {
+      width: Dimensions.get("window").width,
+      alignItems: "flex-start",
+      justifyContent:'center',
+  
+    },
+    yourVoiceMsg: {
+      width: Dimensions.get("window").width*0.85,
+      alignItems: "flex-end",
+      justifyContent:'center',
+    },
+
+    VoiceScrollView: {
+    height: responsiveHeight(28),
+    width: responsiveWidth(85),
+    marginTop: responsiveScreenHeight(1),
+    justifyContent: "center",
+    alignItems:'center',
+    textAlign: "center",
+    backgroundColor: "seashell",
+    borderRadius: 20,
+    borderWidth: 3,
+    borderColor: "lightgrey",
+  },
     };
 
     this.unmountSocket = () => {
