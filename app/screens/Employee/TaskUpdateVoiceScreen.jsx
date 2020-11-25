@@ -47,10 +47,8 @@ function Main({ navigation, style }) {
     globalObject.User.role === "manager"
       ? item.employee
       : globalObject.User.managerEmail;
-  const audios = navigation.state.params.shouldRender
-    ? globalObject.User.tasks.processing[item._id].audios
-    : globalObject.User.tasks.completed[item._id].audios;
-
+  const audios = navigation.state.params.shouldRender ? globalObject.User.tasks.processing[item._id].audios : globalObject.User.tasks.completed[item._id].audios;
+  console.log(audios);
   const [toolTipVisible, setToolTipVisible] = useState(false);
   const renderTaskOptions = () => {
     return (
