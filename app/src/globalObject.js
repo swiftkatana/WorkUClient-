@@ -247,7 +247,8 @@ class global {
 
         this.socket.on("updateTaskVoice" + this.User.email, (data) => {
           console.log("new audio");
-          this.User.tasks.processing[data.taskId].audios.push(data.audio);
+          this.User.tasks.processing[data.taskId].audios[data.audio.url] =
+            data.audio;
           console.log(this.User.tasks.processing[data.taskId].audios);
         });
         this.socket.on(
