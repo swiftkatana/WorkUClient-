@@ -63,10 +63,28 @@ This application ensures the success of every workplace, especially when it is r
 
 In order to access all that the application offers, you are required to grant the application access to your microphone and turn on notifications. 
 
-For the best user experience, it is recommended to use a hand-held device. The microphone proximity, along with the real-time notification alerts, will keep you fully engaged with your work environment. 
+#### For the best user experience, it is recommended to use a hand-held device. The microphone proximity, along with the real-time notification alerts, will keep you fully engaged with your work environment. 
+- Pay attention, if your using the apk on rtl languge phone the app will intantionaly force the user to reopen the app after first installation. It's ok, after that the app will work.
+## Here are some already existing users you canconnect with:
 
-#### Functions that are still in development:
+##### Employer:
+Email: manager1@gmail.com
+Password: Manager1
+
+##### employees:
+Email: emp1@gmail.com
+Password: emp123
+
+Email: emp2@gmail.com
+Password: emp123
+
+Email: emp3@gmail.com
+Password: emp123
+
+
+### Functions that are still in development:
 - viewing and sending payslips 
+- viewing statistics
 - viewing shifts (please note that requesting and managing shifts is already up and running)
 
 
