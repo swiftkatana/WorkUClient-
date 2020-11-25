@@ -34,7 +34,7 @@ function Main({ navigation, style }) {
   const item = navigation.state.params.item;
   const [update, setUpdate] = useState(0);
   const myScroll = useRef(null);
-  const Rec = new Recorder();
+  const Rec = useRef(new Recorder());
   const status = globalObject.User.role === "manager" ? "בוטל" : "הושלם";
   const navi =
     globalObject.User.role === "manager"
@@ -58,8 +58,8 @@ function Main({ navigation, style }) {
         <View style={globalObject.styles.recordSendBtnList}>
           <TouchableOpacity
             style={{ ...globalObject.styles.voice_3_btns, ...style.btn2 }}
-            onPressIn={Rec.StartRecording}
-            onPressOut={Rec.StopRecording}
+            onPressIn={Rec.current.StartRecording}
+            onPressOut={Rec.current.StopRecording}
           >
             <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[3]} />
             <Text style={globalObject.styles.regButtonText}>הקלט</Text>
@@ -67,7 +67,7 @@ function Main({ navigation, style }) {
 
           <TouchableOpacity
             style={{ ...globalObject.styles.voice_3_btns, ...style.btn2 }}
-            onPress={Rec.playAudio}
+            onPress={Rec.current.playAudio}
           >
             <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[0]} />
             <Text style={globalObject.styles.regButtonText}>נגן הקלטה</Text>
@@ -228,10 +228,10 @@ function Main({ navigation, style }) {
 
         </View>
         <View style={globalObject.styles.VoiceScrollView}>
-            <ScrollView ref={(ref) => (myScroll.current = ref)}>
-              {renderVoiceList()}
-            </ScrollView>
-          </View>
+          <ScrollView ref={(ref) => (myScroll.current = ref)}>
+            {renderVoiceList()}
+          </ScrollView>
+        </View>
       </View>
 
       {navigation.state.params.shouldRender === true
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginVertical: responsiveHeight(1),
     alignItems: "center",
-    justifyContent:'center',
+    justifyContent: 'center',
   },
 });
 const mapStateToProps = (state) => {
