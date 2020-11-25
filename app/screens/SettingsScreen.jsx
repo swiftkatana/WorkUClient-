@@ -49,7 +49,7 @@ function Main({ navigation, style }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={globalObject.styles.menuBtn}
-          onPress={() => navigation.navigate("ChangeProfileImageScreen")}
+          onPress={Alert.alert('לא נוצר עדיין',"הפונקציה הזאת לא נוצרה עדיין אבל זה בטיפול")}
         >
           <Text style={globalObject.styles.menuBtnText}>עזרה</Text>
         </TouchableOpacity>
