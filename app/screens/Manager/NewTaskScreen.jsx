@@ -112,9 +112,7 @@ function Main({ navigation, style }) {
       enabled={Platform.OS === "ios" ? true : false}
     >
       <View style={styles.container}>
-        <View>
-          <Text style={globalObject.styles.menuTitle}>משימה חדשה</Text>
-        </View>
+        <Text style={globalObject.styles.menuTitle}>משימה חדשה</Text>
         <Text style={globalObject.styles.subTextWhite}>
           תייג עובד:{" "}
           {sendTo.firstName ? sendTo.firstName + " " + sendTo.lastName : null}{" "}
@@ -126,15 +124,14 @@ function Main({ navigation, style }) {
             borderColor: style.btn3.backgroundColor,
           }}
         >
-          <View style={styles.listContainer}>
-            <InfoList
-              render={render}
-              GetLen={GetLen}
-              GetList={GetList}
-              src={require("../../assets/empty_icon_white.png")}
-              emptyInfo={"אין לך עובדים כרגע."}
-            />
-          </View>
+          <InfoList
+            render={render}
+            GetLen={GetLen}
+            GetList={GetList}
+            src={require("../../assets/empty_icon_white.png")}
+            emptyInfo={"אין לך עובדים כרגע."}
+          />
+
         </View>
         {GetLen() > 0 ? (
           <View style={styles.centerWraper}>
@@ -312,10 +309,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   vButton: {
-    justifyContent:'center',
+    justifyContent: 'center',
     width: responsiveScreenWidth(30),
     height: responsiveScreenHeight(10.2),
- // backgroundColor: "#6f61ca", // #6357b5
+    // backgroundColor: "#6f61ca", // #6357b5
     borderRadius: 25,
     marginVertical: responsiveScreenFontSize(1),
     //paddingVertical: 16,

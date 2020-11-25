@@ -15,7 +15,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 function Main({ navigation, style }) {
   const [day, SetDay] = useState(0);
-  const [state, Setstate] = useState(2);
+  const [state, Setstate] = useState(1);
 
   const daysString = ["day1", "day2", "day3", "day4", "day5", "day6", "day7"];
   const stateString = ["morning", "lunch", "evening"];

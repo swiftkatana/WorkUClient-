@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 import { connect } from 'react-redux';
@@ -30,7 +30,7 @@ function ManagerNaviButton({ navigation, style }) {
         <Text style={styles.settingsFont}>כלי ניהול</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }}>
+      <TouchableOpacity style={{ ...styles.settings, ...style.btn1 } } onPress={Alert.alert('לא נוצר עדיין',"הפונקציה הזאת לא נוצרה עדיין אבל זה בטיפול")}>
         <Image
           style={styles.tinyLogo}
           source={require("../assets/statistics_icon.png")}
