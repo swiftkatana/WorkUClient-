@@ -33,7 +33,17 @@ function Main({ style, navigation }) {
         break;
       case "updateTaskVoice":
         Alert.alert("you got notification", data.type);
-        globalObject.User.tasks.processing[data.data.taskId].audios[data.data.url] = data.data;
+
+        var v = Object.values(globalObject.User.tasks.processing[data.data.taskId].audios);
+        var found = false;
+        v.forEach(i => {
+          if (i.url === data.data.url) {
+            found = true;
+            return;
+          }
+        });
+        if (!found)
+          globalObject.User.tasks.processing[data.data.taskId].audios.push(data.data);
 
         break;
       default:
