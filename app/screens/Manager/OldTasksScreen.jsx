@@ -40,6 +40,8 @@ function Main({ navigation, style }) {
 
 
     return (
+
+
         <View style={{ ...styles.view, ...style.view }}>
             <Text style={globalObject.styles.menuTitle}>
                 היסטוריית משימות
