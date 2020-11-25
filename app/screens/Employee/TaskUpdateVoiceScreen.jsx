@@ -159,7 +159,7 @@ function Main({ navigation, style }) {
         ? globalObject.User.tasks.processing[item._id].employee
         : globalObject.User.managerEmail;
 
-    let audio = await Rec.UploadToServer(
+    let audio = await Rec.current.UploadToServer(
       globalObject.User.email,
       to,
       item._id,
