@@ -87,7 +87,7 @@ Password: emp123
 - Viewing and sending payslips.
 - Viewing statistics.
 - Update working time manually (please note that the automatic update by the "work clock" works).
-- Viewing shifts (please note that requesting and managing shifts is already up and running).
+- Viewing shifts for manager (please note that viewing shifts for employee, requesting and managing shifts are already up and running).
 
 
 
