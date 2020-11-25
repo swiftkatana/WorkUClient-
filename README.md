@@ -82,8 +82,9 @@ WorkU
 ## Installation
 #### first request for the server may take bit longer because of Heroku servers policy so after the build we thought that there is a problem with the login screen but it turns out everything is ok and you just need to wait a bit longer for the first login to work and Heroku server to wake up.
 
-### [click here](https://worku.herokuapp.com/WorkU.apk)
+### [Click here](https://worku.herokuapp.com/WorkU.apk)
 
+### if you want to see the Backend [Click here](https://github.com/swiftkatana/WorkU-Server)
 
 
 In order to access all that the application offers, you are required to grant the application access to your microphone and turn on notifications. 
