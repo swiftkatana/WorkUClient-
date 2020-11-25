@@ -26,7 +26,7 @@ function Main({ navigation, style }) {
         for (var obj in globalObject.User.employees) {
             let employee = globalObject.User.employees[obj];
             if (employee.email !== globalObject.User.email)
-                arr.push({ ...employee, id: employee.phone });
+                arr.push({ ...employee, id: (employee.phone + employee.email) });
         }
         return arr;
     }

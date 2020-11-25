@@ -17,15 +17,18 @@ function Main({ navigation, style }) {
 
         (async () => {
             const res = await globalObject.SendRequest(requestList.getShiftUrl, { email: globalObject.User.email });
-
-            //const res = globalObject.User.shifts[0];
-            fill.current = res[0];
-            const keys = Object.keys(res[0]);
-            if (keys === undefined)
+            console.log(typeof (res));
+            if (!res[0])
                 setLen(-1);
-            else
-                setLen(Object.keys(res[0]).length);
-            //GetLenShifts();
+            else {
+                fill.current = res[0];
+                console.log(1);
+                const keys = Object.keys(res[0]);
+                if (keys === undefined)
+                    setLen(-1);
+                else
+                    setLen(Object.keys(res[0]).length);
+            }
         })();
     }, [])
     const GetLenShifts = (fill) => {
@@ -178,7 +181,7 @@ const styles = StyleSheet.create({
     },
 
     tinyPluse: {
-        justifyContent:'center',
+        justifyContent: 'center',
         width: responsiveScreenHeight(2),
         height: responsiveScreenHeight(2),
     },
@@ -222,10 +225,10 @@ const styles = StyleSheet.create({
         //margin: 5,
         borderRadius: 11,
         fontWeight: "bold",
-        borderWidth:2,
-        borderColor:'lightgrey',
-        alignItems:'center',
-        justifyContent:'center',
+        borderWidth: 2,
+        borderColor: 'lightgrey',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     fillContainer: {
         width: responsiveScreenWidth(91),
@@ -234,11 +237,11 @@ const styles = StyleSheet.create({
     stateContainer: {
         alignItems: "flex-end",
         flexDirection: "column",
-        justifyContent:'center',
+        justifyContent: 'center',
     },
     stateText: {
         textAlign: "center",
-        justifyContent:'center',
+        justifyContent: 'center',
         width: responsiveScreenWidth(12.6),
         height: responsiveScreenHeight(4.2),
         margin: responsiveScreenWidth(1.2),
@@ -247,7 +250,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: responsiveScreenFontSize(1.4),
         backgroundColor: "lightgrey",
-      },
+    },
 
 })
 const mapStateToProps = (state) => {
