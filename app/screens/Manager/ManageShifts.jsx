@@ -197,13 +197,31 @@ function Main({ navigation, style }) {
     return <>{arr2.map((item) => item)}</>;
   };
 
+  const IsEmtpyList = () => {
+    const employees = globalObject.company.employees;
+    var keys = Object.keys(employees);
+    if (keys.length > 0) {
+      for (let i = 0; i < keys.length; i++) {
+        if (employees[keys[i]].shift && employees[keys[i]].shift.day1) {
+          for (let j = 0; j < 3; j++) {
+            if (employees[keys[i]].shift[daysString[day]][stateString[j]] > 0) {
+              return true;
+
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   const GetEmployyesFromDay = () => {
     var arr = [[], [], []];
     const employees = globalObject.company.employees;
     var keys = Object.keys(employees);
     if (keys.length > 0) {
       for (let i = 0; i < keys.length; i++) {
-        if (employees[keys[i]].shift.day1) {
+        if (employees[keys[i]].shift && employees[keys[i]].shift.day1) {
           for (let j = 0; j < 3; j++) {
             if (
               employees[keys[i]].shift[daysString[day]][stateString[j]] ===
