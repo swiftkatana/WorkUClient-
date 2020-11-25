@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'rea
 import requestList from "../../src/api/apiKeys";
 import { connect } from 'react-redux';
 import { globalObject } from '../../src/globalObject';
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 
 
 function Main({ navigation, style }) {
@@ -91,7 +92,7 @@ function Main({ navigation, style }) {
         else
             return (
                 <View style={styles.shiftsCon}>
-                    <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי:</Text>
+                    <Text style={globalObject.styles.subTextWhite}>המשמרות שלך לשבוע הנוכחי:</Text>
                     <View style={styles.view}>
                         <View style={styles.shiftsCon}>
                             <View style={styles.daysContainer}>
@@ -126,11 +127,11 @@ function Main({ navigation, style }) {
         <View style={{ ...styles.view, ...style.view }}>
 
             <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>המשמרות שלי</Text>
+                <Text style={globalObject.styles.menuTitle}>המשמרות שלי</Text>
 
                 {RenderLoadingScreen()}
-                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -160,55 +161,46 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: Dimensions.get('window').height / 2,
     },
-    title:
-    {
-        textAlign: "center",
-        width: Dimensions.get('window').width * 0.80,
-        margin: 20,
-        //marginRight: 30,
-        fontSize: 48,
-        color: "seashell",
-        borderBottomWidth: 2,
-        borderColor: "seashell",
-    },
+
     checkBoxContainer: {
         flex: 1,
         backgroundColor: 'seashell',
-        margin: 20,
-        marginVertical: 150,
-        borderRadius: 30,
+        //margin: 20,
+        //marginVertical: 150,
+        //borderRadius: 30,
     },
 
     lableContainer: {
-        width: Dimensions.get('window').width,
-        flexDirection: 'row-reverse',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: responsiveScreenWidth(100),
+        flexDirection: "row-reverse",
+        alignItems: "center",
+        justifyContent: "center",
     },
 
     tinyPluse: {
-        width: 15,
-        height: 15,
+        justifyContent:'center',
+        width: responsiveScreenHeight(2),
+        height: responsiveScreenHeight(2),
     },
 
     header: {
-        fontSize: 18,
+        fontSize: responsiveScreenFontSize(2.2), //18
         color: "seashell",
+        marginVertical: responsiveScreenWidth(1),
     },
     daysContainer: {
-        width: Dimensions.get('window').width,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row-reverse',
-        marginHorizontal: Dimensions.get('window').width / 50 - 10,
+        width: responsiveScreenWidth(76),
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row-reverse",
 
 
     },
     dayText: {
         textAlign: "center",
-        width: Dimensions.get('window').width / 12,
-        height: 35,
-        margin: 5,
+        width: responsiveScreenWidth(8.5),
+        height: responsiveScreenHeight(4.2),
+        margin: responsiveScreenWidth(1.2),
         backgroundColor: "seashell",
         borderRadius: 10,
         fontWeight: "bold",
@@ -216,66 +208,47 @@ const styles = StyleSheet.create({
     },
     fillBox: {
         textAlign: "center",
-        width: Dimensions.get('window').width / 12,
-        height: 35,
-        margin: 5,
+        width: responsiveScreenWidth(8.5),
+        height: responsiveScreenHeight(4.2),
+        margin: responsiveScreenWidth(1.2),
         backgroundColor: "seashell",
         borderRadius: 10,
         fontWeight: "bold",
     },
     notTouchableStyle: {
         textAlign: "center",
-        width: Dimensions.get('window').width / 12,
-        height: 35,
-        margin: 5,
-        borderRadius: 10,
+        width: responsiveScreenWidth(9),
+        height: responsiveScreenHeight(4.4),
+        //margin: 5,
+        borderRadius: 11,
         fontWeight: "bold",
+        borderWidth:2,
+        borderColor:'lightgrey',
+        alignItems:'center',
+        justifyContent:'center',
     },
     fillContainer: {
-        width: Dimensions.get('window').width,
-        flexDirection: 'row-reverse',
-        marginHorizontal: 10,
+        width: responsiveScreenWidth(91),
+        flexDirection: "row-reverse",
     },
     stateContainer: {
-        alignItems: 'flex-end',
-        flexDirection: 'column',
+        alignItems: "flex-end",
+        flexDirection: "column",
+        justifyContent:'center',
     },
     stateText: {
         textAlign: "center",
-        width: 50,
-        height: 35,
-        margin: 5,
+        justifyContent:'center',
+        width: responsiveScreenWidth(12.6),
+        height: responsiveScreenHeight(4.2),
+        margin: responsiveScreenWidth(1.2),
         backgroundColor: "seashell",
         borderRadius: 10,
         fontWeight: "bold",
-        fontSize: 11,
+        fontSize: responsiveScreenFontSize(1.4),
         backgroundColor: "lightgrey",
+      },
 
-    },
-    button: {
-        width: 200,
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 16,
-    },
-
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: 'seashell',
-        textAlign: 'center',
-    },
-
-    exitButton:
-    {
-        paddingTop: 40,
-
-
-    },
-    exitIcon: {
-        height: 50,
-        width: 50,
-    },
 })
 const mapStateToProps = (state) => {
     return { style: state.styles }
