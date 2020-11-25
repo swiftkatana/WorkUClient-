@@ -267,6 +267,12 @@ class global {
           console.log("managerGotShift");
           this.company.employees[data.email].shift = data;
         });
+
+        this.socket.on("newEmployee" + this.User.email, (data) => {
+          console.log("newEmployee");
+          this.company.employees[data.email] = data;
+        });
+
         if (this.User.role !== "manager") {
           this.socket.on(
             "employeeGotFinalShift" + this.User.company,

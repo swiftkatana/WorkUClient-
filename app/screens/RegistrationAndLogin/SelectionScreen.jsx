@@ -18,6 +18,9 @@ export default function Main({ navigation }) {
     if (user) {
 
       globalObject.User = user;
+
+      globalObject.sendSocketMessage("joinCompany", user, user.managerEmail);
+      globalObject.sendNotification(user.managerEmail, user, "עובד חדש", `עובד בשם ${user.fullName} הוסף`, "joinCompany");
       navigation.navigate('EmployeeMainScreen');
     }
 
@@ -29,9 +32,9 @@ export default function Main({ navigation }) {
     <View style={styles.container}>
       <View style={styles.container}>
         <View style={styles.container}>
-        <Text style={globalObject.styles.regTitleText}>שלום, {user.firstName} </Text>
+          <Text style={globalObject.styles.regTitleText}>שלום, {user.firstName} </Text>
 
-          <Text style={{...globalObject.styles.signupOrLoginText,fontWeight:'bold'}}>חבר/י את חשבונך לבית עסק רשום:</Text>
+          <Text style={{ ...globalObject.styles.signupOrLoginText, fontWeight: 'bold' }}>חבר/י את חשבונך לבית עסק רשום:</Text>
         </View>
         <TextInput onChangeText={SetCodeText} style={globalObject.styles.regInputBox} placeholder='קוד גישה לבית העסק' />
         <TouchableOpacity onPress={() => pressHandler(codeText)} style={globalObject.styles.regButton}>
@@ -40,8 +43,8 @@ export default function Main({ navigation }) {
         <Text style={globalObject.styles.signupOrLoginText}>* אין לך קוד? בקש/י מהמנהל שלך</Text>
       </View>
       <View style={styles.signupTextCont}>
-        <Text style={{...globalObject.styles.signupOrLoginText,fontWeight:'bold'}}> מנהל/ת עסק?</Text>
-        <Text style={{...globalObject.styles.signupOrLoginText,fontWeight:'bold'}}> להרשמת בית עסק חדש במערכת</Text>
+        <Text style={{ ...globalObject.styles.signupOrLoginText, fontWeight: 'bold' }}> מנהל/ת עסק?</Text>
+        <Text style={{ ...globalObject.styles.signupOrLoginText, fontWeight: 'bold' }}> להרשמת בית עסק חדש במערכת</Text>
         <TouchableOpacity onPress={() => navigation.navigate('RegisterCompanyScreen')}>
           <Text style={globalObject.styles.signupOrLoginButton}>לחץ כאן</Text>
         </TouchableOpacity>
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
   signupTextCont: {
     alignItems: 'flex-end',
     justifyContent: 'center',
-   // paddingVertical: 16,
+    // paddingVertical: 16,
   },
 });
 

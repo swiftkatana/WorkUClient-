@@ -29,11 +29,11 @@ export default function Main({ navigation }) {
   const [expoId, setexpoId] = useState("");
 
   useEffect(() => {
-   ( async () => {
+    (async () => {
       let expoId = await globalObject.registerForPushNotificationsAsync();
       setexpoId(expoId);
     })();
-  }, []); 
+  }, []);
 
   const pressHandler = async () => {
     if (!firstName || !lastName || !email || !password || !verifyPassword) {
@@ -60,6 +60,8 @@ export default function Main({ navigation }) {
         storeData(email, "email");
         // register content ok
         globalObject.User = user;
+        globalObject.SocketConnect();
+        globalObject.sendSocketMessage("loginToTheWebSite", email, "das");
         navigation.navigate("SelectionScreen", { user: globalObject.User });
       }
     }

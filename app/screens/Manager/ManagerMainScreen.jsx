@@ -31,6 +31,10 @@ export default function Main({ navigation }) {
       case "gotNewShiftPen":
         globalObject.company.employees[data.data.email].shift = data.data;
         break;
+
+      case "joinCompany":
+        globalObject.company.employees[data.data.email] = data.data;
+        break;
       default:
         Alert.alert("you got not handler notification", data.type);
         break;
@@ -69,9 +73,9 @@ export default function Main({ navigation }) {
 }
 
 const styles = StyleSheet.create(
-    {
-        container: {
-            flex: 1,
-        },
-    }
+  {
+    container: {
+      flex: 1,
+    },
+  }
 )
