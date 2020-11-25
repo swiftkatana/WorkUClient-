@@ -8,12 +8,12 @@ function Main({ navigation, style }) {
     return (
         <View style={{ ...styles.view, ...style.view }}>
             <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>משמרות</Text>
+                <Text style={globalObject.styles.menuTitle}>הגשת משמרות</Text>
                 <View style={styles.shiftsCon}>
                     <Shifts style={style} navigation={navigation} />
                 </View>
-                <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
+                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
             </View>
 

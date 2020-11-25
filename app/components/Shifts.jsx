@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { globalObject } from "../src/globalObject";
 import requestList from "../src/api/apiKeys";
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 const CreateList = (fill, options, handler) => {
   var arr2 = [];
   var arrDay = Object.keys(fill);
@@ -176,10 +177,10 @@ export default function Shifts({ style, navigation }) {
           </View>
         </View>
         <TouchableOpacity
-          style={{ ...styles.button, ...style.btn2 }}
+          style={{ ...globalObject.styles.regButton, ...style.btn2 }}
           onPress={SendShifts}
         >
-          <Text style={styles.buttonText}>שלח משמרות</Text>
+          <Text style={globalObject.styles.regButtonText}>שלח משמרות</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -188,7 +189,7 @@ export default function Shifts({ style, navigation }) {
 
 const styles = StyleSheet.create({
   mainView: {
-    width: Dimensions.get("window").width,
+    width: responsiveScreenWidth(100),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   lableContainer: {
-    width: Dimensions.get("window").width,
+    width: responsiveScreenWidth(100),
     flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "center",
@@ -206,9 +207,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
-    width: 109,
-    height: 42,
-    margin: 5,
+    width: responsiveScreenWidth(28),
+    height: responsiveScreenHeight(6),
+    margin: responsiveScreenWidth(1),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
@@ -219,9 +220,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
-    width: 109,
-    height: 42,
-    margin: 5,
+    width: responsiveScreenWidth(28),
+    height: responsiveScreenHeight(6),
+    margin: responsiveScreenWidth(1),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
@@ -232,28 +233,30 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 10,
     fontWeight: "bold",
+    fontSize: responsiveScreenFontSize(1.7), //14
   },
   tinyPluse: {
-    width: 15,
-    height: 15,
+    justifyContent:'center',
+    width: responsiveScreenHeight(2),
+    height: responsiveScreenHeight(2),
   },
   header: {
-    fontSize: 18,
+    fontSize: responsiveScreenFontSize(2.2), //18
     color: "seashell",
-    marginVertical: 2,
+    marginVertical: responsiveScreenWidth(1),
   },
   daysContainer: {
-    width: Dimensions.get("window").width,
+    width: responsiveScreenWidth(76),
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row-reverse",
-    marginHorizontal: Dimensions.get("window").width / 50 - 10,
+    //marginHorizontal: Dimensions.get("window").width / 50 - 10,
   },
   dayText: {
     textAlign: "center",
-    width: Dimensions.get("window").width / 12,
-    height: 35,
-    margin: 5,
+    width: responsiveScreenWidth(8.5),
+    height: responsiveScreenHeight(4.2),
+    margin: responsiveScreenWidth(1.2),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
@@ -261,52 +264,46 @@ const styles = StyleSheet.create({
   },
   fillBox: {
     textAlign: "center",
-    width: Dimensions.get("window").width / 12,
-    height: 35,
-    margin: 5,
+    width: responsiveScreenWidth(8.5),
+    height: responsiveScreenHeight(4.2),
+    margin: responsiveScreenWidth(1.2),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
   },
   touchableStyle: {
     textAlign: "center",
-    width: Dimensions.get("window").width / 12,
-    height: 35,
-    margin: 5,
-    borderRadius: 10,
+    width: responsiveScreenWidth(9),
+    height: responsiveScreenHeight(4.4),
+    //margin: 5,
+    borderRadius: 11,
     fontWeight: "bold",
+    borderWidth:2,
+    borderColor:'lightgrey',
+    alignItems:'center',
+    justifyContent:'center',
   },
   fillContainer: {
-    width: Dimensions.get("window").width,
+    width: responsiveScreenWidth(91),
     flexDirection: "row-reverse",
-    marginHorizontal: 10,
+    //marginHorizontal: 10,
   },
   stateContainer: {
     alignItems: "flex-end",
     flexDirection: "column",
+    justifyContent:'center',
+
   },
   stateText: {
     textAlign: "center",
-    width: 50,
-    height: 35,
-    margin: 5,
+    justifyContent:'center',
+    width: responsiveScreenWidth(12.6),
+    height: responsiveScreenHeight(4.2),
+    margin: responsiveScreenWidth(1.2),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
-    fontSize: 11,
+    fontSize: responsiveScreenFontSize(1.4),
     backgroundColor: "lightgrey",
-  },
-  button: {
-    width: 200,
-    borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 16,
-  },
-
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "seashell",
-    textAlign: "center",
   },
 });
