@@ -135,17 +135,19 @@ function Main({ navigation, style }) {
     }
   };
   const renderButton = ({ item }) => {
+    const colors = [null, styles.styleState.borderColor, styles.styleState.borderColor, styles.styleState.borderColor];
+    colors[state] = "red";
     return (
       <View style={styles.list}>
-        <TouchableOpacity style={styles.styleState} onPress={() => Setstate(1)}>
+        <TouchableOpacity style={{ ...styles.styleState, borderColor: colors[1] }} onPress={() => Setstate(1)}>
           <Text style={styles.listText}>{item.can}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.styleState} onPress={() => Setstate(3)}>
+        <TouchableOpacity style={{ ...styles.styleState, borderColor: colors[3] }} onPress={() => Setstate(3)}>
           <Text style={styles.listText}>{item.perferNot}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.styleState} onPress={() => Setstate(2)}>
+        <TouchableOpacity style={{ ...styles.styleState, borderColor: colors[2] }} onPress={() => Setstate(2)}>
           <Text style={styles.listText}>{item.cannot}</Text>
         </TouchableOpacity>
       </View>
@@ -333,7 +335,7 @@ function Main({ navigation, style }) {
           </View>
         </View>
 
-        <TouchableOpacity style={{...globalObject.styles.regButton, backgroundColor: style.btn2.backgroundColor }} onPress={Send}>
+        <TouchableOpacity style={{ ...globalObject.styles.regButton, backgroundColor: style.btn2.backgroundColor }} onPress={Send}>
           <Text style={globalObject.styles.regButtonText}>עדכן משמרות לשבוע הבא</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -361,8 +363,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     fontSize: responsiveScreenFontSize(1.4), //11
-    fontWeight:'bold',
-    
+    fontWeight: 'bold',
+
   },
   itemList: {
     width: responsiveScreenWidth(90),
@@ -370,7 +372,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     alignItems: "center",
     justifyContent: "center",
-    
+
   },
   buttonsContainer: {
     flex: 1,
@@ -397,7 +399,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'seashell',
     borderColor: "grey",
     borderWidth: 1,
-    borderRadius:15,
+    borderRadius: 15,
 
   },
   list: {
@@ -407,10 +409,10 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse",
     alignItems: "center",
     borderWidth: 1,
-    borderRadius:10,
+    borderRadius: 10,
     borderColor: "lightgrey",
-    alignItems:'center',
-    justifyContent:'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   listC: {
     width: responsiveScreenWidth(27),
@@ -441,10 +443,10 @@ const styles = StyleSheet.create({
     //margin: 5,
     borderRadius: 11,
     fontWeight: "bold",
-    borderWidth:2,
-    borderColor:'lightgrey',
-    alignItems:'center',
-    justifyContent:'center',
+    borderWidth: 2,
+    borderColor: 'lightgrey',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   daysContainer: {
     width: responsiveScreenWidth(76),
@@ -465,7 +467,7 @@ const styles = StyleSheet.create({
 
   stateText: {
     textAlign: "center",
-    justifyContent:'center',
+    justifyContent: 'center',
     width: responsiveScreenWidth(12.6),
     height: responsiveScreenHeight(4.2),
     margin: responsiveScreenWidth(1.2),
@@ -479,14 +481,14 @@ const styles = StyleSheet.create({
   stateContainer: {
     alignItems: "flex-end",
     flexDirection: "column",
-    justifyContent:'center',
+    justifyContent: 'center',
 
   },
 
   fillContainer: {
     width: responsiveScreenWidth(91),
     flexDirection: "row-reverse",
-   //marginHorizontal: 10,
+    //marginHorizontal: 10,
   },
   styleState: {
     flex: 1,
@@ -495,9 +497,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     margin: responsiveScreenWidth(0.5),
     borderRadius: 10,
-    justifyContent:'center',
-    borderWidth:1,
-    borderColor:'lightgrey',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'lightgrey',
   },
 });
 const mapStateToProps = (state) => {
