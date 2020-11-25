@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { Provider } from "react-redux";
@@ -16,7 +16,7 @@ const connectionConfig = {
 };
 import ip from "./app/src/api/serverIP";
 import store from "./app/src/store";
-import { I18nManager } from "react-native";
+import { I18nManager, AppState } from "react-native";
 import { Restart } from "fiction-expo-restart";
 // employee
 import EmployeeMainScreen from "./app/screens/Employee/EmployeeMainScreen";
@@ -98,12 +98,20 @@ const listScreen = [
 ];
 var screens = {};
 
+
+
+
 export default function App() {
+
+
   if (I18nManager.isRTL == true) {
     I18nManager.forceRTL(false);
     I18nManager.allowRTL(false);
     Restart();
   }
+
+
+
 
   for (let i = 0; i < listScreen.length; i++) {
     var keyNames = Object.keys(listScreen[i]);

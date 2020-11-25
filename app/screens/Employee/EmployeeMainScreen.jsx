@@ -1,6 +1,6 @@
 import { globalObject } from "../../src/globalObject";
-import React, { useEffect } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, StyleSheet, Alert, AppState } from "react-native";
 import Greeting from "../../components/Greeting";
 import Timer from "../../components/Timer";
 import TaskBoard from "../../components/TaskBoard";
@@ -10,6 +10,9 @@ import { connect } from "react-redux";
 import apiKeys from "../../src/api/apiKeys";
 
 function Main({ style, navigation }) {
+
+
+
   const handleListener = ({ data }) => {
     switch (data.type) {
       case "newTask":
@@ -40,6 +43,27 @@ function Main({ style, navigation }) {
         break;
     }
   };
+
+
+  const appState = useRef(AppState.currentState);
+  const [appStateVisible, setAppStateVisible] = useState(appState.current);
+  const _handleAppStateChange = (nextAppState) => {
+    if (appState.current.match(/inactive|background/) && nextAppState === "active") {
+      console.log("App has come to the foreground!");
+
+    }
+    appState.current = nextAppState;
+    setAppStateVisible(appState.current);
+    console.log("AppState", appState.current);
+  };
+
+  useEffect(() => {
+    AppState.addEventListener("change", _handleAppStateChange);
+
+    return () => {
+      AppState.removeEventListener("change", _handleAppStateChange);
+    };
+  }, []);
 
   useEffect(() => {
     (async () => {

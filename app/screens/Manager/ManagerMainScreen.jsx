@@ -42,13 +42,16 @@ export default function Main({ navigation }) {
   };
 
   useEffect(() => {
+
     Notifications.setNotificationHandler({
       handleNotification: async () => ({
         shouldShowAlert: true,
         shouldPlaySound: true,
         shouldSetBadge: true,
       }),
-    });
+
+    }
+    );
 
     const subscription1 = Notifications.addNotificationReceivedListener(
       (notification) => handleListener(notification.request.content)
