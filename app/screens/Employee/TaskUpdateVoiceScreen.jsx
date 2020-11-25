@@ -195,7 +195,7 @@ function Main({ navigation, style }) {
           <View key={obj.url} style={globalObject.styles.VoicPlayeButton}>
             <TouchableOpacity
               style={{ ...globalObject.styles.VoicPlayeButton, ...style.btn3 }}
-              onPress={() => Rec.playAudio(obj.url)}
+              onPress={() => Rec.current.playAudio(obj.url)}
             >
               <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[0]} />
               <Text style={globalObject.styles.regButtonText}>אני</Text>
@@ -207,7 +207,7 @@ function Main({ navigation, style }) {
         <View key={obj.url} style={globalObject.styles.yourVoiceMsg}>
           <TouchableOpacity
             style={{ ...globalObject.styles.VoicPlayeButton, ...style.btn2 }}
-            onPress={() => Rec.playAudio(obj.url)}
+            onPress={() => Rec.current.playAudio(obj.url)}
           >
             <Image style={globalObject.styles.tinyVoiceIcon} source={imgSrc[0]} />
             <Text style={globalObject.styles.regButtonText}>{obj.fullName}</Text>
