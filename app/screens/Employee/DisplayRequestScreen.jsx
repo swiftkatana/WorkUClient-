@@ -12,21 +12,23 @@ function Main({ navigation, style }) {
     const item = navigation.state.params.item;
     return (
         <View style={{ ...styles.view, ...style.view }}>
-            <View style={styles.container}>
+                <View style={styles.container}>
 
-                <View >
-                    <Text style={globalObject.styles.menuTitle}>בקשה</Text>
+                    <View >
+                        <Text style={globalObject.styles.menuTitle}>בקשה</Text>
+                    </View>
+                    <View style={styles.mainRequestContainer}>
+                        <View style={styles.requestContainer}>
+                            <Text style={globalObject.styles.subTextBlack}>תאריך: {item.date}</Text>
+                            <Text style={globalObject.styles.subTextBlack}>סוג בקשה: {item.type}</Text>
+                            <Text style={globalObject.styles.subTextBlack}>סטטוס: {item.status}</Text>
+                            <Text style={styles.bodyHeader}>פירוט:</Text>
+                            <Text style={globalObject.styles.subTextBlack}>{item.body}</Text>
+                        </View>
+                    </View>
                 </View>
-                <View style={styles.requestContainer}>
-                    <Text style={globalObject.styles.subTextBlack}>תאריך: {item.date}</Text>
-                    <Text style={globalObject.styles.subTextBlack}>סוג בקשה: {item.type}</Text>
-                    <Text style={globalObject.styles.subTextBlack}>סטטוס: {item.status}</Text>
-                    <Text style={styles.bodyHeader}>פירוט:</Text>
-                    <Text style={globalObject.styles.subTextBlack}>{item.body}</Text>
-                </View>
-            </View>
             <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                        <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
             </TouchableOpacity>
         </View>
     )
@@ -41,6 +43,17 @@ const styles = StyleSheet.create({
 
 
     },
+    mainRequestContainer:{
+        width: responsiveScreenHeight(45),
+        height: responsiveScreenWidth(60),
+        backgroundColor: "seashell",
+        borderColor: "grey",
+        borderRadius:30,
+        alignItems:'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+
+    },
     container:
     {
         alignItems:'center',
@@ -49,15 +62,12 @@ const styles = StyleSheet.create({
 
     },
     requestContainer:{
+        textAlign: 'center',
         alignItems:'center',
         justifyContent: 'center',
-        borderWidth:1,
-        borderColor: "grey",
         borderRadius:30,
-        width: Dimensions.get('window').width*0.80,
-        height: Dimensions.get('window').height*0.30,
-        backgroundColor: "seashell",
-        textAlign:'center',
+        width: responsiveScreenHeight(42),
+        height: responsiveScreenWidth(58),
 
     },
     bodyHeader: {
