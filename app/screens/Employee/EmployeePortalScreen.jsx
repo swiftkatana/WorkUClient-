@@ -16,7 +16,7 @@ function Main({ navigation, style }) {
                     <Text style={globalObject.styles.menuBtnText}>דו"ח שעות חודשי</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={globalObject.styles.menuBtn} onPress={() => navigation.navigate("EmployeeShiftsScreen")}>
-                    <Text style={globalObject.styles.menuBtnText}>שליחת משמרות</Text>
+                    <Text style={globalObject.styles.menuBtnText}>הגשת משמרות</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={globalObject.styles.menuBtn} onPress={() => navigation.navigate("EmployeePayChecksScreen")}>
                     <Text style={globalObject.styles.menuBtnText}>תלושי שכר</Text>

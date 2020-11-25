@@ -12,6 +12,7 @@ import requestList from "../../src/api/apiKeys";
 import { connect } from "react-redux";
 import { Picker } from "@react-native-community/picker";
 import { FlatList } from "react-native-gesture-handler";
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 function Main({ navigation, style }) {
   const [day, SetDay] = useState(0);
   const [state, Setstate] = useState(2);
@@ -225,7 +226,8 @@ function Main({ navigation, style }) {
   return (
     <View style={{ ...styles.view, ...style.view }}>
       <View style={styles.buttonsContainer}>
-        <Text style={styles.title}>ניהול משמרות</Text>
+        <Text style={globalObject.styles.menuTitle}>ניהול משמרות</Text>
+        <Text style={globalObject.styles.subTextWhite}>בחר יום ומצב של זמינות של עובדים ולאחר מכן בחר עובד מהרשימה המתאימה </Text>
         <Picker
           prompt="בחר יום"
           mode="dialog"
@@ -313,15 +315,15 @@ function Main({ navigation, style }) {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.sendBtn} onPress={Send}>
-          <Text style={styles.sendBtnText}>עדכן משמרות לשבוע הבא</Text>
+        <TouchableOpacity style={{...globalObject.styles.regButton, backgroundColor: style.btn2.backgroundColor }} onPress={Send}>
+          <Text style={globalObject.styles.regButtonText}>עדכן משמרות לשבוע הבא</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.exitButton}
+          style={globalObject.styles.exitButton}
           onPress={() => navigation.pop()}
         >
           <Image
-            style={styles.exitIcon}
+            style={globalObject.styles.exitIcon}
             source={require("../../assets/exit_icon.png")}
           />
         </TouchableOpacity>
@@ -337,15 +339,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   listText: {
-    flex: 1,
+    flex: 0.9,
     textAlign: "center",
     justifyContent: "center",
-    fontSize: 14,
+    fontSize: responsiveScreenFontSize(1.4), //11
+    fontWeight:'bold',
+    
   },
   itemList: {
-    width: Dimensions.get("window").width,
+    width: responsiveScreenWidth(90),
     color: "#ffffff",
     textAlign: "right",
+    alignItems: "center",
+    justifyContent: "center",
+    
   },
   buttonsContainer: {
     flex: 1,
@@ -355,95 +362,83 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     justifyContent: "center",
-    height: Dimensions.get("window").height / 18,
-    marginHorizontal: 10,
+    height: responsiveScreenHeight(5),
+    //marginHorizontal: 10,
   },
   header2: {
     flexDirection: "row-reverse",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header3: {
     alignItems: "center",
     justifyContent: "center",
-    height: Dimensions.get("window").height * 0.25,
-    width: Dimensions.get("window").width * 0.315,
-    borderColor: "white",
+    height: responsiveScreenHeight(16),
+    width: responsiveScreenWidth(30),
+    margin: responsiveScreenWidth(1),
+    backgroundColor: 'seashell',
+    borderColor: "grey",
     borderWidth: 1,
+    borderRadius:15,
+
   },
   list: {
-    width: Dimensions.get("window").width * 0.95,
-    height: Dimensions.get("window").height * 0.05,
-    backgroundColor: "white",
+    width: responsiveScreenWidth(94),
+    height: responsiveScreenHeight(4.5),
+    backgroundColor: "seashell",
     flexDirection: "row-reverse",
     alignItems: "center",
-    borderWidth: 2,
+    borderWidth: 1,
+    borderRadius:10,
     borderColor: "lightgrey",
+    alignItems:'center',
+    justifyContent:'center',
   },
   listC: {
-    width: Dimensions.get("window").width * 0.3,
-    height: Dimensions.get("window").height * 0.05,
+    width: responsiveScreenWidth(27),
+    height: responsiveScreenHeight(4),
     backgroundColor: "white",
     flexDirection: "column-reverse",
     alignItems: "center",
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "lightgrey",
-  },
-  title: {
-    textAlign: "center",
-    width: Dimensions.get("window").width * 0.8,
-    margin: 20,
-    fontSize: 48,
-    color: "seashell",
-    borderBottomWidth: 2,
-    borderColor: "seashell",
-  },
-  sendBtn: {
-    width: 200,
-    height: 50,
-    backgroundColor: "white",
-    borderRadius: 25,
-    justifyContent: "center",
-  },
-  sendBtnText: {
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  exitButton: {
-    paddingTop: 40,
-  },
-  exitIcon: {
-    height: 50,
-    width: 50,
+    borderRadius: 10,
+    marginTop: responsiveScreenWidth(1),
+
   },
 
   fillBox: {
     textAlign: "center",
-    width: Dimensions.get("window").width / 12,
-    height: 35,
-    margin: 5,
+    width: responsiveScreenWidth(8.5),
+    height: responsiveScreenHeight(4.2),
+    margin: responsiveScreenWidth(1.2),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
   },
   touchableStyle: {
     textAlign: "center",
-    width: Dimensions.get("window").width / 12,
-    height: 35,
-    margin: 5,
-    borderRadius: 10,
+    width: responsiveScreenWidth(9),
+    height: responsiveScreenHeight(4.4),
+    //margin: 5,
+    borderRadius: 11,
     fontWeight: "bold",
+    borderWidth:2,
+    borderColor:'lightgrey',
+    alignItems:'center',
+    justifyContent:'center',
   },
   daysContainer: {
-    width: Dimensions.get("window").width,
+    width: responsiveScreenWidth(76),
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row-reverse",
-    marginHorizontal: Dimensions.get("window").width / 50 - 10,
   },
   dayText: {
     textAlign: "center",
-    width: Dimensions.get("window").width / 12,
-    height: 35,
-    margin: 5,
+    width: responsiveScreenWidth(8.5),
+    height: responsiveScreenHeight(4.2),
+    margin: responsiveScreenWidth(1.2),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
@@ -452,32 +447,39 @@ const styles = StyleSheet.create({
 
   stateText: {
     textAlign: "center",
-    width: 50,
-    height: 35,
-    margin: 5,
+    justifyContent:'center',
+    width: responsiveScreenWidth(12.6),
+    height: responsiveScreenHeight(4.2),
+    margin: responsiveScreenWidth(1.2),
     backgroundColor: "seashell",
     borderRadius: 10,
     fontWeight: "bold",
-    fontSize: 11,
+    fontSize: responsiveScreenFontSize(1.4),
     backgroundColor: "lightgrey",
   },
 
   stateContainer: {
     alignItems: "flex-end",
     flexDirection: "column",
+    justifyContent:'center',
+
   },
 
   fillContainer: {
-    width: Dimensions.get("window").width,
+    width: responsiveScreenWidth(91),
     flexDirection: "row-reverse",
-    marginHorizontal: 10,
+   //marginHorizontal: 10,
   },
   styleState: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "gray",
-    marginHorizontal: 2,
+    textAlign: 'center',
+    backgroundColor: "white",
+    margin: responsiveScreenWidth(0.5),
+    borderRadius: 10,
+    justifyContent:'center',
+    borderWidth:1,
+    borderColor:'lightgrey',
   },
 });
 const mapStateToProps = (state) => {
