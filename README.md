@@ -84,7 +84,7 @@ WorkU
 
 ### [Click here](https://worku.herokuapp.com/WorkU.apk)
 
-### if you want to see the Backend [Click here]
+### if you want to see the Backend [Click here](https://github.com/swiftkatana/WorkU-Server)
 
 
 In order to access all that the application offers, you are required to grant the application access to your microphone and turn on notifications. 
