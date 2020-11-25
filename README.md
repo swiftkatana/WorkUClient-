@@ -27,7 +27,7 @@ Ability to send requests to the employer in a convenient manner.
 Simple way of submitting shift requests to the employer, and easily viewing each week’s shifts. 
 Access to viewing all payslips. 
 
-<img align="center" width="50%" alt="portfolio_view" src="https://raw.githubusercontent.com/swiftkatana/swiftkatana/main/WorkU_Readme_images/5.png">
+<img align="center" width="50%" alt="portfolio_view" src="https://drive.google.com/uc?export=view&id=1rMVY_37jSdvmTQWKPJ0gtjIt8rOX8dBH">
 
 #### Creating “vocal tasks:” 
 This application allows the employer to open a task room for the employee, which will be managed by “vocal updates” in order to keep both employer and employee on the same page. The task room operates with notification alerts, in order to ensure that no new information is missed. When the employee finishes the assigned task, an alert will be sent to the employer, and the task room will be automatically closed. There is no limit to the amount of task rooms -- the employee can simultaneously be in as many task rooms as the employer would like to assign. 
