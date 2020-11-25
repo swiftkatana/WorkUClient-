@@ -30,7 +30,7 @@ function ManagerNaviButton({ navigation, style }) {
         <Text style={styles.settingsFont}>כלי ניהול</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={{ ...styles.settings, ...style.btn1 } } onPress={Alert.alert('לא נוצר עדיין',"הפונקציה הזאת לא נוצרה עדיין אבל זה בטיפול")}>
+      <TouchableOpacity style={{ ...styles.settings, ...style.btn1 }} onPress={() => navigation.navigate("employeeStatisticScreen")}>
         <Image
           style={styles.tinyLogo}
           source={require("../assets/statistics_icon.png")}
@@ -54,42 +54,42 @@ function ManagerNaviButton({ navigation, style }) {
 }
 
 const styles = StyleSheet.create({
-    view:
-    {
-        //marginTop: 5,
-        flex: 2,
-        flexDirection: "row-reverse",
-        justifyContent: "space-evenly",
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        backgroundColor: "#efeef4",
-        marginHorizontal: responsiveScreenWidth(2),
-        marginBottom: responsiveScreenHeight(1),
-        textAlign: "center",
-        alignItems: 'center',
-    },
-    settings:
-    {
-        borderRadius: 30,
-        width: responsiveScreenWidth(22),
-        height: responsiveScreenWidth(19),
-        justifyContent: 'center',
-        alignItems: 'center',
+  view:
+  {
+    //marginTop: 5,
+    flex: 2,
+    flexDirection: "row-reverse",
+    justifyContent: "space-evenly",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: "#efeef4",
+    marginHorizontal: responsiveScreenWidth(2),
+    marginBottom: responsiveScreenHeight(1),
+    textAlign: "center",
+    alignItems: 'center',
+  },
+  settings:
+  {
+    borderRadius: 30,
+    width: responsiveScreenWidth(22),
+    height: responsiveScreenWidth(19),
+    justifyContent: 'center',
+    alignItems: 'center',
 
-    },
-    settingsFont:
-    {
-        textAlign: "center",
-        fontSize: responsiveScreenFontSize(1.4),
-        color: "seashell",
-        fontWeight: "bold",
-    },
-    tinyLogo: {
-        width: responsiveScreenHeight(4),
-        height: responsiveScreenHeight(4),
-    },
+  },
+  settingsFont:
+  {
+    textAlign: "center",
+    fontSize: responsiveScreenFontSize(1.4),
+    color: "seashell",
+    fontWeight: "bold",
+  },
+  tinyLogo: {
+    width: responsiveScreenHeight(4),
+    height: responsiveScreenHeight(4),
+  },
 })
 const mapStateToProps = (state) => {
   return { style: state.styles };

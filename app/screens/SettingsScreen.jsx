@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Alert,
 } from "react-native";
 import { responsiveFontSize, responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from "react-native-responsive-dimensions";
 import { connect } from "react-redux";
@@ -49,7 +50,7 @@ function Main({ navigation, style }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={globalObject.styles.menuBtn}
-          onPress={Alert.alert('לא נוצר עדיין',"הפונקציה הזאת לא נוצרה עדיין אבל זה בטיפול")}
+          onPress={() => Alert.alert("התראת מפתחים", "חלק זה בפיתוח")}
         >
           <Text style={globalObject.styles.menuBtnText}>עזרה</Text>
         </TouchableOpacity>
