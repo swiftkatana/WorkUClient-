@@ -8,23 +8,24 @@ import { globalObject } from '../../src/globalObject'
 
 
 function Main({ navigation, style }) {
-  const pressHandler = async (_id, status, email) => {
-    const res = await globalObject.SendRequest(
-      requestList.updatePersonalRequestUrl,
-      { _id, status, email }
-    );
-    if (res) {
-      globalObject.User.personalRequests[res._id] = res;
-      globalObject.sendSocketMessage("updateOrNewPersonalRequest", res, email);
-      globalObject.sendNotification(
-        email,
-        res,
-        "כנס לבקשות שלי",
-        "בקשה אישית עודכנה",
-        "updatePersonalReq"
-      );
+    const pressHandler = async (_id, status, email) => {
+        const res = await globalObject.SendRequest(
+            requestList.updatePersonalRequestUrl,
+            { _id, status, email }
+        );
+        if (res) {
+            globalObject.User.personalRequests[res._id] = res;
+            globalObject.sendSocketMessage("updateOrNewPersonalRequest", res, email);
+            globalObject.sendNotification(
+                email,
+                res,
+                "כנס לבקשות שלי",
+                "בקשה אישית עודכנה",
+                "updatePersonalReq"
+            );
+            navigation.pop();
+        }
 
-      navigation.pop();
     }
 
     const item = navigation.state.params.item;
@@ -36,11 +37,11 @@ function Main({ navigation, style }) {
                     <Text style={globalObject.styles.menuTitle}>בקשה</Text>
                 </View>
                 <View style={styles.requestContainer}>
-                        <Text style={styles.subTitle}>תאריך: {item.date}</Text>
-                        <Text style={styles.subTitle}>סוג בקשה: {item.type}</Text>
-                        <Text style={styles.subTitle}>שם עובד: {item.fullName}</Text>
-                        <Text style={styles.bodyHeader}>פירוט:</Text>
-                        <Text style={styles.subTitle}>{item.body}</Text>
+                    <Text style={styles.subTitle}>תאריך: {item.date}</Text>
+                    <Text style={styles.subTitle}>סוג בקשה: {item.type}</Text>
+                    <Text style={styles.subTitle}>שם עובד: {item.fullName}</Text>
+                    <Text style={styles.bodyHeader}>פירוט:</Text>
+                    <Text style={styles.subTitle}>{item.body}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.buttonOk} onPress={() => pressHandler(item.id, "אושר", item.email)}>
@@ -54,36 +55,38 @@ function Main({ navigation, style }) {
                 </View>
             </View>
             <TouchableOpacity style={globalObject.styles.exitButton} onPress={() => navigation.pop()}>
-                    <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
+                <Image style={globalObject.styles.exitIcon} source={require('../../assets/exit_icon.png')} />
             </TouchableOpacity>
-   
-    </View>
-  );
+
+        </View>
+    );
+
 }
+
 
 const styles = StyleSheet.create({
     view: {
         //marginTop:50,
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
 
 
     },
     container:
     {
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
 
     },
-    requestContainer:{
-        alignItems:'center',
+    requestContainer: {
+        alignItems: 'center',
         justifyContent: 'center',
-        borderWidth:1,
+        borderWidth: 1,
         borderColor: "grey",
-        borderRadius:30,
-        width: Dimensions.get('window').width*0.80,
-        height: Dimensions.get('window').height*0.30,
+        borderRadius: 30,
+        width: Dimensions.get('window').width * 0.80,
+        height: Dimensions.get('window').height * 0.30,
         backgroundColor: "seashell",
 
     },
@@ -97,13 +100,13 @@ const styles = StyleSheet.create({
         fontSize: responsiveScreenFontSize(2.2),//18
         color: "black",
         marginTop: responsiveScreenHeight(1),
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
     },
     itemList:
     {
         textAlign: "center",
-        width: Dimensions.get('window').width*0.70,
+        width: Dimensions.get('window').width * 0.70,
         justifyContent: 'center',
 
 
@@ -112,8 +115,8 @@ const styles = StyleSheet.create({
         width: responsiveScreenWidth(60),
         height: responsiveScreenHeight(15),
         flexDirection: 'row-reverse',
-        justifyContent:'space-evenly',
-        alignItems:'center',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
     },
     buttonText: {
         fontSize: responsiveScreenFontSize(1.5),
@@ -130,8 +133,8 @@ const styles = StyleSheet.create({
     },
 
 
-})}
+})
 const mapStateToProps = (state) => {
-  return { style: state.styles };
+    return { style: state.styles };
 };
 export default connect(mapStateToProps, {})(Main);

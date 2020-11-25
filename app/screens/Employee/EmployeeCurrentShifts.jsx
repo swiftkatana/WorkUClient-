@@ -11,38 +11,60 @@ function Main({ navigation, style }) {
     const blue = require('../../assets/checked_icon_blue.png');
     const options = [blue, blue, blue];
     const fill = useRef();
-    var state = true;
-    const [updateScreen, SetUpdateScreen] = useState();
-
-
+    const [len, setLen] = useState(0);
     useEffect(() => {
 
         (async () => {
             const res = await globalObject.SendRequest(requestList.getShiftUrl, { email: globalObject.User.email });
 
+            //const res = globalObject.User.shifts[0];
             fill.current = res[0];
-            SetUpdateScreen(updateScreen + 1);
-            state = false;
+            const keys = Object.keys(res[0]);
+            if (keys === undefined)
+                setLen(-1);
+            else
+                setLen(Object.keys(res[0]).length);
+            //GetLenShifts();
         })();
-
     }, [])
+    const GetLenShifts = (fill) => {
+
+        if (!fill)
+            return 0;
+        var arrDay = Object.keys(fill);
+        if (!arrDay.length)
+            return 0;
+        var state = Object.keys(fill[arrDay[0]]);
+        var howmanyShiftLen = 0;
+
+        for (let row = 0; row < 7; row++) {
+            for (let column = 0; column < 3; column++) {
+                if (fill[arrDay[row]][state[column]][0] === globalObject.User.email) {
+                    howmanyShiftLen++;
+                }
+            }
+        }
+        return howmanyShiftLen;
+    }
 
     const CreateList = (fill) => {
 
         if (!fill)
-            return;
+            return <View></View>;
         var arr2 = [];
         var arrDay = Object.keys(fill);
         if (!arrDay.length)
-            return;
+            return <View></View>;
         var state = Object.keys(fill[arrDay[0]]);
-
+        var howmanyShiftLen = 0;
         let key = 0;
         for (let row = 0; row < 7; row++) {
             var arr = [];
             for (let column = 0; column < 3; column++) {
-                if (fill[arrDay[row]][state[column]][0] === globalObject.User.email)
+                if (fill[arrDay[row]][state[column]][0] === globalObject.User.email) {
                     arr.push(<View key={key} style={styles.fillBox}><View style={styles.notTouchableStyle}><Image style={styles.tinyPluse} source={blue} /></View></View>);
+                    howmanyShiftLen++;
+                }
                 else
                     arr.push(<View key={key} style={styles.fillBox}><View style={styles.notTouchableStyle}><Image style={styles.tinyPluse} source={null} /></View></View>);
                 key++;
@@ -59,45 +81,58 @@ function Main({ navigation, style }) {
     }
 
 
-    return (
-        <View style={{ ...styles.view, ...style.view }}>
-            <View style={styles.buttonsContainer}>
-                <Text style={styles.title}>המשמרות שלי</Text>
-                {state === false ? <Text style={styles.header}>אין לך משמרות השבוע</Text> :
-                    <View style={styles.shiftsCon}>
-                        <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי:</Text>
-                        <View style={styles.view}>
-                            <View style={styles.shiftsCon}>
-                                <View style={styles.daysContainer}>
-                                    <Text style={styles.dayText}>א</Text>
-                                    <Text style={styles.dayText}>ב</Text>
-                                    <Text style={styles.dayText}>ג</Text>
-                                    <Text style={styles.dayText}>ד</Text>
-                                    <Text style={styles.dayText}>ה</Text>
-                                    <Text style={styles.dayText}>ו</Text>
-                                    <Text style={styles.dayText}>ז</Text>
+
+    const RenderLoadingScreen = () => {
+
+        if (len === 0)
+            return (<Image style={globalObject.styles.loadingIcon} source={require("../../assets/loading_animation.gif")} />)
+        else if (GetLenShifts(fill.current) === 0 || len === -1)
+            return (<Text style={styles.header}>אין לך משמרות השבוע</Text>)
+        else
+            return (
+                <View style={styles.shiftsCon}>
+                    <Text style={styles.header}>המשמרות שלך לשבוע הנוכחי:</Text>
+                    <View style={styles.view}>
+                        <View style={styles.shiftsCon}>
+                            <View style={styles.daysContainer}>
+                                <Text style={styles.dayText}>א</Text>
+                                <Text style={styles.dayText}>ב</Text>
+                                <Text style={styles.dayText}>ג</Text>
+                                <Text style={styles.dayText}>ד</Text>
+                                <Text style={styles.dayText}>ה</Text>
+                                <Text style={styles.dayText}>ו</Text>
+                                <Text style={styles.dayText}>ז</Text>
+                            </View>
+
+                            <View style={styles.fillContainer}>
+                                <View style={styles.stateContainer}>
+                                    <Text style={styles.stateText}>בוקר</Text>
+                                    <Text style={styles.stateText}>צהוריים</Text>
+                                    <Text style={styles.stateText}>ערב</Text>
                                 </View>
-                                <View style={styles.fillContainer}>
-                                    <View style={styles.stateContainer}>
-                                        <Text style={styles.stateText}>בוקר</Text>
-                                        <Text style={styles.stateText}>צהוריים</Text>
-                                        <Text style={styles.stateText}>ערב</Text>
-                                    </View>
-                                    {CreateList(fill.current, options)}
-
-
-                                </View>
-
+                                {CreateList(fill.current, options)}
                             </View>
 
                         </View>
                     </View>
-                }
+                </View>
+            )
+    }
+
+
+
+
+    return (
+        <View style={{ ...styles.view, ...style.view }}>
+
+            <View style={styles.buttonsContainer}>
+                <Text style={styles.title}>המשמרות שלי</Text>
+
+                {RenderLoadingScreen()}
                 <TouchableOpacity style={styles.exitButton} onPress={() => navigation.pop()}>
                     <Image style={styles.exitIcon} source={require('../../assets/exit_icon.png')} />
                 </TouchableOpacity>
             </View>
-
         </View>
     )
 }
@@ -154,13 +189,11 @@ const styles = StyleSheet.create({
     tinyPluse: {
         width: 15,
         height: 15,
-
     },
+
     header: {
         fontSize: 18,
         color: "seashell",
-        // marginHorizontal: 22,
-        // marginVertical: 2,
     },
     daysContainer: {
         width: Dimensions.get('window').width,
